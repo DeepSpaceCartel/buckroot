@@ -1,0 +1,17 @@
+{
+	"name": "buckroot",
+	"image": "mcr.microsoft.com/devcontainers/python:3-3.13-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+	"runArgs": ["--privileged"],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"anthropic.claude-code",
+				"BazelBuild.vscode-bazel"
+			]
+		}
+	},
+	"forwardPorts": [8980, 7982, 8081]
+}

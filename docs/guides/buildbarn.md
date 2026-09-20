@@ -1,0 +1,102 @@
+<title>Remote cache and execution with Buildbarn</title>
+
+# Remote cache and execution with Buildbarn
+
+Run the bundled [Buildbarn](https://github.com/buildbarn) stack, then point
+Buck2 at it for a shared cache, for remote execution, or both. The stack is trimmed from
+`buildbarn/bb-deployments` (docker compose, one storage shard) and lives in
+[`toolkit/infra/buildbarn/`](https://github.com/DeepSpaceCartel/buckroot/tree/main/toolkit/infra/buildbarn).
+
+## 1. Create the state directories
+
+```bash
+export BB_VOLUMES=/var/lib/buckroot-buildbarn
+mkdir -p $BB_VOLUMES/{storage-ac,storage-cas}/persistent_state \
+         $BB_VOLUMES/worker/{build,cache/persistent_state} $BB_VOLUMES/{bb,runner-tmp}
+chmod -R 0777 $BB_VOLUMES
+```
+
+State lives outside the project on purpose: the worker's build directories exhaust
+the inotify limit of Buck2's file watcher if they are inside a Buck2 project.
+
+## 2. Start it
+
+=== "Remote cache only"
+
+    ```bash
+    cd toolkit/infra/buildbarn
+    docker compose up -d frontend storage
+    ```
+
+    A REAPI cache (CAS and action cache) on `localhost:8980`.
+
+=== "Cache and remote execution"
+
+    ```bash
+    cd toolkit/infra/buildbarn
+    docker compose up -d --build
+    ```
+
+    Adds the `scheduler`, one `worker` and a privileged `runner` container built
+    from `runner/Dockerfile` - the pinned host-tool baseline (gcc, perl, rsync, ...)
+    that the wrapped actions use. `bb-portal` and Postgres come up too.
+
+## 3. Point a build at it
+
+`br2 build --mode ...` sets everything for you; underneath it is four `[br2]` switches
+(see [Buck2 configuration](../reference/buckconfig.md)):
+
+| Mode | Switches |
+|---|---|
+| `local` | none |
+| `local-cache` | `remote_cache=true`, `cache_uploads=true` |
+| `remote` | `remote_execution=true`, `local_execution=false` |
+| `remote-cache` | both of the above |
+
+By hand:
+
+```bash
+tools/buck2 build //:rootfs --config br2.remote_cache=true --config br2.cache_uploads=true
+tools/buck2 build //:rootfs --config br2.remote_execution=true --config br2.local_execution=false
+```
+
+A read-only client - one that uses the cache but never writes - sets
+`cache_uploads=false`. That is how untrusted branches should build; see
+[Remote cache and execution](../concepts/remote-cache-and-execution.md#trust).
+
+## Web UIs
+
+Forward the ports from your devcontainer or host.
+
+| UI | URL | What it shows |
+|---|---|---|
+| bb-scheduler | <http://127.0.0.1:7982/> | platform queues, workers, running and queued operations |
+| bb-portal | <http://127.0.0.1:8081/> | browse the CAS and action cache; scheduler view; build event data |
+
+`bb-browser` was removed from Buildbarn's reference deployment; `bb-portal` (with
+Postgres, in the compose file) replaces it.
+
+To inspect one action: `tools/buck2 log what-ran` prints its digest (`<hash>:<size>`).
+Paste it into the browser page of bb-portal to see the command, environment, input
+tree and - for executed actions - the output tree, stdout and stderr.
+
+## If nothing seems to happen on the worker
+
+- With `local_execution=true` and `remote_execution=false`, everything runs on
+  Buck2's own machine and the containers stay idle, as they should: check the
+  `Commands: N (cached, remote, local)` line at the end of the build.
+- A `remote` build needs the `worker` and `runner` containers; `frontend` and
+  `storage` alone are only a cache.
+- Remote runs reuse your cache unless you use a fresh `instance_name` - and note that
+  Buildbarn's local storage ignores instance names, which is why
+  [each measured cell has its own salt](../decisions/0010-cache-salt-per-cell.md).
+
+## Things that break, and what they look like
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| `No engine address` on upload | addresses lack the `grpc://` scheme | use `grpc://host:port` in `[buck2_re_client]` |
+| Uploads rejected, large input roots | gRPC's 4 MiB default message limit | `maximumReceivedMessageSizeBytes` in the Buildbarn configs (already 64 MiB here) |
+| Scheduler finds no worker | Buck2 leaves `Action.platform` empty | the `static` platform extractor in `scheduler.jsonnet` |
+| `Failed to run command: error reading from server: EOF` | the runner died mid-action | an infrastructure error, not retried; restart the runner and rerun - completed actions are reused |
+| `materialize_inputs_failed` when falling back to local | inputs exist only in the remote CAS | keep the cache reachable, or `--materializations=all` |

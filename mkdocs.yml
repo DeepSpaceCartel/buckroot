@@ -1,0 +1,106 @@
+site_name: buckroot
+site_description: Build Buildroot projects with Buck2 - one cacheable, remotely executable target per package, verified against a plain make build.
+site_url: https://deepspacecartel.github.io/buckroot/
+repo_url: https://github.com/DeepSpaceCartel/buckroot
+repo_name: DeepSpaceCartel/buckroot
+edit_uri: edit/main/docs/
+
+nav:
+  - Home:
+    - Welcome: home/index.md
+    - Quickstart: home/quickstart.md
+  - Guides:
+      - Adding a Buildroot project: guides/adding-a-project.md
+      - Iterating fast: guides/fast-iteration.md
+      - Remote cache and execution with Buildbarn: guides/buildbarn.md
+      - Debugging a failing package: guides/debugging.md
+  - Concepts:
+      - Architecture: concepts/architecture.md
+      - Buildroot vs. Buck2: concepts/buildroot-vs-buck2.md
+      - Views and config slices: concepts/views-and-slices.md
+      - Wrapped and native packages: concepts/wrapped-and-native.md
+      - Verification: concepts/verification.md
+      - Remote cache and execution: concepts/remote-cache-and-execution.md
+  - Reference:
+      - project.json: reference/project-json.md
+      - The br2 CLI: reference/cli.md
+      - Buck2 configuration: reference/buckconfig.md
+  - Project:
+      - Results: project/results.md
+      - Status and roadmap: project/status.md
+  - Decisions:
+      - Decision log: decisions/index.md
+      - 0001. One Buck2 target per Buildroot package: decisions/0001-one-target-per-package.md
+      - 0002. Wrapped packages run Buildroot's own make: decisions/0002-wrapped-packages-run-make.md
+      - 0003. Enforced input views: decisions/0003-enforced-input-views.md
+      - 0004. Fixed-path mount namespace: decisions/0004-fixed-path-namespace.md
+      - 0005. Config slices by symbol ownership: decisions/0005-config-slices.md
+      - 0006. Golden build and manifest comparison: decisions/0006-golden-and-manifest-comparison.md
+      - 0007. Vendored sources: decisions/0007-vendored-sources.md
+      - 0008. Buildbarn as the remote backend: decisions/0008-buildbarn-backend.md
+      - 0009. Dev mode versus strict mode: decisions/0009-dev-mode-vs-strict.md
+      - 0010. A cache salt per measured cell: decisions/0010-cache-salt-per-cell.md
+      - 0011. project.json is the only project input: decisions/0011-project-json.md
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.footer
+    - navigation.path
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.instant.prefetch
+    - toc.follow
+    - header.autohide
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.code.select
+    - content.action.edit
+    - content.action.view
+    - content.tooltips
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search

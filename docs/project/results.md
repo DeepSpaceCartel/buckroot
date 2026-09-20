@@ -1,0 +1,83 @@
+<title>Results</title>
+
+# Results
+
+Every project is measured the same way: the *golden* build with plain `make`, then Buck2 in
+two variants (`wrapped`, `native`) and four modes (`local`, `local-cache`, `remote`,
+`remote-cache`). Each cell starts from `buck2 kill` and `buck2 clean`, uses its own
+[cache salt](../decisions/0010-cache-salt-per-cell.md) so a cold run really is cold, runs
+strict, and compares the resulting root filesystem manifest with the golden's. The cache
+modes run twice: cold, then warm after a clean.
+
+Hardware for all numbers below: 4 cores, 7.9 GB RAM, the Buildbarn worker on the same
+machine, so "remote" adds no hardware.
+
+## helloworld
+
+Buildroot 2025.02.18, aarch64, musl, Bootlin external toolchain, one local package
+(`hello`). 29 packages, 61 Buck2 actions. `native` builds the 12 packages in `hello`'s
+dependency closure with Buck2 actions (56 actions in total).
+
+| variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |
+|---|---|---|---|---|---|---|---|---|---|
+| wrapped | local | cold | yes | 338.0 | 61 | 0 | 0 | 61 | IDENTICAL |
+| wrapped | local-cache | cold | yes | 363.8 | 61 | 0 | 0 | 61 | IDENTICAL |
+| wrapped | local-cache | warm | yes | 8.5 | 61 | 61 | 0 | 0 | IDENTICAL |
+| wrapped | remote | cold | yes | 363.4 | 61 | 0 | 61 | 0 | IDENTICAL |
+| wrapped | remote-cache | cold | yes | 416.8 | 61 | 0 | 61 | 0 | IDENTICAL |
+| wrapped | remote-cache | warm | yes | 9.0 | 61 | 61 | 0 | 0 | IDENTICAL |
+| native | local | cold | yes | 346.0 | 56 | 0 | 0 | 56 | IDENTICAL |
+| native | local-cache | cold | yes | 355.2 | 56 | 0 | 0 | 56 | IDENTICAL |
+| native | local-cache | warm | yes | 23.2 | 56 | 55 | 0 | 1 | IDENTICAL |
+| native | remote | cold | yes | 354.9 | 56 | 0 | 56 | 0 | IDENTICAL |
+| native | remote-cache | cold | yes | 317.3 | 56 | 0 | 56 | 0 | IDENTICAL |
+| native | remote-cache | warm | yes | 11.9 | 56 | 56 | 0 | 0 | IDENTICAL |
+
+Reading it:
+
+- The build is dominated by compiling upstream tarballs (busybox, e2fsprogs, util-linux),
+  which are still `make` in both variants, so `native` saves 4-5 actions of 61 and little
+  wall time here.
+- A warm cache rebuild of the whole graph takes 8-23 s.
+- Remote execution on the same four cores costs about what local does (no extra
+  hardware); the cold cache modes cost 5-15 % for uploading results.
+- Where native shows its value is incremental: a comment-only edit to `hello.c` is a
+  0.7 s rebuild (the object file is identical, so link, package and rootfs are skipped)
+  against 41 s for the wrapped path.
+
+Incremental behaviour of the wrapped variant on a 30-package image with four cores:
+
+| Change | Time | Actions that ran |
+|---|---|---|
+| cold build | 5 min 16 s | everything |
+| add an upstream package (`tree`) | 43 s | `tree`, rootfs |
+| add an external package with its own source | 40 s | that package, rootfs |
+| flip a busybox-only symbol | 81 s | busybox, rootfs |
+| flip a global symbol (`BR2_OPTIMIZE_S`) | 5 min 2 s | everything (by design) |
+
+## superduperbird (Spotify Car Thing)
+
+[`nd-0r/superduperbird-buildroot`](https://github.com/nd-0r/superduperbird-buildroot): a
+`BR2_EXTERNAL` tree on Buildroot 2024.05.3 for the Amlogic S905D2 (aarch64, glibc, an
+internal Buildroot toolchain, a 4.9 vendor kernel, Mesa, SDL2, Rust host tools). 98
+packages and 199 Buck2 actions; the root filesystem is a 79 MB tar.
+
+Deviations from the project's own defconfig, applied to golden and Buck2 alike (see the
+project's `notes`): no post-image script (it loop-mounts an image and writes into the
+external tree), an older full kernel config that builds at the pinned commit, and the DTS
+settings the external tree's hook needs. `/etc/shadow` is compared by presence only: its
+sha-256 hash has a random salt on every build.
+
+| Milestone | Status |
+|---|---|
+| golden build (plain `make`, instrumented config) | done: manifest of 864 entries |
+| preflight: patches applied in every view | done |
+| Buck2 `wrapped`, local, dev mode | done: 199 actions, manifest **IDENTICAL** (after the strip fix below) |
+| 8-cell matrix (wrapped and native x 4 modes) | in progress |
+
+The first comparison of the Buck2 rootfs with the golden showed 40+ differences, all binaries
+and libraries larger than the golden's: the cross `strip` was missing from the rootfs
+action's host tree. [Verification](../concepts/verification.md#what-the-manifest-caught)
+describes the cause. The first native cell also failed, in `host-gcc-final` (`cannot find
+crti.o`), which the native variant is being debugged against; the matrix table will be
+filled in when the cells complete.
