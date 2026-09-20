@@ -21,6 +21,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - id: repo
+        run: echo "image=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/buckroot-worker" >> "$GITHUB_OUTPUT"   # image names must be lowercase
       - id: build
         uses: docker/build-push-action@v6
         with:
@@ -28,7 +30,7 @@ jobs:
           push: true
           labels: org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
           tags: |
-            ghcr.io/${{ github.repository_owner }}/buckroot-worker:latest
-            ghcr.io/${{ github.repository_owner }}/buckroot-worker:${{ github.sha }}
+            ${{ steps.repo.outputs.image }}:latest
+            ${{ steps.repo.outputs.image }}:${{ github.sha }}
       - run: |
-          echo "Pin this digest in the platform's runner_image variable: ghcr.io/${{ github.repository_owner }}/buckroot-worker@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Pin this digest in the platform's runner_image variable: ${{ steps.repo.outputs.image }}@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
