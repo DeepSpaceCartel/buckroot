@@ -6,3 +6,5 @@
 | native | remote | cold | False | 99.4 | 119 | 0 | 119 | 0 | ? |
 | native | remote-cache | cold | False | 61.0 | 119 | 0 | 119 | 0 | ? |
 | wrapped | local | cold | True | 6353.6 | 199 | 0 | 0 | 199 | IDENTICAL |
+| wrapped | local-cache | cold | True | 6090.9 | 199 | 0 | 0 | 199 | IDENTICAL |
+| wrapped | local-cache | warm | True | 235.7 | 199 | 197 | 0 | 2 | IDENTICAL |

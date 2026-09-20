@@ -86,5 +86,31 @@
    "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
    "manifest": "IDENTICAL"
   }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "local-cache",
+  "salt": "wrapped-local-cache-20072824",
+  "instance": "superduperbird-local-cache-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 6090.9,
+   "commands": 199,
+   "cached": 0,
+   "remote": 0,
+   "local": 199,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 235.7,
+   "commands": 199,
+   "cached": 197,
+   "remote": 0,
+   "local": 2,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  }
  }
 ]

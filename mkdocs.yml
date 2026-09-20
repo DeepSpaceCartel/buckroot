@@ -30,6 +30,7 @@ nav:
       - Importing from Buildroot: concepts/importing-from-buildroot.md
       - Verification: concepts/verification.md
       - Remote cache and execution: concepts/remote-cache-and-execution.md
+      - Package output sizes: concepts/package-output-sizes.md
   - Reference:
       - project.json: reference/project-json.md
       - The br2 CLI: reference/cli.md

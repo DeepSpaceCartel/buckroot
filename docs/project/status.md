@@ -71,11 +71,12 @@ cache as a single blob, and every action that depends on the package unpacks it 
 - *A cheaper two-stage stepped variant.* The per-stage state (a source tree, then a built tree) would share almost all of its files
   with the previous stage, so only new files would add bytes. See [Stepped](../walkthrough/stepped.md#how-the-state-cost-could-be-reduced).
 
-**Evidence so far** (Car Thing and `helloworld`, measured): the largest package outputs are legitimate payload, not duplication
+**Evidence so far** (Car Thing and `helloworld`, measured; details on [Package output sizes](../concepts/package-output-sizes.md)): the largest package outputs are legitimate payload, not duplication
 (`host-rust-bin` 751 MB of which about 30 MB is repeated content; the Bootlin toolchain 379 MB); ordinary host packages carry only
 their own files; and source trees are 9 to 11 times larger than their archives (`gcc`: 84 MB to 758 MiB; `mesa3d`: 20 MB to
-227 MiB). What is *not* measured: how many bytes of tarballs are content shared between packages, and how much Buildroot's
-path-rewriting of inherited text files (`.pc`, `.la`, `*-config`) adds to target packages.
+227 MiB). Across the 98 Car Thing actions the dependency tarballs to unpack add up to 5.0 GB, against 1.11 GB of distinct output. What is *not*
+measured: how many bytes of tarballs are content shared between packages, and whether Buildroot's path-rewriting of inherited text
+files explains the roughly 4 to 11 MB that packages with large closures carry.
 
 **Risks to test first:**
 
