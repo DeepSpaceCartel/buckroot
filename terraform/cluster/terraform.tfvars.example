@@ -1,0 +1,9 @@
+environment     = "dev"
+hcloud_location = "hil"
+
+# hcloud_token comes from TF_VAR_hcloud_token.
+
+# Server types: check availability in your location with `hcloud server-type list`.
+platform_node_type     = "cpx41"
+workers_shared_type    = "cpx51"
+workers_dedicated_type = "ccx33"

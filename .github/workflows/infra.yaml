@@ -1,0 +1,36 @@
+name: infra
+
+on:
+  pull_request:
+    paths: ["terraform/**", "charts/**", "toolkit/infra/buildbarn/**", ".github/workflows/infra.yaml"]
+  push:
+    branches: [main]
+    paths: ["terraform/**", "charts/**", "toolkit/infra/buildbarn/**", ".github/workflows/infra.yaml"]
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive terraform
+      - run: |
+          for d in cluster platform coder-templates coder-templates/templates/buckroot-workspace; do
+            (cd terraform/$d && terraform init -backend=false -input=false && terraform validate)
+          done
+
+  chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+      - name: The chart's jsonnet is in sync with the toolkit's
+        run: |
+          charts/buckroot-buildbarn/sync-config.sh
+          git diff --exit-code -- charts/buckroot-buildbarn/files
+      - run: helm lint charts/buckroot-buildbarn
+      - run: helm lint charts/buckroot-buildbarn -f charts/buckroot-buildbarn/ci/keda-values.yaml
+      - run: helm template t charts/buckroot-buildbarn -f charts/buckroot-buildbarn/ci/keda-values.yaml > /dev/null

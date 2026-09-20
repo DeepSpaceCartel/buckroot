@@ -1,0 +1,15 @@
+# Same values as ../cluster/backend.hcl, with the cluster state's key.
+cluster_state = {
+  bucket = "your-terraform-state-bucket"
+  key    = "buckroot/cluster.tfstate"
+  region = "us-east-1"
+}
+
+coder_admin_email = "you@example.com"
+# coder_admin_password and coder_postgres_password come from TF_VAR_*.
+
+# Enable worker autoscaling once the scheduler's queue metric is known (see the chart's values.yaml):
+# worker_scaling_queries = {
+#   shared    = "sum(<metric>{pool=\"shared\"})"
+#   dedicated = "sum(<metric>{pool=\"dedicated\"})"
+# }

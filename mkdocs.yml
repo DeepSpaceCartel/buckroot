@@ -22,6 +22,7 @@ nav:
       - Iterating fast: guides/fast-iteration.md
       - Remote cache and execution with Buildbarn: guides/buildbarn.md
       - Debugging a failing package: guides/debugging.md
+      - Buildbarn and Coder on Kubernetes: guides/kubernetes.md
   - Concepts:
       - Architecture: concepts/architecture.md
       - Buildroot vs. Buck2: concepts/buildroot-vs-buck2.md
@@ -59,6 +60,7 @@ nav:
       - 0012. The toolchain tuple comes from Buildroot: decisions/0012-toolchain-tuple-from-buildroot.md
       - 0013. The worker image is the tool baseline: decisions/0013-worker-image-is-the-tool-baseline.md
       - 0014. Every view entry is a declared input: decisions/0014-view-entries-are-declared-inputs.md
+      - 0015. Buildbarn on Kubernetes: decisions/0015-buildbarn-on-kubernetes.md
 
 theme:
   name: material

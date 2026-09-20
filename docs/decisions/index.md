@@ -29,3 +29,4 @@ building it.
 | [0012](0012-toolchain-tuple-from-buildroot.md) | The toolchain tuple comes from Buildroot | accepted |
 | [0013](0013-worker-image-is-the-tool-baseline.md) | The worker image is the tool baseline | accepted |
 | [0014](0014-view-entries-are-declared-inputs.md) | Every view entry is a declared input, and remote execution proves it | accepted |
+| [0015](0015-buildbarn-on-kubernetes.md) | Buildbarn on a dedicated Kubernetes cluster with autoscaled worker pools | accepted |

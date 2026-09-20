@@ -50,7 +50,7 @@ Toolkit work:
   Buildroot as a pinned source of package knowledge; see [Importing from Buildroot](../concepts/importing-from-buildroot.md).
 - Trim oversized sources such as `googlefontdirectory` (965 MB for one 3 MB font family). Vendoring a trimmed archive would leave the image identical
   but needs a documented hash policy, since Buildroot's `.hash` file names the original archive. Not urgent: the cost is paid once per cache.
-- Deploy the Buildbarn stack on Kubernetes with autoscaled workers.
+- Apply and measure the Kubernetes deployment (`terraform/`, `charts/`): written and validated, not yet run on a real cluster; see the [guide](../guides/kubernetes.md).
 - Rename the internal `br2` names to `buckroot` (CLI, rules) once the interfaces settle.
 
 ## Directory-tree package outputs

@@ -1,0 +1,10 @@
+# Local state, credentials and generated client configs never go into git.
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+backend.hcl
+**/kubeconfig
+**/talosconfig
+crash.log
