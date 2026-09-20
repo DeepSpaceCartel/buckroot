@@ -178,7 +178,8 @@ attractive.
 - **Mount, do not copy.** Even a deduplicated tree has to be *writable* for the build. Where the platform can give a build a
   copy-on-write view of a cached tree (overlay or reflink), fetching a tree costs almost nothing after the first time on a worker.
 
-None of this is implemented; each is a hypothesis to test in the prototype described next.
+None of this is implemented; each is a hypothesis to test in the prototype described next. The tree-output idea is also tracked on
+[Status and roadmap](../project/status.md#directory-tree-package-outputs).
 
 ## How to decide
 
