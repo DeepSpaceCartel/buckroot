@@ -43,5 +43,7 @@ Toolkit work:
   (`<pkg>-extract`, `-patch`, ...) onto separate Buck2 actions: finer early cutoff without
   reimplementing package logic.
 - Native rules for autotools and plain-`make` packages, not just install-only recipes.
+- Importing Buildroot package data (patches, hashes, frozen option lists) into native targets, with
+  Buildroot as a pinned source of package knowledge; see [Importing from Buildroot](../concepts/importing-from-buildroot.md).
 - Deploy the Buildbarn stack on Kubernetes with autoscaled workers.
 - Rename the internal `br2` names to `buckroot` (CLI, rules) once the interfaces settle.

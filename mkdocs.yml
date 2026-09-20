@@ -19,6 +19,7 @@ nav:
       - Buildroot vs. Buck2: concepts/buildroot-vs-buck2.md
       - Views and config slices: concepts/views-and-slices.md
       - Wrapped and native packages: concepts/wrapped-and-native.md
+      - Importing from Buildroot: concepts/importing-from-buildroot.md
       - Verification: concepts/verification.md
       - Remote cache and execution: concepts/remote-cache-and-execution.md
   - Reference:

@@ -1,0 +1,18 @@
+{
+  "name": "funkey-os",
+  "description": "FunKey-OS 2.3.0 (FunKey S retro handheld): a BR2_EXTERNAL tree on the FunKey fork of Buildroot 2021.02, external musl toolchain, 32-bit ARM",
+  "defconfig": "funkey_defconfig",
+  "external": true,
+  "external_repo": {
+    "url": "https://github.com/FunKey-Project/FunKey-OS",
+    "commit": "7a15dcc3ef1253af3f852ba0390b88c8fa251c5d",
+    "subdir": "FunKey"
+  },
+  "buildroot": {
+    "repo": "https://github.com/FunKey-Project/buildroot.git",
+    "ref": "2021.02-funkey",
+    "commit": "1f59bd3b4809a4196f34bd4daf4f092d4c4911c8"
+  },
+  "native": [],
+  "sources": "vendored"
+}

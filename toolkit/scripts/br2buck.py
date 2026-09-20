@@ -42,6 +42,25 @@ def buildroot_json(out_dir, *goal):
     return json.loads(r.stdout)
 
 
+def buildroot_vars(out_dir, patterns):
+    """Expanded make variables matching `patterns` (a `%` is a wildcard): {name: {"expanded": value}}.
+    `show-vars` exists since Buildroot 2023; older trees have `printvars` (NAME=value lines)."""
+    cmd = [str(NS), out_dir, str(HERE / "buildroot-src" / "dl"), "--", *IN_NS_MAKE, "show-vars", f"VARS={patterns}"]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode == 0:
+        return json.loads(r.stdout)
+    cmd = [str(NS), out_dir, str(HERE / "buildroot-src" / "dl"), "--", *IN_NS_MAKE, "QUIET=1", "printvars", f"VARS={patterns}"]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0:
+        sys.exit(f"printvars VARS={patterns} failed:\n{r.stderr}")
+    found = {}
+    for line in r.stdout.splitlines():
+        name, sep, value = line.partition("=")
+        if sep:
+            found[name] = {"expanded": value}
+    return found
+
+
 def parse_hash_file(path):
     """`<algo>  <hex>  <file>` lines -> {file: {algo: hex}} (sha256 and sha512 are kept)."""
     hashes = {}
@@ -113,11 +132,11 @@ def extract(out_dir):
     # Older Buildroot (2024.05) has no "hashes" in show-info; <PKG>_HASH_FILES is in every version.
     hash_vars = {}
     if any("hashes" not in e or "package_dir" not in e for e in info.values()):
-        hv = buildroot_json(out_dir, "show-vars", "VARS=%_HASH_FILES %_PKGDIR")
+        hv = buildroot_vars(out_dir, "%_HASH_FILES %_PKGDIR")
         hash_vars = {k: v["expanded"].split() for k, v in hv.items()}
     # The toolchain tuple names the sysroot (host/<tuple>/sysroot): aarch64-buildroot-linux-gnu for an
     # internal glibc toolchain, ...-musl for a musl or Bootlin one. Native rules must not hard-code it.
-    tuple_var = buildroot_json(out_dir, "show-vars", "VARS=GNU_TARGET_NAME")["GNU_TARGET_NAME"]["expanded"].strip()
+    tuple_var = buildroot_vars(out_dir, "GNU_TARGET_NAME")["GNU_TARGET_NAME"]["expanded"].strip()
     model = {"defconfig": DEFCONFIG,
              "buildroot": (HERE / "BUILDROOT_PINNED_VERSION.txt").read_text().strip(),
              "target_tuple": tuple_var,
@@ -153,7 +172,7 @@ def extract(out_dir):
         model["packages"][name] = {
             "kind": e["type"], "virtual": bool(e.get("virtual")),
             "version": e.get("version"), "dl_dir": e.get("dl_dir"),
-            "stamp_dir": e["stamp_dir"],
+            "stamp_dir": (e.get("stamp_dir") or e["build_dir"]).rstrip("/"),     # older show-info calls it build_dir
             "dir": normalize_pkg_dir(e["package_dir"] if "package_dir" in e else
                                      hash_vars[var_prefix(name, e) + "_PKGDIR"][0]),
             "deps": sorted(e["dependencies"]), "sources": sources,

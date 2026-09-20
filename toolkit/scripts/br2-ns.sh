@@ -107,5 +107,10 @@ exec unshare --mount --propagation private "${NETFLAG[@]}" bash -c '
   fi
   mount --bind "$BR2_NS_DL" /mnt/dl
   mount --bind "$BR2_NS_OUT" /mnt/out
+  # Old Buildroot trees (2021 and earlier) recurse so deeply in GNU make 4.3 (`printvars`, `show-info`) that
+  # the default 8 MiB stack overflows and make dies with SIGSEGV; a 1 GiB limit avoids it.
+  ulimit -s 1048576 2>/dev/null || true
+  # Buildroot builds run as root here (namespace, container); old host-tar/host-m4 refuse to configure as root.
+  export FORCE_UNSAFE_CONFIGURE=1
   exec "$@"
 ' br2-ns "$@"
