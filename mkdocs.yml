@@ -10,10 +10,13 @@ nav:
     - Welcome: home/index.md
     - Quickstart: home/quickstart.md
   - Walkthrough:
-      - Overview: walkthrough/index.md
-      - Wrapped: walkthrough/wrapped.md
-      - Stepped (design): walkthrough/stepped.md
-      - Native: walkthrough/native.md
+      - Start here: walkthrough/index.md
+      - "1. Buildroot from scratch": walkthrough/buildroot.md
+      - "2. Buck2 from scratch": walkthrough/buck2.md
+      - "3. Joining the two": walkthrough/project.md
+      - "4. Wrapped": walkthrough/wrapped.md
+      - "5. Stepped (design)": walkthrough/stepped.md
+      - "6. Native": walkthrough/native.md
   - Guides:
       - Adding a Buildroot project: guides/adding-a-project.md
       - Iterating fast: guides/fast-iteration.md

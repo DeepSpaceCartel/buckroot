@@ -1,0 +1,22 @@
+# Each genrule is a *target*: a named recipe that turns declared inputs into one declared output.
+
+genrule(
+    name = "upper",
+    srcs = ["greeting.txt"],
+    out = "upper.txt",
+    cmd = "tr a-z A-Z < $SRCS > $OUT",
+)
+
+genrule(
+    name = "first_word",
+    srcs = [":upper"],
+    out = "first_word.txt",
+    cmd = "head -c 5 $SRCS > $OUT",
+)
+
+genrule(
+    name = "banner",
+    srcs = [":first_word"],
+    out = "banner.txt",
+    cmd = "(echo '=== banner ==='; cat $SRCS) > $OUT",
+)
