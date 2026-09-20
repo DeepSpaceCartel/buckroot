@@ -327,7 +327,7 @@ Read it against `hello.mk` from Step 1:
   `aarch64-linux-gcc`, found in the merged `host/bin`. `$(TARGET_CFLAGS)` became `-D_LARGEFILE_SOURCE ... -O2 -g0`.
 - **Installing to target**: `HELLO_INSTALL_TARGET_CMDS`, with `$(TARGET_DIR)` expanded to this package's own `target/`.
 
-### The output: `hello.tar`
+### The output: `hello.tar` { #the-output-hellotar }
 
 `hello.tar` is an archive (a tar file: many files packed into one) with twelve regular files:
 

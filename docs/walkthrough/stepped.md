@@ -131,15 +131,66 @@ almost never skip, because they depend on everything before them.
   decision would be split between Buildroot's stamps and Buck2's action keys. They must agree, and a step's action must never
   run against a stamp the previous action did not write.
 
+## The state problem, with numbers
+
+The cost that decides this design is the one already named above: **the state passed between steps is the build directory.** In
+the wrapped variant that directory lives and dies inside one action; only the files the package *installs* leave it (a few
+megabytes for `host-gawk`, see the artifact sizes on [Step 4](wrapped.md#the-output-hellotar)). In a stepped build, every step
+boundary would have to store the whole directory and the next step would have to fetch and unpack it. Some real sizes from the
+Car Thing project:
+
+| Package | Source archive (compressed) | Extracted source tree | Growth |
+|---|---|---|---|
+| `host-gcc-final` | 84 MB | 758 MiB | 9x |
+| `mesa3d` | 20 MB | 227 MiB | 11x |
+| `linux` | 143 MB | (about a gigabyte) | |
+| `host-cmake` | | 329 MB build directory, measured mid-build | |
+
+Two consequences:
+
+1. **For the first steps, moving the state costs more than recomputing it.** Extracting an archive is one decompression pass. The
+   *extracted tree* is roughly 10 times larger than the archive that already sits in the cache, so uploading the tree and
+   downloading it again on the next machine moves an order of magnitude more data than simply extracting again would read. Caching
+   `extract` only pays if it can be **deduplicated** (below), or if the network is faster than the decompression, which on one
+   machine it is, and across a network usually is not.
+2. **Later steps are worse.** After `build` the directory holds the source *and* the objects, often larger than the source alone.
+   Any boundary after `build` would move gigabytes for a large package.
+
+So five separate actions would probably make builds slower and the cache larger for exactly the packages where skipping looks most
+attractive.
+
+### How the state cost could be reduced
+
+- **Store steps as directory trees, not archives.** The cache stores files by content hash. If step N's output is a directory tree,
+  then step N+1's tree shares almost every file with it (the patched source is the extracted source plus a few changed files; the
+  built tree is the patched source plus objects). Only the *new or changed* files add bytes. With one archive blob per step, the
+  whole tree is stored again every time. This is the largest single improvement, and it also helps the wrapped variant's package
+  outputs (files shared between packages, and between projects, are stored once).
+- **Split in two, not five.** The real dependence boundary is between *source preparation* (download, extract, patch: depends only on
+  the archive and the patches, not on the configuration or the dependencies) and *building* (configure, build, install: depends on
+  everything). Cut only there. The build stays a single action, as in wrapped, so objects never move. The source stage is shareable
+  across configurations and between a `host-foo` and a `foo` that unpack the same archive, and changing a compiler flag would not
+  redo it. This keeps the useful part of stepped and drops the expensive part.
+- **Do not cache what is cheaper to recompute.** Where the extract of a large archive takes less time than transferring its tree,
+  leave it inside the build action. Measure the pair (extraction seconds against transfer seconds) per package before deciding.
+- **Build outside the source tree where the package allows it** (cmake and meson do; many autotools packages can), so the state
+  worth moving is the small build output, not a copy of the source.
+- **Mount, do not copy.** Even a deduplicated tree has to be *writable* for the build. Where the platform can give a build a
+  copy-on-write view of a cached tree (overlay or reflink), fetching a tree costs almost nothing after the first time on a worker.
+
+None of this is implemented; each is a hypothesis to test in the prototype described next.
+
 ## How to decide
 
 Do not build it on principle; measure first:
 
 1. Take the two heaviest packages of the Car Thing project (`host-gcc-final` and `linux`) and time the extract and patch steps
    separately from the whole build.
-2. Measure the size of the state (the build directory) after each step.
-3. If extract plus patch is more than roughly 5% of the package's time **and** the state is small enough to move cheaply,
-   prototype `br2_stepped_package` for those two packages only, selected through a list in `project.json` in the same way as
+2. Measure the size of the state (the build directory) after each step, and how much of it is *new files* compared with the
+   previous step (that is what a directory-tree cache would actually store).
+3. Compare the time saved by skipping extract and patch with the time to move the source tree. If extract plus patch is more than
+   roughly 5% of the package's time **and** moving the tree is cheaper than redoing it, prototype the **two-stage** shape
+   (source preparation, then build) for those two packages only, selected through a list in `project.json` in the same way as
    the `native` list.
 4. Run the prototype through the same eight-cell matrix and compare with the [results](../project/results.md).
 
