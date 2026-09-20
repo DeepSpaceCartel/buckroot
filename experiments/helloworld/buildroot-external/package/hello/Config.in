@@ -1,0 +1,5 @@
+config BR2_PACKAGE_HELLO
+	bool "hello"
+	help
+	  Trivial hello-world C program, shared verbatim with the Tier 1
+	  Buck2 migration experiment (see experiments/helloworld/common/hello).

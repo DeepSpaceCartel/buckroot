@@ -1,0 +1,170 @@
+[
+ {
+  "variant": "wrapped",
+  "mode": "local",
+  "salt": "wrapped-local-19141219",
+  "instance": "helloworld-local-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 338.0,
+   "commands": 61,
+   "cached": 0,
+   "remote": 0,
+   "local": 61,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "local-cache",
+  "salt": "wrapped-local-cache-19141758",
+  "instance": "helloworld-local-cache-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 363.8,
+   "commands": 61,
+   "cached": 0,
+   "remote": 0,
+   "local": 61,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 8.5,
+   "commands": 61,
+   "cached": 61,
+   "remote": 0,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "remote",
+  "salt": "wrapped-remote-19142412",
+  "instance": "helloworld-remote-wrapped-142412",
+  "cold": {
+   "ok": true,
+   "seconds": 363.4,
+   "commands": 61,
+   "cached": 0,
+   "remote": 61,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "remote-cache",
+  "salt": "wrapped-remote-cache-19143016",
+  "instance": "helloworld-remote-cache-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 416.8,
+   "commands": 61,
+   "cached": 0,
+   "remote": 61,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 9.0,
+   "commands": 61,
+   "cached": 61,
+   "remote": 0,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "local",
+  "salt": "native-local-19143724",
+  "instance": "helloworld-local-native",
+  "cold": {
+   "ok": true,
+   "seconds": 346.0,
+   "commands": 56,
+   "cached": 0,
+   "remote": 0,
+   "local": 56,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "local-cache",
+  "salt": "native-local-cache-19144311",
+  "instance": "helloworld-local-cache-native",
+  "cold": {
+   "ok": true,
+   "seconds": 355.2,
+   "commands": 56,
+   "cached": 0,
+   "remote": 0,
+   "local": 56,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 23.2,
+   "commands": 56,
+   "cached": 55,
+   "remote": 0,
+   "local": 1,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote",
+  "salt": "native-remote-19144933",
+  "instance": "helloworld-remote-native-144933",
+  "cold": {
+   "ok": true,
+   "seconds": 354.9,
+   "commands": 56,
+   "cached": 0,
+   "remote": 56,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote-cache",
+  "salt": "native-remote-cache-19145529",
+  "instance": "helloworld-remote-cache-native",
+  "cold": {
+   "ok": true,
+   "seconds": 317.3,
+   "commands": 56,
+   "cached": 0,
+   "remote": 56,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 11.9,
+   "commands": 56,
+   "cached": 56,
+   "remote": 0,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.ext4",
+   "manifest": "IDENTICAL"
+  }
+ }
+]

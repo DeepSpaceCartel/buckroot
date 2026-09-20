@@ -1,0 +1,18 @@
+/buildroot-src/
+/buildroot-external/output/
+/buildroot-external/dl/
+/out/
+/tools/
+/buck-out/
+__pycache__/
+# vendored from the buckroot toolkit by br2-sync
+/.buckconfig
+/.buckroot
+/BUCK
+/br2/
+/scripts/
+/platforms/
+/toolchains/
+/infra/
+/smoke/
+/sources/

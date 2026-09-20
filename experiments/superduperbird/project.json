@@ -1,0 +1,79 @@
+{
+  "name": "superduperbird",
+  "description": "Spotify Car Thing (superbird): nd-0r/superduperbird-buildroot, a BR2_EXTERNAL tree on Buildroot 2024.05",
+  "defconfig": "superduperbird_defconfig",
+  "external": true,
+  "external_repo": {
+    "url": "https://github.com/nd-0r/superduperbird-buildroot",
+    "commit": "fcc1ef9f4d16b08e78819a53252fda0224bd6519"
+  },
+  "buildroot": {
+    "repo": "https://git.buildroot.net/buildroot",
+    "ref": "2024.05.3"
+  },
+  "native": [
+    "host-skeleton",
+    "host-fakedate",
+    "skeleton",
+    "initscripts",
+    "urandom-scripts",
+    "skeleton-init-sysv",
+    "skeleton-init-common"
+  ],
+  "rootfs_image": "rootfs.tar",
+  "config_fragment": [
+    "BR2_ROOTFS_POST_IMAGE_SCRIPT=\"\"",
+    "BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE=\"$(BR2_EXTERNAL_SUPERDUPERBIRD_PATH)/board/linux.config.4.9.113\"",
+    "BR2_LINUX_KERNEL_DTS_SUPPORT=y",
+    "BR2_LINUX_KERNEL_INTREE_DTS_NAME=\"superbird_evt_512\""
+  ],
+  "notes": "Two deviations from the project's defconfig, applied to every build we compare (golden included): (1) post_image.sh writes into $BR2_EXTERNAL/output and loop-mounts an image, incompatible with the read-only fixed-path namespace; (2) the pinned HEAD commit ('Still trying to get Amlogic's code to compile') fails to build the kernel with board/linux.config (CONFIG_AMLOGIC_MEDIA_VIDEOCAPTURE unset -> implicit declaration in video.c), so the older full config linux.config.4.9.113 is used. (3) the default defconfig lacks the DTS settings that external.mk's hook needs (superbird_evt_512.dtb); they are taken from superduperbird_dev_defconfig. (4) /etc/shadow is compared by presence only: the sha-256 root password hash gets a random salt on every build, golden or not.",
+  "sources": "vendored",
+  "extra_view": {
+    "package/gettext-tiny": [
+      "package/gettext-gnu"
+    ],
+    "package/avahi": [
+      "package/python3"
+    ],
+    "package/gcc/gcc-final": [
+      "package/gcc"
+    ],
+    "package/autoconf": [
+      "package/automake"
+    ],
+    "package/gcc/gcc-initial": [
+      "package/gcc"
+    ],
+    "package/rust-bin": [
+      "package/rustc"
+    ],
+    "package/util-linux": [
+      "package/ncurses"
+    ],
+    "linux": [
+      "package/uboot-tools"
+    ],
+    "package/skeleton-init-common": [
+      "package/mkpasswd"
+    ],
+    "package/util-linux/util-linux-libs": [
+      "package/util-linux"
+    ]
+  },
+  "heavy": [
+    "host-gcc-initial",
+    "host-gcc-final",
+    "gcc-final",
+    "linux",
+    "mesa3d",
+    "host-cmake",
+    "host-python3"
+  ],
+  "salts": {
+    "linux": "kernel-release-stub"
+  },
+  "manifest_ignore": [
+    "/etc/shadow"
+  ]
+}

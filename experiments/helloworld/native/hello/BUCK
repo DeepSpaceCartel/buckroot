@@ -1,0 +1,32 @@
+# hello, built natively: Buck2 compiles hello.c with the cross toolchain instead of running
+# Buildroot's `make hello`. Hand-written; select it with `[br2] native = hello` (see .buckconfig).
+load("//br2:rules.bzl", "br2_dep", "BR2_STAMPS_LOCAL", "br2_cc_program", "br2_native_package")
+
+# HELLO_BUILD_CMDS in buildroot-external/package/hello/hello.mk:
+#   $(TARGET_CC) $(TARGET_CFLAGS) -o hello hello.c
+# with TARGET_CFLAGS = -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -O2 -g0
+br2_cc_program(
+    name = "hello-bin",
+    srcs = ["//common/hello:hello.c"],
+    toolchain = "//br2/native/tc-bootlin:bootlin-aarch64-musl",
+    defines = ["_LARGEFILE_SOURCE", "_LARGEFILE64_SOURCE", "_FILE_OFFSET_BITS=64"],
+    copts = ["-O2", "-g0"],
+)
+
+# HELLO_INSTALL_TARGET_CMDS: $(INSTALL) -D -m 0755 hello $(TARGET_DIR)/usr/bin/hello
+br2_native_package(
+    name = "hello",
+    pkg = "hello",
+    bdir = "buildroot-external/package/hello",
+    pkg_inputs = "//buildroot-external/package/hello:inputs",
+    stamp_dir = "build/hello-1.0",
+    stamps = BR2_STAMPS_LOCAL,
+    install = {"usr/bin/hello": ":hello-bin"},
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton", "//buildroot-src/package/skeleton:skeleton"),
+        br2_dep("toolchain", "//buildroot-src/toolchain/toolchain:toolchain"),
+    ],
+    visibility = ["PUBLIC"],
+)

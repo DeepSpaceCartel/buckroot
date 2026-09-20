@@ -1,0 +1,9 @@
+{
+  "name": "helloworld",
+  "defconfig": "helloworld_qemu_aarch64_musl_rootfs_defconfig",
+  "external": true,
+  "buildroot": {"repo": "https://git.buildroot.net/buildroot", "ref": "2025.02.18"},
+  "native": ["hello", "host-skeleton", "host-fakedate", "skeleton", "musl-compat-headers",
+             "initscripts", "urandom-scripts", "skeleton-init-sysv", "skeleton-init-common",
+             "toolchain", "toolchain-external", "toolchain-external-bootlin"]
+}

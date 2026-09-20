@@ -1,0 +1,2174 @@
+{
+ "buildroot": "2024.05.3",
+ "defconfig": "superduperbird_defconfig",
+ "packages": {
+  "avahi": {
+   "deps": [
+    "dbus",
+    "expat",
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "libdaemon",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/avahi",
+   "dl_dir": "avahi",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "avahi-0.8.tar.gz",
+     "hash": {
+      "sha256": "060309d7a333d38d951bc27598c677af1796934dbd98e1024e7ad8de798fedda"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/avahi-0.8",
+   "version": "0.8",
+   "virtual": false
+  },
+  "busybox": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "kmod",
+    "libxcrypt",
+    "skeleton",
+    "toolchain",
+    "util-linux"
+   ],
+   "dir": "buildroot-src/package/busybox",
+   "dl_dir": "busybox",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "busybox-1.36.1.tar.bz2",
+     "hash": {
+      "sha256": "b8cc24c9574d809e7279c3be349795c5d5ceb6fdf19ca709f80cde50e47de314"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/busybox-1.36.1",
+   "version": "1.36.1",
+   "virtual": false
+  },
+  "dbus": {
+   "deps": [
+    "expat",
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/dbus",
+   "dl_dir": "dbus",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "dbus-1.14.10.tar.xz",
+     "hash": {
+      "sha256": "ba1f21d2bd9d339da2d4aa8780c09df32fea87998b73da24f49ab9df1e36a50f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/dbus-1.14.10",
+   "version": "1.14.10",
+   "virtual": false
+  },
+  "eudev": {
+   "deps": [
+    "host-fakedate",
+    "host-gperf",
+    "host-pkgconf",
+    "host-skeleton",
+    "kmod",
+    "skeleton",
+    "toolchain",
+    "util-linux-libs"
+   ],
+   "dir": "buildroot-src/package/eudev",
+   "dl_dir": "eudev",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "eudev-3.2.14.tar.gz",
+     "hash": {
+      "sha256": "8da4319102f24abbf7fff5ce9c416af848df163b29590e666d334cc1927f006f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/eudev-3.2.14",
+   "version": "3.2.14",
+   "virtual": false
+  },
+  "expat": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/expat",
+   "dl_dir": "expat",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "expat-2.6.2.tar.xz",
+     "hash": {
+      "sha256": "ee14b4c5d8908b1bec37ad937607eab183d4d9806a08adee472c3c3121d27364"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/expat-2.6.2",
+   "version": "2.6.2",
+   "virtual": false
+  },
+  "fontconfig": {
+   "deps": [
+    "expat",
+    "freetype",
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-gperf",
+    "host-libtool",
+    "host-pkgconf",
+    "host-skeleton",
+    "skeleton",
+    "toolchain",
+    "util-linux-libs"
+   ],
+   "dir": "buildroot-src/package/fontconfig",
+   "dl_dir": "fontconfig",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "fontconfig-2.14.2.tar.xz",
+     "hash": {
+      "sha256": "dba695b57bce15023d2ceedef82062c2b925e51f5d4cc4aef736cf13f60a468b"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/fontconfig-2.14.2",
+   "version": "2.14.2",
+   "virtual": false
+  },
+  "freetype": {
+   "deps": [
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "skeleton",
+    "toolchain",
+    "zlib"
+   ],
+   "dir": "buildroot-src/package/freetype",
+   "dl_dir": "freetype",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "freetype-2.13.2.tar.xz",
+     "hash": {
+      "sha256": "12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/freetype-2.13.2",
+   "version": "2.13.2",
+   "virtual": false
+  },
+  "gcc-final": {
+   "deps": [
+    "host-fakedate",
+    "host-gcc-final",
+    "host-skeleton",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/package/gcc/gcc-final",
+   "dl_dir": "gcc",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "gcc-13.3.0.tar.xz",
+     "hash": {
+      "sha512": "ed5f2f4c6ed2c796fcf2c93707159e9dbd3ddb1ba063d549804dd68cdabbb6d550985ae1c8465ae9a336cfe29274a6eb0f42e21924360574ebd8e5d5c7c9a801"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/gcc-final-13.3.0",
+   "version": "13.3.0",
+   "virtual": false
+  },
+  "glibc": {
+   "deps": [
+    "host-bison",
+    "host-fakedate",
+    "host-gawk",
+    "host-gcc-initial",
+    "host-skeleton",
+    "linux-headers",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/package/glibc",
+   "dl_dir": "glibc",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "glibc-2.39-74-g198632a05f6c7b9ab67d3331d8caace9ceabb685.tar.gz",
+     "hash": {
+      "sha256": "2858e8e47c4c0df32b526c56d5590ec939e8178201ee9526bb070999ce4aa1f2"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/glibc-2.39-74-g198632a05f6c7b9ab67d3331d8caace9ceabb685",
+   "version": "2.39-74-g198632a05f6c7b9ab67d3331d8caace9ceabb685",
+   "virtual": false
+  },
+  "googlefontdirectory": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/googlefontdirectory",
+   "dl_dir": "googlefontdirectory",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "googlefontdirectory-2125bc9b447971543caaa132530b828e5e682819.tar.gz",
+     "hash": {
+      "sha256": "c911d284cb6ff255f25298123f33aaf96039664dcf3de22e66ca9f2af7019a08"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/googlefontdirectory-2125bc9b447971543caaa132530b828e5e682819",
+   "version": "2125bc9b447971543caaa132530b828e5e682819",
+   "virtual": false
+  },
+  "host-acl": {
+   "deps": [
+    "host-attr",
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/acl",
+   "dl_dir": "acl",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "acl-2.3.2.tar.xz",
+     "hash": {
+      "sha256": "97203a72cae99ab89a067fe2210c1cbf052bc492b479eca7d226d9830883b0bd"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-acl-2.3.2",
+   "version": "2.3.2",
+   "virtual": false
+  },
+  "host-attr": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/attr",
+   "dl_dir": "attr",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "attr-2.5.2.tar.xz",
+     "hash": {
+      "sha256": "f2e97b0ab7ce293681ab701915766190d607a1dba7fae8a718138150b700a70b"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-attr-2.5.2",
+   "version": "2.5.2",
+   "virtual": false
+  },
+  "host-autoconf": {
+   "deps": [
+    "host-fakedate",
+    "host-libtool",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/autoconf",
+   "dl_dir": "autoconf",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "autoconf-2.72.tar.xz",
+     "hash": {
+      "sha256": "ba885c1319578d6c94d46e9b0dceb4014caafe2490e437a0dbca3f270a223f5a"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-autoconf-2.72",
+   "version": "2.72",
+   "virtual": false
+  },
+  "host-autoconf-archive": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/autoconf-archive",
+   "dl_dir": "autoconf-archive",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "autoconf-archive-2023.02.20.tar.xz",
+     "hash": {
+      "sha256": "71d4048479ae28f1f5794619c3d72df9c01df49b1c628ef85fde37596dc31a33"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-autoconf-archive-2023.02.20",
+   "version": "2023.02.20",
+   "virtual": false
+  },
+  "host-automake": {
+   "deps": [
+    "host-autoconf",
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/automake",
+   "dl_dir": "automake",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "automake-1.16.5.tar.xz",
+     "hash": {
+      "sha256": "f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-automake-1.16.5",
+   "version": "1.16.5",
+   "virtual": false
+  },
+  "host-binutils": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/binutils",
+   "dl_dir": "binutils",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "binutils-2.41.tar.xz",
+     "hash": {
+      "sha512": "5df45d0bd6ddabdce4f35878c041e46a92deef01e7dea5facc97fd65cc06b59abc6fba0eb454b68e571c7e14038dc823fe7f2263843e6e627b7444eaf0fe9374"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-binutils-2.41",
+   "version": "2.41",
+   "virtual": false
+  },
+  "host-bison": {
+   "deps": [
+    "host-fakedate",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/bison",
+   "dl_dir": "bison",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "bison-3.8.2.tar.xz",
+     "hash": {
+      "sha256": "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-bison-3.8.2",
+   "version": "3.8.2",
+   "virtual": false
+  },
+  "host-btrfs-progs": {
+   "deps": [
+    "host-fakedate",
+    "host-lzo",
+    "host-skeleton",
+    "host-util-linux",
+    "host-zlib"
+   ],
+   "dir": "buildroot-src/package/btrfs-progs",
+   "dl_dir": "btrfs-progs",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "btrfs-progs-v5.16.2.tar.xz",
+     "hash": {
+      "sha256": "9e9b303a1d0fd9ceaaf204ee74c1c8fa1fd55794e223d9fe2bc62875ecbd53d2"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-btrfs-progs-5.16.2",
+   "version": "5.16.2",
+   "virtual": false
+  },
+  "host-cmake": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/cmake",
+   "dl_dir": "cmake",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "cmake-3.28.3.tar.gz",
+     "hash": {
+      "sha256": "72b7570e5c8593de6ac4ab433b73eab18c5fb328880460c86ce32608141ad5c1"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-cmake-3.28.3",
+   "version": "3.28.3",
+   "virtual": false
+  },
+  "host-e2fsprogs": {
+   "deps": [
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "host-util-linux"
+   ],
+   "dir": "buildroot-src/package/e2fsprogs",
+   "dl_dir": "e2fsprogs",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "e2fsprogs-1.47.0.tar.xz",
+     "hash": {
+      "sha256": "144af53f2bbd921cef6f8bea88bb9faddca865da3fbc657cc9b4d2001097d5db"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-e2fsprogs-1.47.0",
+   "version": "1.47.0",
+   "virtual": false
+  },
+  "host-eudev": {
+   "deps": [
+    "host-fakedate",
+    "host-gperf",
+    "host-pkgconf",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/eudev",
+   "dl_dir": "eudev",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "eudev-3.2.14.tar.gz",
+     "hash": {
+      "sha256": "8da4319102f24abbf7fff5ce9c416af848df163b29590e666d334cc1927f006f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-eudev-3.2.14",
+   "version": "3.2.14",
+   "virtual": false
+  },
+  "host-expat": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/expat",
+   "dl_dir": "expat",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "expat-2.6.2.tar.xz",
+     "hash": {
+      "sha256": "ee14b4c5d8908b1bec37ad937607eab183d4d9806a08adee472c3c3121d27364"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-expat-2.6.2",
+   "version": "2.6.2",
+   "virtual": false
+  },
+  "host-fakedate": {
+   "deps": [
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/fakedate",
+   "dl_dir": "fakedate",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-fakedate",
+   "version": "",
+   "virtual": false
+  },
+  "host-fakeroot": {
+   "deps": [
+    "host-acl",
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/fakeroot",
+   "dl_dir": "fakeroot",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "fakeroot_1.34.orig.tar.gz",
+     "hash": {
+      "sha256": "5727f16d8903792588efa7a9f8ef8ce71f8756e746b62e45162e7735662e56bb"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-fakeroot-1.34",
+   "version": "1.34",
+   "virtual": false
+  },
+  "host-flex": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-gettext",
+    "host-libtool",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/flex",
+   "dl_dir": "flex",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "flex-2.6.4.tar.gz",
+     "hash": {
+      "sha256": "e87aae032bf07c26f85ac0ed3250998c37621d95f8bd748b31f15b33c45ee995"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-flex-2.6.4",
+   "version": "2.6.4",
+   "virtual": false
+  },
+  "host-gawk": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gawk",
+   "dl_dir": "gawk",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gawk-5.3.0.tar.xz",
+     "hash": {
+      "sha256": "ca9c16d3d11d0ff8c69d79dc0b47267e1329a69b39b799895604ed447d3ca90b"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gawk-5.3.0",
+   "version": "5.3.0",
+   "virtual": false
+  },
+  "host-gcc-final": {
+   "deps": [
+    "glibc",
+    "host-binutils",
+    "host-fakedate",
+    "host-gmp",
+    "host-mpc",
+    "host-mpfr",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gcc/gcc-final",
+   "dl_dir": "gcc",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gcc-13.3.0.tar.xz",
+     "hash": {
+      "sha512": "ed5f2f4c6ed2c796fcf2c93707159e9dbd3ddb1ba063d549804dd68cdabbb6d550985ae1c8465ae9a336cfe29274a6eb0f42e21924360574ebd8e5d5c7c9a801"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gcc-final-13.3.0",
+   "version": "13.3.0",
+   "virtual": false
+  },
+  "host-gcc-initial": {
+   "deps": [
+    "host-binutils",
+    "host-fakedate",
+    "host-gmp",
+    "host-mpc",
+    "host-mpfr",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gcc/gcc-initial",
+   "dl_dir": "gcc",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gcc-13.3.0.tar.xz",
+     "hash": {
+      "sha512": "ed5f2f4c6ed2c796fcf2c93707159e9dbd3ddb1ba063d549804dd68cdabbb6d550985ae1c8465ae9a336cfe29274a6eb0f42e21924360574ebd8e5d5c7c9a801"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gcc-initial-13.3.0",
+   "version": "13.3.0",
+   "virtual": false
+  },
+  "host-gettext": {
+   "deps": [
+    "host-fakedate",
+    "host-gettext-tiny",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gettext",
+   "dl_dir": null,
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-gettext",
+   "version": null,
+   "virtual": true
+  },
+  "host-gettext-tiny": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gettext-tiny",
+   "dl_dir": "gettext-tiny",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gettext-0.22.4.tar.xz",
+     "hash": {
+      "sha256": "29217f1816ee2e777fa9a01f9956a14139c0c23cc1b20368f06b2888e8a34116"
+     },
+     "vendored": true
+    },
+    {
+     "file": "gettext-tiny-0.3.2.tar.gz",
+     "hash": {
+      "sha256": "29cc165e27e83d2bb3760118c2368eadab550830d962d758e51bd36eb860f383"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gettext-tiny-0.3.2",
+   "version": "0.3.2",
+   "virtual": false
+  },
+  "host-gmp": {
+   "deps": [
+    "host-fakedate",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gmp",
+   "dl_dir": "gmp",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gmp-6.3.0.tar.xz",
+     "hash": {
+      "sha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gmp-6.3.0",
+   "version": "6.3.0",
+   "virtual": false
+  },
+  "host-gperf": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gperf",
+   "dl_dir": "gperf",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gperf-3.1.tar.gz",
+     "hash": {
+      "sha256": "588546b945bba4b70b6a3a616e80b4ab466e3f33024a352fc2198112cdbb3ae2"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gperf-3.1",
+   "version": "3.1",
+   "virtual": false
+  },
+  "host-kmod": {
+   "deps": [
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/kmod",
+   "dl_dir": "kmod",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "kmod-31.tar.xz",
+     "hash": {
+      "sha256": "f5a6949043cc72c001b728d8c218609c5a15f3c33d75614b78c79418fcf00d80"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-kmod-31",
+   "version": "31",
+   "virtual": false
+  },
+  "host-libffi": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/libffi",
+   "dl_dir": "libffi",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "libffi-3.4.6.tar.gz",
+     "hash": {
+      "sha256": "b0dea9df23c863a7a50e825440f3ebffabd65df1497108e5d437747843895a4e"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-libffi-3.4.6",
+   "version": "3.4.6",
+   "virtual": false
+  },
+  "host-libtool": {
+   "deps": [
+    "host-fakedate",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/libtool",
+   "dl_dir": "libtool",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "libtool-2.4.6.tar.xz",
+     "hash": {
+      "sha256": "7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-libtool-2.4.6",
+   "version": "2.4.6",
+   "virtual": false
+  },
+  "host-libzlib": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/libzlib",
+   "dl_dir": "libzlib",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "zlib-1.3.1.tar.xz",
+     "hash": {
+      "sha256": "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-libzlib-1.3.1",
+   "version": "1.3.1",
+   "virtual": false
+  },
+  "host-lz4": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/lz4",
+   "dl_dir": "lz4",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "lz4-1.9.4.tar.gz",
+     "hash": {
+      "sha256": "0b0e3aa07c8c063ddf40b082bdf7e37a1562bda40a0ff5272957f3e987e0e54b"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-lz4-1.9.4",
+   "version": "1.9.4",
+   "virtual": false
+  },
+  "host-lzo": {
+   "deps": [
+    "host-cmake",
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/lzo",
+   "dl_dir": "lzo",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "lzo-2.10.tar.gz",
+     "hash": {
+      "sha256": "c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-lzo-2.10",
+   "version": "2.10",
+   "virtual": false
+  },
+  "host-m4": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/m4",
+   "dl_dir": "m4",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "m4-1.4.19.tar.xz",
+     "hash": {
+      "sha256": "63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-m4-1.4.19",
+   "version": "1.4.19",
+   "virtual": false
+  },
+  "host-makedevs": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/makedevs",
+   "dl_dir": "makedevs",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-makedevs",
+   "version": "",
+   "virtual": false
+  },
+  "host-meson": {
+   "deps": [
+    "host-fakedate",
+    "host-ninja",
+    "host-python-installer",
+    "host-python-pypa-build",
+    "host-python-setuptools",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/meson",
+   "dl_dir": "meson",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "meson-1.3.1.tar.gz",
+     "hash": {
+      "sha256": "6020568bdede1643d4fb41e28215be38eff5d52da28ac7d125457c59e0032ad7"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-meson-1.3.1",
+   "version": "1.3.1",
+   "virtual": false
+  },
+  "host-mkpasswd": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/mkpasswd",
+   "dl_dir": "mkpasswd",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-mkpasswd",
+   "version": "",
+   "virtual": false
+  },
+  "host-mpc": {
+   "deps": [
+    "host-fakedate",
+    "host-gmp",
+    "host-mpfr",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/mpc",
+   "dl_dir": "mpc",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "mpc-1.3.1.tar.gz",
+     "hash": {
+      "sha256": "ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-mpc-1.3.1",
+   "version": "1.3.1",
+   "virtual": false
+  },
+  "host-mpfr": {
+   "deps": [
+    "host-fakedate",
+    "host-gmp",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/mpfr",
+   "dl_dir": "mpfr",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "mpfr-4.1.1.tar.xz",
+     "hash": {
+      "sha256": "ffd195bd567dbaffc3b98b23fd00aad0537680c9896171e44fe3ff79e28ac33d"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-mpfr-4.1.1",
+   "version": "4.1.1",
+   "virtual": false
+  },
+  "host-ninja": {
+   "deps": [
+    "host-cmake",
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/ninja",
+   "dl_dir": "ninja",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "ninja-1.11.1.g95dee.kitware.jobserver-1.tar.gz",
+     "hash": {
+      "sha256": "7ba84551f5b315b4270dc7c51adef5dff83a2154a3665a6c9744245c122dd0db"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-ninja-1.11.1.g95dee.kitware.jobserver-1",
+   "version": "1.11.1.g95dee.kitware.jobserver-1",
+   "virtual": false
+  },
+  "host-patchelf": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/patchelf",
+   "dl_dir": "patchelf",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "patchelf-0.13.tar.bz2",
+     "hash": {
+      "sha256": "4c7ed4bcfc1a114d6286e4a0d3c1a90db147a4c3adda1814ee0eee0f9ee917ed"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-patchelf-0.13",
+   "version": "0.13",
+   "virtual": false
+  },
+  "host-pkgconf": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/pkgconf",
+   "dl_dir": "pkgconf",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "pkgconf-1.6.3.tar.xz",
+     "hash": {
+      "sha256": "61f0b31b0d5ea0e862b454a80c170f57bad47879c0c42bd8de89200ff62ea210"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-pkgconf-1.6.3",
+   "version": "1.6.3",
+   "virtual": false
+  },
+  "host-python-flit-core": {
+   "deps": [
+    "host-fakedate",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-flit-core",
+   "dl_dir": "python-flit-core",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "flit_core-3.9.0.tar.gz",
+     "hash": {
+      "sha256": "72ad266176c4a3fcfab5f2930d76896059851240570ce9a98733b658cb786eba"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-flit-core-3.9.0",
+   "version": "3.9.0",
+   "virtual": false
+  },
+  "host-python-installer": {
+   "deps": [
+    "host-fakedate",
+    "host-python-flit-core",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-installer",
+   "dl_dir": "python-installer",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "installer-0.7.0.tar.gz",
+     "hash": {
+      "sha256": "a26d3e3116289bb08216e0d0f7d925fcef0b0194eedfa0c944bcaaa106c4b631"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-installer-0.7.0",
+   "version": "0.7.0",
+   "virtual": false
+  },
+  "host-python-mako": {
+   "deps": [
+    "host-fakedate",
+    "host-python-installer",
+    "host-python-markupsafe",
+    "host-python-pypa-build",
+    "host-python-setuptools",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-mako",
+   "dl_dir": "python-mako",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "Mako-1.3.0.tar.gz",
+     "hash": {
+      "sha256": "e3a9d388fd00e87043edbe8792f45880ac0114e9c4adc69f6e9bfb2c55e3b11b"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-mako-1.3.0",
+   "version": "1.3.0",
+   "virtual": false
+  },
+  "host-python-markupsafe": {
+   "deps": [
+    "host-fakedate",
+    "host-python-installer",
+    "host-python-pypa-build",
+    "host-python-setuptools",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-markupsafe",
+   "dl_dir": "python-markupsafe",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "MarkupSafe-2.1.3.tar.gz",
+     "hash": {
+      "sha256": "af598ed32d6ae86f1b747b82783958b1a4ab8f617b06fe68795c7f026abbdcad"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-markupsafe-2.1.3",
+   "version": "2.1.3",
+   "virtual": false
+  },
+  "host-python-packaging": {
+   "deps": [
+    "host-fakedate",
+    "host-python-installer",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-packaging",
+   "dl_dir": "python-packaging",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "packaging-24.0.tar.gz",
+     "hash": {
+      "sha256": "eb82c5e3e56209074766e6885bb04b8c38a0c015d0a30036ebe7ece34c9989e9"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-packaging-24.0",
+   "version": "24.0",
+   "virtual": false
+  },
+  "host-python-pypa-build": {
+   "deps": [
+    "host-fakedate",
+    "host-python-installer",
+    "host-python-packaging",
+    "host-python-pyproject-hooks",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-pypa-build",
+   "dl_dir": "python-pypa-build",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "build-1.0.3.tar.gz",
+     "hash": {
+      "sha256": "538aab1b64f9828977f84bc63ae570b060a8ed1be419e7870b8b4fc5e6ea553b"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-pypa-build-1.0.3",
+   "version": "1.0.3",
+   "virtual": false
+  },
+  "host-python-pyproject-hooks": {
+   "deps": [
+    "host-fakedate",
+    "host-python-installer",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-pyproject-hooks",
+   "dl_dir": "python-pyproject-hooks",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "pyproject_hooks-1.0.0.tar.gz",
+     "hash": {
+      "sha256": "f271b298b97f5955d53fb12b72c1fb1948c22c1a6b70b315c54cedaca0264ef5"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-pyproject-hooks-1.0.0",
+   "version": "1.0.0",
+   "virtual": false
+  },
+  "host-python-setuptools": {
+   "deps": [
+    "host-fakedate",
+    "host-python-installer",
+    "host-python-pypa-build",
+    "host-python-wheel",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-setuptools",
+   "dl_dir": "python-setuptools",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "setuptools-69.2.0.tar.gz",
+     "hash": {
+      "sha256": "0ff4183f8f42cd8fa3acea16c45205521a4ef28f73c6391d8a25e92893134f2e"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-setuptools-69.2.0",
+   "version": "69.2.0",
+   "virtual": false
+  },
+  "host-python-wheel": {
+   "deps": [
+    "host-fakedate",
+    "host-python-flit-core",
+    "host-python-installer",
+    "host-python-pypa-build",
+    "host-python3",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/python-wheel",
+   "dl_dir": "python-wheel",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "wheel-0.40.0.tar.gz",
+     "hash": {
+      "sha256": "cd1196f3faee2b31968d626e1731c94f99cbdb67cf5a46e4f5656cbee7738873"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python-wheel-0.40.0",
+   "version": "0.40.0",
+   "virtual": false
+  },
+  "host-python3": {
+   "deps": [
+    "host-autoconf",
+    "host-autoconf-archive",
+    "host-automake",
+    "host-expat",
+    "host-fakedate",
+    "host-libffi",
+    "host-libtool",
+    "host-pkgconf",
+    "host-skeleton",
+    "host-zlib"
+   ],
+   "dir": "buildroot-src/package/python3",
+   "dl_dir": "python3",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "Python-3.11.8.tar.xz",
+     "hash": {
+      "sha256": "9e06008c8901924395bc1da303eac567a729ae012baa182ab39269f650383bb3"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-python3-3.11.8",
+   "version": "3.11.8",
+   "virtual": false
+  },
+  "host-rust-bin": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/rust-bin",
+   "dl_dir": "rust-bin",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "rust-1.74.1-x86_64-unknown-linux-gnu.tar.xz",
+     "hash": {
+      "sha256": "5483e32fe962e9123cf49c9cf169e60640d4c9d0aad1a054dd4bf232f0f012be"
+     },
+     "vendored": true
+    },
+    {
+     "file": "rust-std-1.74.1-aarch64-unknown-linux-gnu.tar.xz",
+     "hash": {
+      "sha256": "a776e7b41991ef7a50706d1f9b7752a8d963e67297bfc22471d6e68d544349cc"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-rust-bin-1.74.1",
+   "version": "1.74.1",
+   "virtual": false
+  },
+  "host-skeleton": {
+   "deps": [],
+   "dir": "buildroot-src/package/skeleton",
+   "dl_dir": "skeleton",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-skeleton",
+   "version": "",
+   "virtual": false
+  },
+  "host-squashfs": {
+   "deps": [
+    "host-fakedate",
+    "host-lz4",
+    "host-lzo",
+    "host-skeleton",
+    "host-xz",
+    "host-zlib",
+    "host-zstd"
+   ],
+   "dir": "buildroot-src/package/squashfs",
+   "dl_dir": "squashfs",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "squashfs-4.6.1.tar.gz",
+     "hash": {
+      "sha256": "94201754b36121a9f022a190c75f718441df15402df32c2b520ca331a107511c"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-squashfs-4.6.1",
+   "version": "4.6.1",
+   "virtual": false
+  },
+  "host-util-linux": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-pkgconf",
+    "host-skeleton",
+    "host-zlib"
+   ],
+   "dir": "buildroot-src/package/util-linux",
+   "dl_dir": "util-linux",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "util-linux-2.39.3.tar.xz",
+     "hash": {
+      "sha256": "7b6605e48d1a49f43cc4b4cfc59f313d0dd5402fa40b96810bd572e167dfed0f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-util-linux-2.39.3",
+   "version": "2.39.3",
+   "virtual": false
+  },
+  "host-xz": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/xz",
+   "dl_dir": "xz",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "xz-5.4.6.tar.bz2",
+     "hash": {
+      "sha256": "913851b274e8e1d31781ec949f1c23e8dbcf0ecf6e73a2436dc21769dd3e6f49"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-xz-5.4.6",
+   "version": "5.4.6",
+   "virtual": false
+  },
+  "host-zlib": {
+   "deps": [
+    "host-fakedate",
+    "host-libzlib",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/zlib",
+   "dl_dir": null,
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-zlib",
+   "version": null,
+   "virtual": true
+  },
+  "host-zstd": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/zstd",
+   "dl_dir": "zstd",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "zstd-1.5.5.tar.gz",
+     "hash": {
+      "sha256": "9c4396cc829cfae319a6e2615202e82aad41372073482fce286fac78646d3ee4"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-zstd-1.5.5",
+   "version": "1.5.5",
+   "virtual": false
+  },
+  "hwdata": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/hwdata",
+   "dl_dir": "hwdata",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "hwdata-0.379.tar.gz",
+     "hash": {
+      "sha256": "b98ef646d530d5fd3afa3180efbf7c8e22d3da0088f5836f41ee25380d87b092"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/hwdata-0.379",
+   "version": "0.379",
+   "virtual": false
+  },
+  "ifupdown-scripts": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/ifupdown-scripts",
+   "dl_dir": "ifupdown-scripts",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/ifupdown-scripts",
+   "version": "",
+   "virtual": false
+  },
+  "initscripts": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/initscripts",
+   "dl_dir": "initscripts",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/initscripts",
+   "version": "",
+   "virtual": false
+  },
+  "kmod": {
+   "deps": [
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "openssl",
+    "skeleton",
+    "toolchain",
+    "zlib"
+   ],
+   "dir": "buildroot-src/package/kmod",
+   "dl_dir": "kmod",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "kmod-31.tar.xz",
+     "hash": {
+      "sha256": "f5a6949043cc72c001b728d8c218609c5a15f3c33d75614b78c79418fcf00d80"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/kmod-31",
+   "version": "31",
+   "virtual": false
+  },
+  "libdaemon": {
+   "deps": [
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libdaemon",
+   "dl_dir": "libdaemon",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libdaemon-0.14.tar.gz",
+     "hash": {
+      "sha256": "fd23eb5f6f986dcc7e708307355ba3289abe03cc381fc47a80bca4a50aa6b834"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libdaemon-0.14",
+   "version": "0.14",
+   "virtual": false
+  },
+  "libdisplay-info": {
+   "deps": [
+    "host-fakedate",
+    "host-meson",
+    "host-skeleton",
+    "hwdata",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libdisplay-info",
+   "dl_dir": "libdisplay-info",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libdisplay-info-0.1.1.tar.bz2",
+     "hash": {
+      "sha256": "51cdb0362882ca2af62532ab4d95e60d81e9890b339264719fd55f8e3945d695"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libdisplay-info-0.1.1",
+   "version": "0.1.1",
+   "virtual": false
+  },
+  "libdrm": {
+   "deps": [
+    "host-fakedate",
+    "host-meson",
+    "host-pkgconf",
+    "host-skeleton",
+    "libpthread-stubs",
+    "skeleton",
+    "toolchain",
+    "udev"
+   ],
+   "dir": "buildroot-src/package/libdrm",
+   "dl_dir": "libdrm",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libdrm-2.4.120.tar.xz",
+     "hash": {
+      "sha256": "3bf55363f76c7250946441ab51d3a6cc0ae518055c0ff017324ab76cdefb327a",
+      "sha512": "6dc16e5134a669eeb59debb1dc2d15b857483ab7476dc2b94bd05a32d8953f046f5656f6cf9e1a63e97e7156fb65ebb58b6a29fe45cb6326058baaf820626e70"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libdrm-2.4.120",
+   "version": "2.4.120",
+   "virtual": false
+  },
+  "libegl": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "mesa3d",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/opengl/libegl",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/libegl",
+   "version": null,
+   "virtual": true
+  },
+  "libevdev": {
+   "deps": [
+    "host-fakedate",
+    "host-meson",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libevdev",
+   "dl_dir": "libevdev",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libevdev-1.13.1.tar.xz",
+     "hash": {
+      "sha256": "06a77bf2ac5c993305882bc1641017f5bec1592d6d1b64787bad492ab34f2f36",
+      "sha512": "9b75bad4bc13948854c8dff7a7a46aca6c06d1410ccb000f881bf76055ccac040595c3b24fb1a574be875b5c262eb86820b9ec3383752641bc2047135e5a412f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libevdev-1.13.1",
+   "version": "1.13.1",
+   "virtual": false
+  },
+  "libgbm": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "mesa3d",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/opengl/libgbm",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/libgbm",
+   "version": null,
+   "virtual": true
+  },
+  "libgles": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "mesa3d",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/opengl/libgles",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/libgles",
+   "version": null,
+   "virtual": true
+  },
+  "libinput": {
+   "deps": [
+    "host-fakedate",
+    "host-meson",
+    "host-pkgconf",
+    "host-skeleton",
+    "libevdev",
+    "mtdev",
+    "skeleton",
+    "toolchain",
+    "udev"
+   ],
+   "dir": "buildroot-src/package/libinput",
+   "dl_dir": "libinput",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libinput-1.25.0.tar.bz2",
+     "hash": {
+      "sha256": "193bd592298bd9e369c0ef3e5d83a6a9d68ddc4cd3dfc84bbe77920a8d0d57df"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libinput-1.25.0",
+   "version": "1.25.0",
+   "virtual": false
+  },
+  "libopenssl": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain",
+    "zlib"
+   ],
+   "dir": "buildroot-src/package/libopenssl",
+   "dl_dir": "libopenssl",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "openssl-3.3.1.tar.gz",
+     "hash": {
+      "sha256": "777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libopenssl-3.3.1",
+   "version": "3.3.1",
+   "virtual": false
+  },
+  "libpthread-stubs": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libpthread-stubs",
+   "dl_dir": "libpthread-stubs",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libpthread-stubs-0.5.tar.xz",
+     "hash": {
+      "sha256": "59da566decceba7c2a7970a4a03b48d9905f1262ff94410a649224e33d2442bc",
+      "sha512": "a24f7c40dcaf5f6ca0085972117fed5ad0851f6fc1972fdab799d27236afaaa4f7baa93e40532f93984d313d94456819aaf4ec8f8d1bbb2e5c4fc76c31891d82"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libpthread-stubs-0.5",
+   "version": "0.5",
+   "virtual": false
+  },
+  "libxcrypt": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libxcrypt",
+   "dl_dir": "libxcrypt",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libxcrypt-4.4.36.tar.xz",
+     "hash": {
+      "sha256": "e5e1f4caee0a01de2aee26e3138807d6d3ca2b8e67287966d1fefd65e1fd8943"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libxcrypt-4.4.36",
+   "version": "4.4.36",
+   "virtual": false
+  },
+  "libxkbcommon": {
+   "deps": [
+    "host-bison",
+    "host-fakedate",
+    "host-flex",
+    "host-meson",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libxkbcommon",
+   "dl_dir": "libxkbcommon",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "libxkbcommon-1.4.0.tar.xz",
+     "hash": {
+      "sha256": "106cec5263f9100a7e79b5f7220f889bc78e7d7ffc55d2b6fdb1efefb8024031"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libxkbcommon-1.4.0",
+   "version": "1.4.0",
+   "virtual": false
+  },
+  "libzlib": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/libzlib",
+   "dl_dir": "libzlib",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "zlib-1.3.1.tar.xz",
+     "hash": {
+      "sha256": "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/libzlib-1.3.1",
+   "version": "1.3.1",
+   "virtual": false
+  },
+  "linux": {
+   "deps": [
+    "host-bison",
+    "host-fakedate",
+    "host-flex",
+    "host-kmod",
+    "host-skeleton",
+    "host-zstd",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/linux",
+   "dl_dir": "linux",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "linux-buildroot-openlinux-201904-g12a-git4.tar.gz",
+     "hash": null,
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/linux-buildroot-openlinux-201904-g12a",
+   "version": "buildroot-openlinux-201904-g12a",
+   "virtual": false
+  },
+  "linux-headers": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/package/linux-headers",
+   "dl_dir": "linux",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "linux-buildroot-openlinux-201904-g12a-git4.tar.gz",
+     "hash": null,
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/linux-headers-buildroot-openlinux-201904-g12a",
+   "version": "buildroot-openlinux-201904-g12a",
+   "virtual": false
+  },
+  "mesa3d": {
+   "deps": [
+    "expat",
+    "host-bison",
+    "host-fakedate",
+    "host-flex",
+    "host-meson",
+    "host-python-mako",
+    "host-skeleton",
+    "libdrm",
+    "skeleton",
+    "toolchain",
+    "zlib"
+   ],
+   "dir": "buildroot-src/package/mesa3d",
+   "dl_dir": "mesa3d",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "mesa-24.0.9.tar.xz",
+     "hash": {
+      "sha256": "51aa686ca4060e38711a9e8f60c8f1efaa516baf411946ed7f2c265cd582ca4c",
+      "sha512": "de2ee6c9df1fc106ee10befe0a76be1e9cfe83d65dbdb83bad6d8d7cfaa085232fb115293a1a790b37b50b1fe14bd58aafbcfe5a15e953b5901a7105d57569a5"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/mesa3d-24.0.9",
+   "version": "24.0.9",
+   "virtual": false
+  },
+  "mtdev": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/mtdev",
+   "dl_dir": "mtdev",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "mtdev-1.1.6.tar.bz2",
+     "hash": {
+      "sha256": "15d7b28da8ac71d8bc8c9287c2045fd174267bc740bec10cfda332dc1204e0e0"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/mtdev-1.1.6",
+   "version": "1.1.6",
+   "virtual": false
+  },
+  "openssh": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-pkgconf",
+    "host-skeleton",
+    "libxcrypt",
+    "openssl",
+    "skeleton",
+    "toolchain",
+    "zlib"
+   ],
+   "dir": "buildroot-src/package/openssh",
+   "dl_dir": "openssh",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "openssh-9.7p1.tar.gz",
+     "hash": {
+      "sha256": "490426f766d82a2763fcacd8d83ea3d70798750c7bd2aff2e57dc5660f773ffd"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/openssh-9.7p1",
+   "version": "9.7p1",
+   "virtual": false
+  },
+  "openssl": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "libopenssl",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/openssl",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/openssl",
+   "version": null,
+   "virtual": true
+  },
+  "sdl2": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain",
+    "udev"
+   ],
+   "dir": "buildroot-src/package/sdl2",
+   "dl_dir": "sdl2",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "SDL2-2.30.3.tar.gz",
+     "hash": {
+      "sha256": "820440072f8f5b50188c1dae104f2ad25984de268785be40c41a099a510f0aec"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/sdl2-2.30.3",
+   "version": "2.30.3",
+   "virtual": false
+  },
+  "skeleton": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton-init-sysv"
+   ],
+   "dir": "buildroot-src/package/skeleton",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/skeleton",
+   "version": null,
+   "virtual": true
+  },
+  "skeleton-init-common": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/skeleton-init-common",
+   "dl_dir": "skeleton-init-common",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/skeleton-init-common",
+   "version": "",
+   "virtual": false
+  },
+  "skeleton-init-sysv": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton-init-common"
+   ],
+   "dir": "buildroot-src/package/skeleton-init-sysv",
+   "dl_dir": "skeleton-init-sysv",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/skeleton-init-sysv",
+   "version": "",
+   "virtual": false
+  },
+  "toolchain": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain-buildroot"
+   ],
+   "dir": "buildroot-src/toolchain/toolchain",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/toolchain",
+   "version": null,
+   "virtual": true
+  },
+  "toolchain-buildroot": {
+   "deps": [
+    "gcc-final",
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/toolchain/toolchain-buildroot",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/toolchain-buildroot",
+   "version": null,
+   "virtual": true
+  },
+  "udev": {
+   "deps": [
+    "eudev",
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/udev",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/udev",
+   "version": null,
+   "virtual": true
+  },
+  "urandom-scripts": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/urandom-scripts",
+   "dl_dir": "urandom-scripts",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/urandom-scripts",
+   "version": "",
+   "virtual": false
+  },
+  "util-linux": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-pkgconf",
+    "host-skeleton",
+    "libxcrypt",
+    "skeleton",
+    "toolchain",
+    "udev",
+    "util-linux-libs",
+    "zlib"
+   ],
+   "dir": "buildroot-src/package/util-linux",
+   "dl_dir": "util-linux",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "util-linux-2.39.3.tar.xz",
+     "hash": {
+      "sha256": "7b6605e48d1a49f43cc4b4cfc59f313d0dd5402fa40b96810bd572e167dfed0f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/util-linux-2.39.3",
+   "version": "2.39.3",
+   "virtual": false
+  },
+  "util-linux-libs": {
+   "deps": [
+    "host-fakedate",
+    "host-pkgconf",
+    "host-skeleton",
+    "libxcrypt",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/util-linux/util-linux-libs",
+   "dl_dir": "util-linux",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "util-linux-2.39.3.tar.xz",
+     "hash": {
+      "sha256": "7b6605e48d1a49f43cc4b4cfc59f313d0dd5402fa40b96810bd572e167dfed0f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/util-linux-libs-2.39.3",
+   "version": "2.39.3",
+   "virtual": false
+  },
+  "zlib": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "libzlib",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/zlib",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/zlib",
+   "version": null,
+   "virtual": true
+  }
+ }
+}

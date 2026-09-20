@@ -1,0 +1,11 @@
+# The source Buildroot's HELLO_SITE points at (HELLO_SITE_METHOD = local).
+filegroup(
+    name = "src",
+    srcs = glob(["*.c"]),
+    visibility = ["PUBLIC"],
+)
+
+export_file(
+    name = "hello.c",
+    visibility = ["PUBLIC"],
+)
