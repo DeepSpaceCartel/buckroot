@@ -11,6 +11,7 @@
                                      --vanilla: the project's defconfig untouched, for reference
   br2 dev [--pkg P]                  iteration loop: no clean, --keep-going, one summary of every failure,
                                      toolkit edits do not invalidate cached results (dev only, no numbers)
+  br2 viewcheck [--mode M]           prove every package's view entries are declared inputs (M=remote: on the worker)
   br2 build --variant V --mode M     one Buck2 build of //:rootfs, timed, checked against golden
   br2 matrix [--variants ..] [--modes ..]   every variant x mode, results/matrix.{json,md}
 
@@ -144,6 +145,25 @@ def cmd_dev(a):
     sys.exit(r.returncode)
 
 
+def cmd_viewcheck(a):
+    """Build every package's `[viewcheck]` sub-target: each package's views are entered with that action's declared inputs
+    and nothing is run. With --mode remote* it runs on the worker, where only declared inputs exist, so an entry that
+    works locally only because the checkout is on disk fails here in minutes instead of hours into a remote build."""
+    q = sh([BUCK2, "uquery", "kind(br2_package, //...)", "--config", "br2.native="], capture_output=True, text=True)
+    labels = sorted({l.split(" (")[0].strip() for l in q.stdout.splitlines() if l.startswith("root//")})
+    cmd = [BUCK2, "build", *[f"{l}[viewcheck]" for l in labels], "--console", "simple", "--keep-going",
+           *config_flags(a.mode, "wrapped", instance(a.mode, "wrapped", "-viewcheck"), dev=False)]
+    r = sh(cmd, capture_output=True, text=True)
+    out = r.stdout + r.stderr
+    m = re.search(r"Commands: (\d+) \(cached: (\d+), remote: (\d+), local: (\d+)\)", out)
+    print(f"{'OK' if r.returncode == 0 else 'FAILED'} {len(labels)} packages" + (f"  commands={m[1]} remote={m[3]} local={m[4]}" if m else ""))
+    for label, tail in failures(out):
+        print(f"\n  FAILED {label}")
+        for l in tail:
+            print("    " + l[:200])
+    sys.exit(r.returncode)
+
+
 def manifest_diff(image, golden):
     tmp = ROOT / "results" / ".scan.json"
     tmp.parent.mkdir(exist_ok=True)
@@ -267,6 +287,9 @@ def main():
     d.add_argument("--mode", choices=MODES, default="local-cache")
     d.add_argument("--strict", action="store_true", help="keep the toolkit scripts as action inputs")
     d.set_defaults(fn=cmd_dev)
+    vc = sub.add_parser("viewcheck", help="prove every package's view entries are declared inputs (use --mode remote to test on the worker)")
+    vc.add_argument("--mode", choices=MODES, default="local")
+    vc.set_defaults(fn=cmd_viewcheck)
     pf = sub.add_parser("preflight")
     pf.add_argument("--pkg", nargs="*")
     pf.set_defaults(fn=cmd_preflight)

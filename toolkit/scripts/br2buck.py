@@ -418,7 +418,7 @@ def render_pkg_dir(pkg_dir, pkgs, carved):
     exports = [n for n in sorted(os.listdir(HERE / pkg_dir))
                if n != "BUCK" and (HERE / pkg_dir / n).is_file() and not (HERE / pkg_dir / n).is_symlink()]
     lines.append("# The package's own files, for hand-written native rules (br2/native/) to consume.\n"
-                 + "".join(f'export_file(name = "file.{n}", src = "{n}", visibility = ["PUBLIC"])\n' for n in exports))
+                 + "".join(f'export_file(name = "file.{n}", src = "{n}", mode = "reference", visibility = ["PUBLIC"])\n' for n in exports))
     seen_sources = set()
     for name, p in sorted(pkgs.items()):
         for s in p["sources"]:
@@ -474,7 +474,7 @@ ROOT_EXPORTS = {"buildroot-src": {"target-dir-warning.txt": "support/misc/target
 def render_exports(root):
     out = ""
     for name, src in sorted(ROOT_EXPORTS.get(root, {}).items()):
-        out += f'\nexport_file(name = "{name}", src = "{src}", visibility = ["PUBLIC"])\n'
+        out += f'\nexport_file(name = "{name}", src = "{src}", mode = "reference", visibility = ["PUBLIC"])\n'
     return out
 
 

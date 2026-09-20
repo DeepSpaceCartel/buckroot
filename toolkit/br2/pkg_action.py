@@ -87,15 +87,15 @@ def untar(tar, dest):
     sh(["tar", "-xf", tar, "-C", dest])
 
 
-def make_in_ns(out, dl, goals, logfile, views=None, common_root=None):
-    """`make <goals>` inside the namespace; `views` = {"SRC"|"EXT"|"COMMON": view file}."""
+def make_in_ns(out, dl, goals, logfile, views=None, common_root=None, command=None):
+    """`make <goals>` (or `command`) inside the namespace; `views` = {"SRC"|"EXT"|"COMMON": view file}."""
     env = dict(ENV, HOME=str(out), BR2_NS_HERE=str(HERE))
     if common_root:
         env["BR2_NS_COMMON_ROOT"] = str(common_root)
     for name, path in (views or {}).items():
         env[f"BR2_NS_{name}_VIEW"] = str(path)
     with open(logfile, "w") as lf:
-        r = subprocess.run([str(NS), str(out), str(dl), "--", *MAKE, *goals],
+        r = subprocess.run([str(NS), str(out), str(dl), "--", *(command or [*MAKE, *goals])],
                            stdout=lf, stderr=subprocess.STDOUT, env=env)
     if r.returncode != 0:
         tail = Path(logfile).read_text().splitlines()[-40:]
@@ -315,6 +315,19 @@ def cmd_package(spec, dest):
         pack_delta(out, pkg, spec["stamp_dir"], seeded_files, seeded_links, dest)
 
 
+def cmd_viewcheck(spec, dest):
+    """Enter the namespace with this package's views and run nothing in it. A declared view entry that is not
+    present in THIS action's inputs (a remote input root holds only what was declared) fails here, in seconds,
+    instead of surfacing hours later as a make error. Needs no dependency outputs."""
+    with work_dir("br2-view-") as work:
+        out, dl = Path(work) / "out", Path(work) / "dl"
+        out.mkdir(), dl.mkdir()
+        views = write_views(work, spec)
+        make_in_ns(out, dl, [], Path(work) / "view.log", views=views, common_root=assemble_common(work, spec), command=["true"])
+        entries = {name: path.read_text().count("\n") for name, path in views.items()}
+        Path(dest).write_text(json.dumps({"pkg": spec["pkg"], "view_entries": entries}) + "\n")
+
+
 def cmd_rootfs(spec, dest):
     with work_dir("br2-rootfs-") as work:
         out, dl = Path(work) / "out", Path(work) / "dl"
@@ -335,7 +348,7 @@ def cmd_rootfs(spec, dest):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["config", "package", "rootfs"])
+    ap.add_argument("mode", choices=["config", "package", "rootfs", "viewcheck"])
     ap.add_argument("--spec", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--dot-config", default=None, help="config mode: also copy the plain .config here")
@@ -349,7 +362,7 @@ def main():
     if args.mode == "config":
         cmd_config(spec, out, os.path.abspath(args.dot_config) if args.dot_config else None)
     else:
-        {"package": cmd_package, "rootfs": cmd_rootfs}[args.mode](spec, out)
+        {"package": cmd_package, "rootfs": cmd_rootfs, "viewcheck": cmd_viewcheck}[args.mode](spec, out)
 
 
 if __name__ == "__main__":

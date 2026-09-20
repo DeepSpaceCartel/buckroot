@@ -67,6 +67,10 @@ exec unshare --mount --propagation private "${NETFLAG[@]}" bash -c '
     while IFS=$(printf "\t") read -r e src || [ -n "$e" ]; do
       [ -n "$e" ] || continue
       real="${src:-$root/$e}"                   # `entry<TAB>path`: an overlay made by the caller
+      if [ ! -e "$real" ]; then                 # a declared entry that is not there: fail, never mount an empty stand-in
+        echo "br2-ns: view entry missing: $e (expected at $real)" >&2
+        exit 97
+      fi
       if [ -d "$real" ]; then
         mkdir -p "$mp/$e"
       else

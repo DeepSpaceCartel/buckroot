@@ -130,6 +130,13 @@ symlink into `../procps-ng/`. Fix each with `extra_view`:
 `scripts/br2 extract` again afterwards. Background:
 [Views and config slices](../concepts/views-and-slices.md).
 
+```bash
+scripts/br2 viewcheck --mode remote   # with the Buildbarn stack up: proves every view entry is a declared input
+```
+
+Run the second command before the first remote build: locally the whole checkout is on disk, so an entry that is not
+declared works anyway and fails only on a worker ([ADR-0014](../decisions/0014-view-entries-are-declared-inputs.md)).
+
 ## 8. Build with Buck2
 
 ```bash

@@ -15,6 +15,7 @@ It is vendored there by `toolkit/bin/br2-sync`.
 | `br2 preflight [--pkg P ...]` | extract and patch every package in its view; compare applied patches with the golden |
 | `br2 golden [--vanilla]` | plain `make` reference build; writes `golden/rootfs.manifest.json` and `results/golden.json` |
 | `br2 dev [--pkg P] [--target L] [--variant V] [--mode M] [--strict]` | iteration loop; see [Iterating fast](../guides/fast-iteration.md) |
+| `br2 viewcheck [--mode M]` | build every package's `[viewcheck]`: enter each view with that action's declared inputs and run nothing. `--mode remote` runs it on the worker and finds entries that only work locally |
 | `br2 build --variant V --mode M` | one clean, timed, manifest-checked Buck2 build of `//:rootfs`; prints JSON |
 | `br2 matrix [--variants ...] [--modes ...]` | every variant and mode; writes `results/matrix.{json,md}` |
 

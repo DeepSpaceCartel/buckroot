@@ -55,6 +55,7 @@ nav:
       - 0011. project.json is the only project input: decisions/0011-project-json.md
       - 0012. The toolchain tuple comes from Buildroot: decisions/0012-toolchain-tuple-from-buildroot.md
       - 0013. The worker image is the tool baseline: decisions/0013-worker-image-is-the-tool-baseline.md
+      - 0014. Every view entry is a declared input: decisions/0014-view-entries-are-declared-inputs.md
 
 theme:
   name: material

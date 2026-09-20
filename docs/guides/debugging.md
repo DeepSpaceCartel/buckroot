@@ -59,6 +59,8 @@ the packages' host trees.
 | `you should not run configure as root` | old `host-tar`, `host-m4` refuse root | already handled: the namespace sets `FORCE_UNSAFE_CONFIGURE=1` |
 | `No rule to make target 'show-vars'` | Buildroot older than 2023 | already handled: extract falls back to `printvars` |
 | `unexpected local source '/mnt/...'` at extract | a local package site outside `common/` | in-tree sites (`/mnt/external/...`, `/mnt/src/...`) are accepted; anything else belongs in `common/` |
+| `make: *** No rule to make target` for a package that builds locally, in a remote action only | a view entry is not a declared input at its real path (a copied `export_file`), so the worker has nothing there | `br2 viewcheck --mode remote`; see [ADR-0014](../decisions/0014-view-entries-are-declared-inputs.md) |
+| `br2-ns: view entry missing: ...` | a declared entry is absent from this action's inputs | declare it (a `links` or `extra_view` entry), then re-run `br2 viewcheck` |
 | `ld: cannot find crti.o` in a native build | a native recipe hard-coded a toolchain tuple | native rules read `TARGET_TUPLE` from `br2/generated/target.bzl` |
 | Kernel: `kernelrelease` probe fails in the rootfs action | the kernel's build tree is not there | handled by a stub; if you see it, the toolkit is stale |
 

@@ -28,3 +28,4 @@ building it.
 | [0011](0011-project-json.md) | project.json is the only project input | accepted |
 | [0012](0012-toolchain-tuple-from-buildroot.md) | The toolchain tuple comes from Buildroot | accepted |
 | [0013](0013-worker-image-is-the-tool-baseline.md) | The worker image is the tool baseline | accepted |
+| [0014](0014-view-entries-are-declared-inputs.md) | Every view entry is a declared input, and remote execution proves it | accepted |

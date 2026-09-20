@@ -256,13 +256,20 @@ def _br2_package_impl(ctx):
     if ctx.attrs.salt:
         spec = dict(spec, salt = ctx.attrs.salt)      # only when set: adding a field to every spec re-keys every package
     out = ctx.actions.declare_output(ctx.attrs.pkg + ".tar")
-    _run(ctx, "package", spec, [out], "br2_package", ctx.attrs.pkg, weight = ctx.attrs.weight, hidden = [
+    action_inputs = [
         _outputs_of([ctx.attrs._infra_src, ctx.attrs._infra_ext]),
         inputs,
         _outputs_of(ctx.attrs.local_srcs),
-    ])
+    ]
+    _run(ctx, "package", spec, [out], "br2_package", ctx.attrs.pkg, weight = ctx.attrs.weight, hidden = action_inputs)
+
+    # `[viewcheck]`: the same views and inputs as the package action, no dependency outputs and no make. Building it
+    # (locally, or with remote execution) proves every view entry is a declared input of this action.
+    view_spec = {k: v for k, v in spec.items() if k not in ("closure", "direct", "slice", "sources")}
+    check = ctx.actions.declare_output(ctx.attrs.pkg + ".viewcheck.json")
+    _run(ctx, "viewcheck", view_spec, [check], "br2_viewcheck", ctx.attrs.pkg, hidden = action_inputs)
     return [
-        DefaultInfo(default_output = out),
+        DefaultInfo(default_output = out, sub_targets = {"viewcheck": [DefaultInfo(default_output = check)]}),
         Br2Pkg(
             dir = own_dir,
             dirs = dirs,
