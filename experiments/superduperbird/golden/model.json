@@ -2170,5 +2170,6 @@
    "version": null,
    "virtual": true
   }
- }
+ },
+ "target_tuple": "aarch64-buildroot-linux-gnu"
 }

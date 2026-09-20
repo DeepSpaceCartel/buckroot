@@ -115,8 +115,12 @@ def extract(out_dir):
     if any("hashes" not in e or "package_dir" not in e for e in info.values()):
         hv = buildroot_json(out_dir, "show-vars", "VARS=%_HASH_FILES %_PKGDIR")
         hash_vars = {k: v["expanded"].split() for k, v in hv.items()}
+    # The toolchain tuple names the sysroot (host/<tuple>/sysroot): aarch64-buildroot-linux-gnu for an
+    # internal glibc toolchain, ...-musl for a musl or Bootlin one. Native rules must not hard-code it.
+    tuple_var = buildroot_json(out_dir, "show-vars", "VARS=GNU_TARGET_NAME")["GNU_TARGET_NAME"]["expanded"].strip()
     model = {"defconfig": DEFCONFIG,
              "buildroot": (HERE / "BUILDROOT_PINNED_VERSION.txt").read_text().strip(),
+             "target_tuple": tuple_var,
              "packages": {}}
     for name, e in sorted(info.items()):
         if e.get("type") not in ("target", "host"):
@@ -563,6 +567,10 @@ def render(check):
     for root in ("buildroot-src", "buildroot-external"):
         out[f"{root}/BUCK"] = HEADER + "\n" + render_tree(root, carved) + render_infra(root, carved) + render_links(root, carved) + render_exports(root)
     out["br2/generated/BUCK"] = render_generated(model)
+    if not model.get("target_tuple"):
+        sys.exit("golden/model.json has no target_tuple: run `scripts/br2 extract` again")
+    out["br2/generated/target.bzl"] = (f"{HEADER}\n# The toolchain tuple: the sysroot is host/<tuple>/sysroot.\n"
+                                       f'TARGET_TUPLE = "{model["target_tuple"]}"\n')
     out["sources/BUCK"] = render_sources(model)
 
     changed = []

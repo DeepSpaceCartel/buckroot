@@ -69,6 +69,17 @@ on the *unwrapped* compiler gives a byte-identical `hello`.
 - `.files-list-host.txt` covers only what an install step adds; `.files-list-staging.txt`
   covers the merged sysroot including dependencies. Only the former is exactly
   reproducible per package.
+- **Nothing may hard-code the toolchain.** A sysroot lives at `host/<tuple>/sysroot`, and the
+  tuple depends on the configuration: `aarch64-buildroot-linux-gnu` for an internal glibc
+  toolchain, `aarch64-buildroot-linux-musl` for a Bootlin musl one. `br2 extract` asks
+  Buildroot for `GNU_TARGET_NAME` and `br2 render` writes it to `br2/generated/target.bzl`;
+  native rules load `TARGET_TUPLE` from there. The first version hard-coded the musl tuple
+  it was developed on. On a glibc project the native skeleton then created its
+  `lib64 -> lib` symlinks in a sysroot nobody used, glibc installed a real `usr/lib64`
+  directory, and `host-gcc-final` failed with `ld: cannot find crti.o` about fifty minutes
+  into the build. The symptom was far from the cause, and a first equivalence check
+  missed it because both sides were the wrapped artifact (see
+  [below](#equivalence-is-checked-not-assumed)).
 
 ### Config-dependent packages declare their config
 
@@ -88,6 +99,9 @@ scripts/compare-pkg.py wrapped.tar native.tar
 ```
 
 compares files (path, mode, sha256), symlinks, stamps and the `.files-list*` contents.
+Building the `//buildroot-src/...` label of a package always gives the *wrapped* artifact:
+`native` takes effect through the labels that dependents resolve (`br2_dep`), so build the
+native artifact as `//br2/native/<pkg>` when comparing.
 The two toolchain-sysroot files Buildroot rewrites for every package that depends on the
 toolchain (`ppd-fixup-paths`) are ignored. See [Verification](verification.md).
 

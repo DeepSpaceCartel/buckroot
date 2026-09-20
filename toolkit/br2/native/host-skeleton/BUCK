@@ -3,6 +3,7 @@
 # The host layout dirs (host/lib, host/include, the sysroot) are created by Buildroot's
 # own `make` setup, so they are listed here as directories.
 load("//br2:rules.bzl", "BR2_STAMPS_HOST", "br2_native_package")
+load("//br2/generated:target.bzl", "TARGET_TUPLE")
 
 br2_native_package(
     name = "host-skeleton",
@@ -12,6 +13,6 @@ br2_native_package(
     stamp_dir = "build/host-skeleton",
     stamps = BR2_STAMPS_HOST,
     host_links = {"usr": ".", "lib64": "lib"},
-    host_dirs = ["include", "lib", "aarch64-buildroot-linux-musl", "aarch64-buildroot-linux-musl/sysroot"],
+    host_dirs = ["include", "lib", TARGET_TUPLE, TARGET_TUPLE + "/sysroot"],
     visibility = ["PUBLIC"],
 )

@@ -580,5 +580,6 @@
    "version": "",
    "virtual": false
   }
- }
+ },
+ "target_tuple": "aarch64-buildroot-linux-musl"
 }
