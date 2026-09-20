@@ -48,6 +48,8 @@ Toolkit work:
 - Native rules for autotools and plain-`make` packages, not just install-only recipes.
 - Importing Buildroot package data (patches, hashes, frozen option lists) into native targets, with
   Buildroot as a pinned source of package knowledge; see [Importing from Buildroot](../concepts/importing-from-buildroot.md).
+- Trim oversized sources such as `googlefontdirectory` (965 MB for one 3 MB font family). Vendoring a trimmed archive would leave the image identical
+  but needs a documented hash policy, since Buildroot's `.hash` file names the original archive. Not urgent: the cost is paid once per cache.
 - Deploy the Buildbarn stack on Kubernetes with autoscaled workers.
 - Rename the internal `br2` names to `buckroot` (CLI, rules) once the interfaces settle.
 

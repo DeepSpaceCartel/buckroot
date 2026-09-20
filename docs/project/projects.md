@@ -42,6 +42,10 @@ What it needed:
   build tree, which is not part of the rootfs action's inputs.
 - **`manifest_ignore` for `/etc/shadow`:** the root password hash has a random salt on every build.
 - **Vendored sources**, because some downloads are git checkouts or have only SHA-512 hashes.
+- **One oversized source**: `googlefontdirectory` downloads the whole `google/fonts` repository at one commit (965 MB compressed, 1.9 GB
+  extracted) to install a single family, `ufl/ubuntu` (2.9 MB in the image). The recipe cannot fetch a subset. It is faithful to Buildroot, costs one
+  large upload per cache and one 1.9 GB extraction, and it sets the minimum block size of the Buildbarn storage
+  ([Sizing the storage](../guides/buildbarn.md#sizing-the-storage)).
 - **Three deviations from the project's defconfig**, in `notes`: no post-image script, an older kernel
   config that builds at the pinned commit, and the device-tree settings the external tree's hook needs.
 
