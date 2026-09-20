@@ -1,3 +1,3 @@
 | variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |
 |---|---|---|---|---|---|---|---|---|---|
-| native | local | cold | False | 3439.2 | 155 | 0 | 0 | 155 | ? |
+| native | local | cold | True | 6628.9 | 193 | 0 | 0 | 193 | IDENTICAL |
