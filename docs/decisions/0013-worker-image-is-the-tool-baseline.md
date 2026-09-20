@@ -41,6 +41,6 @@ and a cache hit would serve a result built with the old tools. The measured cell
 A real case, found by the manifest: OpenSSH's `configure` searches the build machine for `xauth` and embeds the path it finds in
 `ssh`, `sshd` and `ssh-keysign`. The golden build and every local cell ran where `/usr/bin/xauth` exists; the first two remote cells ran on a worker
 without it, and the three binaries differed (same size, different hash, identical across the two remote runs). The fix used here was to add
-`xauth` to the image. The lasting fix is a **baseline identity in the key**: a platform property (a hash of `runner/Dockerfile`, or the image digest) that
+`xauth` to the image; the next remote cell (native, which builds the same OpenSSH) came out IDENTICAL, which confirms the explanation. The lasting fix is a **baseline identity in the key**: a platform property (a hash of `runner/Dockerfile`, or the image digest) that
 the worker advertises and that changes when the image is rebuilt, so a new baseline is a cache miss for every action. See the roadmap item on
 [Status and roadmap](../project/status.md).

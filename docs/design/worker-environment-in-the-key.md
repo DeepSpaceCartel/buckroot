@@ -32,7 +32,7 @@ The current platform property is `container-image: docker://buckroot-worker`, a 
 | Observation | What it shows |
 |---|---|
 | Adding `git` to the worker image fixed a remote failure (Buildroot 2024.05's dependency check) and changed no key | the tool set is invisible to the key |
-| Three OpenSSH binaries (`ssh`, `sshd`, `ssh-keysign`) differed between the golden build and the first two remote builds. Same size, different hash, identical across the two remote runs | an ambient tool leaked into the output. OpenSSH's `configure` searches the build machine for `xauth` and embeds the path it finds. The golden and local builds ran where `/usr/bin/xauth` exists, the worker had none. Adding `xauth` to the image was the workaround |
+| Three OpenSSH binaries (`ssh`, `sshd`, `ssh-keysign`) differed between the golden build and the first two remote builds. Same size, different hash, identical across the two remote runs | an ambient tool leaked into the output. OpenSSH's `configure` searches the build machine for `xauth` and embeds the path it finds. The golden and local builds ran where `/usr/bin/xauth` exists, the worker had none. Adding `xauth` to the image was the workaround, and it worked: the next remote cell was IDENTICAL |
 | `xauth` is not on any list of "tools the build needs"; `configure` found it by searching the filesystem | restricting `PATH` cannot fix this class |
 | Every measured matrix cell has its own cache salt | the cells are not affected by stale hits, but only because of the salt, not because of anything about the environment |
 

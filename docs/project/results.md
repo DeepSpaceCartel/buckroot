@@ -79,6 +79,8 @@ sha-256 hash has a random salt on every build.
 | Buck2 `native`, remote and remote-cache, first attempt | failed in about 100 s: the worker image had no `git` (fixed) |
 | Buck2 `wrapped`, remote, first attempt | failed after 33 min: `cc1plus` killed for lack of memory, the worker ran two actions at once (fixed: `concurrency: 1`) |
 | Buck2 `wrapped`, local-cache | done: cold 6,091 s; warm 236 s with 197 of 199 actions cached; both **IDENTICAL** |
+| Buck2 `wrapped`, remote and remote-cache, fourth attempt (no `xauth` in the worker image) | complete: 199 of 199 actions on the worker; cold 7,982 s and 7,338 s, warm 17 s (199 of 199 cached). Manifest: three OpenSSH binaries differ (see below) |
+| Buck2 `native`, remote, with `xauth` added to the worker image | done: 193 actions on the worker in 7,473 s, manifest **IDENTICAL**; confirms the OpenSSH explanation |
 | Buck2 `wrapped`, remote, second attempt | failed after 102 min, 184 of 199 actions: `util-linux-libs` (and others with cross-directory links) had no `util-linux.mk` on the worker; fixed by [ADR-0014](../decisions/0014-view-entries-are-declared-inputs.md) |
 | the four remote cells (wrapped and native, remote and remote-cache), rerun with all fixes | in progress; the toolkit differs from the local cells (see the ADR) |
 
@@ -91,3 +93,12 @@ libraries into a real `usr/lib64`. The tuple now comes from Buildroot
 ([Wrapped and native](../concepts/wrapped-and-native.md#the-artifact-format-is-an-interface)); after the fix the
 native local cell passes. The table will be filled in when the remaining cells complete. The first
 cell's time (110 min) includes about ten minutes of overlap with source downloads for another project.
+
+### The three OpenSSH differences
+
+The wrapped remote cells (worker image without `xauth`) built all 199 actions and differed from the golden in exactly three files:
+`/usr/bin/ssh`, `/usr/sbin/sshd` and `/usr/libexec/ssh-keysign` (same size, different hash, the same hashes in both remote runs). OpenSSH's `configure`
+searches the build machine for `xauth` and embeds the path it finds (`/usr/bin/xauth`); the golden build and every local cell ran where that file exists, the worker
+image had none. Only the three binaries that contain the string differ (`ssh-add` and `ssh-keygen` do not). After adding `xauth` to the image, the native remote cell,
+which builds the same OpenSSH, is IDENTICAL. Background: [ADR-0013](../decisions/0013-worker-image-is-the-tool-baseline.md) and the
+[design note](../design/worker-environment-in-the-key.md).

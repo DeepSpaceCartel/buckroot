@@ -1,3 +1,3 @@
 | variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |
 |---|---|---|---|---|---|---|---|---|---|
-| wrapped | remote | cold | False | 7227.1 | 196 | 0 | 196 | 0 | ? |
+| native | remote | cold | True | 7473.2 | 193 | 0 | 193 | 0 | IDENTICAL |

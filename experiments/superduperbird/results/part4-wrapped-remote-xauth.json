@@ -1,0 +1,59 @@
+[
+ {
+  "variant": "wrapped",
+  "mode": "remote",
+  "salt": "wrapped-remote-20142006",
+  "instance": "superduperbird-remote-wrapped-142006",
+  "cold": {
+   "ok": true,
+   "seconds": 7981.8,
+   "commands": 199,
+   "cached": 0,
+   "remote": 199,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": [
+    "differs: /usr/bin/ssh  (sha256: 'd01630af228374f28a4517de6e3481ae4804e6e063ce88098bacf0bf3c6d2cf5' -> 'd028dae25999d70abd0e70de38c3d53d0e236df6dafe00e61414d574adc5b42f')",
+    "differs: /usr/libexec/ssh-keysign  (sha256: '6cc9abc9594ad37f068abeedce8cfd8a403e9273a8c62e73e00154ad6f1d3b7a' -> 'efc3e0a6ffc1b980e4bebfa5d47cc033d068a7c1e7b7b2e62f4c65482e25bfb3')",
+    "differs: /usr/sbin/sshd  (sha256: '9bf97652be69d8a4e62ec8bfc64310be238089faa40204c55da52fd779309952' -> 'fd376139279d0c6e7c81ebc7fc45bb32212d9f31c8af25417718f57815246fc7')",
+    "3 difference(s)"
+   ]
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "remote-cache",
+  "salt": "wrapped-remote-cache-20163309",
+  "instance": "superduperbird-remote-cache-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 7338.3,
+   "commands": 199,
+   "cached": 0,
+   "remote": 199,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": [
+    "differs: /usr/bin/ssh  (sha256: 'd01630af228374f28a4517de6e3481ae4804e6e063ce88098bacf0bf3c6d2cf5' -> 'd028dae25999d70abd0e70de38c3d53d0e236df6dafe00e61414d574adc5b42f')",
+    "differs: /usr/libexec/ssh-keysign  (sha256: '6cc9abc9594ad37f068abeedce8cfd8a403e9273a8c62e73e00154ad6f1d3b7a' -> 'efc3e0a6ffc1b980e4bebfa5d47cc033d068a7c1e7b7b2e62f4c65482e25bfb3')",
+    "differs: /usr/sbin/sshd  (sha256: '9bf97652be69d8a4e62ec8bfc64310be238089faa40204c55da52fd779309952' -> 'fd376139279d0c6e7c81ebc7fc45bb32212d9f31c8af25417718f57815246fc7')",
+    "3 difference(s)"
+   ]
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 17.0,
+   "commands": 199,
+   "cached": 199,
+   "remote": 0,
+   "local": 0,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": [
+    "differs: /usr/bin/ssh  (sha256: 'd01630af228374f28a4517de6e3481ae4804e6e063ce88098bacf0bf3c6d2cf5' -> 'd028dae25999d70abd0e70de38c3d53d0e236df6dafe00e61414d574adc5b42f')",
+    "differs: /usr/libexec/ssh-keysign  (sha256: '6cc9abc9594ad37f068abeedce8cfd8a403e9273a8c62e73e00154ad6f1d3b7a' -> 'efc3e0a6ffc1b980e4bebfa5d47cc033d068a7c1e7b7b2e62f4c65482e25bfb3')",
+    "differs: /usr/sbin/sshd  (sha256: '9bf97652be69d8a4e62ec8bfc64310be238089faa40204c55da52fd779309952' -> 'fd376139279d0c6e7c81ebc7fc45bb32212d9f31c8af25417718f57815246fc7')",
+    "3 difference(s)"
+   ]
+  }
+ }
+]
