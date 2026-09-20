@@ -27,24 +27,16 @@ check availability in your location with `hcloud server-type list` (all x86: the
 
 ## Apply
 
-Requires `terraform` >= 1.10, `kubectl`, `helm`, a Hetzner Cloud project and API token, and an S3-compatible bucket for state.
+Requires `terraform` >= 1.10, `kubectl`, `helm`, and 1Password's `op` (or the same variables exported by hand).
 
-Secrets are 1Password references in [`.env.1password`](.env.1password) (no secret is stored in the repository); `op run` puts them
-into the environment of one command. Sign in once with `eval $(op signin)`. Without 1Password, export the same variables yourself
-(`TF_VAR_hcloud_token`, `TF_VAR_coder_admin_password`, `TF_VAR_coder_postgres_password`, and the state bucket's `AWS_ACCESS_KEY_ID` and
-`AWS_SECRET_ACCESS_KEY`).
+Everything is baked in: the state backend (S3 bucket `rts-terraform-admin`, one key per state), the server types, pool sizes and location
+(defaults in each `variables.tf`). Only secrets are inputs, and they are 1Password references in [`.env.1password`](.env.1password), so there
+are no files to copy or edit. Sign in once with `eval $(op signin)`.
 
 ```bash
 alias tf='op run --env-file=$PWD/.env.1password -- terraform'    # from terraform/
-cd cluster
-cp backend.hcl.example backend.hcl                    # edit: your state bucket
-cp terraform.tfvars.example terraform.tfvars
-tf init -backend-config=backend.hcl && tf apply
-
-export KUBECONFIG=$PWD/kubeconfig && kubectl get nodes
-
-cd ../platform                                        # same pattern: backend.hcl (a different key), terraform.tfvars
-tf init -backend-config=backend.hcl && tf apply
+(cd cluster && tf init && tf apply)     # also merges the cluster into ~/.kube/config: `kubectl get nodes` just works
+(cd platform && tf init && tf apply)
 ```
 
 Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there):

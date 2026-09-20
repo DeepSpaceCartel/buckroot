@@ -19,8 +19,8 @@ module "kubernetes" {
 
   cluster_delete_protection = false
 
-  cluster_kubeconfig_path  = "${path.module}/kubeconfig"
-  cluster_talosconfig_path = "${path.module}/talosconfig"
+  cluster_kubeconfig_path  = pathexpand("~/.kube/buckroot.yaml")
+  cluster_talosconfig_path = pathexpand("~/.talos/buckroot.yaml")
 
   control_plane_nodepools = [
     { name = "control", type = var.control_node_type, location = var.hcloud_location, count = var.control_nodes_count }

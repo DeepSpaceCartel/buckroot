@@ -4,8 +4,9 @@
 # TF_VAR_coder_token. With Coder reached by port-forward, use its local address as coder_url.
 
 variable "coder_url" {
-  description = "Coder's URL as reachable from this machine, for example http://127.0.0.1:8080 through a port-forward."
+  description = "Coder's URL as reachable from this machine (a port-forward: kubectl -n coder port-forward svc/coder 8080:80)."
   type        = string
+  default     = "http://127.0.0.1:8080"
 }
 
 variable "coder_token" {

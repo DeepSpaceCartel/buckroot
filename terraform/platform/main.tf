@@ -7,7 +7,11 @@
 
 data "terraform_remote_state" "cluster" {
   backend = "s3"
-  config  = var.cluster_state
+  config = {
+    bucket = "rts-terraform-admin"
+    key    = "buckroot/cluster.tfstate"
+    region = "us-east-1"
+  }
 }
 
 locals {

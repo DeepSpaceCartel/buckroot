@@ -10,7 +10,7 @@
 # Order: this script, then `terraform destroy` in ../platform, then `terraform destroy` in ../cluster.
 # Prompts before every deletion; nothing runs unattended.
 set -uo pipefail
-export KUBECONFIG="${KUBECONFIG:-$(dirname "$0")/../cluster/kubeconfig}"
+export KUBECONFIG="${KUBECONFIG:-$HOME/.kube/buckroot.yaml}"
 
 confirm() { read -r -p "  $1 [y/N] " reply </dev/tty; [[ "$reply" =~ ^[Yy]$ ]]; }
 

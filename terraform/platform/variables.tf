@@ -4,11 +4,6 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "cluster_state" {
-  description = "terraform_remote_state config of ../cluster (the same values as its backend.hcl, with its key)."
-  type        = map(string)
-}
-
 # --- Buildbarn ---------------------------------------------------------------------------------------------------------
 
 variable "runner_image" {
@@ -69,7 +64,8 @@ variable "coder_admin_username" {
 }
 
 variable "coder_admin_email" {
-  type = string
+  type    = string
+  default = "admin@buckroot.local"
 }
 
 variable "coder_admin_password" {
