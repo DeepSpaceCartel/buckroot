@@ -40,5 +40,51 @@
    "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
    "manifest": "IDENTICAL"
   }
+ },
+ {
+  "variant": "native",
+  "mode": "remote",
+  "salt": "native-remote-20053934",
+  "instance": "superduperbird-remote-native-053934",
+  "cold": {
+   "ok": false,
+   "seconds": 99.4,
+   "commands": 119,
+   "cached": 0,
+   "remote": 119,
+   "local": 0,
+   "error_tail": "make: *** [support/dependencies/dependencies.mk:27: dependencies] Error 1\nmake: Leaving directory '/mnt/src'\n[2026-09-20T05:41:18.748+00:00] Info:\nAction details (uncached result): superduperbird/blobs/sha256/historical_execute_response/1b5abb1eca299235195569eae150069d792b1d2f7c9ba3c0209fe624878a411c-631/\n\n[2026-09-20T05:41:18.748+00:00] Action failed: root//buildroot-src/package/rust-bin:host-rust-bin (root//platforms:default#5fe249fa9992182d) (br2_package host-rust-bin)\n[2026-09-20T05:41:18.748+00:00] Remote command returned non-zero exit code 1\n[2026-09-20T05:41:18.748+00:00] Remote action digest: 'f04afb3aab26ed8bead6011e59640386e53a396177a2af67bac43c0302ef9c1a:142'\n[2026-09-20T05:41:18.748+00:00] Stdout: <empty>\n[2026-09-20T05:41:18.748+00:00] Stderr:\n[pkg_action] make host-rust-bin\nmake host-rust-bin failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nwhich: no git in (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin)\nYou must install 'git' on your build machine\n/mnt/src/support/dependencies/dependencies.sh: 180: git: not found\n/mnt/src/support/dependencies/dependencies.sh: 182: [: Illegal number: \nmake: *** [support/dependencies/dependencies.mk:27: dependencies] Error 1\nmake: Leaving directory '/mnt/src'\n[2026-09-20T05:41:18.748+00:00] Info:\nAction details (uncached result): superduperbird/blobs/sha256/historical_execute_response/01c19bd719368e6c40f167daab9fbe905cad231b1a443cc6a31c4ccde58edd13-630/\n\n[2026-09-20T05:41:18.748+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/m4:host-m4 (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote-cache",
+  "salt": "native-remote-cache-20054118",
+  "instance": "superduperbird-remote-cache-native",
+  "cold": {
+   "ok": false,
+   "seconds": 61.0,
+   "commands": 119,
+   "cached": 0,
+   "remote": 119,
+   "local": 0,
+   "error_tail": "make: *** [support/dependencies/dependencies.mk:27: dependencies] Error 1\nmake: Leaving directory '/mnt/src'\n[2026-09-20T05:42:24.979+00:00] Info:\nAction details (uncached result): superduperbird/blobs/sha256/historical_execute_response/1bdc0dde58ebf7af8b12c888ab31dc7fb5207b79b4f484b4fe72e92b0ec33849-632/\n\n[2026-09-20T05:42:24.979+00:00] Action failed: root//buildroot-src/package/linux-headers:linux-headers (root//platforms:default#5fe249fa9992182d) (br2_package linux-headers)\n[2026-09-20T05:42:24.979+00:00] Remote command returned non-zero exit code 1\n[2026-09-20T05:42:24.979+00:00] Remote action digest: 'c593e4342734c98d39ca268edc6d9eb06162c142bbaaaa0c57ff92c08ca9e36d:142'\n[2026-09-20T05:42:24.979+00:00] Stdout: <empty>\n[2026-09-20T05:42:24.979+00:00] Stderr:\n[pkg_action] make linux-headers\nmake linux-headers failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nwhich: no git in (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin)\nYou must install 'git' on your build machine\n/mnt/src/support/dependencies/dependencies.sh: 180: git: not found\n/mnt/src/support/dependencies/dependencies.sh: 182: [: Illegal number: \nmake: *** [support/dependencies/dependencies.mk:27: dependencies] Error 1\nmake: Leaving directory '/mnt/src'\n[2026-09-20T05:42:24.979+00:00] Info:\nAction details (uncached result): superduperbird/blobs/sha256/historical_execute_response/b0e60d8a47d29d52b4d123a1fcbce952fc92ebc040d30cdefbeeb85b4f664328-637/\n\n[2026-09-20T05:42:24.979+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/m4:host-m4 (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "local",
+  "salt": "wrapped-local-20054224",
+  "instance": "superduperbird-local-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 6353.6,
+   "commands": 199,
+   "cached": 0,
+   "remote": 0,
+   "local": 199,
+   "output": "buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  }
  }
 ]
