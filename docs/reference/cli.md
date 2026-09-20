@@ -9,7 +9,7 @@ It is vendored there by `toolkit/bin/br2-sync`.
 
 | Command | What it does |
 |---|---|
-| `br2 setup` | install the pinned `buck2` (into `tools/`) and fetch the Buildroot and external trees named in `project.json` |
+| `br2 setup [--no-buck2]` | install the pinned `buck2` (into `tools/`) and fetch the Buildroot and external trees named in `project.json` |
 | `br2 extract` | defconfig to `golden/model.json`, then render the `BUCK` files |
 | `br2 fetch` | download sources Buck2's `http_file` cannot express and vendor them |
 | `br2 preflight [--pkg P ...]` | extract and patch every package in its view; compare applied patches with the golden |
