@@ -40,6 +40,9 @@ nav:
       - Projects: project/projects.md
       - Results: project/results.md
       - Status and roadmap: project/status.md
+  - Design notes:
+      - Overview: design/index.md
+      - Worker environment in the key: design/worker-environment-in-the-key.md
   - Decisions:
       - Decision log: decisions/index.md
       - 0001. One Buck2 target per Buildroot package: decisions/0001-one-target-per-package.md
