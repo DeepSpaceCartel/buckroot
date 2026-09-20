@@ -114,5 +114,5 @@ compiles overlapped: the kernel's OOM killer ended `cc1plus` while compiling `ho
 
 The consequence is that remote execution on **one** machine runs the graph one action at a time (each action still parallel inside). It stops
 being a way to save time and remains a way to test the remote path, pin the tool baseline and populate a shared cache. Real parallelism needs
-more worker capacity: more workers, each with its own memory, and `concurrency` sized to the memory of one heavy compile (roughly 2 GB per `make`
-job for the compiler packages).
+more worker capacity: more workers, each with its own memory, and `concurrency` sized to the memory of one heavy compile (measure it: a single `cc1plus`
+process can use well over a gigabyte, and `make -jN` runs N of them).
