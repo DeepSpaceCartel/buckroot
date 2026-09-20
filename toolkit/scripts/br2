@@ -242,6 +242,7 @@ def golden_job(a):
     import io
     import tarfile
     repo = subprocess.check_output(["git", "remote", "get-url", "origin"], cwd=ROOT, text=True).strip()
+    repo = re.sub(r"^(https?://)[^/@]+@", r"\1", repo)     # never carry a token from the remote URL into the Job spec or its log
     ref = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     prefix = subprocess.check_output(["git", "rev-parse", "--show-prefix"], cwd=ROOT, text=True).strip().rstrip("/")
     name = re.sub(r"[^a-z0-9-]", "-", f"golden-{CFG['name']}-{ref[:8]}".lower())[:60]
