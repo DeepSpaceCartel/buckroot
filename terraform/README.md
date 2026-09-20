@@ -29,18 +29,22 @@ check availability in your location with `hcloud server-type list` (all x86: the
 
 Requires `terraform` >= 1.10, `kubectl`, `helm`, a Hetzner Cloud project and API token, and an S3-compatible bucket for state.
 
+Secrets are 1Password references in [`.env.1password`](.env.1password) (no secret is stored in the repository); `op run` puts them
+into the environment of one command. Sign in once with `eval $(op signin)`. Without 1Password, export the same variables yourself
+(`TF_VAR_hcloud_token`, `TF_VAR_coder_admin_password`, `TF_VAR_coder_postgres_password`, and the state bucket's `AWS_ACCESS_KEY_ID` and
+`AWS_SECRET_ACCESS_KEY`).
+
 ```bash
-export TF_VAR_hcloud_token=...                       # Hetzner Cloud API token
+alias tf='op run --env-file=$PWD/.env.1password -- terraform'    # from terraform/
 cd cluster
 cp backend.hcl.example backend.hcl                    # edit: your state bucket
 cp terraform.tfvars.example terraform.tfvars
-terraform init -backend-config=backend.hcl && terraform apply
+tf init -backend-config=backend.hcl && tf apply
 
 export KUBECONFIG=$PWD/kubeconfig && kubectl get nodes
 
 cd ../platform                                        # same pattern: backend.hcl (a different key), terraform.tfvars
-export TF_VAR_coder_admin_password=... TF_VAR_coder_postgres_password=...
-terraform init -backend-config=backend.hcl && terraform apply
+tf init -backend-config=backend.hcl && tf apply
 ```
 
 Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there):

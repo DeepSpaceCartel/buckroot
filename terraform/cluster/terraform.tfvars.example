@@ -1,7 +1,7 @@
 environment     = "dev"
 hcloud_location = "hil"
 
-# hcloud_token comes from TF_VAR_hcloud_token.
+# hcloud_token comes from TF_VAR_hcloud_token (see ../.env.1password).
 
 # Server types: check availability in your location with `hcloud server-type list`.
 platform_node_type     = "cpx41"
