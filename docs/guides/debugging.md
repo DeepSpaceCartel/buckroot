@@ -54,6 +54,12 @@ the packages' host trees.
 | `hash file` / download errors | a dead URL or a SHA-512-only hash | [`br2 fetch`](adding-a-project.md#5-fetch-sources-buck2-cannot-download) |
 | Build passes, a lot of files differ in size | the strip step did not run, or a config the golden had | compare with `br2 golden` |
 | Same digest, different results across machines | an ambient host tool that differs | [Wrapped and native](../concepts/wrapped-and-native.md#the-host-tools-are-not-in-the-key) |
+| `You must install 'git'` in a remote action only | the worker image lacks a host tool the local machine has | add it to `toolkit/infra/buildbarn/runner/Dockerfile` and recreate the runner |
+| `make` exits with `-11` (SIGSEGV) on an old Buildroot | GNU make 4.3 overflows the 8 MiB stack in `printvars`/`show-info` | already handled: the namespace raises the stack limit; keep `br2-ns.sh` current |
+| `you should not run configure as root` | old `host-tar`, `host-m4` refuse root | already handled: the namespace sets `FORCE_UNSAFE_CONFIGURE=1` |
+| `No rule to make target 'show-vars'` | Buildroot older than 2023 | already handled: extract falls back to `printvars` |
+| `unexpected local source '/mnt/...'` at extract | a local package site outside `common/` | in-tree sites (`/mnt/external/...`, `/mnt/src/...`) are accepted; anything else belongs in `common/` |
+| `ld: cannot find crti.o` in a native build | a native recipe hard-coded a toolchain tuple | native rules read `TARGET_TUPLE` from `br2/generated/target.bzl` |
 | Kernel: `kernelrelease` probe fails in the rootfs action | the kernel's build tree is not there | handled by a stub; if you see it, the toolkit is stale |
 
 ## Reading a manifest difference

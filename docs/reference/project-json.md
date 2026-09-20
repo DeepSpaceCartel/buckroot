@@ -32,8 +32,8 @@ the working directory.
 | `description` | string | - | free text |
 | `defconfig` | string | required | a defconfig `make` understands (`configs/` of the tree or of the external tree) |
 | `external` | bool | `true` | is there a `BR2_EXTERNAL` tree in `buildroot-external/`? |
-| `external_repo` | `{url, commit}` | - | where `br2 setup` clones `buildroot-external/` from, pinned to a commit |
-| `buildroot` | `{repo, ref}` | - | where `br2 setup` clones `buildroot-src/` from; `ref` should be a release tag |
+| `external_repo` | `{url, commit, subdir?}` | - | where `br2 setup` gets `buildroot-external/` from, pinned to a commit. With `subdir`, only that directory of the repository is copied (a monorepo such as FunKey-OS or Home Assistant OS) and `EXTERNAL_PINNED_COMMIT.txt` records what was taken |
+| `buildroot` | `{repo, ref, commit?}` | - | where `br2 setup` clones `buildroot-src/` from. `ref` is a tag or branch (a shallow clone); with `commit`, that exact commit is fetched instead (a vendor fork pinned by a git submodule) and `ref` is only a label |
 | `native` | list of package names | `[]` | packages the `native` variant builds with Buck2 actions |
 | `rootfs_image` | string | `rootfs.ext4` | the file of `output/images/` that is compared |
 | `sources` | `"http"` or `"vendored"` | `"http"` | how downloads reach Buck2 |
@@ -80,6 +80,14 @@ Keys and values are paths relative to the Buildroot tree:
 ```
 
 `scripts/check-narrow.py --apply` proposes entries.
+
+## Old and forked Buildroot trees
+
+`buildroot.commit` and `external_repo.subdir` exist for vendor forks pinned by a git submodule, where
+the tree is not a release tag. The toolkit extracts trees as old as Buildroot 2021.02 (FunKey-OS):
+it falls back to `make printvars` where `show-vars` does not exist (before 2023), reads `build_dir` where
+`show-info` has no `stamp_dir`, and runs `make` with a 1 GiB stack limit because GNU make 4.3 overflows
+the default stack on the old `printvars`. See [Projects](../project/projects.md) for what each project needed.
 
 ## `sources`
 

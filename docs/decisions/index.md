@@ -9,7 +9,7 @@ for the convention this follows. Numbers are sequential and never reused, even f
 rejected or superseded decision.
 
 An ADR is a record of a decision *already made*, kept accurate after the fact
-(superseded by a new ADR when circumstances change, never rewritten in place). These
+(superseded by a new ADR when circumstances change, never rewritten in place). The
 first eleven were written down once the design had settled, from the decisions made while
 building it.
 
@@ -26,3 +26,5 @@ building it.
 | [0009](0009-dev-mode-vs-strict.md) | Dev mode versus strict mode | accepted |
 | [0010](0010-cache-salt-per-cell.md) | A cache salt per measured cell | accepted |
 | [0011](0011-project-json.md) | project.json is the only project input | accepted |
+| [0012](0012-toolchain-tuple-from-buildroot.md) | The toolchain tuple comes from Buildroot | accepted |
+| [0013](0013-worker-image-is-the-tool-baseline.md) | The worker image is the tool baseline | accepted |

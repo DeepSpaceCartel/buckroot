@@ -26,7 +26,9 @@ nav:
       - project.json: reference/project-json.md
       - The br2 CLI: reference/cli.md
       - Buck2 configuration: reference/buckconfig.md
+      - Glossary: reference/glossary.md
   - Project:
+      - Projects: project/projects.md
       - Results: project/results.md
       - Status and roadmap: project/status.md
   - Decisions:
@@ -42,6 +44,8 @@ nav:
       - 0009. Dev mode versus strict mode: decisions/0009-dev-mode-vs-strict.md
       - 0010. A cache salt per measured cell: decisions/0010-cache-salt-per-cell.md
       - 0011. project.json is the only project input: decisions/0011-project-json.md
+      - 0012. The toolchain tuple comes from Buildroot: decisions/0012-toolchain-tuple-from-buildroot.md
+      - 0013. The worker image is the tool baseline: decisions/0013-worker-image-is-the-tool-baseline.md
 
 theme:
   name: material
