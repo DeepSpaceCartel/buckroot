@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels: {{- include "bb.labels" . | nindent 4 }}
+spec:
+  selector: { app: frontend }
+  ports:
+    - { name: grpc, port: 8980 }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels: {{- include "bb.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.frontend.replicas }}
+  selector:
+    matchLabels: { app: frontend }
+  template:
+    metadata:
+      labels:
+        app: frontend
+        {{- include "bb.labels" . | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ .Values.diagnosticsPort | quote }}
+        checksum/config: {{ include "bb.env" (dict "root" . "workerPool" "") | sha256sum }}
+    spec:
+      containers:
+        - name: frontend
+          image: {{ .Values.images.storage }}
+          args: [/config/frontend.jsonnet]
+          ports:
+            - { name: grpc, containerPort: 8980 }
+            - { name: metrics, containerPort: {{ .Values.diagnosticsPort }} }
+          resources: {{- toYaml .Values.frontend.resources | nindent 12 }}
+          volumeMounts:
+            - { name: config, mountPath: /config }
+      volumes:
+        - name: config
+          configMap: { name: bb-config-frontend }

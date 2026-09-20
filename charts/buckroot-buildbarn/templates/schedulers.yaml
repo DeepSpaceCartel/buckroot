@@ -1,0 +1,53 @@
+{{- range $name, $p := .Values.pools }}{{ if $p.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheduler-{{ $name }}
+  labels: {{- include "bb.labels" $ | nindent 4 }}
+spec:
+  selector: { app: scheduler, pool: {{ $name }} }
+  ports:
+    - { name: client, port: 8982 }
+    - { name: worker, port: 8983 }
+    - { name: state, port: 8984 }
+    - { name: admin, port: 7982 }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler-{{ $name }}
+  labels: {{- include "bb.labels" $ | nindent 4 }}
+spec:
+  replicas: 1
+  strategy: { type: Recreate }      # the queue lives in memory; two schedulers must never overlap
+  selector:
+    matchLabels: { app: scheduler, pool: {{ $name }} }
+  template:
+    metadata:
+      labels:
+        app: scheduler
+        pool: {{ $name }}
+        {{- include "bb.labels" $ | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ $.Values.diagnosticsPort | quote }}
+        checksum/config: {{ include "bb.env" (dict "root" $ "workerPool" $name) | sha256sum }}
+    spec:
+      containers:
+        - name: scheduler
+          image: {{ $.Values.images.scheduler }}
+          args: [/config/scheduler.jsonnet]
+          ports:
+            - { name: client, containerPort: 8982 }
+            - { name: worker, containerPort: 8983 }
+            - { name: state, containerPort: 8984 }
+            - { name: admin, containerPort: 7982 }
+            - { name: metrics, containerPort: {{ $.Values.diagnosticsPort }} }
+          resources: { requests: { cpu: 250m, memory: 256Mi } }
+          volumeMounts:
+            - { name: config, mountPath: /config }
+      volumes:
+        - name: config
+          configMap: { name: bb-config-scheduler-{{ $name }} }
+{{- end }}{{ end }}

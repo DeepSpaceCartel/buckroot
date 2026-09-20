@@ -1,0 +1,6 @@
+apiVersion: v2
+name: buckroot-buildbarn
+description: Buildbarn remote cache and remote execution (storage, frontend, schedulers, autoscalable worker pools, portal) for buckroot builds
+type: application
+version: 0.1.0
+appVersion: "20260527T162223Z-c48dcda"

@@ -1,0 +1,94 @@
+{{- if .Values.portal.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels: {{- include "bb.labels" . | nindent 4 }}
+spec:
+  selector: { app: postgres }
+  ports:
+    - { name: sql, port: 5432 }
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  labels: {{- include "bb.labels" . | nindent 4 }}
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels: { app: postgres }
+  template:
+    metadata:
+      labels:
+        app: postgres
+        {{- include "bb.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.images.postgres }}
+          env:
+            - { name: POSTGRES_DB, value: app }
+            - { name: POSTGRES_USER, value: app }
+            - { name: POSTGRES_PASSWORD, value: {{ .Values.portal.postgres.password | quote }} }
+            - { name: PGDATA, value: /var/lib/postgresql/data/pgdata }
+          ports:
+            - { name: sql, containerPort: 5432 }
+          readinessProbe:
+            exec: { command: [sh, -c, "pg_isready -U app -d app"] }
+            periodSeconds: 10
+          resources: { requests: { cpu: 100m, memory: 256Mi } }
+          volumeMounts:
+            - { name: data, mountPath: /var/lib/postgresql/data }
+  volumeClaimTemplates:
+    - metadata: { name: data }
+      spec:
+        accessModes: [ReadWriteOnce]
+        {{- with .Values.storage.storageClassName }}
+        storageClassName: {{ . }}
+        {{- end }}
+        resources: { requests: { storage: {{ max 10 .Values.portal.postgres.storageGiB }}Gi } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: portal
+  labels: {{- include "bb.labels" . | nindent 4 }}
+spec:
+  selector: { app: portal }
+  ports:
+    - { name: http, port: 8081 }
+    - { name: bes, port: 8082 }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal
+  labels: {{- include "bb.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: portal }
+  template:
+    metadata:
+      labels:
+        app: portal
+        {{- include "bb.labels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include "bb.env" (dict "root" . "workerPool" "") | sha256sum }}
+    spec:
+      containers:
+        - name: portal
+          image: {{ .Values.images.portal }}
+          args: [/config/portal.jsonnet]
+          ports:
+            - { name: http, containerPort: 8081 }
+            - { name: bes, containerPort: 8082 }
+          resources: { requests: { cpu: 100m, memory: 256Mi } }
+          volumeMounts:
+            - { name: config, mountPath: /config }
+      volumes:
+        - name: config
+          configMap: { name: bb-config-portal }
+{{- end }}

@@ -1,0 +1,11 @@
+{{ include "bb.configmap" (dict "root" . "name" "bb-config-storage" "workerPool" "") }}
+---
+{{ include "bb.configmap" (dict "root" . "name" "bb-config-frontend" "workerPool" "") }}
+---
+{{ include "bb.configmap" (dict "root" . "name" "bb-config-portal" "workerPool" "") }}
+{{- range $name, $p := .Values.pools }}{{ if $p.enabled }}
+---
+{{ include "bb.configmap" (dict "root" $ "name" (printf "bb-config-scheduler-%s" $name) "workerPool" $name) }}
+---
+{{ include "bb.configmap" (dict "root" $ "name" (printf "bb-config-worker-%s" $name) "workerPool" $name) }}
+{{- end }}{{ end }}

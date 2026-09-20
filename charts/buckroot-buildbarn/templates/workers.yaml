@@ -1,0 +1,161 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: buckroot-worker
+  labels: {{- include "bb.labels" . | nindent 4 }}
+---
+# The idle reporter annotates its own pod; that is all this role allows.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: buckroot-worker
+  labels: {{- include "bb.labels" . | nindent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: [pods]
+    verbs: [patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: buckroot-worker
+  labels: {{- include "bb.labels" . | nindent 4 }}
+subjects:
+  - { kind: ServiceAccount, name: buckroot-worker }
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: buckroot-worker
+{{- range $name, $p := .Values.pools }}{{ if $p.enabled }}
+---
+# One worker = one pod = three containers that share /worker (build directories and the runner socket), /bb (the runner
+# binary) and /var/tmp (scratch of the build): bb-worker fetches inputs, the privileged runner executes the command
+# (it starts a mount namespace per action), the reporter says whether the worker is busy.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-{{ $name }}
+  labels: {{- include "bb.labels" $ | nindent 4 }}
+spec:
+  {{- if not $.Values.keda.enabled }}
+  replicas: {{ $p.worker.replicas }}
+  {{- end }}
+  selector:
+    matchLabels: { app: worker, pool: {{ $name }} }
+  template:
+    metadata:
+      labels:
+        app: worker
+        pool: {{ $name }}
+        {{- include "bb.labels" $ | nindent 8 }}
+      annotations:
+        # The node autoscaler must never evict a busy worker; the node goes away after this pod is removed.
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ $.Values.diagnosticsPort | quote }}
+        checksum/config: {{ include "bb.env" (dict "root" $ "workerPool" $name) | sha256sum }}
+    spec:
+      serviceAccountName: buckroot-worker
+      terminationGracePeriodSeconds: {{ add $.Values.workerTerminationDelaySeconds 30 }}
+      {{- with $p.worker.nodeSelector }}
+      nodeSelector: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $p.worker.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      affinity:
+        podAntiAffinity:            # one worker per node, so make -jN sees the node's CPUs
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels: { app: worker }
+      initContainers:
+        - name: runner-installer
+          image: {{ $.Values.images.runnerInstaller }}
+          volumeMounts:
+            - { name: bb, mountPath: /bb }
+        - name: prepare
+          image: {{ $.Values.images.busybox }}
+          env:
+            - name: POD_NAME
+              valueFrom: { fieldRef: { fieldPath: metadata.name } }
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /worker/build /worker/cache/persistent_state
+              chmod -R 0777 /worker
+              echo "{ slot: '$POD_NAME' }" > /gen/id.libsonnet
+          volumeMounts:
+            - { name: worker, mountPath: /worker }
+            - { name: gen, mountPath: /gen }
+      containers:
+        - name: worker
+          image: {{ $.Values.images.worker }}
+          args: [/config/worker.jsonnet]
+          ports:
+            - { name: metrics, containerPort: {{ $.Values.diagnosticsPort }} }
+          resources: { requests: { cpu: 250m, memory: 512Mi } }
+          lifecycle:
+            preStop: { sleep: { seconds: {{ $.Values.workerTerminationDelaySeconds }} } }
+          volumeMounts:
+            - { name: config, mountPath: /config }
+            - { name: gen, mountPath: /config/gen }
+            - { name: worker, mountPath: /worker }
+        - name: runner
+          image: {{ $.Values.images.runner }}
+          command:
+            - sh
+            - -c
+            - while ! test -f /bb/installed; do sleep 1; done; exec /bb/bb_runner /config/runner.jsonnet
+          securityContext:
+            privileged: true        # actions start a mount namespace (toolkit scripts/br2-ns.sh)
+          resources: {{- toYaml $p.worker.resources | nindent 12 }}
+          lifecycle:
+            preStop: { sleep: { seconds: {{ $.Values.workerTerminationDelaySeconds }} } }
+          volumeMounts:
+            - { name: config, mountPath: /config }
+            - { name: bb, mountPath: /bb }
+            - { name: worker, mountPath: /worker }
+            - { name: scratch, mountPath: /var/tmp }
+        {{- if $.Values.idleReporter.enabled }}
+        - name: idle-reporter
+          image: {{ $.Values.images.utility }}
+          env:
+            - name: POD_NAME
+              valueFrom: { fieldRef: { fieldPath: metadata.name } }
+            - name: POD_NAMESPACE
+              valueFrom: { fieldRef: { fieldPath: metadata.namespace } }
+          command:
+            - sh
+            - -c
+            - |
+              api=https://kubernetes.default.svc
+              sa=/var/run/secrets/kubernetes.io/serviceaccount
+              last=""
+              while true; do
+                if [ -n "$(ls -A /worker/build 2>/dev/null)" ]; then cost=1000; else cost=0; fi
+                if [ "$cost" != "$last" ]; then
+                  curl -sS --fail --cacert $sa/ca.crt -H "Authorization: Bearer $(cat $sa/token)" \
+                    -H "Content-Type: application/merge-patch+json" -X PATCH \
+                    -d "{\"metadata\":{\"annotations\":{\"controller.kubernetes.io/pod-deletion-cost\":\"$cost\"}}}" \
+                    "$api/api/v1/namespaces/$POD_NAMESPACE/pods/$POD_NAME" >/dev/null && last=$cost
+                fi
+                sleep {{ $.Values.idleReporter.intervalSeconds }}
+              done
+          resources: { requests: { cpu: 10m, memory: 16Mi } }
+          volumeMounts:
+            - { name: worker, mountPath: /worker, readOnly: true }
+        {{- end }}
+      volumes:
+        - name: config
+          configMap: { name: bb-config-worker-{{ $name }} }
+        - name: gen
+          emptyDir: {}
+        - name: bb
+          emptyDir: {}
+        - name: worker
+          emptyDir: { sizeLimit: {{ $p.worker.workDirGiB }}Gi }
+        - name: scratch
+          emptyDir: { sizeLimit: {{ $p.worker.workDirGiB }}Gi }
+{{- end }}{{ end }}

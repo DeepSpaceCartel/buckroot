@@ -1,0 +1,31 @@
+{{- if .Values.keda.enabled }}
+{{- range $name, $p := .Values.pools }}{{ if $p.enabled }}
+---
+# Scales the worker Deployment of one pool on the load its scheduler reports. Scale-in removes idle pods first
+# (the pod-deletion-cost annotation set by the idle reporter); the stabilization window stops a build's ramp-down
+# from removing workers early.
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: worker-{{ $name }}
+  labels: {{- include "bb.labels" $ | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: worker-{{ $name }}
+  minReplicaCount: {{ $p.scaling.min }}
+  maxReplicaCount: {{ $p.scaling.max }}
+  cooldownPeriod: {{ $p.scaling.cooldownSeconds }}
+  pollingInterval: 15
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: {{ $p.scaling.scaleDownStabilizationSeconds }}
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: {{ $.Values.keda.prometheusAddress }}
+        query: {{ required (printf "pools.%s.scaling.query is required when keda.enabled (the scheduler metric of queued + executing operations)" $name) $p.scaling.query | quote }}
+        threshold: {{ $p.scaling.tasksPerWorker | quote }}
+{{- end }}{{ end }}
+{{- end }}

@@ -1,0 +1,92 @@
+# buckroot-buildbarn: Buildbarn on Kubernetes. Everything tunable is here; the jsonnet in files/config is the toolkit's,
+# unchanged (see sync-config.sh), with env.libsonnet rendered from these values.
+
+images:
+  storage: ghcr.io/buildbarn/bb-storage:20260609T094425Z-10acc76
+  scheduler: ghcr.io/buildbarn/bb-scheduler:20260527T162223Z-c48dcda
+  worker: ghcr.io/buildbarn/bb-worker:20260527T162223Z-c48dcda
+  runnerInstaller: ghcr.io/buildbarn/bb-runner-installer:20260527T162223Z-c48dcda
+  portal: ghcr.io/buildbarn/bb-portal:20260630T071618Z-dd0997c
+  postgres: docker.io/postgres:18-alpine
+  # The tool baseline every wrapped action runs in (toolkit/infra/buildbarn/runner/Dockerfile). Set the digest
+  # once it is published; it is also what platformProperties below should name.
+  runner: ghcr.io/deepspacecartel/buckroot-worker:latest
+  utility: docker.io/curlimages/curl:8.11.1   # the busy/idle reporter
+  busybox: docker.io/library/busybox:1.37
+
+# Platform properties every worker advertises and every scheduler routes on (one static platform per scheduler).
+platformProperties:
+  - { name: OSFamily, value: linux }
+  - { name: container-image, value: "docker://buckroot-worker" }
+
+storage:
+  # One blob has to fit in ONE block: block size = size / 22 (old 4 + current 12 + new 3 + spare 3). 100 GiB -> 4.5 GiB blocks.
+  casSizeGiB: 100
+  acSizeGiB: 2
+  storageClassName: ""          # "" = the cluster default (hcloud-volumes on Hetzner)
+  resources: { requests: { cpu: 500m, memory: 1Gi } }
+
+frontend:
+  replicas: 2
+  resources: { requests: { cpu: 250m, memory: 256Mi } }
+
+# One scheduler and one worker pool per entry. The client chooses a pool with its REAPI instance name: the pool with
+# instancePrefix "" is the default queue; another pool is selected by an instance name starting with "<prefix>/".
+pools:
+  shared:
+    enabled: true
+    instancePrefix: ""
+    # A scheduler fails an action when no worker exists for its platform for this long. With workers scaled to
+    # zero it must exceed a node's cold start (server + Talos boot + image pull).
+    noWorkersTimeout: 900s
+    worker:
+      concurrency: 1
+      cacheGiB: 20                # the worker's local input cache (emptyDir)
+      workDirGiB: 100             # build directories + /var/tmp scratch (emptyDir on node-local disk)
+      resources:                  # size a worker to a whole node so `make -jN` sees its CPUs
+        requests: { cpu: "7", memory: 12Gi }
+      nodeSelector: { buckroot.dev/pool: bb-workers-shared }
+      tolerations:
+        - { key: buckroot-worker, operator: Equal, value: "true", effect: NoSchedule }
+      replicas: 0                 # KEDA (below) manages the count when keda.enabled
+    scaling: { min: 0, max: 8, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
+  dedicated:
+    enabled: true
+    instancePrefix: dedicated
+    noWorkersTimeout: 900s
+    worker:
+      concurrency: 1
+      cacheGiB: 20
+      workDirGiB: 100
+      resources:
+        requests: { cpu: "7", memory: 28Gi }
+      nodeSelector: { buckroot.dev/pool: bb-workers-dedicated }
+      tolerations:
+        - { key: buckroot-worker, operator: Equal, value: "true", effect: NoSchedule }
+      replicas: 0
+    scaling: { min: 0, max: 4, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
+
+# Delay before a worker pod stops, so an action that is still running can finish. Scale-in normally picks an idle
+# pod (see idleReporter), so this is insurance, not the mechanism.
+workerTerminationDelaySeconds: 60
+
+# Reports busy/idle by annotating the pod `controller.kubernetes.io/pod-deletion-cost`, so a scale-in removes idle
+# workers first. Busy = the worker's build directory is non-empty.
+idleReporter:
+  enabled: true
+  intervalSeconds: 5
+
+keda:
+  # A ScaledObject per pool. `pools.<name>.scaling.query` must be a Prometheus query returning the number of queued +
+  # executing operations of that pool's scheduler: find the metric in the scheduler's /metrics first.
+  enabled: false
+  prometheusAddress: http://prometheus-server.monitoring.svc.cluster.local:80
+
+portal:
+  enabled: true
+  pool: shared                   # the portal shows one scheduler; the others have their own admin UI on :7982
+  postgres:
+    password: password           # single-tenant cluster; change it if that stops being true
+    storageGiB: 5
+
+diagnosticsPort: 9980            # Prometheus metrics of every Buildbarn component

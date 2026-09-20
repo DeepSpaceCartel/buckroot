@@ -1,0 +1,7 @@
+keda:
+  enabled: true
+pools:
+  shared:
+    scaling: { query: "sum(placeholder_queued_and_executing{pool=\"shared\"})" }
+  dedicated:
+    scaling: { query: "sum(placeholder_queued_and_executing{pool=\"dedicated\"})" }
