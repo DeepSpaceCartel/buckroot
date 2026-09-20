@@ -21,6 +21,9 @@ resource "helm_release" "prometheus" {
   values = [yamlencode({
     alertmanager           = { enabled = false }
     prometheus-pushgateway = { enabled = false }
+    # Its DaemonSet needs host namespaces and paths, which the namespace's baseline Pod Security level refuses, and nothing
+    # here uses node metrics (KEDA scales on the scheduler's own metrics): leave it out rather than make the namespace privileged.
+    prometheus-node-exporter = { enabled = false }
     server = {
       retention        = "48h"
       persistentVolume = { size = "10Gi" }
