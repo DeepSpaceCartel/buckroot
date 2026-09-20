@@ -16,7 +16,7 @@
 | Limit | Why | Way out |
 |---|---|---|
 | Global config symbols and any infrastructure edit rebuild everything | every slice contains the global symbols | split global symbols by who reads them (rootfs-only groups) |
-| Ambient host tools are not in the cache key | `wrapped` actions call `gcc`, `perl`, `rsync` | pin them in the worker image; put a tool-baseline digest into the key |
+| Ambient host tools are not in the cache key | `wrapped` actions call `gcc`, `perl`, `rsync`, and `configure` scripts probe the host (OpenSSH embeds the path of `xauth` if it finds one) | pin them in the worker image, and put a **baseline identity** into the key (a platform property, the hash of `runner/Dockerfile`) so a changed image is a cache miss; local execution can only declare a baseline, not verify it |
 | Needs `CAP_SYS_ADMIN` | mount namespaces | a user-namespace variant, or a privileged runner |
 | A package is a coarse unit | `wrapped` runs the whole `make <pkg>` | native rules; possibly a two-stage stepped variant, after a measurement (see [Stepped](../walkthrough/stepped.md)) |
 | Package outputs are tarballs | one opaque blob per package: any change re-uploads all of it, identical files in different packages or projects are stored again, and every action unpacks its dependencies' tarballs | [directory-tree outputs](#directory-tree-package-outputs) (an idea, untested) |

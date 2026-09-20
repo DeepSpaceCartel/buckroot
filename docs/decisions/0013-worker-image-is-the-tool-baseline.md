@@ -30,3 +30,17 @@ dependency check).
   [Status and roadmap](../project/status.md).
 - **Harder**: local execution has a larger, unpinned tool set, so a build can pass locally and fail
   remotely. The remote cells exist to catch exactly that.
+
+## Update: what the key does and does not cover (2026-09-20)
+
+The image is referenced in the platform properties by *name* (`container-image: docker://buckroot-worker`), so a change to its contents
+does **not** change any action key. Rebuilding the image with a different tool set (adding `git`, adding `xauth`) leaves every key as it was,
+and a cache hit would serve a result built with the old tools. The measured cells are not affected, because each has its own
+[cache salt](0010-cache-salt-per-cell.md), which is in the key.
+
+A real case, found by the manifest: OpenSSH's `configure` searches the build machine for `xauth` and embeds the path it finds in
+`ssh`, `sshd` and `ssh-keysign`. The golden build and every local cell ran where `/usr/bin/xauth` exists; the first two remote cells ran on a worker
+without it, and the three binaries differed (same size, different hash, identical across the two remote runs). The fix used here was to add
+`xauth` to the image. The lasting fix is a **baseline identity in the key**: a platform property (a hash of `runner/Dockerfile`, or the image digest) that
+the worker advertises and that changes when the image is rebuilt, so a new baseline is a cache miss for every action. See the roadmap item on
+[Status and roadmap](../project/status.md).

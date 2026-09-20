@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential ca-certificates python3 perl rsync bc bison flex file which patch cpio \
       unzip wget curl bzip2 xz-utils gzip tar util-linux e2fsprogs libncurses-dev \
-      findutils diffutils sed gawk pkg-config git \
+      findutils diffutils sed gawk pkg-config git xauth \
     && rm -rf /var/lib/apt/lists/*
 
 # Same fixed PATH the actions use (see br2/pkg_action.py ENV).
