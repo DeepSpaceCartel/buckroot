@@ -17,3 +17,4 @@ __pycache__/
 /smoke/
 /buildroot-external/
 /sources/
+# vendored from the buckroot toolkit by br2-sync

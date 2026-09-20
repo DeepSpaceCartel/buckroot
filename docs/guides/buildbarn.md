@@ -100,6 +100,7 @@ tree and - for executed actions - the output tree, stdout and stderr.
 | Scheduler finds no worker | Buck2 leaves `Action.platform` empty | the `static` platform extractor in `scheduler.jsonnet` |
 | `Failed to run command: error reading from server: EOF` | the runner died mid-action | an infrastructure error, not retried; restart the runner and rerun - completed actions are reused |
 | `materialize_inputs_failed` when falling back to local | inputs exist only in the remote CAS | keep the cache reachable, or `--materializations=all` |
+| `Blob is N bytes in size, while this backend is only capable of storing blobs of up to M bytes` (stage `remote_upload_error`) | the CAS block size is the largest blob it can hold: `sizeBytes` divided by the number of blocks (38 with the original config: 16 GiB gave 431 MiB) | enlarge `sizeBytes` or lower the block counts in `config/storage.jsonnet`, and recreate the storage directory (state written with another layout is not readable); see [Sizing the storage](#sizing-the-storage) |
 | `g++: fatal error: Killed signal terminated program cc1plus` in a remote action | the worker's memory ran out: it runs `concurrency` actions at once, each with `make -jN` | lower `concurrency` in `config/worker.jsonnet` (1 on an 8 GB machine); see [Sizing the worker](#sizing-the-worker) |
 
 ## Sizing the worker
@@ -116,3 +117,15 @@ The consequence is that remote execution on **one** machine runs the graph one a
 being a way to save time and remains a way to test the remote path, pin the tool baseline and populate a shared cache. Real parallelism needs
 more worker capacity: more workers, each with its own memory, and `concurrency` sized to the memory of one heavy compile (measure it: a single `cc1plus`
 process can use well over a gigabyte, and `make -jN` runs N of them).
+
+## Sizing the storage
+
+The content-addressable storage keeps its data in a fixed number of equally sized **blocks** (`oldBlocks + currentBlocks + newBlocks +
+spareBlocks`), and **one blob has to fit in one block**. The block size is `sizeBytes` divided by that number. The original 16 GiB in 38 blocks
+gave 431 MiB, and the third wrapped remote Car Thing build failed uploading a 965 MB source archive (the Google Fonts repository, an input
+of `googlefontdirectory`). The shipped configuration is 28 GiB in 22 blocks (1.27 GiB per block).
+
+Changing `sizeBytes` or the block counts changes the on-disk layout: stop the storage, delete its state directory
+(`$BB_VOLUMES/storage-cas` and `storage-ac`), recreate the empty `persistent_state` directories and start it again. The cache is emptied by this.
+Size the total for the working set of the cells you run (each Car Thing cold cell adds about 1 GB of outputs plus 2 GB of sources), and note that
+the files are sparse, so the disk usage grows as blocks fill.

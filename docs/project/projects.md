@@ -31,7 +31,8 @@ and 199 Buck2 actions. The rootfs is a tar.
 
 What it needed:
 
-- **`extra_view` for hidden references:** `gettext-tiny` reads `gettext-gnu`, `avahi` reads `python3`,
+- **`extra_view` for hidden references:** `util-linux` includes the makefile of its child directory `util-linux-libs` (found only by the
+  remote view check: a directory bind exposes the child locally, but the worker has only declared files), `gettext-tiny` reads `gettext-gnu`, `avahi` reads `python3`,
   `gcc-initial` and `gcc-final` read the `package/gcc` group directory, `autoconf` reads `automake`,
   `rust-bin` reads `rustc`, `util-linux` reads `ncurses`, `linux` reads `uboot-tools`,
   `skeleton-init-common` reads `mkpasswd`.

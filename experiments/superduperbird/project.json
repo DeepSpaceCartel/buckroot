@@ -49,7 +49,7 @@
       "package/rustc"
     ],
     "package/util-linux": [
-      "package/ncurses"
+      "package/util-linux/util-linux-libs"
     ],
     "linux": [
       "package/uboot-tools"

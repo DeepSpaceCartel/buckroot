@@ -1,0 +1,17 @@
+[
+ {
+  "variant": "wrapped",
+  "mode": "remote",
+  "salt": "wrapped-remote-20094852",
+  "instance": "superduperbird-remote-wrapped-094852",
+  "cold": {
+   "ok": false,
+   "seconds": 6130.8,
+   "commands": 184,
+   "cached": 0,
+   "remote": 184,
+   "local": 0,
+   "error_tail": "Action details (uncached result): superduperbird/blobs/sha256/historical_execute_response/36ca4101cad01192559c974e23f9c17f9ea36dd1e3dbc8afb5cff147257bfe0a-617/\n\n[2026-09-20T11:31:03.405+00:00] Action failed: root//buildroot-src/package/googlefontdirectory:googlefontdirectory (root//platforms:default#5fe249fa9992182d) (br2_package googlefontdirectory)\n[2026-09-20T11:31:03.405+00:00] Internal error (stage: remote_upload_error): Remote Execution Error on upload for ReSession GRPC-SESSION-ID\n[2026-09-20T11:31:03.405+00:00] Error: (code: 'Client specified an invalid argument', message: \"Blob is 1011764312 bytes in size, while this backend is only capable of storing blobs of up to 452100096 bytes in size\")\n[2026-09-20T11:31:03.405+00:00] Remote action digest: 'bf3d8a9252f3fbfe2d0a318f588ac6c4ab77029f29ad16d8e3af66dcc5b5caaa:142'\n[2026-09-20T11:31:03.405+00:00] Stdout: <empty>\n[2026-09-20T11:31:03.405+00:00] Stderr: <empty>\n\n[2026-09-20T11:31:03.405+00:00] Action failed: root//buildroot-src/package/util-linux/util-linux-libs:util-linux-libs (root//platforms:default#5fe249fa9992182d) (br2_package util-linux-libs)\n[2026-09-20T11:31:03.405+00:00] Remote command returned non-zero exit code 1\n[2026-09-20T11:31:03.405+00:00] Remote action digest: '307189026a1181c7b2e69a22f22378ae6bdba7212f5332a3f01f8cc6cc9ab04c:142'\n[2026-09-20T11:31:03.405+00:00] Stdout: <empty>\n[2026-09-20T11:31:03.405+00:00] Stderr:\n[pkg_action] make util-linux-libs\nmake util-linux-libs failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nmake: *** No rule to make target 'util-linux-libs'.  Stop.\nmake: Leaving directory '/mnt/src'\n[2026-09-20T11:31:03.405+00:00] Info:\nAction details (uncached result): superduperbird/blobs/sha256/historical_execute_response/8ea1f39220edfcfc4b85040c06df85233b1ae66867b0be35eb2679051a4d99c0-622/\n\n[2026-09-20T11:31:03.405+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/util-linux/util-linux-libs:util-linux-libs (root//platforms:default#5fe249fa9992182d)'"
+  }
+ }
+]

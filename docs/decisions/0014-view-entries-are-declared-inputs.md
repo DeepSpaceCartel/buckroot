@@ -41,5 +41,10 @@ Every earlier remote run (`helloworld`) had passed, because its packages have no
   the same list.
 - **Harder**: the change alters the inputs of every package that has `links`, so cached results from before it (the local cells of the same
   matrix) are not reused; the results record which toolkit version each cell ran with.
-- **Not covered**: the check enters the namespace but does not run the build, so a file read *outside* the view, or by a step other than
-  the view setup, is not found by it. The full remote build remains the final test.
+- **A second layer, found by the next failure**: checking that entries exist is not enough. A directory entry exposes everything in it, so
+  a makefile that includes a *child* directory's makefile (`util-linux.mk` includes `util-linux-libs/util-linux-libs.mk`) works locally
+  and fails on the worker, where only declared files exist. The check therefore also runs `make <pkg>-show-version`, which parses every
+  makefile the view provides; three packages (`host-util-linux`, `host-e2fsprogs`, `host-btrfs-progs`) failed it, in about 3 minutes, and
+  the fix is an `extra_view` entry (`package/util-linux` reads `package/util-linux/util-linux-libs`).
+- **Not covered**: a file read only during a *later* step (configure, build, install) is not found by a parse. The full remote build remains
+  the final test.

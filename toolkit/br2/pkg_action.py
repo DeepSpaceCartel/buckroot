@@ -316,14 +316,18 @@ def cmd_package(spec, dest):
 
 
 def cmd_viewcheck(spec, dest):
-    """Enter the namespace with this package's views and run nothing in it. A declared view entry that is not
-    present in THIS action's inputs (a remote input root holds only what was declared) fails here, in seconds,
-    instead of surfacing hours later as a make error. Needs no dependency outputs."""
+    """Enter the namespace with this package's views and let make PARSE every makefile it can see (`<pkg>-show-version`
+    builds nothing). Run where only the declared inputs exist (a remote input root), it fails in seconds on
+      * a view entry that is not a declared input (br2-ns.sh: `view entry missing`), and
+      * a makefile that includes or reads a file the view does not provide (`No such file or directory`),
+    instead of hours into a build. Needs the config slice, not the dependencies' outputs."""
     with work_dir("br2-view-") as work:
         out, dl = Path(work) / "out", Path(work) / "dl"
         out.mkdir(), dl.mkdir()
+        untar(spec["slice"], out)
         views = write_views(work, spec)
-        make_in_ns(out, dl, [], Path(work) / "view.log", views=views, common_root=assemble_common(work, spec), command=["true"])
+        make_in_ns(out, dl, [f"{spec['pkg']}-show-version"], Path(work) / "view.log", views=views,
+                   common_root=assemble_common(work, spec))
         entries = {name: path.read_text().count("\n") for name, path in views.items()}
         Path(dest).write_text(json.dumps({"pkg": spec["pkg"], "view_entries": entries}) + "\n")
 

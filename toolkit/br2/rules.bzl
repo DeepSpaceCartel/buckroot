@@ -263,9 +263,10 @@ def _br2_package_impl(ctx):
     ]
     _run(ctx, "package", spec, [out], "br2_package", ctx.attrs.pkg, weight = ctx.attrs.weight, hidden = action_inputs)
 
-    # `[viewcheck]`: the same views and inputs as the package action, no dependency outputs and no make. Building it
-    # (locally, or with remote execution) proves every view entry is a declared input of this action.
-    view_spec = {k: v for k, v in spec.items() if k not in ("closure", "direct", "slice", "sources")}
+    # `[viewcheck]`: the same views and inputs as the package action and the config slice, but no dependency outputs
+    # and no build: make only parses (see pkg_action.cmd_viewcheck). Built with remote execution it proves the
+    # views against the worker's input root.
+    view_spec = {k: v for k, v in spec.items() if k not in ("closure", "direct", "sources")}
     check = ctx.actions.declare_output(ctx.attrs.pkg + ".viewcheck.json")
     _run(ctx, "viewcheck", view_spec, [check], "br2_viewcheck", ctx.attrs.pkg, hidden = action_inputs)
     return [
