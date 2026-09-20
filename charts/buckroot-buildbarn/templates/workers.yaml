@@ -53,7 +53,7 @@ spec:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ $.Values.diagnosticsPort | quote }}
-        checksum/config: {{ include "bb.env" (dict "root" $ "workerPool" $name) | sha256sum }}
+        checksum/config: {{ printf "%s%s" (include "bb.env" (dict "root" $ "workerPool" $name)) ($.Files.Glob "files/config/*" | toJson) | sha256sum }}
     spec:
       serviceAccountName: buckroot-worker
       terminationGracePeriodSeconds: {{ add $.Values.workerTerminationDelaySeconds 30 }}

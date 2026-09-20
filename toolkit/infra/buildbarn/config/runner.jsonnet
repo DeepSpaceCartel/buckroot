@@ -1,8 +1,6 @@
-local common = import 'common.libsonnet';
-
+// No diagnostics server here: in a Kubernetes pod the runner shares the worker's network namespace (and its diagnostics port).
 {
   buildDirectoryPath: '/worker/build',
-  global: common.global,
   grpcServers: [{
     listenPaths: ['/worker/runner'],
     authenticationPolicy: { allow: {} },
