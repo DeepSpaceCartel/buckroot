@@ -26,7 +26,9 @@ jobs:
         with:
           context: toolkit/infra/buildbarn/runner
           push: true
+          labels: org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/buckroot-worker:latest
             ghcr.io/${{ github.repository_owner }}/buckroot-worker:${{ github.sha }}
-      - run: echo "Pin this digest in the platform's runner_image variable: ghcr.io/${{ github.repository_owner }}/buckroot-worker@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
+      - run: |
+          echo "Pin this digest in the platform's runner_image variable: ghcr.io/${{ github.repository_owner }}/buckroot-worker@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
