@@ -30,13 +30,15 @@ check availability in your location with `hcloud server-type list` (all x86: the
 Requires `terraform` >= 1.10, `kubectl`, `helm`, and 1Password's `op` (or the same variables exported by hand).
 
 Everything is baked in: the state backend (S3 bucket `rts-terraform-admin`, one key per state), the server types, pool sizes and location
-(defaults in each `variables.tf`). Only secrets are inputs, and they are 1Password references in [`.env.1password`](.env.1password), so there
-are no files to copy or edit. Sign in once with `eval $(op signin)`.
+(defaults in each `variables.tf`). Only secrets are inputs, and they are 1Password references, so there are no files to copy or edit:
+[`.env.1password`](.env.1password) (state backend, Hetzner token; every state), [`.env.platform.1password`](.env.platform.1password) and
+[`.env.coder-templates.1password`](.env.coder-templates.1password). Authenticate `op` with `eval $(op signin)` or an
+`OP_SERVICE_ACCOUNT_TOKEN` (read access to the vault is enough).
 
 ```bash
-alias tf='op run --env-file=$PWD/.env.1password -- terraform'    # from terraform/
-(cd cluster && tf init && tf apply)     # also merges the cluster into ~/.kube/config: `kubectl get nodes` just works
-(cd platform && tf init && tf apply)
+E="op run --env-file=$PWD/.env.1password"              # from terraform/
+(cd cluster && $E -- terraform init && $E -- terraform apply)   # also merges the cluster into ~/.kube/config: `kubectl get nodes` just works
+(cd platform && P="$E --env-file=$PWD/../.env.platform.1password"; $P -- terraform init && $P -- terraform apply)
 ```
 
 Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there):
