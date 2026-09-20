@@ -1,6 +1,8 @@
-# Local state and credentials never go into git (the kubeconfig and talosconfig are written to ~/.kube and ~/.talos).
+# Local state and credentials never go into git (the kubeconfig and talosconfig are written by the cluster apply and installed into ~/.kube and ~/.talos).
 **/.terraform/
 *.tfstate
 *.tfstate.*
 *.tfvars
+**/kubeconfig
+**/talosconfig
 crash.log
