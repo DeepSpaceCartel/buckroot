@@ -15,8 +15,8 @@ machine, so "remote" adds no hardware.
 ## helloworld
 
 Buildroot 2025.02.18, aarch64, musl, Bootlin external toolchain, one local package
-(`hello`). 29 packages, 61 Buck2 actions. `native` builds the 12 packages in `hello`'s
-dependency closure with Buck2 actions (56 actions in total).
+(`hello`). 29 packages, 61 Buck2 actions. `native` builds the 12 packages listed in
+`project.json` with Buck2 actions: `hello`, its nine dependencies, and `initscripts` and `urandom-scripts` (56 actions in total).
 
 | variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |
 |---|---|---|---|---|---|---|---|---|---|

@@ -112,7 +112,7 @@ The generic ones (`toolkit/br2/native/`): `host-skeleton`, `host-fakedate`, `ske
 `musl-compat-headers`, and the external-toolchain trio `toolchain-external-bootlin`,
 `toolchain-external`, `toolchain`. A project adds its own under `native/<pkg>/BUCK`.
 
-`helloworld` builds its whole dependency closure of `hello` this way (12 packages). The
+`helloworld` builds `hello`, its whole dependency closure, and two init-script packages this way (12 packages). The
 external-toolchain package is the hardest: it unpacks the tarball, compiles Buildroot's
 compiler wrapper with the host compiler (a byte-identical result once `__FILE__` is
 mapped), installs the sysroot, rewrites the libtool `.la` files, generates `gdbinit` and

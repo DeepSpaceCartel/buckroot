@@ -101,6 +101,7 @@ The remote modes need the full stack (`docker compose up -d --build`); see
 
 ## Next
 
+- Take it apart: the [Walkthrough](../walkthrough/index.md) follows `hello` through the wrapped, stepped and native variants, showing what happens under the hood.
 - [Add your own Buildroot project](../guides/adding-a-project.md).
 - [Iterate faster](../guides/fast-iteration.md) than a six-minute loop.
 - Understand what you just ran: [Architecture](../concepts/architecture.md).

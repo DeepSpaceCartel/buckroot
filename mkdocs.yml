@@ -9,6 +9,11 @@ nav:
   - Home:
     - Welcome: home/index.md
     - Quickstart: home/quickstart.md
+  - Walkthrough:
+      - Overview: walkthrough/index.md
+      - Wrapped: walkthrough/wrapped.md
+      - Stepped (design): walkthrough/stepped.md
+      - Native: walkthrough/native.md
   - Guides:
       - Adding a Buildroot project: guides/adding-a-project.md
       - Iterating fast: guides/fast-iteration.md
