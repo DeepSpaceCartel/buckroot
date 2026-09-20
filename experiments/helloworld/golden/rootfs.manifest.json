@@ -1607,7 +1607,7 @@
   "/usr/bin/hello": {
    "gid": 0,
    "mode": "0755",
-   "sha256": "8677683e40e595ebf461114d75847d488fecfc3bd73d19defbb66c6f0eab5c61",
+   "sha256": "e44852c780aef09699e7d916df0907ec4dee974fed4ea7852ef0b9ef1381e60f",
    "size": 5680,
    "type": "file",
    "uid": 0
