@@ -50,8 +50,30 @@ def _project_root():
 
 HERE = _project_root()
 NS = HERE / "scripts" / "br2-ns.sh"   # overridden by spec["ns"]: the declared artifact
+def memory_bytes():
+    """The memory this process may use: the smaller of the machine's and, in a container, the cgroup limit."""
+    with open("/proc/meminfo") as fh:
+        total = int(next(l for l in fh if l.startswith("MemTotal:")).split()[1]) * 1024
+    for path in ("/sys/fs/cgroup/memory.max", "/sys/fs/cgroup/memory/memory.limit_in_bytes"):
+        try:
+            limit = int(Path(path).read_text().strip())
+        except (OSError, ValueError):                 # absent, or "max" (no limit)
+            continue
+        total = min(total, limit)
+    return total
+
+
+def parallel_jobs():
+    """The -jN of the action's make. Buildroot's default is CPUs + 1, and a single make -j5 of GCC was OOM-killed twice on a
+    7.7 GB machine, so cap it at about 2 GB of memory per job. BR2_JOBS overrides. Output does not depend on N."""
+    if os.environ.get("BR2_JOBS"):
+        return max(1, int(os.environ["BR2_JOBS"]))
+    cpus = len(os.sched_getaffinity(0))
+    return max(1, min(cpus + 1, memory_bytes() // (2 * 2**30)))
+
+
 MAKE = ["make", "-C", "/mnt/src", "O=/mnt/out",
-        "BR2_EXTERNAL=/mnt/external", "BR2_DL_DIR=/mnt/dl"]
+        "BR2_EXTERNAL=/mnt/external", "BR2_DL_DIR=/mnt/dl", f"PARALLEL_JOBS={parallel_jobs()}"]
 ENV = {"PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
        "LC_ALL": "C", "TERM": "dumb", "BR2_NS_NET": "off"}
 

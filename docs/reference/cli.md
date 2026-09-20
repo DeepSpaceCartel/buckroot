@@ -13,11 +13,11 @@ It is vendored there by `toolkit/bin/br2-sync`.
 | `br2 extract` | defconfig to `golden/model.json`, then render the `BUCK` files |
 | `br2 fetch` | download sources Buck2's `http_file` cannot express and vendor them |
 | `br2 preflight [--pkg P ...]` | extract and patch every package in its view; compare applied patches with the golden |
-| `br2 golden [--vanilla]` | plain `make` reference build; writes `golden/rootfs.manifest.json` and `results/golden.json` |
+| `br2 golden [--vanilla] [--k8s ...]` | plain `make` reference build; writes `golden/rootfs.manifest.json` and `results/golden.json`. `--k8s` runs it as a Kubernetes Job on a worker pool's nodes, in the workers' own tool-baseline image, and copies the small results back (push first: the Job clones the current commit); options `--pool` (default `dedicated`), `--namespace`, `--image`, `--cpu`, `--memory`, `--deadline`, `--dry-run` (print the Job). See [Buildbarn on Kubernetes](../guides/kubernetes.md) |
 | `br2 dev [--pkg P] [--target L] [--variant V] [--mode M] [--strict]` | iteration loop; see [Iterating fast](../guides/fast-iteration.md) |
 | `br2 viewcheck [--mode M]` | build every package's `[viewcheck]`: enter each view with that action's declared inputs and run nothing. `--mode remote` runs it on the worker and finds entries that only work locally |
 | `br2 build --variant V --mode M` | one clean, timed, manifest-checked Buck2 build of `//:rootfs`; prints JSON |
-| `br2 matrix [--variants ...] [--modes ...]` | every variant and mode; writes `results/matrix.{json,md}` |
+| `br2 matrix [--variants ...] [--modes ...] [--parallel N] [--pool P] [--dry-run]` | every variant and mode; writes `results/matrix.{json,md}`. `--parallel N` runs N cells at once, each in its own Buck2 isolation directory (only meaningful with remote capacity to match; timings of parallel cells are not comparable with a serial run); `--pool P` sends the remote actions to a worker pool (see below); `--dry-run` prints the Buck2 commands and runs nothing |
 
 Variants: `wrapped`, `native`. Modes: `local`, `local-cache`, `remote`, `remote-cache`. The
 two cache modes run twice, cold and warm.
@@ -44,6 +44,14 @@ two cache modes run twice, cold and warm.
 | `BR2_WORK_DIR` | `/var/tmp/buckroot-work` | scratch directories of running actions |
 | `BR2_KEEP_WORK` | unset | keep an action's scratch directory (and its `make.log`) after it ends |
 | `BB_VOLUMES` | `/var/lib/buckroot-buildbarn` | Buildbarn state |
+| `BR2_RE_ENDPOINT` | unset (`localhost:8980`) | `grpc://host:port` of a Buildbarn frontend, for engine, action cache and CAS; set it in a Kubernetes workspace to `grpc://frontend.buildbarn.svc.cluster.local:8980` |
+| `BR2_JOBS` | unset | Buildroot `PARALLEL_JOBS` inside every wrapped action. Default: the smaller of the CPU count plus one and the memory (cgroup limit included) divided by 2 GiB, because a single `make -jN` of GCC was killed by the OOM killer on a 7.7 GB machine |
+
+## Worker pools
+
+`--pool P` (on `br2 build` and `br2 matrix`) prefixes the Buck2 instance name with `P/`. The Buildbarn frontend routes an instance-name prefix to the
+scheduler of that pool (`schedulers` in `env.libsonnet`, `pools` in the Helm chart), so `--pool dedicated` runs on the dedicated-CPU workers and the
+default runs on the shared ones. The CAS is shared by all pools. See [Buildbarn on Kubernetes](../guides/kubernetes.md).
 
 ## Exit behaviour
 

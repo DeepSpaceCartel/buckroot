@@ -6,7 +6,7 @@
   br2 extract                        defconfig -> golden/model.json, then render the BUCK files
   br2 fetch                          download sources Buck2's http_file cannot express, vendor them
   br2 preflight                      extract+patch every package in its view, compare with golden (minutes)
-  br2 golden [--vanilla]             plain `make` build with the instrumentation's config fragment
+  br2 golden [--vanilla] [--k8s]     plain `make` build with the instrumentation's config fragment
                                      (what Buck2 must reproduce) -> golden/rootfs.manifest.json + timing;
                                      --vanilla: the project's defconfig untouched, for reference
   br2 dev [--pkg P]                  iteration loop: no clean, --keep-going, one summary of every failure,
@@ -24,11 +24,13 @@ modes:    local          Buck2 executes locally, no remote cache
 The two cache modes run twice: cold (populates the cache) and warm (after `buck2 clean`).
 """
 import argparse
+import concurrent.futures
 import json
 import os
 import re
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -43,7 +45,8 @@ CACHE = br2project.cache_dir(CFG)
 MODES = ["local", "local-cache", "remote", "remote-cache"]
 VARIANTS = ["wrapped", "native"]
 TARGET = "//:rootfs"
-SALT = ""      # per (variant, mode) run: cold runs get a fresh salt, the warm run of the same cell reuses it
+POOL = ""      # --pool: which Buildbarn worker pool (scheduler) the actions go to; see instance()
+RE_ENDPOINT = os.environ.get("BR2_RE_ENDPOINT", "")   # grpc://host:port of the cache/execution endpoint, when not localhost:8980
 
 
 def sh(cmd, **kw):
@@ -51,12 +54,19 @@ def sh(cmd, **kw):
     return subprocess.run([str(c) for c in cmd], cwd=ROOT, **kw)
 
 
+def buck2_cmd(iso=""):
+    """The buck2 binary, with its own daemon and output directory when `iso` is set (parallel matrix cells)."""
+    return [BUCK2, "--isolation-dir", iso] if iso else [BUCK2]
+
+
 def instance(mode, variant, tag=""):
-    """Buildbarn instance name = a separate cache namespace. Cold remote runs use a fresh one."""
-    return f"{CFG['name']}-{mode}-{variant}{tag}"
+    """Buildbarn instance name = a separate cache namespace. Cold remote runs use a fresh one. With --pool, the name starts
+    with `<pool>/`, which is how the Buildbarn frontend routes the actions to that pool's scheduler."""
+    name = f"{CFG['name']}-{mode}-{variant}{tag}"
+    return f"{POOL}/{name}" if POOL else name
 
 
-def config_flags(mode, variant, inst, dev=False):
+def config_flags(mode, variant, inst, dev=False, salt=""):
     flags = {
         "local": {"remote_cache": "false", "cache_uploads": "false", "remote_execution": "false", "local_execution": "true"},
         "local-cache": {"remote_cache": "true", "cache_uploads": "true", "remote_execution": "false", "local_execution": "true"},
@@ -69,18 +79,21 @@ def config_flags(mode, variant, inst, dev=False):
     args += ["--config", f"br2.native={','.join(CFG['native']) if variant == 'native' else ''}"]
     args += ["--config", f"buck2_re_client.instance_name={inst}"]
     args += ["--config", f"br2.dev_tools={'true' if dev else 'false'}"]     # measured runs are always strict
-    if SALT:
-        args += ["--config", f"br2.cache_salt={SALT}"]
+    if salt:
+        args += ["--config", f"br2.cache_salt={salt}"]
+    if RE_ENDPOINT:
+        for key in ("engine_address", "action_cache_address", "cas_address"):
+            args += ["--config", f"buck2_re_client.{key}={RE_ENDPOINT}"]
     return args
 
 
-def clean():
-    sh([BUCK2, "kill"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    sh([BUCK2, "clean"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def clean(iso=""):
+    sh([*buck2_cmd(iso), "kill"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    sh([*buck2_cmd(iso), "clean"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def buck_build(mode, variant, inst, show=False):
-    cmd = [BUCK2, "build", TARGET, "--console", "simple", "--keep-going", *config_flags(mode, variant, inst)]
+def buck_build(mode, variant, inst, show=False, iso="", salt=""):
+    cmd = [*buck2_cmd(iso), "build", TARGET, "--console", "simple", "--keep-going", *config_flags(mode, variant, inst, salt=salt)]
     if show:
         cmd.append("--show-full-output")
     t0 = time.time()
@@ -164,8 +177,8 @@ def cmd_viewcheck(a):
     sys.exit(r.returncode)
 
 
-def manifest_diff(image, golden):
-    tmp = ROOT / "results" / ".scan.json"
+def manifest_diff(image, golden, iso=""):
+    tmp = ROOT / "results" / (f".scan-{iso}.json" if iso else ".scan.json")
     tmp.parent.mkdir(exist_ok=True)
     subprocess.run([str(ROOT / "scripts" / "fs-manifest.py"), "scan", image, "-o", str(tmp)], check=True,
                    stdout=subprocess.DEVNULL)
@@ -175,28 +188,29 @@ def manifest_diff(image, golden):
     return r.stdout.strip().splitlines()
 
 
-def build_once(mode, variant, cold_state=True):
-    """Cold and (for the cache modes) warm build of one variant/mode. Returns a result dict."""
-    global SALT
-    SALT = f"{variant}-{mode}-{time.strftime('%d%H%M%S')}"    # a fresh cache generation for this cell
-    result = {"variant": variant, "mode": mode, "salt": SALT}
+def build_once(mode, variant, cold_state=True, iso=""):
+    """Cold and (for the cache modes) warm build of one variant/mode. Returns a result dict.
+    `iso` gives the cell its own Buck2 daemon and output directory, so cells can run side by side."""
+    # a fresh cache generation for this cell; the warm run of the same cell reuses it
+    salt = f"{variant}-{mode}-{time.strftime('%d%H%M%S')}"
+    result = {"variant": variant, "mode": mode, "salt": salt}
     golden = ROOT / "golden" / "rootfs.manifest.json"
     if mode == "remote":
         inst = instance(mode, variant, "-" + time.strftime("%H%M%S"))     # nothing cached under it
     else:
         inst = instance(mode, variant)
     if cold_state:
-        clean()
+        clean(iso)
     result["instance"] = inst
-    result["cold"] = buck_build(mode, variant, inst, show=True)
+    result["cold"] = buck_build(mode, variant, inst, show=True, iso=iso, salt=salt)
     if result["cold"]["ok"] and result["cold"].get("output") and golden.exists():
-        diff = manifest_diff(result["cold"]["output"], golden)
+        diff = manifest_diff(result["cold"]["output"], golden, iso)
         result["cold"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
     if mode in ("local-cache", "remote-cache") and result["cold"]["ok"]:
-        clean()
-        result["warm"] = buck_build(mode, variant, inst, show=True)
+        clean(iso)
+        result["warm"] = buck_build(mode, variant, inst, show=True, iso=iso, salt=salt)
         if result["warm"]["ok"] and result["warm"].get("output") and golden.exists():
-            diff = manifest_diff(result["warm"]["output"], golden)
+            diff = manifest_diff(result["warm"]["output"], golden, iso)
             result["warm"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
     return result
 
@@ -220,7 +234,74 @@ def cmd_extract(_):
     sh([ROOT / "scripts" / "br2buck.py", "render"], check=True)
 
 
+def golden_job(a):
+    """`br2 golden --k8s`: the golden build as a Kubernetes Job on a Buildbarn worker pool's nodes, in the worker's own tool-baseline
+    image (so the golden and the remote builds share one environment). The repository is cloned at the current commit, so push
+    first. Small results come back through the pod log (a gzip'd tar between markers); the image and build tree are discarded."""
+    import base64
+    import io
+    import tarfile
+    repo = subprocess.check_output(["git", "remote", "get-url", "origin"], cwd=ROOT, text=True).strip()
+    ref = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    prefix = subprocess.check_output(["git", "rev-parse", "--show-prefix"], cwd=ROOT, text=True).strip().rstrip("/")
+    name = re.sub(r"[^a-z0-9-]", "-", f"golden-{CFG['name']}-{ref[:8]}".lower())[:60]
+    pool = a.pool or "dedicated"
+    fetch = "scripts/br2 fetch\n" if CFG["sources"] == "vendored" else ""
+    vanilla = " --vanilla" if a.vanilla else ""
+    results = f"golden/rootfs.{'vanilla.' if a.vanilla else ''}manifest.json results/golden{'-vanilla' if a.vanilla else ''}.json"
+    script = f"""set -eu
+git clone --quiet '{repo}' /work/repo
+cd /work/repo && git checkout --quiet {ref}
+cd /work/repo/{prefix}
+/work/repo/toolkit/bin/br2-sync .
+scripts/br2 setup
+{fetch}scripts/br2 golden{vanilla}
+echo BR2_RESULTS_BEGIN
+tar -czf - {results} | base64 -w0
+echo
+echo BR2_RESULTS_END
+"""
+    job = {
+        "apiVersion": "batch/v1", "kind": "Job",
+        "metadata": {"name": name, "namespace": a.namespace, "labels": {"app": "buckroot-golden"}},
+        "spec": {
+            "backoffLimit": 0, "activeDeadlineSeconds": a.deadline, "ttlSecondsAfterFinished": 3600,
+            "template": {
+                "metadata": {"labels": {"app": "buckroot-golden"}},
+                "spec": {
+                    "restartPolicy": "Never",
+                    "nodeSelector": {"buckroot.dev/pool": f"bb-workers-{pool}"},
+                    "tolerations": [{"key": "buckroot-worker", "operator": "Equal", "value": "true", "effect": "NoSchedule"}],
+                    "containers": [{
+                        "name": "golden", "image": a.image, "command": ["bash", "-c", script],
+                        "env": [{"name": "HOME", "value": "/work"}, {"name": "BR2_CACHE", "value": "/work/cache"}],
+                        "securityContext": {"privileged": True},      # the fixed-path mount namespace
+                        "resources": {"requests": {"cpu": a.cpu, "memory": a.memory}},
+                        "volumeMounts": [{"name": "work", "mountPath": "/work"}, {"name": "tmp", "mountPath": "/var/tmp"}],
+                    }],
+                    "volumes": [{"name": "work", "emptyDir": {"sizeLimit": "200Gi"}}, {"name": "tmp", "emptyDir": {"sizeLimit": "100Gi"}}],
+                },
+            },
+        },
+    }
+    if a.dry_run:
+        print(json.dumps(job, indent=2))
+        return
+    kubectl = ["kubectl", "-n", a.namespace]
+    subprocess.run([*kubectl, "apply", "-f", "-"], input=json.dumps(job), text=True, check=True)
+    print(f"job {name}: waiting (logs follow)", flush=True)
+    log = subprocess.run([*kubectl, "logs", "-f", f"job/{name}"], capture_output=True, text=True)
+    m = re.search(r"BR2_RESULTS_BEGIN\n(.*?)\nBR2_RESULTS_END", log.stdout, re.S)
+    if not m:
+        sys.exit("golden job failed; last log lines:\n" + "\n".join(log.stdout.splitlines()[-30:]) + log.stderr[-500:])
+    tarfile.open(fileobj=io.BytesIO(base64.b64decode(m[1])), mode="r:gz").extractall(ROOT)
+    print("results written:", results)
+    subprocess.run([*kubectl, "delete", "job", name, "--ignore-not-found"], check=False)
+
+
 def cmd_golden(a):
+    if a.k8s:
+        return golden_job(a)
     out = CACHE / ("golden-vanilla" if a.vanilla else "golden")
     env = dict(os.environ, OUT=str(out))
     if not a.vanilla:
@@ -247,16 +328,30 @@ def cmd_build(a):
 
 def cmd_matrix(a):
     print("matrix: strict tool inputs, clean state before every cell (numbers are only valid this way)")
+    cells = [(variant, mode) for variant in a.variants for mode in a.modes]
+    # Cells in parallel each need their own Buck2 daemon and output directory (--isolation-dir); one at a time keeps the default.
+    iso = (lambda v, m: f"{v}-{m}") if a.parallel > 1 else (lambda v, m: "")
+    if a.dry_run:
+        for v, m in cells:
+            print(f"cell {v}/{m}: instance {instance(m, v)}, isolation dir '{iso(v, m)}', pool '{POOL or 'default'}', endpoint {RE_ENDPOINT or 'localhost:8980'}")
+        return
     results = []
     res_dir = ROOT / "results"
     res_dir.mkdir(exist_ok=True)
-    for variant in a.variants:
-        for mode in a.modes:
-            r = build_once(mode, variant)
+    lock = threading.Lock()
+
+    def run(cell):
+        v, m = cell
+        r = build_once(m, v, iso=iso(v, m))
+        with lock:
             results.append(r)
+            results.sort(key=lambda x: (cells.index((x["variant"], x["mode"]))))
             (res_dir / "matrix.json").write_text(json.dumps(results, indent=1) + "\n")
             (res_dir / "matrix.md").write_text(render_md(results))
-            print(render_md(results[-1:]), flush=True)
+            print(render_md([r]), flush=True)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, a.parallel)) as pool:
+        list(pool.map(run, cells))
 
 
 def render_md(results):
@@ -286,25 +381,41 @@ def main():
     d.add_argument("--variant", choices=VARIANTS, default="wrapped")
     d.add_argument("--mode", choices=MODES, default="local-cache")
     d.add_argument("--strict", action="store_true", help="keep the toolkit scripts as action inputs")
+    d.add_argument("--pool", default="", help="Buildbarn worker pool (instance-name prefix), e.g. dedicated")
     d.set_defaults(fn=cmd_dev)
     vc = sub.add_parser("viewcheck", help="prove every package's view entries are declared inputs (use --mode remote to test on the worker)")
     vc.add_argument("--mode", choices=MODES, default="local")
+    vc.add_argument("--pool", default="", help="Buildbarn worker pool (instance-name prefix)")
     vc.set_defaults(fn=cmd_viewcheck)
     pf = sub.add_parser("preflight")
     pf.add_argument("--pkg", nargs="*")
     pf.set_defaults(fn=cmd_preflight)
     g = sub.add_parser("golden")
     g.add_argument("--vanilla", action="store_true")
+    g.add_argument("--k8s", action="store_true", help="run as a Kubernetes Job on the Buildbarn worker pool's nodes (push first; results come back through the pod log)")
+    g.add_argument("--pool", default="", help="--k8s: worker pool whose nodes to use (default dedicated)")
+    g.add_argument("--namespace", default="buildbarn", help="--k8s: namespace (needs the privileged Pod Security level)")
+    g.add_argument("--image", default=os.environ.get("BR2_RUNNER_IMAGE", "ghcr.io/deepspacecartel/buckroot-worker:latest"), help="--k8s: the tool-baseline image")
+    g.add_argument("--cpu", default="7", help="--k8s: CPU request")
+    g.add_argument("--memory", default="28Gi", help="--k8s: memory request")
+    g.add_argument("--deadline", type=int, default=14400, help="--k8s: seconds before the Job is stopped")
+    g.add_argument("--dry-run", action="store_true", help="--k8s: print the Job and run nothing")
     g.set_defaults(fn=cmd_golden)
     b = sub.add_parser("build")
     b.add_argument("--variant", choices=VARIANTS, required=True)
     b.add_argument("--mode", choices=MODES, required=True)
+    b.add_argument("--pool", default="", help="Buildbarn worker pool (instance-name prefix), e.g. dedicated for measured runs")
     b.set_defaults(fn=cmd_build)
     m = sub.add_parser("matrix")
     m.add_argument("--variants", nargs="+", choices=VARIANTS, default=VARIANTS)
     m.add_argument("--modes", nargs="+", choices=MODES, default=MODES)
+    m.add_argument("--pool", default="", help="Buildbarn worker pool (instance-name prefix), e.g. dedicated for measured runs")
+    m.add_argument("--parallel", type=int, default=1, help="run this many cells at once, each with its own Buck2 daemon (needs the memory and, for remote modes, enough workers)")
+    m.add_argument("--dry-run", action="store_true", help="print the cells and their settings, run nothing")
     m.set_defaults(fn=cmd_matrix)
     a = ap.parse_args()
+    global POOL
+    POOL = getattr(a, "pool", "") or ""
     a.fn(a)
 
 
