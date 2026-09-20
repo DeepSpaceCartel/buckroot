@@ -79,6 +79,9 @@ sha-256 hash has a random salt on every build.
 The first comparison of the Buck2 rootfs with the golden showed 40+ differences, all binaries
 and libraries larger than the golden's: the cross `strip` was missing from the rootfs
 action's host tree. [Verification](../concepts/verification.md#what-the-manifest-caught)
-describes the cause. The first native cell also failed, in `host-gcc-final` (`cannot find
-crti.o`), which the native variant is being debugged against; the matrix table will be
-filled in when the cells complete.
+describes the cause. The first native cell also failed, in `host-gcc-final` (`cannot find crti.o`): the native skeleton
+recipes hard-coded the musl toolchain tuple of `helloworld`, so on this glibc project glibc installed its
+libraries into a real `usr/lib64`. The tuple now comes from Buildroot
+([Wrapped and native](../concepts/wrapped-and-native.md#the-artifact-format-is-an-interface)); after the fix the
+native local cell passes. The table will be filled in when the remaining cells complete. The first
+cell's time (110 min) includes about ten minutes of overlap with source downloads for another project.
