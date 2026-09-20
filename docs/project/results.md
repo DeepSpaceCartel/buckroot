@@ -76,9 +76,10 @@ sha-256 hash has a random salt on every build.
 | Buck2 `native`, local, cold (strict, clean state) | done: 193 actions in 6,629 s (110 min), manifest **IDENTICAL** |
 | Buck2 `native`, local-cache | done: cold 7,038 s; warm 268 s with 191 of 193 actions cached; both **IDENTICAL** |
 | Buck2 `wrapped`, local, cold | done: 199 actions in 6,354 s (106 min), manifest **IDENTICAL** |
-| Buck2 `native`, remote and remote-cache | failed in about 100 s: the worker image had no `git`; fixed, to be rerun |
+| Buck2 `native`, remote and remote-cache, first attempt | failed in about 100 s: the worker image had no `git` (fixed) |
+| Buck2 `wrapped`, remote, first attempt | failed after 33 min: `cc1plus` killed for lack of memory, the worker ran two actions at once (fixed: `concurrency: 1`) |
 | Buck2 `wrapped`, local-cache | done: cold 6,091 s; warm 236 s with 197 of 199 actions cached; both **IDENTICAL** |
-| remaining cells (wrapped remote, remote-cache; native remote cells rerun) | in progress |
+| the four remote cells (wrapped and native, remote and remote-cache), rerun with the fixes | in progress |
 
 The first comparison of the Buck2 rootfs with the golden showed 40+ differences, all binaries
 and libraries larger than the golden's: the cross `strip` was missing from the rootfs

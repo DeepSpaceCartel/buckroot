@@ -100,3 +100,19 @@ tree and - for executed actions - the output tree, stdout and stderr.
 | Scheduler finds no worker | Buck2 leaves `Action.platform` empty | the `static` platform extractor in `scheduler.jsonnet` |
 | `Failed to run command: error reading from server: EOF` | the runner died mid-action | an infrastructure error, not retried; restart the runner and rerun - completed actions are reused |
 | `materialize_inputs_failed` when falling back to local | inputs exist only in the remote CAS | keep the cache reachable, or `--materializations=all` |
+| `g++: fatal error: Killed signal terminated program cc1plus` in a remote action | the worker's memory ran out: it runs `concurrency` actions at once, each with `make -jN` | lower `concurrency` in `config/worker.jsonnet` (1 on an 8 GB machine); see [Sizing the worker](#sizing-the-worker) |
+
+## Sizing the worker
+
+A `wrapped` action runs Buildroot's `make -jN`, so one heavy package (`host-gcc-initial`, `gcc-final`, the kernel, Mesa) already uses every core and
+a large part of the memory. The worker's `concurrency` setting says how many actions it runs at the same time; each one starts its own `make -jN`.
+
+Buck2's `weight` on the `heavy` packages does **not** help here: it is a *local* scheduling hint, and a remote action is scheduled by Buildbarn.
+On the reference machine (4 cores, 7.7 GB) a `concurrency` of 2 was fine for `helloworld` and killed the Car Thing build the first time two heavy
+compiles overlapped: the kernel's OOM killer ended `cc1plus` while compiling `host-gcc-initial`. The shipped configuration is therefore
+`concurrency: 1`.
+
+The consequence is that remote execution on **one** machine runs the graph one action at a time (each action still parallel inside). It stops
+being a way to save time and remains a way to test the remote path, pin the tool baseline and populate a shared cache. Real parallelism needs
+more worker capacity: more workers, each with its own memory, and `concurrency` sized to the memory of one heavy compile (roughly 2 GB per `make`
+job for the compiler packages).

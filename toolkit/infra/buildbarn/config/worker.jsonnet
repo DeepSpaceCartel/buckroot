@@ -18,7 +18,7 @@ local common = import 'common.libsonnet';
     },
     runners: [{
       endpoint: { address: 'unix:///worker/runner' },
-      concurrency: 2,
+      concurrency: 1,
       instanceNamePrefix: '',
       platform: {
         properties: [
