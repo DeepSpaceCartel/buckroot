@@ -156,6 +156,10 @@ def extract(out_dir):
         for dl in e.get("downloads", []):
             urls, local = urls_for(dl["source"], dl["uris"], e["dl_dir"])
             if local:
+                # A local site inside the trees (hassio: $(BR2_EXTERNAL_HAOS_PATH)/package/hassio) is read from the
+                # package's own directory, which its view contains; nothing to declare.
+                if local.startswith(("/mnt/external/", "/mnt/src/")):
+                    continue
                 # HELLO_SITE = $(BR2_EXTERNAL_..._PATH)/../common/hello  ->  /mnt/common/hello
                 if not local.startswith("/mnt/common/"):
                     sys.exit(f"{name}: unexpected local source {local!r} (only common/<dir> is mounted)")

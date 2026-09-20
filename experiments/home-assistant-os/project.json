@@ -1,0 +1,26 @@
+{
+  "name": "home-assistant-os",
+  "description": "Home Assistant Operating System 18.3, generic aarch64 (UEFI) board: the buildroot-external tree on the home-assistant fork of Buildroot 2024.02, internal glibc toolchain, systemd, Docker, a 6.18 mainline kernel",
+  "defconfig": "generic_aarch64_defconfig",
+  "external": true,
+  "external_repo": {
+    "url": "https://github.com/home-assistant/operating-system",
+    "commit": "b22f929d3bc8895f5cf84d13d71a24714b59eed4",
+    "subdir": "buildroot-external"
+  },
+  "buildroot": {
+    "repo": "https://github.com/home-assistant/buildroot.git",
+    "ref": "2024.02.x-haos",
+    "commit": "d2b75e0548bf1f0c56d17cac44d5fe9a0e17e60a"
+  },
+  "rootfs_image": "rootfs.tar",
+  "sources": "vendored",
+  "config_fragment": [
+    "BR2_CCACHE=n",
+    "BR2_ROOTFS_POST_IMAGE_SCRIPT=\"\"",
+    "BR2_TARGET_ROOTFS_EROFS=n",
+    "BR2_TARGET_ROOTFS_TAR=y"
+  ],
+  "native": [],
+  "notes": "Deviations from the board's own defconfig, applied to golden and Buck2 alike: no ccache (its cache directory is outside the build), no post-image script (it assembles disk images outside the rootfs), and a tar rootfs instead of EROFS so the manifest scanner can read it."
+}

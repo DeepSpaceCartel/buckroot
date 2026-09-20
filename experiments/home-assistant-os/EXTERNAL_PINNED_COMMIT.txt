@@ -1,0 +1,1 @@
+b22f929d3bc8895f5cf84d13d71a24714b59eed4 buildroot-external
