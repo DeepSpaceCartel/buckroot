@@ -82,7 +82,7 @@ sha-256 hash has a random salt on every build.
 | Buck2 `wrapped`, remote and remote-cache, fourth attempt (no `xauth` in the worker image) | complete: 199 of 199 actions on the worker; cold 7,982 s and 7,338 s, warm 17 s (199 of 199 cached). Manifest: three OpenSSH binaries differ (see below) |
 | Buck2 `native`, remote, with `xauth` added to the worker image | done: 193 actions on the worker in 7,473 s, manifest **IDENTICAL**; confirms the OpenSSH explanation |
 | Buck2 `wrapped`, remote, second attempt | failed after 102 min, 184 of 199 actions: `util-linux-libs` (and others with cross-directory links) had no `util-linux.mk` on the worker; fixed by [ADR-0014](../decisions/0014-view-entries-are-declared-inputs.md) |
-| the four remote cells (wrapped and native, remote and remote-cache), rerun with all fixes | in progress; the toolkit differs from the local cells (see the ADR) |
+| the remaining remote cells: `native` remote-cache, `wrapped` remote and remote-cache with the `xauth` image | not finished: the single 4-core machine was stopped after a rerun had run 3 h (the native remote-cache cell was OOM-killed at 153 of 193 actions before the memory-capped `make` parallelism); to be run on the Kubernetes worker pools ([guide](../guides/kubernetes.md)) |
 
 The first comparison of the Buck2 rootfs with the golden showed 40+ differences, all binaries
 and libraries larger than the golden's: the cross `strip` was missing from the rootfs
