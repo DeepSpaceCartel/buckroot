@@ -1,0 +1,89 @@
+# Buildbarn for the Buck2 experiment.
+#   cache only:        docker compose up -d frontend storage
+#   cache + execution: docker compose up -d --build        (everything below)
+# State lives OUTSIDE the project (BB_VOLUMES): the worker build directories hold whole input
+# trees and exhaust the inotify limit for Buck2's file watcher if they sit inside it.
+# Images pinned to the versions used by buildbarn/bb-deployments.
+name: buckroot-buildbarn
+x-storage-image: &storage-image ghcr.io/buildbarn/bb-storage:20260609T094425Z-10acc76
+x-bb-tag: &bb-tag 20260527T162223Z-c48dcda
+
+services:
+  frontend:
+    image: *storage-image
+    command: [/config/frontend.jsonnet]
+    expose: [9980]
+    ports: ['127.0.0.1:8980:8980']
+    volumes: ['./config:/config']
+    depends_on: [storage]
+
+  storage:
+    image: *storage-image
+    command: [/config/storage.jsonnet]
+    expose: [8981, 9980]
+    volumes:
+      - ./config:/config
+      - ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/storage-ac:/storage-ac
+      - ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/storage-cas:/storage-cas
+
+  scheduler:
+    image: ghcr.io/buildbarn/bb-scheduler:20260527T162223Z-c48dcda
+    command: [/config/scheduler.jsonnet]
+    expose: [8982, 8983, 8984, 9980]
+    ports: ['127.0.0.1:7982:7982']
+    volumes: ['./config:/config']
+
+  # Web UI: browse CAS/action cache by digest, watch the scheduler. http://127.0.0.1:8081/
+  portal:
+    image: ghcr.io/buildbarn/bb-portal:20260630T071618Z-dd0997c
+    command: [/config/portal.jsonnet]
+    expose: [9980]
+    ports: ['127.0.0.1:8081:8081', '127.0.0.1:8082:8082']
+    volumes: ['./config:/config']
+    depends_on:
+      postgres: {condition: service_healthy, restart: true}
+
+  postgres:
+    image: docker.io/postgres:18-alpine
+    expose: [5432]
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  # Copies bb_runner into ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/bb for the runner container below.
+  runner-installer:
+    image: ghcr.io/buildbarn/bb-runner-installer:20260527T162223Z-c48dcda
+    volumes: ['${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/bb:/bb']
+
+  worker:
+    image: ghcr.io/buildbarn/bb-worker:20260527T162223Z-c48dcda
+    command: [/config/worker.jsonnet]
+    volumes:
+      - ./config:/config
+      - ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/worker:/worker
+    depends_on: [scheduler, storage]
+
+  # Executes the commands. Privileged because our actions start a mount namespace
+  # (scripts/br2-ns.sh); no network, like the actions themselves.
+  runner:
+    build: ./runner
+    image: buckroot-worker
+    command:
+      - sh
+      - -c
+      - while ! test -f /bb/installed; do sleep 1; done; exec /bb/bb_runner /config/runner.jsonnet
+    privileged: true
+    network_mode: none
+    volumes:
+      - ./config:/config
+      - ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/bb:/bb
+      - ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/worker:/worker
+      - ${BB_VOLUMES:-/var/lib/buckroot-buildbarn}/runner-tmp:/var/tmp
+    depends_on: [runner-installer]

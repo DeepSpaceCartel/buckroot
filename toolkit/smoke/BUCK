@@ -1,0 +1,6 @@
+# Smoke test that the pinned buck2 + bundled prelude work in this project.
+genrule(
+    name = "hello_world",
+    out = "out.txt",
+    cmd = "echo BUILT BY BUCK2 > $OUT",
+)

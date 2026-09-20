@@ -1,0 +1,18 @@
+# skeleton is a virtual package: it installs nothing itself (its content comes from the
+# skeleton-init-* provider), it only has to exist and be ordered after its dependencies.
+load("//br2:rules.bzl", "br2_dep", "BR2_STAMPS_TARGET", "br2_native_package")
+
+br2_native_package(
+    name = "skeleton",
+    pkg = "skeleton",
+    bdir = "buildroot-src/package/skeleton",
+    pkg_inputs = "//buildroot-src/package/skeleton:inputs",
+    stamp_dir = "build/skeleton",
+    stamps = BR2_STAMPS_TARGET,
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton-init-sysv", "//buildroot-src/package/skeleton-init-sysv:skeleton-init-sysv"),
+    ],
+    visibility = ["PUBLIC"],
+)

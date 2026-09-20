@@ -1,0 +1,22 @@
+# initscripts (package/initscripts): the sysv rc scripts.
+#   mkdir -p $(TARGET_DIR)/etc/init.d
+#   $(INSTALL) -D -m 0755 package/initscripts/init.d/* $(TARGET_DIR)/etc/init.d/
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_native_package")
+
+br2_native_package(
+    name = "initscripts",
+    pkg = "initscripts",
+    bdir = "buildroot-src/package/initscripts",
+    pkg_inputs = "//buildroot-src/package/initscripts:inputs",
+    stamp_dir = "build/initscripts",
+    stamps = BR2_STAMPS_TARGET,
+    install_trees = {"etc/init.d": "init.d"},
+    tree_modes = {"etc/init.d": "0755"},
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton", "//buildroot-src/package/skeleton:skeleton"),
+        br2_dep("toolchain", "//buildroot-src/toolchain/toolchain:toolchain"),
+    ],
+    visibility = ["PUBLIC"],
+)

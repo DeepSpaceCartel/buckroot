@@ -1,0 +1,17 @@
+# host-skeleton (package/skeleton/skeleton.mk, HOST_SKELETON_INSTALL_CMDS), natively:
+#   ln -snf . $(HOST_DIR)/usr; mkdir -p host/lib host/include; ln -snf lib host/lib64
+# The host layout dirs (host/lib, host/include, the sysroot) are created by Buildroot's
+# own `make` setup, so they are listed here as directories.
+load("//br2:rules.bzl", "BR2_STAMPS_HOST", "br2_native_package")
+
+br2_native_package(
+    name = "host-skeleton",
+    pkg = "host-skeleton",
+    bdir = "buildroot-src/package/skeleton",
+    pkg_inputs = "//buildroot-src/package/skeleton:inputs",
+    stamp_dir = "build/host-skeleton",
+    stamps = BR2_STAMPS_HOST,
+    host_links = {"usr": ".", "lib64": "lib"},
+    host_dirs = ["include", "lib", "aarch64-buildroot-linux-musl", "aarch64-buildroot-linux-musl/sysroot"],
+    visibility = ["PUBLIC"],
+)

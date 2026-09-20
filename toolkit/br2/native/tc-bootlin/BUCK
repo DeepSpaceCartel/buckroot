@@ -1,0 +1,9 @@
+load("//br2:rules.bzl", "br2_untar")
+
+# The external toolchain Buildroot downloads, unpacked as a Buck2 artifact: what native
+# (non-`make`) builds compile with. Same tarball and sha256 as the wrapped toolchain package.
+br2_untar(
+    name = "bootlin-aarch64-musl",
+    src = "//buildroot-src/toolchain/toolchain-external/toolchain-external-bootlin:aarch64--musl--stable-2024.05-1.tar.xz",
+    visibility = ["PUBLIC"],
+)

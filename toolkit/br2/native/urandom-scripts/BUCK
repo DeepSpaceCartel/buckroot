@@ -1,0 +1,20 @@
+# urandom-scripts (package/urandom-scripts), INSTALL_INIT_SYSV:
+#   $(INSTALL) -D -m 0755 S01seedrng $(TARGET_DIR)/etc/init.d/S01seedrng
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_native_package")
+
+br2_native_package(
+    name = "urandom-scripts",
+    pkg = "urandom-scripts",
+    bdir = "buildroot-src/package/urandom-scripts",
+    pkg_inputs = "//buildroot-src/package/urandom-scripts:inputs",
+    stamp_dir = "build/urandom-scripts",
+    stamps = BR2_STAMPS_TARGET,
+    install = {"etc/init.d/S01seedrng": "//buildroot-src/package/urandom-scripts:file.S01seedrng"},
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton", "//buildroot-src/package/skeleton:skeleton"),
+        br2_dep("toolchain", "//buildroot-src/toolchain/toolchain:toolchain"),
+    ],
+    visibility = ["PUBLIC"],
+)

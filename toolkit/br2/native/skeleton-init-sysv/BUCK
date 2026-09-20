@@ -1,0 +1,21 @@
+# skeleton-init-sysv (package/skeleton-init-sysv): the sysv-specific part of the skeleton.
+#   $(call SYSTEM_RSYNC,package/skeleton-init-sysv/skeleton,$(TARGET_DIR))
+# Its symlinks (var/log -> ../tmp, dev/log, ...) dangle inside the source tree, so Buck2 cannot
+# track them; the renderer records them as data and the rule installs them from there.
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_native_package")
+
+br2_native_package(
+    name = "skeleton-init-sysv",
+    pkg = "skeleton-init-sysv",
+    bdir = "buildroot-src/package/skeleton-init-sysv",
+    pkg_inputs = "//buildroot-src/package/skeleton-init-sysv:inputs",
+    stamp_dir = "build/skeleton-init-sysv",
+    stamps = BR2_STAMPS_TARGET,
+    install_trees = {"": "skeleton"},
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton-init-common", "//buildroot-src/package/skeleton-init-common:skeleton-init-common"),
+    ],
+    visibility = ["PUBLIC"],
+)

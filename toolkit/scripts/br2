@@ -1,0 +1,289 @@
+#!/usr/bin/env python3
+"""br2: drive the Buck2 instrumentation of a Buildroot project. Run from an experiment directory
+(one that has a project.json; see scripts/br2project.py).
+
+  br2 setup                          install buck2, fetch the Buildroot tree named in project.json
+  br2 extract                        defconfig -> golden/model.json, then render the BUCK files
+  br2 fetch                          download sources Buck2's http_file cannot express, vendor them
+  br2 preflight                      extract+patch every package in its view, compare with golden (minutes)
+  br2 golden [--vanilla]             plain `make` build with the instrumentation's config fragment
+                                     (what Buck2 must reproduce) -> golden/rootfs.manifest.json + timing;
+                                     --vanilla: the project's defconfig untouched, for reference
+  br2 dev [--pkg P]                  iteration loop: no clean, --keep-going, one summary of every failure,
+                                     toolkit edits do not invalidate cached results (dev only, no numbers)
+  br2 build --variant V --mode M     one Buck2 build of //:rootfs, timed, checked against golden
+  br2 matrix [--variants ..] [--modes ..]   every variant x mode, results/matrix.{json,md}
+
+variants: wrapped  every package runs Buildroot's own `make <pkg>` inside a Buck2 action
+          native   the packages listed in project.json "native" are built by Buck2 actions
+modes:    local          Buck2 executes locally, no remote cache
+          local-cache    local execution, results uploaded to / served from the Buildbarn cache
+          remote         actions execute on the Buildbarn worker, no cache (fresh instance name)
+          remote-cache   actions execute on the worker, results cached (warm instance name)
+The two cache modes run twice: cold (populates the cache) and warm (after `buck2 clean`).
+"""
+import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import br2project  # noqa: E402
+
+CFG = br2project.load(Path(__file__).resolve().parent)
+ROOT = CFG["root"]
+BUCK2 = str(ROOT / "tools" / "buck2")
+CACHE = br2project.cache_dir(CFG)
+MODES = ["local", "local-cache", "remote", "remote-cache"]
+VARIANTS = ["wrapped", "native"]
+TARGET = "//:rootfs"
+SALT = ""      # per (variant, mode) run: cold runs get a fresh salt, the warm run of the same cell reuses it
+
+
+def sh(cmd, **kw):
+    print("+ " + " ".join(str(c) for c in cmd), flush=True)
+    return subprocess.run([str(c) for c in cmd], cwd=ROOT, **kw)
+
+
+def instance(mode, variant, tag=""):
+    """Buildbarn instance name = a separate cache namespace. Cold remote runs use a fresh one."""
+    return f"{CFG['name']}-{mode}-{variant}{tag}"
+
+
+def config_flags(mode, variant, inst, dev=False):
+    flags = {
+        "local": {"remote_cache": "false", "cache_uploads": "false", "remote_execution": "false", "local_execution": "true"},
+        "local-cache": {"remote_cache": "true", "cache_uploads": "true", "remote_execution": "false", "local_execution": "true"},
+        "remote": {"remote_cache": "false", "cache_uploads": "false", "remote_execution": "true", "local_execution": "false"},
+        "remote-cache": {"remote_cache": "true", "cache_uploads": "true", "remote_execution": "true", "local_execution": "false"},
+    }[mode]
+    args = []
+    for k, v in flags.items():
+        args += ["--config", f"br2.{k}={v}"]
+    args += ["--config", f"br2.native={','.join(CFG['native']) if variant == 'native' else ''}"]
+    args += ["--config", f"buck2_re_client.instance_name={inst}"]
+    args += ["--config", f"br2.dev_tools={'true' if dev else 'false'}"]     # measured runs are always strict
+    if SALT:
+        args += ["--config", f"br2.cache_salt={SALT}"]
+    return args
+
+
+def clean():
+    sh([BUCK2, "kill"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    sh([BUCK2, "clean"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
+def buck_build(mode, variant, inst, show=False):
+    cmd = [BUCK2, "build", TARGET, "--console", "simple", "--keep-going", *config_flags(mode, variant, inst)]
+    if show:
+        cmd.append("--show-full-output")
+    t0 = time.time()
+    r = sh(cmd, capture_output=True, text=True)
+    dt = time.time() - t0
+    out = r.stdout + r.stderr
+    m = re.search(r"Commands: (\d+) \(cached: (\d+), remote: (\d+), local: (\d+)\)", out)
+    res = {"ok": r.returncode == 0, "seconds": round(dt, 1)}
+    if m:
+        res.update(commands=int(m[1]), cached=int(m[2]), remote=int(m[3]), local=int(m[4]))
+    if r.returncode != 0:
+        res["error_tail"] = "\n".join(out.strip().splitlines()[-25:])
+    if show and r.returncode == 0:
+        line = [l for l in r.stdout.splitlines() if re.match(r"^\S*//:rootfs\s", l)]
+        res["output"] = line[0].split(None, 1)[1].strip() if line else None
+    return res
+
+
+def resolve_target(pkg=None, target=None):
+    """A Buck2 label: --target as given, --pkg NAME via the model, else the whole rootfs."""
+    if target:
+        return target
+    if pkg:
+        model = json.loads((ROOT / "golden" / "model.json").read_text())["packages"]
+        if pkg not in model:
+            sys.exit(f"{pkg}: not in golden/model.json ({', '.join(sorted(model)[:8])}...)")
+        return f"//{model[pkg]['dir']}:{pkg}"
+    return TARGET
+
+
+def failures(out):
+    """Every failed action of a --keep-going run, with the last lines of its output."""
+    found, seen = [], set()
+    blocks = re.split(r"\n(?=\[[0-9T:.+-]+\] Action failed: )", out)
+    for b in blocks:
+        m = re.match(r"\[[^\]]+\] Action failed: (\S+)", b)
+        if not m or m[1] in seen:
+            continue
+        seen.add(m[1])
+        tail = [l for l in b.splitlines() if l.strip() and "[pkg_action]" not in l][-6:]
+        found.append((m[1], tail))
+    return found
+
+
+def cmd_dev(a):
+    """Iterate without paying for measurement: no `buck2 clean`, daemon and caches kept, every
+    independent failure reported in one run, and (unless --strict) the toolkit's own scripts are
+    not action inputs, so editing them does not rebuild gcc. Never use these results as numbers."""
+    target = resolve_target(a.pkg, a.target)
+    cmd = [BUCK2, "build", target, "--console", "simple", "--keep-going",
+           *config_flags(a.mode, a.variant, instance(a.mode, a.variant, "-dev"), dev=not a.strict)]
+    t0 = time.time()
+    r = sh(cmd, capture_output=True, text=True)
+    out = r.stdout + r.stderr
+    m = re.search(r"Commands: (\d+) \(cached: (\d+), remote: (\d+), local: (\d+)\)", out)
+    print(f"{'OK' if r.returncode == 0 else 'FAILED'} {target} in {time.time() - t0:.0f}s"
+          + (f"  commands={m[1]} cached={m[2]} remote={m[3]} local={m[4]}" if m else ""))
+    for label, tail in failures(out):
+        print(f"\n  FAILED {label}")
+        for l in tail:
+            print("    " + l[:200])
+    sys.exit(r.returncode)
+
+
+def manifest_diff(image, golden):
+    tmp = ROOT / "results" / ".scan.json"
+    tmp.parent.mkdir(exist_ok=True)
+    subprocess.run([str(ROOT / "scripts" / "fs-manifest.py"), "scan", image, "-o", str(tmp)], check=True,
+                   stdout=subprocess.DEVNULL)
+    ignore = [a for path in CFG["manifest_ignore"] for a in ("--ignore", path)]
+    r = subprocess.run([str(ROOT / "scripts" / "fs-manifest.py"), "diff", str(golden), str(tmp), *ignore],
+                       capture_output=True, text=True)
+    return r.stdout.strip().splitlines()
+
+
+def build_once(mode, variant, cold_state=True):
+    """Cold and (for the cache modes) warm build of one variant/mode. Returns a result dict."""
+    global SALT
+    SALT = f"{variant}-{mode}-{time.strftime('%d%H%M%S')}"    # a fresh cache generation for this cell
+    result = {"variant": variant, "mode": mode, "salt": SALT}
+    golden = ROOT / "golden" / "rootfs.manifest.json"
+    if mode == "remote":
+        inst = instance(mode, variant, "-" + time.strftime("%H%M%S"))     # nothing cached under it
+    else:
+        inst = instance(mode, variant)
+    if cold_state:
+        clean()
+    result["instance"] = inst
+    result["cold"] = buck_build(mode, variant, inst, show=True)
+    if result["cold"]["ok"] and result["cold"].get("output") and golden.exists():
+        diff = manifest_diff(result["cold"]["output"], golden)
+        result["cold"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
+    if mode in ("local-cache", "remote-cache") and result["cold"]["ok"]:
+        clean()
+        result["warm"] = buck_build(mode, variant, inst, show=True)
+        if result["warm"]["ok"] and result["warm"].get("output") and golden.exists():
+            diff = manifest_diff(result["warm"]["output"], golden)
+            result["warm"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
+    return result
+
+
+def cmd_setup(_):
+    sh([ROOT / "scripts" / "fetch-buck2.sh"], check=True)
+    if CFG.get("buildroot"):
+        sh([ROOT / "scripts" / "fetch-buildroot.sh"], check=True)
+
+
+def cmd_fetch(_):
+    sh([ROOT / "scripts" / "br2buck.py", "fetch"], check=True)
+
+
+def cmd_preflight(a):
+    sh([ROOT / "scripts" / "preflight.py", *(["--pkg", *a.pkg] if a.pkg else [])], check=True)
+
+
+def cmd_extract(_):
+    sh([ROOT / "scripts" / "br2buck.py", "extract"], check=True)
+    sh([ROOT / "scripts" / "br2buck.py", "render"], check=True)
+
+
+def cmd_golden(a):
+    out = CACHE / ("golden-vanilla" if a.vanilla else "golden")
+    env = dict(os.environ, OUT=str(out))
+    if not a.vanilla:
+        env["GOLDEN_FRAGMENT"] = "1"
+    t0 = time.time()
+    sh([ROOT / "scripts" / "build-rootfs-golden.sh"], check=True, env=env)
+    dt = time.time() - t0
+    images = out / "images"
+    image = images / CFG["rootfs_image"]
+    if not image.exists():
+        sys.exit(f"no {CFG['rootfs_image']} in {images}: {sorted(p.name for p in images.glob('*'))}")
+    name = "rootfs.vanilla.manifest.json" if a.vanilla else "rootfs.manifest.json"
+    sh([ROOT / "scripts" / "fs-manifest.py", "scan", image, "-o", ROOT / "golden" / name], check=True)
+    res = ROOT / "results"
+    res.mkdir(exist_ok=True)
+    (res / ("golden-vanilla.json" if a.vanilla else "golden.json")).write_text(
+        json.dumps({"seconds": round(dt, 1), "image": str(image)}, indent=1) + "\n")
+    print(f"golden build: {dt / 60:.1f} min")
+
+
+def cmd_build(a):
+    print(json.dumps(build_once(a.mode, a.variant), indent=1))
+
+
+def cmd_matrix(a):
+    print("matrix: strict tool inputs, clean state before every cell (numbers are only valid this way)")
+    results = []
+    res_dir = ROOT / "results"
+    res_dir.mkdir(exist_ok=True)
+    for variant in a.variants:
+        for mode in a.modes:
+            r = build_once(mode, variant)
+            results.append(r)
+            (res_dir / "matrix.json").write_text(json.dumps(results, indent=1) + "\n")
+            (res_dir / "matrix.md").write_text(render_md(results))
+            print(render_md(results[-1:]), flush=True)
+
+
+def render_md(results):
+    lines = ["| variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
+    for r in results:
+        for run in ("cold", "warm"):
+            if run in r:
+                x = r[run]
+                man = x.get("manifest", "?")
+                man = man if isinstance(man, str) else f"{len(man)} diffs"
+                lines.append(f"| {r['variant']} | {r['mode']} | {run} | {x['ok']} | {x['seconds']} | "
+                             f"{x.get('commands', '')} | {x.get('cached', '')} | {x.get('remote', '')} | "
+                             f"{x.get('local', '')} | {man} |")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("setup").set_defaults(fn=cmd_setup)
+    sub.add_parser("extract").set_defaults(fn=cmd_extract)
+    sub.add_parser("fetch").set_defaults(fn=cmd_fetch)
+    d = sub.add_parser("dev", help="iterate: no clean, keep-going, toolkit edits do not invalidate")
+    d.add_argument("--pkg", help="build just this package (its target and dependencies)")
+    d.add_argument("--target", help="an explicit Buck2 label")
+    d.add_argument("--variant", choices=VARIANTS, default="wrapped")
+    d.add_argument("--mode", choices=MODES, default="local-cache")
+    d.add_argument("--strict", action="store_true", help="keep the toolkit scripts as action inputs")
+    d.set_defaults(fn=cmd_dev)
+    pf = sub.add_parser("preflight")
+    pf.add_argument("--pkg", nargs="*")
+    pf.set_defaults(fn=cmd_preflight)
+    g = sub.add_parser("golden")
+    g.add_argument("--vanilla", action="store_true")
+    g.set_defaults(fn=cmd_golden)
+    b = sub.add_parser("build")
+    b.add_argument("--variant", choices=VARIANTS, required=True)
+    b.add_argument("--mode", choices=MODES, required=True)
+    b.set_defaults(fn=cmd_build)
+    m = sub.add_parser("matrix")
+    m.add_argument("--variants", nargs="+", choices=VARIANTS, default=VARIANTS)
+    m.add_argument("--modes", nargs="+", choices=MODES, default=MODES)
+    m.set_defaults(fn=cmd_matrix)
+    a = ap.parse_args()
+    a.fn(a)
+
+
+if __name__ == "__main__":
+    main()

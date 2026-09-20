@@ -1,0 +1,55 @@
+# toolchain-external-bootlin (toolchain/toolchain-external/toolchain-external-bootlin), natively:
+# the Bootlin aarch64/musl toolchain tarball, unpacked (br2_untar), Buildroot's compiler wrapper
+# compiled from toolchain-wrapper.c, the sysroot and runtime libraries installed. recipe.py holds
+# the install logic Buildroot keeps in make macros.
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_host_program", "br2_native_package")
+
+# Buildroot's HOSTCC command for the wrapper (toolchain/toolchain-wrapper.mk), from its own
+# output: the -D values come from the configuration (cpu, abi, sysroot subdir, hardening).
+br2_host_program(
+    name = "toolchain-wrapper",
+    srcs = ["//buildroot-src:toolchain-wrapper.c"],
+    flags = [
+        "-O2",
+        '-DBR_CPU="cortex-a53"',
+        '-DBR_ABI="lp64"',
+        '-DBR_CROSS_PATH_SUFFIX=".br_real"',
+        '-DBR_CROSS_PATH_REL="opt/ext-toolchain/bin"',
+        '-DBR_SYSROOT="aarch64-buildroot-linux-musl/sysroot"',
+        '-DBR_ADDITIONAL_CFLAGS="-Wl,-z,max-page-size=4096", "-Wl,-z,common-page-size=4096", "-fstack-protector-strong", "-Wl,--build-id=none", "-ffile-prefix-map=/mnt/out=buildroot",',
+        "-DBR2_PIC_PIE",
+        "-DBR2_RELRO_FULL",
+        "-s",
+        "-Wl,--hash-style=both",
+    ],
+    # Buildroot compiles from /mnt/src as toolchain/toolchain-wrapper.c
+    source_root = "toolchain",
+)
+
+br2_native_package(
+    name = "toolchain-external-bootlin",
+    pkg = "toolchain-external-bootlin",
+    bdir = "buildroot-src/toolchain/toolchain-external/toolchain-external-bootlin",
+    pkg_inputs = "//buildroot-src/toolchain/toolchain-external/toolchain-external-bootlin:inputs",
+    stamp_dir = "build/toolchain-external-bootlin-2024.05-1",
+    stamps = BR2_STAMPS_TARGET + [".stamp_staging_installed"],
+    recipe = "recipe.py",
+    recipe_inputs = {
+        "tc": "//br2/native/tc-bootlin:bootlin-aarch64-musl",
+        "skeleton": br2_dep("skeleton-init-common", "//buildroot-src/package/skeleton-init-common:skeleton-init-common"),
+        "wrapper": ":toolchain-wrapper",
+    },
+    config = [
+        "BR2_ARCH", "BR2_INSTALL_LIBSTDCPP", "BR2_SSP_NONE", "BR2_STATIC_LIBS",
+        "BR2_PACKAGE_HOST_GDB", "BR2_TOOLCHAIN_EXTERNAL_GDB_SERVER_COPY", "BR2_TOOLCHAIN_EXTERNAL_GLIBC",
+        "BR2_TOOLCHAIN_EXTERNAL_MUSL", "BR2_TOOLCHAIN_EXTERNAL_PREFIX", "BR2_TOOLCHAIN_EXTERNAL_UCLIBC",
+        "BR2_TOOLCHAIN_EXTRA_LIBS", "BR2_TOOLCHAIN_HAS_DLANG", "BR2_TOOLCHAIN_HAS_FORTRAN",
+        "BR2_TOOLCHAIN_HAS_OPENMP",
+    ],
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton", "//buildroot-src/package/skeleton:skeleton"),
+    ],
+    visibility = ["PUBLIC"],
+)

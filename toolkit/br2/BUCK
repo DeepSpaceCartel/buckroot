@@ -1,0 +1,23 @@
+# Hand-written build-system layer: the rules live in rules.bzl, the action driver is
+# exported so rules can take it as an (implicit) input.
+export_file(
+    name = "pkg_action.py",
+    visibility = ["PUBLIC"],
+)
+
+# Config slicing lives in its own script so that editing it does not invalidate the
+# package actions (which take pkg_action.py as an input).
+export_file(
+    name = "slicing.py",
+    visibility = ["PUBLIC"],
+)
+
+export_file(
+    name = "native_pkg.py",
+    visibility = ["PUBLIC"],
+)
+
+export_file(
+    name = "native_config.py",
+    visibility = ["PUBLIC"],
+)

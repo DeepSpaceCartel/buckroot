@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Create a variant experiment from an existing one, e.g. a cut-down config for fast iteration.
+
+  toolkit/bin/br2-new NAME --like EXPERIMENT_DIR [--fragment 'BR2_X=y' ...] [--drop-heavy]
+
+Copies project.json (renamed, extra config fragment appended), hard-links buildroot-src and
+buildroot-external (no second download; dl/ and sources/ are shared by hard link), vendors the
+toolkit, and prints the next steps. The variant gets its own model, golden and Buck2 state, so
+a lite config (say: no Mesa, external toolchain) turns a 2 h debugging loop into minutes.
+"""
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+TOOLKIT = Path(__file__).resolve().parent.parent
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("name")
+    ap.add_argument("--like", required=True)
+    ap.add_argument("--fragment", action="append", default=[])
+    ap.add_argument("--drop-heavy", action="store_true", help="clear the `heavy` list (lite configs rarely need it)")
+    a = ap.parse_args()
+    src = Path(a.like).resolve()
+    dst = src.parent / a.name
+    if dst.exists():
+        sys.exit(f"{dst} exists")
+    dst.mkdir()
+    cfg = json.loads((src / "project.json").read_text())
+    cfg["name"] = a.name
+    cfg["config_fragment"] = cfg.get("config_fragment", []) + a.fragment
+    cfg["description"] = f"variant of {src.name}: " + ", ".join(a.fragment or ["no config change"])
+    if a.drop_heavy:
+        cfg["heavy"] = []
+    (dst / "project.json").write_text(json.dumps(cfg, indent=2) + "\n")
+    for d in ("buildroot-src", "buildroot-external", "common", "native"):
+        if (src / d).exists():
+            subprocess.run(["cp", "-al", str(src / d), str(dst / d)], check=True)     # hard links: same files, no copy
+    for sub in ("output",):
+        p = dst / "buildroot-src" / sub
+        if p.is_symlink() or p.exists():
+            p.unlink() if p.is_symlink() else shutil.rmtree(p)
+    subprocess.run([str(TOOLKIT / "bin" / "br2-sync"), str(dst)], check=True)
+    print(f"\ncreated {dst}\nnext:  cd {dst} && scripts/br2 extract && scripts/br2 fetch && scripts/br2 golden")
+
+
+if __name__ == "__main__":
+    main()

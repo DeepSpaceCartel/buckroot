@@ -1,0 +1,33 @@
+# toolchain (toolchain/toolchain.mk + package/pkg-cmake.mk): the virtual package that fronts the
+# toolchain. Its own install is the CMake toolchain file and platform file, generated/copied
+# from templates; the finalize hooks it registers are run by the rootfs action's make.
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_native_package")
+
+br2_native_package(
+    name = "toolchain",
+    pkg = "toolchain",
+    bdir = "buildroot-src/toolchain/toolchain",
+    pkg_inputs = "//buildroot-src/toolchain/toolchain:inputs",
+    stamp_dir = "build/toolchain",
+    stamps = BR2_STAMPS_TARGET + [".stamp_staging_installed"],
+    recipe = "recipe.py",
+    recipe_inputs = {
+        "platform": "//buildroot-src:Buildroot.cmake",
+        "template": "//buildroot-src:toolchainfile.cmake.in",
+    },
+    # exactly the symbols recipe.py reads
+    config = [
+        "BR2_ARCH", "BR2_ENABLE_RUNTIME_DEBUG", "BR2_FORTIFY_SOURCE_1", "BR2_FORTIFY_SOURCE_2",
+        "BR2_FORTIFY_SOURCE_3", "BR2_INSTALL_LIBSTDCPP", "BR2_OPTIMIZE_0", "BR2_OPTIMIZE_1",
+        "BR2_OPTIMIZE_2", "BR2_OPTIMIZE_3", "BR2_OPTIMIZE_FAST", "BR2_OPTIMIZE_G", "BR2_OPTIMIZE_S",
+        "BR2_DEBUG_1", "BR2_DEBUG_2", "BR2_DEBUG_3", "BR2_TARGET_LDFLAGS",
+        "BR2_TOOLCHAIN_HAS_FORTRAN", "BR2_TOOLCHAIN_USES_MUSL",
+    ],
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("skeleton", "//buildroot-src/package/skeleton:skeleton"),
+        br2_dep("toolchain-external", "//buildroot-src/toolchain/toolchain-external:toolchain-external"),
+    ],
+    visibility = ["PUBLIC"],
+)

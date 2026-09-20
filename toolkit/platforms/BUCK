@@ -1,0 +1,16 @@
+load("//br2:platform.bzl", "br2_execution_platform")
+load("@prelude//platforms:defs.bzl", "host_configuration")
+
+br2_execution_platform(
+    name = "default",
+    cpu_configuration = host_configuration.cpu,
+    os_configuration = host_configuration.os,
+    remote_cache = read_config("br2", "remote_cache", "false") == "true",
+    cache_uploads = read_config("br2", "cache_uploads", "false") == "true",
+    remote_execution = read_config("br2", "remote_execution", "false") == "true",
+    local_execution = read_config("br2", "local_execution", "true") == "true",
+    remote_execution_properties = (
+        {"OSFamily": "linux", "container-image": "docker://buckroot-worker"} if read_config("br2", "remote_execution", "false") == "true" else {}
+    ),
+    visibility = ["PUBLIC"],
+)

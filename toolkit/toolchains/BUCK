@@ -1,0 +1,5 @@
+load("@prelude//toolchains:demo.bzl", "system_demo_toolchains")
+
+# Placeholder for the ambient host baseline; Tier 1 documents (and measures) which
+# host tools package actions rely on instead of pretending the build is hermetic.
+system_demo_toolchains()

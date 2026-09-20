@@ -1,0 +1,7 @@
+# Top-level entry point: `buck2 build //:rootfs` builds rootfs.ext4 with Buck2 owning the
+# package loop (see br2/rules.bzl). Everything else is generated under br2/generated/.
+alias(
+    name = "rootfs",
+    actual = "//br2/generated:rootfs",
+    visibility = ["PUBLIC"],
+)

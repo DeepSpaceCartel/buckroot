@@ -1,0 +1,33 @@
+# skeleton-init-common (package/skeleton-init-common): the base filesystem skeleton, installed
+# into the target tree and, again, into the toolchain sysroot ("staging").
+#
+#   SYSTEM_RSYNC system/skeleton -> $(TARGET_DIR) and $(STAGING_DIR)
+#   SYSTEM_USR_SYMLINKS_OR_DIRS, SYSTEM_LIB_SYMLINK, sed @PATH@   -> recipe.py (config dependent)
+#   $(INSTALL) -m 0644 support/misc/target-dir-warning.txt $(TARGET_DIR_WARNING_FILE)
+#
+# The finalize hooks (hostname, issue, root password, /bin/sh) are registered by the .mk and
+# run by the rootfs action's `make`; they are not part of this install.
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_native_package")
+
+br2_native_package(
+    name = "skeleton-init-common",
+    pkg = "skeleton-init-common",
+    bdir = "buildroot-src/package/skeleton-init-common",
+    pkg_inputs = "//buildroot-src/package/skeleton-init-common:inputs",
+    stamp_dir = "build/skeleton-init-common",
+    stamps = BR2_STAMPS_TARGET + [".stamp_staging_installed"],
+    install_trees = {
+        "staging:": "buildroot-src/system/skeleton",
+        "target:": "buildroot-src/system/skeleton",
+    },
+    install = {"THIS_IS_NOT_YOUR_ROOT_FILESYSTEM": "//buildroot-src:target-dir-warning.txt"},
+    modes = {"target:THIS_IS_NOT_YOUR_ROOT_FILESYSTEM": "0644"},
+    recipe = "recipe.py",
+    # exactly the symbols recipe.py reads: any other config change leaves this package untouched
+    config = ["BR2_ARCH_IS_64", "BR2_MIPS_NABI32", "BR2_ROOTFS_MERGED_USR", "BR2_SYSTEM_DEFAULT_PATH"],
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+    ],
+    visibility = ["PUBLIC"],
+)

@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Vendor the toolkit into an experiment directory.
+
+  toolkit/bin/br2-sync EXPERIMENT_DIR
+
+Copies br2/ (rules and actions, plus the generic native packages), scripts/, platforms/,
+toolchains/ and infra/ into the experiment, generates .buckconfig, .buckroot and the root
+BUCK from project.json, and makes sure the vendored files are git-ignored (they are copies:
+edit the toolkit, then sync again). The experiment keeps only what is specific to it:
+project.json, buildroot-external/, common/, native/, golden/ and its docs.
+"""
+import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+TOOLKIT = Path(__file__).resolve().parent.parent
+VENDORED = ["br2", "scripts", "platforms", "toolchains", "infra", "smoke"]
+
+
+def main():
+    if len(sys.argv) != 2:
+        sys.exit(__doc__)
+    exp = Path(sys.argv[1]).resolve()
+    proj = json.loads((exp / "project.json").read_text())
+    for d in VENDORED:
+        src, dst = TOOLKIT / d, exp / d
+        dst.mkdir(exist_ok=True)
+        # --delete would remove br2/generated (the renderer's output) too: it is re-rendered
+        subprocess.run(["rsync", "-a", "--delete", "--exclude", "__pycache__", "--exclude", "generated",
+                        "--exclude", "volumes", f"{src}/", f"{dst}/"], check=True)
+    (exp / ".buckroot").write_text("")
+    native_project = sorted(p.parent.name for p in (exp / "native").glob("*/BUCK")) if (exp / "native").is_dir() else []
+    text = (TOOLKIT / "templates" / "buckconfig").read_text()
+    sys.path.insert(0, str(TOOLKIT / "scripts"))
+    import br2project
+    for k, v in {"@ROOTFS_IMAGE@": proj.get("rootfs_image", "rootfs.ext4"), "@FRAGMENT@": ";".join(br2project.fragment(proj)), "@EXTERNAL@": "true" if proj.get("external", True) else "false",
+                 "@NATIVE_PROJECT@": ",".join(native_project), "@NAME@": proj["name"]}.items():
+        text = text.replace(k, v)
+    (exp / ".buckconfig").write_text(text)
+    shutil.copy(TOOLKIT / "templates" / "BUCK", exp / "BUCK")
+    if not proj.get("external", True):
+        (exp / "buildroot-external").mkdir(exist_ok=True)       # empty stand-in: the rules always take //buildroot-external:infra
+    ignore = exp / ".gitignore"
+    extra_ignore = ["/buildroot-external/"] if proj.get("external_repo") else []   # a pinned clone, not ours
+    have = ignore.read_text().splitlines() if ignore.exists() else []
+    want = ["/buildroot-src/", "/buildroot-external/output/", "/buildroot-external/dl/", "/out/", "/tools/",
+            "/buck-out/", "__pycache__/", "# vendored from the buckroot toolkit by br2-sync",
+            "/.buckconfig", "/.buckroot", "/BUCK", "/sources/"] + [f"/{d}/" for d in VENDORED] + extra_ignore
+    ignore.write_text("\n".join(have + [w for w in want if w not in have]) + "\n")
+    print(f"synced {TOOLKIT.name} into {exp} (native_project = {','.join(native_project) or '-'})")
+
+
+if __name__ == "__main__":
+    main()

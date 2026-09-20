@@ -1,0 +1,21 @@
+# toolchain-external (toolchain/toolchain-external/toolchain-external.mk): the umbrella package for
+# an external toolchain. It installs nothing itself: the only files in the wrapped artifact are
+# two toolchain-sysroot files that Buildroot rewrites for every consumer (ppd-fixup-paths).
+load("//br2:rules.bzl", "BR2_STAMPS_TARGET", "br2_dep", "br2_native_package")
+
+br2_native_package(
+    name = "toolchain-external",
+    pkg = "toolchain-external",
+    bdir = "buildroot-src/toolchain/toolchain-external",
+    pkg_inputs = "//buildroot-src/toolchain/toolchain-external:inputs",
+    stamp_dir = "build/toolchain-external",
+    stamps = BR2_STAMPS_TARGET,
+    deps = [
+        br2_dep("host-fakedate", "//buildroot-src/package/fakedate:host-fakedate"),
+        br2_dep("host-skeleton", "//buildroot-src/package/skeleton:host-skeleton"),
+        br2_dep("musl-compat-headers", "//buildroot-src/package/musl-compat-headers:musl-compat-headers"),
+        br2_dep("skeleton", "//buildroot-src/package/skeleton:skeleton"),
+        br2_dep("toolchain-external-bootlin", "//buildroot-src/toolchain/toolchain-external/toolchain-external-bootlin:toolchain-external-bootlin"),
+    ],
+    visibility = ["PUBLIC"],
+)
