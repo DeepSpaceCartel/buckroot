@@ -17,6 +17,7 @@ nav:
       - "4. Wrapped": walkthrough/wrapped.md
       - "5. Stepped (design)": walkthrough/stepped.md
       - "6. Native": walkthrough/native.md
+      - "7. Buildbarn on Kubernetes": walkthrough/kubernetes.md
   - Guides:
       - Adding a Buildroot project: guides/adding-a-project.md
       - Iterating fast: guides/fast-iteration.md
@@ -41,7 +42,7 @@ nav:
       - Projects: project/projects.md
       - Results: project/results.md
       - Status and roadmap: project/status.md
-  - Design notes:
+  - Design:
       - Overview: design/index.md
       - Worker environment in the key: design/worker-environment-in-the-key.md
   - Decisions:

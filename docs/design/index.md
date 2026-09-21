@@ -1,6 +1,6 @@
-<title>Design notes</title>
+<title>Design</title>
 
-# Design notes
+# Design
 
 Proposals and open problems that are **not implemented**. Each page states the problem with the evidence gathered so far, the options, what
 is unknown, and how to decide. They are the place to read before changing the design; when one is built, its decision moves to an

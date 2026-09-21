@@ -9,7 +9,7 @@ on these pages is real output.
 
 If you already know both tools, go straight to [Step 3](project.md) (how buckroot joins them) or [Step 4](wrapped.md).
 
-## The six steps
+## The seven steps
 
 | Step | Page | You will learn |
 |---|---|---|
@@ -19,8 +19,9 @@ If you already know both tools, go straight to [Step 3](project.md) (how buckroo
 | 4 | [Wrapped](wrapped.md) | build a package with Buck2 running Buildroot's own `make` inside an action; what's inside that action |
 | 5 | [Stepped (design)](stepped.md) | what happens if each Buildroot step becomes its own action. Not implemented; the page says what was checked and what is a proposal |
 | 6 | [Native](native.md) | build a package with Buck2 alone, no `make`; proof that the result is the same |
+| 7 | [Buildbarn on Kubernetes](kubernetes.md) | the remote side taken apart: storage (CAS and action cache), the frontend, the schedulers, the worker pods, the portal; one action followed through |
 
-Steps 1 and 2 are independent of each other and of buckroot; read whichever you need. Steps 3 to 6 are one story, in order.
+Steps 1 and 2 are independent of each other and of buckroot; read whichever you need. Steps 3 to 6 are one story, in order; Step 7 opens the remote side that Steps 2 and 4 send actions to.
 
 ## What you need to follow along
 
