@@ -247,7 +247,8 @@ def golden_job(a):
     ref = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     prefix = subprocess.check_output(["git", "rev-parse", "--show-prefix"], cwd=ROOT, text=True).strip().rstrip("/")
     name = re.sub(r"[^a-z0-9-]", "-", f"golden-{CFG['name']}-{ref[:8]}".lower())[:60]
-    fetch = "scripts/br2 fetch\n" if CFG["sources"] == "vendored" else ""
+    # downloads from a cluster IP hit rate limits (GitHub 429) now and then: a few tries, a minute apart
+    fetch = "for i in 1 2 3 4; do scripts/br2 fetch && break; [ $i = 4 ] && exit 1; sleep 60; done\n" if CFG["sources"] == "vendored" else ""
     vanilla = " --vanilla" if a.vanilla else ""
     results = f"golden/rootfs.{'vanilla.' if a.vanilla else ''}manifest.json results/golden{'-vanilla' if a.vanilla else ''}.json"
     script = f"""set -eu
