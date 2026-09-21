@@ -63,3 +63,11 @@ data:
   env.libsonnet: |
 {{ include "bb.env" (dict "root" .root "workerPool" .workerPool) | indent 4 }}
 {{- end -}}
+
+{{/* Queued + executing operations of one pool's scheduler. The scheduler has no gauge for it: a task is counted when it is
+scheduled and again when it completes, so the difference is what is in the system (checked against the busy workers). Both
+counters restart together with the scheduler pod. An absent series (no scheduler yet) reads as 0 in KEDA. */}}
+{{- define "bb.queueQuery" -}}
+{{- $pod := printf "scheduler-%s-[a-z0-9]+-[a-z0-9]+" .pool -}}
+sum(buildbarn_builder_in_memory_build_queue_tasks_scheduled_total{namespace="{{ .root.Release.Namespace }}",pod=~"{{ $pod }}"}) - sum(buildbarn_builder_in_memory_build_queue_tasks_completed_duration_seconds_count{namespace="{{ .root.Release.Namespace }}",pod=~"{{ $pod }}"})
+{{- end }}

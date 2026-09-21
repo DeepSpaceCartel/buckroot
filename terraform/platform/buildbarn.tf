@@ -13,8 +13,6 @@ resource "kubernetes_namespace_v1" "buildbarn" {
 }
 
 locals {
-  scaling_enabled = length(var.worker_scaling_queries) > 0
-
   # The Helm provider does not see edits inside a local chart directory; this digest, passed as a value, makes any change to
   # the chart (templates, values, config files) an upgrade.
   chart_dir    = "${path.module}/../../charts/buckroot-buildbarn"
@@ -34,7 +32,7 @@ resource "helm_release" "buildbarn" {
     images      = { runner = var.runner_image }
     storage     = { casSizeGiB = var.cas_size_gib }
     keda = {
-      enabled           = local.scaling_enabled
+      enabled           = var.worker_autoscaling
       prometheusAddress = "http://prometheus-server.${kubernetes_namespace_v1.monitoring.metadata[0].name}.svc.cluster.local:80"
     }
     pools = {

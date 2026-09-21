@@ -106,8 +106,9 @@ idleReporter:
   intervalSeconds: 5
 
 keda:
-  # A ScaledObject per pool. `pools.<name>.scaling.query` must be a Prometheus query returning the number of queued +
-  # executing operations of that pool's scheduler: find the metric in the scheduler's /metrics first.
+  # A ScaledObject per pool, scaling its worker Deployment (min..max in pools.<name>.scaling) on the queued + executing
+  # operations of the pool's scheduler. `pools.<name>.scaling.query` overrides the default query (templates/_helpers.tpl,
+  # "bb.queueQuery"); it must return one number of that kind. Needs Prometheus scraping the scheduler pods.
   enabled: false
   prometheusAddress: http://prometheus-server.monitoring.svc.cluster.local:80
 

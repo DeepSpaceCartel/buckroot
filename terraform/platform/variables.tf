@@ -18,11 +18,17 @@ variable "cas_size_gib" {
   default     = 100
 }
 
-variable "worker_scaling_queries" {
+variable "worker_autoscaling" {
   description = <<-EOT
-    Prometheus query per pool (keys: shared, dedicated) that returns the number of queued + executing operations of that pool's scheduler.
-    Empty disables worker autoscaling (workers then stay at their replica count). Read the metric names from a scheduler's /metrics first.
+    Scale each worker pool with KEDA on the queue depth of its scheduler (scale to zero when idle; the node autoscaler then removes
+    the empty nodes). When true, `worker_replicas` is ignored. Set false to hold a fixed number of workers.
   EOT
+  type        = bool
+  default     = true
+}
+
+variable "worker_scaling_queries" {
+  description = "Override the chart's default queue-depth query per pool (keys: shared, dedicated, legacy). Empty uses the default."
   type        = map(string)
   default     = {}
 }
@@ -112,7 +118,7 @@ variable "coder_github_orgs" {
 
 variable "worker_replicas" {
   description = <<-EOT
-    Fixed number of worker pods per pool (keys: shared, dedicated) while worker autoscaling is off. A shared node runs two workers, so
+    Fixed number of worker pods per pool (keys: shared, dedicated, legacy) while `worker_autoscaling` is false. A shared node runs two workers, so
     shared = 4 needs two nodes. Costs money while non-zero (a cpx51 is about 0.45 EUR/h): set it for a run, then back to {}.
   EOT
   type        = map(number)

@@ -56,7 +56,7 @@ op run --env-file=$PWD/../.env.1password --env-file=$PWD/../.env.platform.1passw
 Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there), or from any tailnet machine with
 `BR2_RE_ENDPOINT=grpc://buildbarn.<tailnet>.ts.net:8980`:
 `scripts/br2 viewcheck --mode remote` and `scripts/br2 build --variant wrapped --mode remote-cache`.
-Enable worker autoscaling by setting `worker_scaling_queries` once the scheduler's queue metric is known (see the chart's `values.yaml`).
+Worker autoscaling is on by default (`worker_autoscaling`): KEDA scales each pool on its scheduler's queue depth, to zero when idle. Set `worker_autoscaling = false` and `worker_replicas` to hold a fixed count for a timed run.
 
 ## Tear down
 

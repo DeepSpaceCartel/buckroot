@@ -25,7 +25,7 @@ spec:
     - type: prometheus
       metadata:
         serverAddress: {{ $.Values.keda.prometheusAddress }}
-        query: {{ required (printf "pools.%s.scaling.query is required when keda.enabled (the scheduler metric of queued + executing operations)" $name) $p.scaling.query | quote }}
+        query: {{ $p.scaling.query | default (include "bb.queueQuery" (dict "root" $ "pool" $name)) | quote }}
         threshold: {{ $p.scaling.tasksPerWorker | quote }}
 {{- end }}{{ end }}
 {{- end }}
