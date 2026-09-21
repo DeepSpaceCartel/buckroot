@@ -14,6 +14,35 @@ toolkit; the numbers are on [Results](results.md).
 | [funkey-os](#funkey-os) | 2021.02 (vendor fork) | 32-bit ARM, musl, external toolchain | 143 | model and sources ready |
 | [home-assistant-os](#home-assistant-os) | 2024.02 (vendor fork) | aarch64, glibc, internal toolchain | 205 | model ready, sources pending |
 
+### Candidates
+
+Projects not started yet, chosen because each covers something the four above do not. The
+four above cover aarch64 glibc with an internal toolchain, an old 32-bit ARM musl fork with an
+external toolchain, and a large systemd/Docker/Go stack, each with a single external tree and a
+tar rootfs.
+
+| Project | Buildroot | Target | What it adds | Status |
+|---|---|---|---|---|
+| In-tree `qemu_x86_64_defconfig` | upstream | x86_64, glibc | no external tree, no vendor fork | candidate |
+| In-tree `qemu_riscv64_virt_defconfig` | upstream | riscv64, glibc | RISC-V | candidate |
+| In-tree `qemu_mips64el_malta_defconfig` | upstream | mips64el | MIPS | candidate |
+| In-tree `qemu_ppc64le_pseries_defconfig` | upstream | ppc64le | PowerPC | candidate |
+| In-tree `qemu_arm_versatile_nommu_defconfig` | upstream | ARM noMMU, uClibc-ng | FLAT binaries, no shared libraries; breaks ELF assumptions in the rootfs merge | candidate |
+| Buildroot test suite (`support/testing/tests/package/`) | upstream | various, QEMU | one tiny image per package infrastructure (cargo, golang, python-pep517/flit/setuptools, luarocks, perl, meson, waf, qmake, kconfig, rebar), each with a runtime test | candidate |
+| [Nerves](https://github.com/nerves-project/nerves_system_br) (with a system such as `nerves_system_rpi4`) | external tree | aarch64 and others | Erlang/OTP host build, squashfs `.fw` image, a custom wrapper around `make` | candidate |
+| [SkiffOS](https://github.com/skiffos/SkiffOS) | external trees | many boards | several stacked `BR2_EXTERNAL` trees, layered configuration | candidate |
+| [OpenIPC](https://github.com/OpenIPC/firmware) / [Thingino](https://github.com/themactep/thingino-firmware) | fork | MIPS (Ingenic, HiSilicon), uClibc or musl | MIPS, uClibc, squashfs rootfs, tiny stripped images | candidate |
+| [Bottlerocket SDK](https://github.com/bottlerocket-os/bottlerocket-sdk) | upstream, own defconfigs | x86_64 and aarch64 toolchains | host-only, toolchain-only build with no target rootfs; a production user | candidate |
+| [buildroot-external-st](https://github.com/STMicroelectronics/buildroot-external-st) | external tree | ARMv7 (STM32MP1), glibc | TF-A, OP-TEE, U-Boot, post-image scripts and genimage | candidate |
+| [buildroot-external-microchip](https://github.com/linux4microchip/buildroot-external-microchip) | external tree | ARMv7 (SAMA5) and RISC-V (PolarFire) | vendor BSP, RISC-V, genimage | candidate |
+| [Milk-V Duo SDK](https://github.com/milkv-duo/duo-buildroot-sdk) | vendor fork | riscv64 (Sophgo CV1800B) | RISC-V vendor SDK, post-image scripts | candidate |
+| [Batocera](https://github.com/batocera-linux/batocera.linux) / [Knulli](https://github.com/knulli-cfw/distribution) | fork | x86_64 and many ARM SoCs | hundreds of packages, Qt, SDL, Python, emulator cores; a stress test for hidden references | candidate |
+| [motionEyeOS](https://github.com/motioneye-project/motioneyeos) / thingOS | old fork | ARM (Raspberry Pi and others) | Python-heavy image on an old Buildroot; archived, so a fixed target | candidate |
+
+Not candidates, because they only look like Buildroot: OpenWrt (forked in 2004, incompatible
+package format), LibreELEC, Lakka and CoreELEC (their own build system), and Yocto-based projects
+such as AGL, BalenaOS and OpenSTLinux.
+
 ## helloworld
 
 A minimal image written for developing the toolkit: Bootlin's external musl toolchain, BusyBox

@@ -96,3 +96,11 @@ the default stack on the old `printvars`. See [Projects](../project/projects.md)
 - **`vendored`**: every source is fetched by `br2 fetch` into `sources/` and recorded in
   `golden/sources.lock.json`, so a build never touches the network. Recommended for real
   projects; see [ADR-0007](../decisions/0007-vendored-sources.md).
+
+## Patches to the fetched trees
+
+`patches/buildroot/*.patch` and `patches/external/*.patch` in the experiment directory are applied by `br2 setup` (`patch -p1`, once,
+right after each tree is fetched; the golden Job applies them too). They are deviations from the project as published, so each patch
+says why in its header and the project's notes explain the difference. The first use: FunKey-OS's `PCSX-ReARMed` runs
+`mksquashfs` from its host directory without depending on `host-squashfs`, which per-package directories (required by buckroot)
+turn into a build failure; the patch adds the dependency and changes nothing in the image.

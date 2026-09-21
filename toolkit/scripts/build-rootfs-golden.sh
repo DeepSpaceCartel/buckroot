@@ -20,6 +20,7 @@ PY
 )"
 OUT="${OUT:-${BR2_CACHE:-$HOME/.cache/br2}/$NAME/golden}"
 export JOBS="${JOBS:-$(nproc)}"
+export MAKE_ARGS="${MAKE_ARGS:-}"       # e.g. -k: keep going, to see every failing package in one run (diagnosis only)
 export DEFCONFIG EXTERNAL
 export FRAGMENT="${GOLDEN_FRAGMENT:+$FRAGMENT}"     # only for the instrumented golden build
 
@@ -28,5 +29,5 @@ exec "$HERE/scripts/br2-ns.sh" "$OUT" "$HERE/buildroot-src/dl" -- bash -c '
   MK="make -C /mnt/src O=/mnt/out BR2_DL_DIR=/mnt/dl ${EXTERNAL:+BR2_EXTERNAL=/mnt/external}"
   $MK "$DEFCONFIG"
   if [ -n "$FRAGMENT" ]; then printf "%s\n" "$FRAGMENT" >> /mnt/out/.config; $MK olddefconfig; fi
-  $MK -j"$JOBS"
+  $MK -j"$JOBS" $MAKE_ARGS
 '

@@ -51,3 +51,17 @@ if [ "$EXT_URL" != "-" ] && [ ! -e "$HERE/buildroot-external/external.desc" ]; t
   fi
   echo "Fetched external tree $EXT_URL @ $EXT_COMMIT"
 fi
+
+# The project's own patches to the fetched trees: patches/buildroot/*.patch and patches/external/*.patch (applied once, at
+# fetch time, with -p1). A deviation from the project as published, so each one says why in its header and the project's
+# docs explain the difference: e.g. a dependency a package's .mk lacks, which only per-package directories notice.
+apply_patches() {
+  local dir="$1" tree="$2"
+  [ -d "$HERE/patches/$dir" ] || return 0
+  for p in "$HERE/patches/$dir"/*.patch; do
+    [ -e "$p" ] || continue
+    patch -d "$tree" -p1 -N -r - < "$p" >/dev/null && echo "Applied $(basename "$p") to $dir"
+  done
+}
+[ -e "$HERE/buildroot-src/.patches-applied" ] || { apply_patches buildroot "$HERE/buildroot-src" && touch "$HERE/buildroot-src/.patches-applied"; }
+[ -e "$HERE/buildroot-external/.patches-applied" ] || { apply_patches external "$HERE/buildroot-external" && touch "$HERE/buildroot-external/.patches-applied"; }

@@ -1,0 +1,17 @@
+PCSX-ReARMed's target-install step runs $(HOST_DIR)/usr/bin/mksquashfs (to pack its OPK) without depending on
+host-squashfs. With a global host directory the tool happens to be there from another package; with per-package
+directories (BR2_PER_PACKAGE_DIRECTORIES, which buckroot requires) the package's own host directory lacks it and
+the install fails with "mksquashfs: No such file or directory". Declaring the dependency is the fix Buildroot's
+per-package-directories documentation asks for; it changes nothing in the image.
+
+--- a/package/PCSX-ReARMed/PCSX-ReARMed.mk
++++ b/package/PCSX-ReARMed/PCSX-ReARMed.mk
+@@ -10,7 +10,7 @@
+ PCSX_REARMED_LICENSE = GPL-2.0
+ PCSX_REARMED_LICENSE_FILES = COPYING
+ 
+-PCSX_REARMED_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++PCSX_REARMED_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ PCSX_REARMED_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard -ffast-math -funsafe-math-optimizations
+ 

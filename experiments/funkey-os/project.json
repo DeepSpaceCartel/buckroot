@@ -17,6 +17,7 @@
   "sources": "vendored",
   "baseline": "funkey",
   "notes": [
-    "Buildroot 2021.02 predates glibc 2.34 (host-m4 does not build on a current host), and the released FunKey SDK's .la files name /opt/FunKey-sdk-2.1.0, where upstream installs it: the project names the `funkey` tool baseline (ubuntu 20.04 plus that SDK at that path; legacy worker pool, same image for the golden Job). No patches are applied."
+    "Buildroot 2021.02 predates glibc 2.34 (host-m4 does not build on a current host), and the released FunKey SDK's .la files name /opt/FunKey-sdk-2.1.0, where upstream installs it: the project names the `funkey` tool baseline (ubuntu 20.04 plus that SDK at that path; legacy worker pool, same image for the golden Job). No patches are applied.",
+    "patches/external/0001: PCSX-ReARMed's install runs mksquashfs without depending on host-squashfs; per-package directories need the dependency declared. Nothing in the image changes."
   ]
 }

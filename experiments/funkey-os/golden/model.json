@@ -35,6 +35,7 @@
     "host-ccache",
     "host-fakedate",
     "host-skeleton",
+    "host-squashfs",
     "host-tar",
     "sdl",
     "sdl_image",
