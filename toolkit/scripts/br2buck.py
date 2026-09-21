@@ -279,10 +279,17 @@ def dep_label(pkg_dir, name):
     return wrapped
 
 
+def q(s):
+    """A Starlark string literal for `s`. File names are not safe inside plain double quotes: systemd unit names
+    contain a literal backslash (`etc-NetworkManager-system\\x2dconnections.mount`), and `"...\\x2d..."` is an escape
+    in Starlark, so the file silently became a different (missing) name. JSON quoting is valid Starlark."""
+    return json.dumps(s, ensure_ascii=False)
+
+
 def bzl_list(items, indent="    "):
     if not items:
         return "[]"
-    return "[\n" + "".join(f'{indent}    {i if isinstance(i, Expr) else chr(34) + i + chr(34)},\n' for i in items) + f"{indent}]"
+    return "[\n" + "".join(f'{indent}    {i if isinstance(i, Expr) else q(i)},\n' for i in items) + f"{indent}]"
 
 
 # Never inputs: VCS data, build output, downloads, and the .config files an in-tree
@@ -413,7 +420,7 @@ def dangling_map(rel_dir):
 def bzl_dict(d, indent="    "):
     if not d:
         return "{}"
-    return "{\n" + "".join(f'{indent}    "{k}": "{v}",\n' for k, v in sorted(d.items())) + f"{indent}}}"
+    return "{\n" + "".join(f'{indent}    {q(k)}: {q(v)},\n' for k, v in sorted(d.items())) + f"{indent}}}"
 
 
 def link_target_name(pkg_dir):
@@ -435,13 +442,13 @@ def render_pkg_dir(pkg_dir, pkgs, carved):
     exports = [n for n in sorted(os.listdir(HERE / pkg_dir))
                if n != "BUCK" and (HERE / pkg_dir / n).is_file() and not (HERE / pkg_dir / n).is_symlink()]
     lines.append("# The package's own files, for hand-written native rules (br2/native/) to consume.\n"
-                 + "".join(f'export_file(name = "file.{n}", src = "{n}", mode = "reference", visibility = ["PUBLIC"])\n' for n in exports))
+                 + "".join(f'export_file(name = {q("file." + n)}, src = {q(n)}, mode = "reference", visibility = ["PUBLIC"])\n' for n in exports))
     seen_sources = set()
     for name, p in sorted(pkgs.items()):
         for s in p["sources"]:
             if "urls" in s and s["file"] not in seen_sources:
                 seen_sources.add(s["file"])
-                lines.append(f'http_file(\n    name = "{target_name(s["file"])}",\n    out = "{s["file"]}",\n'
+                lines.append(f'http_file(\n    name = {q(target_name(s["file"]))},\n    out = {q(s["file"])},\n'
                              f'    urls = {bzl_list(s["urls"][:1])},  # prelude http_file takes one URL; sha256 is enforced\n'
                              f'    sha256 = "{s["sha256"]}",\n'
                              f'    visibility = ["PUBLIC"],\n)\n')
@@ -491,7 +498,7 @@ ROOT_EXPORTS = {"buildroot-src": {"target-dir-warning.txt": "support/misc/target
 def render_exports(root):
     out = ""
     for name, src in sorted(ROOT_EXPORTS.get(root, {}).items()):
-        out += f'\nexport_file(name = "{name}", src = "{src}", mode = "reference", visibility = ["PUBLIC"])\n'
+        out += f'\nexport_file(name = {q(name)}, src = {q(src)}, mode = "reference", visibility = ["PUBLIC"])\n'
     return out
 
 
@@ -583,7 +590,7 @@ def target_name(s):
 
 def render_sources(model):
     """Vendored downloads, exposed as Buck2 sources (the files are put there by `br2 fetch`)."""
-    body = "".join(f'export_file(name = "{target_name(d + "--" + f)}", src = "{d}/{f}", visibility = ["PUBLIC"])\n'
+    body = "".join(f'export_file(name = {q(target_name(d + "--" + f))}, src = {q(d + "/" + f)}, visibility = ["PUBLIC"])\n'
                    for d, f, _ in vendored_sources(model))
     return HEADER + "\n# Downloads Buck2's http_file cannot express (git, sha512-only hashes...): put here by `br2 fetch`.\n" + body
 

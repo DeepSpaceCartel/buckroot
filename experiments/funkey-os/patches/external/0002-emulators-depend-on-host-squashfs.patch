@@ -1,0 +1,83 @@
+The emulator and file-manager packages of the FunKey external tree pack an OPK with $(HOST_DIR)/usr/bin/mksquashfs in their
+target-install step without depending on host-squashfs. With a global host directory the tool happens to be there from another
+package; with per-package directories (BR2_PER_PACKAGE_DIRECTORIES, which buckroot requires) the package's own host directory lacks it and
+the install fails with "mksquashfs: No such file or directory". Declaring the dependency is what Buildroot's documentation for per-package
+directories asks for; it changes nothing in the image. (PCSX-ReARMed is fixed by patch 0001.)
+
+--- a/package/PocketSNES/PocketSNES.mk
++++ b/package/PocketSNES/PocketSNES.mk
+@@ -10,7 +10,7 @@
+ POCKETSNES_LICENSE = GPL-2.0
+ POCKETSNES_LICENSE_FILES = COPYING
+ 
+-POCKETSNES_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++POCKETSNES_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ POCKETSNES_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard -ffast-math -funsafe-math-optimizations
+ 
+--- a/package/FCEUX/FCEUX.mk
++++ b/package/FCEUX/FCEUX.mk
+@@ -10,7 +10,7 @@
+ FCEUX_LICENSE = GPL-2.0
+ FCEUX_LICENSE_FILES = COPYING
+ 
+-FCEUX_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++FCEUX_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ FCEUX_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard -ffast-math -funsafe-math-optimizations
+ 
+--- a/package/commander/commander.mk
++++ b/package/commander/commander.mk
+@@ -8,7 +8,7 @@
+ COMMANDER_SITE = https://github.com/FunKey-Project/commander.git
+ COMMANDER_LICENSE = GPL-2.0
+ 
+-COMMANDER_DEPENDENCIES = sdl sdl_ttf sdl_gfx
++COMMANDER_DEPENDENCIES = sdl sdl_ttf sdl_gfx host-squashfs
+ 
+ COMMANDER_CONF_OPTS = -DCMAKE_BUILD_TYPE=Release -DTARGET_PLATFORM="funkey-s" -DRES_DIR=""
+ #COMMANDER_CONF_OPTS += -DWITH_SYSTEM_SDL_GFX=ON -DWITH_SYSTEM_SDL_TTF=ON
+--- a/package/gnuboy/gnuboy.mk
++++ b/package/gnuboy/gnuboy.mk
+@@ -10,7 +10,7 @@
+ GNUBOY_LICENSE = GPL-2.0
+ GNUBOY_LICENSE_FILES = COPYING
+ 
+-GNUBOY_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++GNUBOY_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ GNUBOY_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard -ffast-math -funsafe-math-optimizations
+ 
+--- a/package/mednafen/mednafen.mk
++++ b/package/mednafen/mednafen.mk
+@@ -10,7 +10,7 @@
+ MEDNAFEN_LICENSE = GPL-2.0+
+ MEDNAFEN_LICENSE_FILES = COPYING
+ 
+-MEDNAFEN_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++MEDNAFEN_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ MEDNAFEN_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard
+ 
+--- a/package/gpsp/gpsp.mk
++++ b/package/gpsp/gpsp.mk
+@@ -10,7 +10,7 @@
+ GPSP_LICENSE = GPL-2.0
+ GPSP_LICENSE_FILES = COPYING.DOC
+ 
+-GPSP_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++GPSP_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ GPSP_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard -ffast-math -funsafe-math-optimizations
+ 
+--- a/package/picodrive/picodrive.mk
++++ b/package/picodrive/picodrive.mk
+@@ -10,7 +10,7 @@
+ PICODRIVE_LICENSE = MAME
+ PICODRIVE_LICENSE_FILES = COPYING
+ 
+-PICODRIVE_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib
++PICODRIVE_DEPENDENCIES = sdl sdl_image sdl_mixer sdl_ttf zlib host-squashfs
+ 
+ PICODRIVE_CFLAGS = $(TARGET_CFLAGS) $(subst $\",,$(BR2_TARGET_OPTIMIZATION)) -mfloat-abi=hard -ffast-math -funsafe-math-optimizations
+ 
