@@ -295,12 +295,12 @@ def bzl_list(items, indent="    "):
 # Never inputs: VCS data, build output, downloads, and the .config files an in-tree
 # `make` (scripts/build-tier0.sh without O=) leaves in the source directory.
 ROOT_SKIP = {"buildroot-src": {".git", "output", "dl", ".config", ".config.old", "..config.tmp",
-                               ".defconfig"},
-             "buildroot-external": {".git"}}
+                               ".defconfig", ".patches-applied"},
+             "buildroot-external": {".git", ".patches-applied"}}      # .patches-applied: setup's marker, not part of the tree
 # Infrastructure = what a package action reads besides package directories. In the source
 # tree that is everything but package/<dir>; in the external tree everything but the
 # packages, the defconfigs and Config.in (Kconfig never runs in a package action).
-INFRA_SKIP = {"buildroot-src": set(), "buildroot-external": {"Config.in", "configs", "output", "dl", ".git"}}
+INFRA_SKIP = {"buildroot-src": {".patches-applied"}, "buildroot-external": {"Config.in", "configs", "output", "dl", ".git", ".patches-applied"}}
 
 
 def unsafe_link(full):
