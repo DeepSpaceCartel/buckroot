@@ -79,3 +79,33 @@ variable "coder_postgres_password" {
   type        = string
   sensitive   = true
 }
+
+# --- Tailscale ---------------------------------------------------------------------------------------------------------
+
+variable "tailscale_client_id" {
+  description = "Tailscale OAuth client id (Devices Core and Auth Keys, write; tag:k8s-operator). Set via TF_VAR_tailscale_client_id."
+  type        = string
+}
+
+variable "tailscale_client_secret" {
+  description = "Tailscale OAuth client secret. Set via TF_VAR_tailscale_client_secret."
+  type        = string
+  sensitive   = true
+}
+
+variable "tailscale_chart_version" {
+  type    = string
+  default = "1.102.4"
+}
+
+variable "coder_tailnet_hostname" {
+  description = "Coder's machine name on the tailnet: https://<this>.<tailnet>.ts.net"
+  type        = string
+  default     = "coder"
+}
+
+variable "coder_github_orgs" {
+  description = "GitHub organisations whose members can sign in to Coder with GitHub."
+  type        = list(string)
+  default     = ["DeepSpaceCartel"]
+}

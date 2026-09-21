@@ -13,6 +13,6 @@ output "buildbarn_ui" {
 }
 
 output "coder_ui" {
-  description = "Coder, by port-forward until a gateway is added."
-  value       = "kubectl -n coder port-forward svc/coder 8080:80   # http://127.0.0.1:8080/"
+  description = "Coder, over Tailscale."
+  value       = "https://${var.coder_tailnet_hostname}.<your-tailnet>.ts.net (Tailscale), or: kubectl -n coder port-forward svc/coder 8080:80"
 }

@@ -81,6 +81,10 @@ resource "helm_release" "coder" {
           valueFrom = { secretKeyRef = { name = kubernetes_secret_v1.coder_db.metadata[0].name, key = "url" } }
         },
         { name = "CODER_ACCESS_URL", value = var.coder_access_url },
+        # GitHub sign-in for members of these organisations (Coder's shared GitHub app); without this a GitHub login finds no user
+        # and stops at "Signups are disabled". The admin account above still works with its password.
+        { name = "CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS", value = "true" },
+        { name = "CODER_OAUTH2_GITHUB_ALLOWED_ORGS", value = join(",", var.coder_github_orgs) },
       ]
     }
   })]
