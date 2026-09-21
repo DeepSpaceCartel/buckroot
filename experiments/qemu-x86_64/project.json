@@ -1,0 +1,29 @@
+{
+  "name": "qemu-x86_64",
+  "description": "Buildroot's own qemu_x86_64_defconfig on upstream 2025.02.18: no external tree, no vendor fork. x86_64, internal glibc toolchain, BusyBox init.",
+  "defconfig": "qemu_x86_64_defconfig",
+  "external": true,
+  "buildroot": {
+    "repo": "https://github.com/buildroot/buildroot.git",
+    "ref": "2025.02.18"
+  },
+  "sources": "http",
+  "config_fragment": [
+    "BR2_TARGET_ROOTFS_TAR=y"
+  ],
+  "heavy": [
+    "host-gcc-initial",
+    "host-gcc-final",
+    "linux"
+  ],
+  "native": [
+    "host-skeleton",
+    "host-fakedate",
+    "skeleton",
+    "initscripts",
+    "urandom-scripts",
+    "skeleton-init-sysv",
+    "skeleton-init-common"
+  ],
+  "notes": "The in-tree defconfig builds an ext2 image only; the fragment adds a tar rootfs, which the manifest scanner reads. Nothing else is changed."
+}

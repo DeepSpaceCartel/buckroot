@@ -1,0 +1,2 @@
+name: QEMU_X86_64
+desc: empty BR2_EXTERNAL: this experiment builds an in-tree Buildroot defconfig (qemu_x86_64_defconfig), no external tree

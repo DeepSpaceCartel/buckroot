@@ -5,7 +5,7 @@
 # Several claims, so several goldens can run at once (`br2 golden --k8s --dl-claim golden-dl-b`); seed the second from the first or from a
 # machine that fetched (docs/guides/kubernetes.md).
 resource "kubernetes_persistent_volume_claim_v1" "golden_dl" {
-  for_each = toset(["golden-dl", "golden-dl-b", "golden-dl-c"])
+  for_each = toset(["golden-dl", "golden-dl-b", "golden-dl-c", "golden-dl-d"])
   metadata {
     name      = each.key
     namespace = kubernetes_namespace_v1.buildbarn.metadata[0].name
