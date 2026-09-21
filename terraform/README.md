@@ -53,7 +53,8 @@ op run --env-file=$PWD/../.env.1password --env-file=$PWD/../.env.platform.1passw
   terraform init && terraform apply'
 ```
 
-Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there):
+Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there), or from any tailnet machine with
+`BR2_RE_ENDPOINT=grpc://buildbarn.<tailnet>.ts.net:8980`:
 `scripts/br2 viewcheck --mode remote` and `scripts/br2 build --variant wrapped --mode remote-cache`.
 Enable worker autoscaling by setting `worker_scaling_queries` once the scheduler's queue metric is known (see the chart's `values.yaml`).
 

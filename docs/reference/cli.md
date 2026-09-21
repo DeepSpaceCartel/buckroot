@@ -44,7 +44,7 @@ two cache modes run twice, cold and warm.
 | `BR2_WORK_DIR` | `/var/tmp/buckroot-work` | scratch directories of running actions |
 | `BR2_KEEP_WORK` | unset | keep an action's scratch directory (and its `make.log`) after it ends |
 | `BB_VOLUMES` | `/var/lib/buckroot-buildbarn` | Buildbarn state |
-| `BR2_RE_ENDPOINT` | unset (`localhost:8980`) | `grpc://host:port` of a Buildbarn frontend, for engine, action cache and CAS; set it in a Kubernetes workspace to `grpc://frontend.buildbarn.svc.cluster.local:8980` |
+| `BR2_RE_ENDPOINT` | unset (`localhost:8980`) | `grpc://host:port` of a Buildbarn frontend, for engine, action cache and CAS; set it in a Kubernetes workspace to `grpc://frontend.buildbarn.svc.cluster.local:8980`, on a tailnet machine to `grpc://buildbarn.<tailnet>.ts.net:8980` |
 | `BR2_JOBS` | unset | Buildroot `PARALLEL_JOBS` inside every wrapped action. Default: the smaller of the CPU count plus one and the memory (cgroup limit included) divided by 2 GiB, because a single `make -jN` of GCC was killed by the OOM killer on a 7.7 GB machine |
 
 ## Worker pools

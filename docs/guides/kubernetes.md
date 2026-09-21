@@ -75,7 +75,9 @@ See [`terraform/README.md`](https://github.com/DeepSpaceCartel/buckroot/blob/mai
 Nothing is exposed to the internet. The [Tailscale Kubernetes operator](https://tailscale.com/kb/1236/kubernetes-operator) puts Coder on the tailnet
 (`https://coder.<tailnet>.ts.net`, an Ingress of class `tailscale`, TLS from Tailscale); the tailnet policy that allows this is Terraform too
 (`terraform/tailscale/`). `kubectl` on the machine that applied `cluster` works through `~/.kube/config`; from anywhere else, the plan is the
-operator's API server proxy. The Buildbarn UIs are still `kubectl port-forward` (`svc/scheduler-shared 7982`, `svc/portal 8081`).
+operator's API server proxy. The Buildbarn frontend is on the tailnet too, as a plain L4 proxy of the gRPC port: any tailnet machine builds with
+`BR2_RE_ENDPOINT=grpc://buildbarn.<tailnet>.ts.net:8980` (a Service with the `tailscale.com/expose` annotation, `terraform/platform/tailscale.tf`).
+The Buildbarn UIs are still `kubectl port-forward` (`svc/scheduler-shared 7982`, `svc/portal 8081`).
 
 ## Golden builds as Jobs
 
