@@ -1,0 +1,15 @@
+post-build.sh puts back the backslash in the overlay file names that 0001 replaced with _BS_ (Buck2 cannot take a
+source path with a backslash). It runs before the presets step, so systemd sees the original unit names.
+--- a/scripts/post-build.sh
++++ b/scripts/post-build.sh
+@@ -48,5 +48,10 @@
+ install_rauc_certs
+ install_bootloader_config
+ 
++# Restore the backslash in unit file names (renamed to _BS_ in the overlay for Buck2, see the buckroot patches)
++for f in "${TARGET_DIR}"/usr/lib/systemd/system/*_BS_*; do
++  [ -e "$f" ] && mv -- "$f" "${f//_BS_/\\}"
++done
++
+ # Fix overlay presets
+ "${HOST_DIR}/bin/systemctl" --root="${TARGET_DIR}" preset-all

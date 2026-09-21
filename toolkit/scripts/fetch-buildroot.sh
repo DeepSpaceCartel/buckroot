@@ -58,9 +58,12 @@ fi
 apply_patches() {
   local dir="$1" tree="$2"
   [ -d "$HERE/patches/$dir" ] || return 0
-  for p in "$HERE/patches/$dir"/*.patch; do
+  for p in "$HERE/patches/$dir"/*.patch "$HERE/patches/$dir"/*.sh; do   # in name order: 0001-..., 0002-...
     [ -e "$p" ] || continue
-    patch -d "$tree" -p1 -N -r - < "$p" >/dev/null && echo "Applied $(basename "$p") to $dir"
+    case "$p" in
+      *.patch) patch -d "$tree" -p1 -N -r - < "$p" >/dev/null ;;
+      *.sh)    (cd "$tree" && bash "$p") ;;             # a change a diff cannot express, e.g. a rename
+    esac && echo "Applied $(basename "$p") to $dir"
   done
 }
 [ -e "$HERE/buildroot-src/.patches-applied" ] || { apply_patches buildroot "$HERE/buildroot-src" && touch "$HERE/buildroot-src/.patches-applied"; }
