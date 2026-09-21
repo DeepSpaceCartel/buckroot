@@ -2,32 +2,6 @@
  "buildroot": "2025.05.1",
  "defconfig": "sdk_x86_64_gnu_defconfig",
  "packages": {
-  "dash": {
-   "deps": [
-    "host-autoconf",
-    "host-automake",
-    "host-fakedate",
-    "host-libtool",
-    "host-skeleton",
-    "skeleton",
-    "toolchain"
-   ],
-   "dir": "buildroot-src/package/dash",
-   "dl_dir": "dash",
-   "kind": "target",
-   "sources": [
-    {
-     "file": "dash-0.5.12.tar.gz",
-     "hash": {
-      "sha512": "13bd262be0089260cbd13530a9cf34690c0abeb2f1920eb5e61be7951b716f9f335b86279d425dbfae56cbd49231a8fdffdff70601a5177da3d543be6fc5eb17"
-     },
-     "vendored": true
-    }
-   ],
-   "stamp_dir": "build/dash-0.5.12",
-   "version": "0.5.12",
-   "virtual": false
-  },
   "gcc-final": {
    "deps": [
     "host-fakedate",

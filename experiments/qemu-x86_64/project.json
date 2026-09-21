@@ -25,5 +25,6 @@
     "skeleton-init-sysv",
     "skeleton-init-common"
   ],
-  "notes": "The in-tree defconfig builds an ext2 image only; the fragment adds a tar rootfs, which the manifest scanner reads. Nothing else is changed."
+  "notes": "The in-tree defconfig builds an ext2 image only; the fragment adds a tar rootfs, which the manifest scanner reads. Nothing else is changed.",
+  "rootfs_image": "rootfs.tar"
 }
