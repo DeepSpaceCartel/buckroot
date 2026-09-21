@@ -41,6 +41,18 @@ E="op run --env-file=$PWD/.env.1password"              # from terraform/
 (cd platform && P="$E --env-file=$PWD/../.env.platform.1password"; $P -- terraform init && $P -- terraform apply)
 ```
 
+`coder-templates/` needs a Coder API token, which does not exist until Coder is up. It is not stored anywhere: log in as the admin user
+for a session token and give it to that one apply (with a port-forward to Coder, or over Tailscale):
+
+```bash
+kubectl -n coder port-forward svc/coder 8080:80 &
+cd coder-templates
+op run --env-file=$PWD/../.env.1password --env-file=$PWD/../.env.platform.1password -- bash -c '
+  export TF_VAR_coder_token=$(curl -s -X POST http://127.0.0.1:8080/api/v2/users/login -H "Content-Type: application/json" \
+    -d "{\"email\":\"admin@buckroot.local\",\"password\":\"$TF_VAR_coder_admin_password\"}" | python3 -c "import sys,json; print(json.load(sys.stdin)[\"session_token\"])")
+  terraform init && terraform apply'
+```
+
 Then use it from a Coder workspace (`BR2_RE_ENDPOINT` is set there):
 `scripts/br2 viewcheck --mode remote` and `scripts/br2 build --variant wrapped --mode remote-cache`.
 Enable worker autoscaling by setting `worker_scaling_queries` once the scheduler's queue metric is known (see the chart's `values.yaml`).
