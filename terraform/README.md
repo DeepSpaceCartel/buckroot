@@ -32,7 +32,7 @@ Requires `terraform` >= 1.10, `kubectl`, `helm`, and 1Password's `op` (or the sa
 Everything is baked in: the state backend (S3 bucket `rts-terraform-admin`, one key per state), the server types, pool sizes and location
 (defaults in each `variables.tf`). Only secrets are inputs, and they are 1Password references, so there are no files to copy or edit:
 [`.env.1password`](.env.1password) (state backend, Hetzner token; every state), [`.env.platform.1password`](.env.platform.1password) and
-[`.env.coder-templates.1password`](.env.coder-templates.1password). Authenticate `op` with `eval $(op signin)` or an
+[`.env.tailscale.1password`](.env.tailscale.1password). Authenticate `op` with `eval $(op signin)` or an
 `OP_SERVICE_ACCOUNT_TOKEN` (read access to the vault is enough).
 
 ```bash
