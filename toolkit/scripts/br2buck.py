@@ -487,7 +487,9 @@ def render_links(root, carved):
             continue
         srcs, deps = [], []
         for l in links:
-            owner = next((c for c in carved if l == c or l.startswith(c + "/")), None)
+            # the most specific owner: a link target can lie in a carved package and in its carved parent, and the
+            # iteration order of a set (hash-seed dependent) must not decide which one renders
+            owner = max((c for c in carved if l == c or l.startswith(c + "/")), key=len, default=None)
             if owner is None:
                 srcs.append(l[len(root) + 1:])                   # a plain file of the root package
             elif l == owner:
