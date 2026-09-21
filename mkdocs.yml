@@ -43,6 +43,8 @@ nav:
       - Projects: project/projects.md
       - Results: project/results.md
       - Status and roadmap: project/status.md
+      - Toolkit review: project/toolkit-review.md
+      - Handover: project/handover.md
   - Design:
       - Overview: design/index.md
       - Worker environment in the key: design/worker-environment-in-the-key.md
@@ -66,6 +68,7 @@ nav:
       - 0015. Buildbarn on Kubernetes: decisions/0015-buildbarn-on-kubernetes.md
       - 0016. One node pool: decisions/0016-one-node-pool.md
       - 0017. Tool baseline per project era: decisions/0017-tool-baseline-per-project-era.md
+      - 0018. make runs with --no-print-directory: decisions/0018-make-runs-with-no-print-directory.md
 
 theme:
   name: material

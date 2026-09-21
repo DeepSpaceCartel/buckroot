@@ -6,10 +6,18 @@
 
 - **helloworld**: the full matrix, 2 variants x 4 modes, every cell's manifest identical
   to the golden; the image boots in QEMU. See [Results](results.md).
-- **superduperbird** (Spotify Car Thing): golden build; `native` and `wrapped` local cells and the
-  `native` local-cache cells (cold and warm) all with an identical manifest. The rest of the matrix is
-  in progress; see [Results](results.md).
-- The remote stack: cache, scheduler, worker with a pinned tool baseline, portal.
+- **superduperbird** (Spotify Car Thing): golden build and the full matrix, both variants in local, local-cache, remote and remote-cache (cold and warm
+  for the cache modes), every manifest identical. See [Results](results.md).
+- **Remote execution on Kubernetes**: Buildbarn with autoscaled workers (KEDA and the node autoscaler, scale from zero, drained scale-in), built and verified on a Hetzner cluster
+  that has since been destroyed; `terraform/` and `charts/` recreate it ([guide](../guides/kubernetes.md)).
+- **Found and fixed through more projects**: sysroot directory name and toolchain tuple as data, `stamp_dir` on older Buildroot, cross-package `.mk` variables (`extra_view`), libtool `.la` files that name
+  another package's build directory, `make` printing directories into a captured `KVER` ([ADR-0018](../decisions/0018-make-runs-with-no-print-directory.md)).
+
+## Open
+
+The testing phase is not finished: FunKey-OS, Home Assistant OS (and the extra projects Bottlerocket SDK and qemu-x86_64) still lack full tables; per project in
+[Results](results.md#status-when-testing-paused-2026-09-21). The refactor phase has not started; its ranked findings are in the [Toolkit review](toolkit-review.md). Order of work and how to
+recreate the cluster: [Handover](handover.md).
 
 ## Known limits
 
@@ -32,9 +40,9 @@ Real projects, smallest first. Each is its own directory under `experiments/` wi
 | Project | Notes | State |
 |---|---|---|
 | helloworld | the toolkit's development example | done |
-| Spotify Car Thing (superbird) | `BR2_EXTERNAL`, glibc, vendor kernel, Mesa, Rust host tools | matrix in progress |
-| FunKey-OS | Buildroot submodule plus a `FunKey/` external tree, `funkey_defconfig` | next |
-| Home Assistant OS | Buildroot submodule plus `buildroot-external` | planned |
+| Spotify Car Thing (superbird) | `BR2_EXTERNAL`, glibc, vendor kernel, Mesa, Rust host tools | done |
+| FunKey-OS | Buildroot submodule plus a `FunKey/` external tree, `funkey_defconfig` | golden built; matrix open |
+| Home Assistant OS | Buildroot submodule plus `buildroot-external` | golden open (fix committed, not re-run) |
 | OpenVoiceOS, Batocera, Recalbox | larger, several boards each | planned |
 
 Toolkit work:
@@ -50,7 +58,6 @@ Toolkit work:
   Buildroot as a pinned source of package knowledge; see [Importing from Buildroot](../concepts/importing-from-buildroot.md).
 - Trim oversized sources such as `googlefontdirectory` (965 MB for one 3 MB font family). Vendoring a trimmed archive would leave the image identical
   but needs a documented hash policy, since Buildroot's `.hash` file names the original archive. Not urgent: the cost is paid once per cache.
-- Apply and measure the Kubernetes deployment (`terraform/`, `charts/`): written and validated, not yet run on a real cluster; see the [guide](../guides/kubernetes.md).
 - Rename the internal `br2` names to `buckroot` (CLI, rules) once the interfaces settle.
 
 ## Directory-tree package outputs

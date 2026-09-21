@@ -43,7 +43,7 @@ Checked against the Buck2 release pinned in `fetch-buck2.sh` (2026-09-15) and th
    The properties of `br2_execution_platform.remote_execution_properties` therefore reach the server, but in the older place.
 2. **The scheduler reads only `Action.platform`.** Its `platformKeyExtractor` is `action` (from the Action) or `static` (one fixed platform).
    The variant that fell back to the Command (`action_and_command`) is removed in this version. This is why
-   [scheduler.jsonnet](../../charts/buckroot-buildbarn/files/config/scheduler.jsonnet) uses `static`, and it means that **per-action routing on a
+   [scheduler.jsonnet](https://github.com/DeepSpaceCartel/buckroot/blob/main/charts/buckroot-buildbarn/files/config/scheduler.jsonnet) uses `static`, and it means that **per-action routing on a
    platform property does not work as configured**.
 3. **Size classes cannot learn here.** The feedback-driven analyzer keys on an action's command line and environment. In this project both change
    for every measured cell: the environment carries `BR2_CACHE_SALT` (ADR-0010) and the arguments carry the isolation directory
