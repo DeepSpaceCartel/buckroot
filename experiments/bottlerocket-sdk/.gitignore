@@ -16,3 +16,5 @@ __pycache__/
 /infra/
 /smoke/
 /sources/
+# setup bookkeeping (br2 setup applies patches/ once per tree)
+.patches-applied
