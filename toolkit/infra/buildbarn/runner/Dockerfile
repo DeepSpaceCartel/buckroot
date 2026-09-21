@@ -8,7 +8,7 @@ FROM ${BASE}
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      build-essential ca-certificates python3 perl rsync bc bison flex file which patch cpio \
+      build-essential ca-certificates python3 perl rsync bc bison flex file patch cpio \
       unzip wget curl bzip2 xz-utils gzip tar util-linux e2fsprogs libncurses-dev \
       findutils diffutils sed gawk pkg-config git xauth debianutils \
     && rm -rf /var/lib/apt/lists/*

@@ -14,5 +14,9 @@
     "commit": "1f59bd3b4809a4196f34bd4daf4f092d4c4911c8"
   },
   "native": [],
-  "sources": "vendored"
+  "sources": "vendored",
+  "baseline": "ubuntu20.04",
+  "notes": [
+    "Buildroot 2021.02 predates glibc 2.34: its host packages (m4 first) do not build on a current host, so the project names the ubuntu20.04 tool baseline (legacy worker pool, same image for the golden Job). No patches are applied."
+  ]
 }

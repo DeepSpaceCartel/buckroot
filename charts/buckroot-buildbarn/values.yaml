@@ -71,6 +71,24 @@ pools:
       replicas: 0
     scaling: { min: 0, max: 4, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
 
+  legacy:                         # workers on the legacy baseline image (ubuntu:20.04 era host tools), for projects pinned to an old Buildroot
+    enabled: true
+    instancePrefix: legacy
+    noWorkersTimeout: 900s
+    worker:
+      image: ghcr.io/deepspacecartel/buckroot-worker:ubuntu20.04
+      concurrency: 1
+      cacheGiB: 20
+      workDirGiB: 100
+      onePerNode: false
+      resources:
+        requests: { cpu: "7", memory: 14Gi }
+        limits: { memory: 14Gi }
+      nodeSelector: {}
+      tolerations: []
+      replicas: 0
+    scaling: { min: 0, max: 4, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
+
 # Delay before a worker pod stops, so an action that is still running can finish. Scale-in normally picks an idle
 # pod (see idleReporter), so this is insurance, not the mechanism.
 workerTerminationDelaySeconds: 60

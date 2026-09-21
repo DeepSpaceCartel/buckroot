@@ -33,6 +33,9 @@ flowchart LR
 | control | static x1, `cpx51` | the Talos control plane, and pods like any other node |
 | nodes | 0 to 4, `cpx51` (16 vCPU, 32 GB) | everything: storage, frontend, scheduler, portal, Postgres, Coder and its workspaces, KEDA, Prometheus, Buildbarn workers |
 
+Worker **pools** are schedulers plus workers, not node pools: `shared` (the default image) and `legacy` (the ubuntu:20.04 image, for projects that name
+that baseline, [ADR-0017](../decisions/0017-tool-baseline-per-project-era.md)); `dedicated` exists in the chart, switched off.
+
 One pool, one server type, no taints: the project's server limit is 5, so a server that only one kind of pod may use is a wasted slot
 ([ADR-0016](../decisions/0016-one-node-pool.md)). The chart still supports a second, dedicated-CPU pool for clean timings (`pools.dedicated`), off until the limit is raised.
 

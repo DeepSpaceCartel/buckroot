@@ -45,7 +45,11 @@ CACHE = br2project.cache_dir(CFG)
 MODES = ["local", "local-cache", "remote", "remote-cache"]
 VARIANTS = ["wrapped", "native"]
 TARGET = "//:rootfs"
-POOL = ""      # --pool: which Buildbarn worker pool (scheduler) the actions go to; see instance()
+# project.json "baseline": the tool-baseline image tag the project's era needs (e.g. "ubuntu20.04" for a Buildroot <= 2021 pin;
+# see toolkit/infra/buildbarn/runner/Dockerfile). Its remote actions then go to the "legacy" pool, whose workers run that image, and
+# its golden Job uses the same image, so golden and Buck2 builds share one baseline.
+BASELINE = CFG.get("baseline", "")
+POOL = "legacy" if BASELINE else ""      # --pool overrides: which Buildbarn worker pool (scheduler) the actions go to; see instance()
 RE_ENDPOINT = os.environ.get("BR2_RE_ENDPOINT", "")   # grpc://host:port of the cache/execution endpoint, when not localhost:8980
 
 
@@ -169,6 +173,8 @@ def cmd_viewcheck(a):
     r = sh(cmd, capture_output=True, text=True)
     out = r.stdout + r.stderr
     m = re.search(r"Commands: (\d+) \(cached: (\d+), remote: (\d+), local: (\d+)\)", out)
+    if not labels:
+        sys.exit("viewcheck: no br2_package targets found (the uquery failed?); see the output above")
     print(f"{'OK' if r.returncode == 0 else 'FAILED'} {len(labels)} packages" + (f"  commands={m[1]} remote={m[3]} local={m[4]}" if m else ""))
     for label, tail in failures(out):
         print(f"\n  FAILED {label}")
@@ -409,7 +415,8 @@ def main():
     g.add_argument("--vanilla", action="store_true")
     g.add_argument("--k8s", action="store_true", help="run as a Kubernetes Job on the cluster, in the worker image (push first; results come back through the pod log)")
     g.add_argument("--namespace", default="buildbarn", help="--k8s: namespace (needs the privileged Pod Security level)")
-    g.add_argument("--image", default=os.environ.get("BR2_RUNNER_IMAGE", "ghcr.io/deepspacecartel/buckroot-worker:latest"), help="--k8s: the tool-baseline image")
+    g.add_argument("--image", default=os.environ.get("BR2_RUNNER_IMAGE", f"ghcr.io/deepspacecartel/buckroot-worker:{BASELINE or 'latest'}"),
+                   help="--k8s: the tool-baseline image (default: the project's baseline, else latest)")
     g.add_argument("--cpu", default="7", help="--k8s: CPU request")
     g.add_argument("--memory", default="28Gi", help="--k8s: memory request")
     g.add_argument("--deadline", type=int, default=14400, help="--k8s: seconds before the Job is stopped")
@@ -430,7 +437,7 @@ def main():
     m.set_defaults(fn=cmd_matrix)
     a = ap.parse_args()
     global POOL
-    POOL = getattr(a, "pool", "") or ""
+    POOL = getattr(a, "pool", "") or POOL          # an explicit --pool wins over the project baseline's default
     a.fn(a)
 
 

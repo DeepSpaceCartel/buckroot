@@ -49,6 +49,9 @@ two cache modes run twice, cold and warm.
 
 ## Worker pools
 
+A project whose Buildroot pin predates current host tools names its baseline in `project.json` (`"baseline": "ubuntu20.04"`): its remote
+actions then go to the `legacy` pool and its golden Job runs in that image ([ADR-0017](../decisions/0017-tool-baseline-per-project-era.md)).
+
 `--pool P` (on `br2 build` and `br2 matrix`) prefixes the Buck2 instance name with `P/`. The Buildbarn frontend routes an instance-name prefix to the
 scheduler of that pool (`schedulers` in `env.libsonnet`, `pools` in the Helm chart), so `--pool dedicated` runs on the dedicated-CPU workers and the
 default runs on the shared ones. The CAS is shared by all pools. See [Buildbarn on Kubernetes](../guides/kubernetes.md).

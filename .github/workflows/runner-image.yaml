@@ -15,6 +15,7 @@ jobs:
   image:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         include:
           - { base: "ubuntu:24.04", tag: latest }

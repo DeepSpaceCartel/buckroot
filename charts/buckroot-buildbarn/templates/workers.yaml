@@ -105,7 +105,7 @@ spec:
             - { name: gen, mountPath: /config/gen }
             - { name: worker, mountPath: /worker }
         - name: runner
-          image: {{ $.Values.images.runner }}
+          image: {{ $p.worker.image | default $.Values.images.runner }}
           command:
             - sh
             - -c
