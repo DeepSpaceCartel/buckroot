@@ -55,6 +55,21 @@ Incremental behaviour of the wrapped variant on a 30-package image with four cor
 | flip a busybox-only symbol | 81 s | busybox, rootfs |
 | flip a global symbol (`BR2_OPTIMIZE_S`) | 5 min 2 s | everything (by design) |
 
+### helloworld on the Kubernetes cluster
+
+The first build on the [cluster](../guides/kubernetes.md) (2026-09-20; one `cpx51` worker, 16 shared vCPU, the Buck2 client on the 4-core
+machine through a port-forward), against a golden built **on the cluster** by `br2 golden --k8s` in the worker image itself (181.9 s):
+
+| variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |
+|---|---|---|---|---|---|---|---|---|---|
+| wrapped | remote-cache | cold | yes | 353.7 | 61 | 0 | 61 | 0 | IDENTICAL |
+| wrapped | remote-cache | warm | yes | 17.4 | 61 | 61 | 0 | 0 | IDENTICAL |
+
+The cold time is the same as on the single machine: helloworld's critical path is serial (the toolchain and the few packages that depend on each
+other), and a worker's `make -j` inside one action was already the whole small machine. The warm run is slower than the local warm run (17 s
+against 9 s) because 61 action results travel over the network instead of a socket. What the cluster changes is not one cell's time; it is
+running many cells and many actions at once, which the Car Thing rows below measure.
+
 ## superduperbird (Spotify Car Thing)
 
 [`nd-0r/superduperbird-buildroot`](https://github.com/nd-0r/superduperbird-buildroot): a
