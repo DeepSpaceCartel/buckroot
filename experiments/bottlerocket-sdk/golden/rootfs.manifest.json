@@ -1,0 +1,425 @@
+{
+ "entries": {
+  "/bin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/dev": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/dev/fd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/stderr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd/2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/stdin": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd/0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/stdout": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd/1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/group": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f55824ead3d8f552bc22020211a8b181af4506e4fbba20389114e46c1cefcd9c",
+   "size": 306,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/hostname": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "b75d7f28772f71715a941c77e07e3922815391dd9cc5718ad21f2231c2da09bb",
+   "size": 10,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/hosts": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "89f23d585185921830eecdafc72af4ac2aa2a2d9a1eb9b0b18e7c87ece911537",
+   "size": 40,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/issue": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c31ead5d5c5abe9d7ce41809a006e7e6645261ac59b71d580ff09f6db73e4f3f",
+   "size": 21,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/mtab": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/mounts",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/network": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-down.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-post-down.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-pre-up.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-pre-up.d/wait_iface": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b70434ea0e10ab723658230c0b52b687e939009886329ee57e4b23008b64c465",
+   "size": 576,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/network/if-up.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/nfs_check": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "c5df7c81ab887a46f60b7061f0e2374903a1aea916bdeb67d56dddc3582a704e",
+   "size": 846,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/nsswitch.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d18b9b4b6e92883f160b547494980ffd0f9322778b1e73df42ae702859bfbd43",
+   "size": 230,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/os-release": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../usr/lib/os-release",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/passwd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "466afb852e38d454b87ab903abd189ea4541bd79bdf15449ccce7460af94d711",
+   "size": 340,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/profile": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "82aaa6819e07689a9ff2f1bf7fdb306e91bc9fac89dd650d214996b937cf49c6",
+   "size": 299,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/profile.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/profile.d/umask.sh": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9b7dae25ad0e172974b7d845a5d3d76e2f62a06b6556fd9c523031419c78d16a",
+   "size": 10,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/protocols": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "29a1a99d7cca2f6a909c42971d6e42e28c0959b5c65714e8190a5a058d747248",
+   "size": 2744,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/resolv.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../run/resolv.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/services": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9305257b1d026853ea63166ad48ccdbbab6edb6db92c0f26cd751d90b5e1a5a4",
+   "size": 10873,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/shadow": {
+   "gid": 0,
+   "mode": "0600",
+   "sha256": "4d3646852973779534ff06618963e589a7231ff0e0ec7bf2d1b8723ef48d561c",
+   "size": 135,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/ld-linux-x86-64.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "3b1997e22c5b9df38ef05a5f24f3c5f15d04a5eec942c65f7c4cbe739101ee7e",
+   "size": 246000,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libanl.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "3ae57dddcb3c307c6168fedd65481e37247e8fd3110cfc797084ec4e26a27a41",
+   "size": 14344,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libc.so.6": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "a27222fa7ac2f9adf08c0611cfb791485a6c2e9bb5f3bc6dc805e449f51df9bd",
+   "size": 1913712,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libdl.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "a4305a9236f69149db7b41bbcd948c016f52e125c9898eb22a83d03fc6cb4201",
+   "size": 14344,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libm.so.6": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "944add0ebdf0f3fb8a045169c54f5abc5c18fc4474f9e35b88ed06616106924c",
+   "size": 960944,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libmvec.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "566ee3a47cc1f57bd721fb7d4ea19b48cd5b601ebbb3e63864b2ab0858b99ab7",
+   "size": 1019280,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libnss_dns.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "6544ce7e0065ca0ba189995c59f355691b4215837d4c412790a33f06b30392fe",
+   "size": 14272,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libnss_files.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ca23305ec1933eac5bbe5c030c07dc3ad7baa433812b331846b996ea0fab5d6e",
+   "size": 14272,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libpthread.so.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "867c22ac7bf468904aebbc3656e442ff9bab4972832b37ff64ec3c51c55d1766",
+   "size": 16504,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libresolv.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "9b7e66070368c0567fb0ba2ed6ecaf4b11937f2530f2065347494dea518c04cb",
+   "size": 60192,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/librt.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "87b841eeeec00b16ba6d161ff5e0887e8eba854d5ce6b73cc5a285fcb12e781d",
+   "size": 14512,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libutil.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "3a06b5d3059c9a0139305014e1bad4a42ee746d83d4f602a64c9d734249fb03a",
+   "size": 14344,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib64": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "lib",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/media": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/mnt": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/opt": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/proc": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/root": {
+   "gid": 0,
+   "mode": "0700",
+   "type": "dir",
+   "uid": 0
+  },
+  "/run": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/sbin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/sys": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/tmp": {
+   "gid": 0,
+   "mode": "1777",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/bin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/os-release": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "930a766a101eecb2f19d17a0c5746ceeb9067934e26af683525c689729981c76",
+   "size": 101,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib64": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "lib",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/var": {
+   "gid": 0,
+   "mode": "0777",
+   "type": "dir",
+   "uid": 0
+  },
+  "/var/www": {
+   "gid": 33,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 33
+  }
+ }
+}
