@@ -251,13 +251,14 @@ def golden_job(a):
     fetch = "for i in 1 2 3 4; do scripts/br2 fetch && break; [ $i = 4 ] && exit 1; sleep 60; done\n" if CFG["sources"] == "vendored" else ""
     vanilla = " --vanilla" if a.vanilla else ""
     results = f"golden/rootfs.{'vanilla.' if a.vanilla else ''}manifest.json results/golden{'-vanilla' if a.vanilla else ''}.json"
+    dl = ("mkdir -p /dl && rm -rf buildroot-src/dl && ln -s /dl buildroot-src/dl\n" if a.dl_claim else "")   # the persistent BR2_DL_DIR
     script = f"""set -eu
 git clone --quiet '{repo}' /work/repo
 cd /work/repo && git checkout --quiet {ref}
 cd /work/repo/{prefix}
 /work/repo/toolkit/bin/br2-sync .
 scripts/br2 setup --no-buck2
-{fetch}scripts/br2 golden{vanilla}
+{dl}{fetch}scripts/br2 golden{vanilla}
 echo BR2_RESULTS_BEGIN
 tar -czf - {results} | base64 -w0
 echo
@@ -274,12 +275,16 @@ echo BR2_RESULTS_END
                     "restartPolicy": "Never",
                     "containers": [{
                         "name": "golden", "image": a.image, "command": ["bash", "-c", script],
-                        "env": [{"name": "HOME", "value": "/work"}, {"name": "BR2_CACHE", "value": "/work/cache"}],
+                        # JOBS: the golden's make -j; nproc inside a pod is the node's CPU count, not the request
+                        "env": [{"name": "HOME", "value": "/work"}, {"name": "BR2_CACHE", "value": "/work/cache"},
+                                {"name": "JOBS", "value": str(a.cpu)}],
                         "securityContext": {"privileged": True},      # the fixed-path mount namespace
                         "resources": {"requests": {"cpu": a.cpu, "memory": a.memory}},
-                        "volumeMounts": [{"name": "work", "mountPath": "/work"}, {"name": "tmp", "mountPath": "/var/tmp"}],
+                        "volumeMounts": [{"name": "work", "mountPath": "/work"}, {"name": "tmp", "mountPath": "/var/tmp"},
+                                         *([{"name": "dl", "mountPath": "/dl"}] if a.dl_claim else [])],
                     }],
-                    "volumes": [{"name": "work", "emptyDir": {"sizeLimit": "200Gi"}}, {"name": "tmp", "emptyDir": {"sizeLimit": "100Gi"}}],
+                    "volumes": [{"name": "work", "emptyDir": {"sizeLimit": "200Gi"}}, {"name": "tmp", "emptyDir": {"sizeLimit": "100Gi"}},
+                                *([{"name": "dl", "persistentVolumeClaim": {"claimName": a.dl_claim}}] if a.dl_claim else [])],
                 },
             },
         },
@@ -408,6 +413,7 @@ def main():
     g.add_argument("--cpu", default="7", help="--k8s: CPU request")
     g.add_argument("--memory", default="28Gi", help="--k8s: memory request")
     g.add_argument("--deadline", type=int, default=14400, help="--k8s: seconds before the Job is stopped")
+    g.add_argument("--dl-claim", default="golden-dl", help="--k8s: PersistentVolumeClaim that keeps Buildroot's downloads between Jobs (empty: none)")
     g.add_argument("--dry-run", action="store_true", help="--k8s: print the Job and run nothing")
     g.set_defaults(fn=cmd_golden)
     b = sub.add_parser("build")

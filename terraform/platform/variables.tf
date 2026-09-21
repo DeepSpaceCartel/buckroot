@@ -118,3 +118,15 @@ variable "worker_replicas" {
   type        = map(number)
   default     = {}
 }
+
+variable "buildbarn_tailnet_hostname" {
+  description = "The Buildbarn frontend's machine name on the tailnet: grpc://<this>.<tailnet>.ts.net:8980"
+  type        = string
+  default     = "buildbarn"
+}
+
+variable "golden_dl_gib" {
+  description = "Size of the download cache volume of the golden Jobs (Buildroot BR2_DL_DIR, all projects)."
+  type        = number
+  default     = 60
+}

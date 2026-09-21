@@ -68,7 +68,7 @@ resource "helm_release" "coder" {
 
   values = [yamlencode({
     coder = {
-      service      = { type = "ClusterIP" }
+      service = { type = "ClusterIP" }
       serviceAccount = {
         # Workspaces are provisioned into their own namespace.
         workspaceNamespaces = [{ name = kubernetes_namespace_v1.workspaces.metadata[0].name }]

@@ -77,6 +77,14 @@ Nothing is exposed to the internet. The [Tailscale Kubernetes operator](https://
 (`terraform/tailscale/`). `kubectl` on the machine that applied `cluster` works through `~/.kube/config`; from anywhere else, the plan is the
 operator's API server proxy. The Buildbarn UIs are still `kubectl port-forward` (`svc/scheduler-shared 7982`, `svc/portal 8081`).
 
+## Golden builds as Jobs
+
+`br2 golden --k8s` runs a project's golden build as a Job in the worker image, so the golden and the remote builds share one tool baseline (the
+class of difference found with OpenSSH's `xauth` cannot happen). The Job clones the repository at the pushed commit, fetches the source trees and
+runs plain `make`; the manifest and timing come back through the pod log. Downloads land on a persistent volume (`golden-dl`, Buildroot's
+`BR2_DL_DIR`, shared by all projects), so a second golden of any project downloads nothing and a retried Job continues where a rate-limited
+download stopped. The volume is single-attach: one golden Job at a time.
+
 ## What the first apply found
 
 | Found | Fix |

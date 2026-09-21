@@ -54,3 +54,28 @@ resource "kubernetes_ingress_v1" "coder_tailscale" {
 
   depends_on = [helm_release.tailscale_operator, helm_release.coder]
 }
+
+# The Buildbarn frontend (gRPC: engine, action cache, CAS) on the tailnet, as a plain L4 proxy: any tailnet machine builds with
+# BR2_RE_ENDPOINT=grpc://<buildbarn_tailnet_hostname>.<tailnet>.ts.net:8980, no port-forward. A Service of its own (not the chart's) so the
+# chart stays independent of Tailscale.
+resource "kubernetes_service_v1" "buildbarn_tailscale" {
+  metadata {
+    name      = "frontend-tailscale"
+    namespace = kubernetes_namespace_v1.buildbarn.metadata[0].name
+    annotations = {
+      "tailscale.com/expose"   = "true"
+      "tailscale.com/hostname" = var.buildbarn_tailnet_hostname
+    }
+  }
+
+  spec {
+    selector = { app = "frontend" }
+    port {
+      name        = "grpc"
+      port        = 8980
+      target_port = 8980
+    }
+  }
+
+  depends_on = [helm_release.tailscale_operator, helm_release.buildbarn]
+}
