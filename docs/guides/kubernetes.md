@@ -52,16 +52,24 @@ dedicated pool's scheduler when that pool is enabled, anything else to the share
 
 Two layers.
 
-1. **Pods.** KEDA scales each worker Deployment on the number of queued plus executing operations of its scheduler (a Prometheus query, set per pool in
-   `worker_scaling_queries`). Scaling is off until you provide the queries, because the scheduler's metric names have to be read from a running scheduler first.
+1. **Pods.** KEDA scales each worker Deployment on the number of queued plus executing operations of its scheduler (a Prometheus query; the
+   default is in the chart's `_helpers.tpl`). The scheduler exports no queue gauge, so the query is tasks scheduled minus tasks completed, which counts what is queued or running.
+   It is on by default (`worker_autoscaling`); `worker_autoscaling = false` with `worker_replicas` holds a fixed count.
 2. **Nodes.** A worker pod that cannot be scheduled makes the cluster autoscaler create a server in the matching pool; an empty node is removed a few minutes later.
 
-The scheduler's *no workers* timeout is 900 seconds here (120 s in the Compose stack): with workers at zero, an action waits in the queue while a node boots, and must not fail meanwhile.
+The scheduler's platform queue is **predeclared** (`predeclaredPlatformQueues` in the scheduler config). A queue created by the first worker is removed again after the
+*no workers* timeout (900 s here, 120 s in the Compose stack), and from then on an action fails at once (`No workers exist for instance name prefix ...`) instead of waiting:
+KEDA then never sees demand and never scales up from zero. With the queue always present, an action waits while a node boots and the queue depth starts the worker
+(measured: zero workers to a working worker in about 65 s on an existing node).
 
-**Scale-in does not wait for running actions.** Removing a worker mid-action fails that action (Buck2 does not retry an infrastructure error). So scale-in is arranged to pick an idle worker:
-the idle reporter marks each pod busy or idle every 5 seconds (a non-empty build directory means busy) through the `controller.kubernetes.io/pod-deletion-cost` annotation, and the
-ReplicaSet controller deletes the lowest-cost pods first. The node autoscaler is told never to evict a worker pod (`safe-to-evict: "false"`); the node disappears after KEDA has removed the pod.
-A 60-second delay before a worker stops is insurance for the rare case. All of this needs verifying with a mid-build scale-in test (see the risks).
+**Scale-in drains the worker first.** Removing a worker mid-action fails that action (Buck2 does not retry an infrastructure error), and a pod that is merely
+sleeping before it stops is still handed new actions. So the `preStop` hook of all three containers (`files/drain.sh`) asks the scheduler to stop assigning to
+this worker (the admin UI's `add_drain`), then waits until the scheduler no longer lists it as executing, for at most `workerDrainTimeoutSeconds` (an hour: the
+pod's grace period is that plus a minute). Only then do the containers get SIGTERM; the idle reporter, PID 1 of its container, traps it, otherwise the pod would
+linger until SIGKILL. bb-worker's image has no shell, so a static busybox is copied into the pod for the hooks. If the scheduler cannot be reached the hook falls
+back to sleeping `workerTerminationDelaySeconds`. Idle workers are still preferred for removal: the reporter marks each pod busy or idle every 5 seconds (a non-empty
+build directory means busy) through the `controller.kubernetes.io/pod-deletion-cost` annotation, and the ReplicaSet controller deletes the lowest-cost pods first.
+The node autoscaler is told never to evict a worker pod (`safe-to-evict: "false"`); the node disappears after KEDA has removed the pod.
 
 ## Workspaces
 
@@ -137,7 +145,7 @@ To add a claim, add its name to the `for_each` in `golden.tf` and apply `terrafo
 
 Verified: privileged worker pods run under Talos; a worker registers and executes actions (helloworld remote-cache, 61 of 61 actions remote, warm run 61 of 61 cached, manifest
 IDENTICAL against a golden built by `br2 golden --k8s` in the same image); Car Thing's 98 packages pass `viewcheck --mode remote`. Not yet measured: cold-start time from zero
-nodes, the KEDA query (worker counts are set by hand through `worker_replicas` for now), and a mid-build scale-in.
+nodes, the KEDA query under a real build (it matched the busy workers when idle-checked, not yet under load), and a mid-build scale-in.
 
 ## Not done
 

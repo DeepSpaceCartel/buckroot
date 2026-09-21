@@ -140,3 +140,61 @@ searches the build machine for `xauth` and embeds the path it finds (`/usr/bin/x
 image had none. Only the three binaries that contain the string differ (`ssh-add` and `ssh-keygen` do not). After adding `xauth` to the image, the native remote cell,
 which builds the same OpenSSH, is IDENTICAL. Background: [ADR-0013](../decisions/0013-worker-image-is-the-tool-baseline.md) and the
 [design note](../design/worker-environment-in-the-key.md).
+
+## What the remote actions used
+
+Measured on 2026-09-21 on the [Kubernetes cluster](../guides/kubernetes.md): every remote action of five projects' matrix runs, read from the
+result the Buildbarn worker stores for each action (`scripts/br2-usage.py`; [how to repeat it](../guides/action-resource-usage.md)). Buck2's own
+`execution_stats` are empty for remote actions. 2,513 of 2,597 unique actions had a stored result (the missing ones are mostly from the earlier
+single-machine run, whose cache no longer exists). Cores are CPU seconds over wall seconds while the action ran; memory is the largest single
+process of the action, not the sum over its parallel jobs. Each cell has its own cache salt, so a package built in several cells counts once per cell.
+
+| Project | Actions | Wall h | CPU h | Avg cores | Median | p90 | Largest process |
+|---|---|---|---|---|---|---|---|
+| bottlerocket-sdk | 346 | 1.22 | 4.77 | 3.90 | 0.98 | 1.72 | 1.33 GiB |
+| funkey-os | 441 | 0.85 | 1.62 | 1.91 | 0.97 | 1.49 | 0.41 GiB |
+| helloworld | 60 | 0.01 | 0.01 | 0.93 | 0.98 | 1.05 | 0.04 GiB |
+| qemu-x86_64 | 684 | 2.16 | 8.39 | 3.89 | 0.97 | 2.02 | 1.33 GiB |
+| superduperbird | 982 | 3.81 | 13.11 | 3.44 | 0.97 | 1.81 | 1.21 GiB |
+| **All** | **2,513** | **8.04** | **27.89** | **3.47** | | | |
+
+By how long the action ran (all projects):
+
+| Wall time | Actions | Share of wall | Avg cores | p90 cores | Largest process |
+|---|---|---|---|---|---|
+| under 5 s | 1,633 | 2% | 0.91 | 0.98 | 0.09 GiB |
+| 5 to 20 s | 535 | 22% | 1.29 | 2.03 | 0.33 GiB |
+| 20 to 60 s | 258 | 30% | 1.91 | 3.31 | 0.23 GiB |
+| 60 to 300 s | 79 | 37% | 5.78 | 9.11 | 1.33 GiB |
+| over 300 s | 8 | 9% | 5.09 | 5.53 | 1.33 GiB |
+
+- **Two populations.** 96.5% of the actions run under a minute and average one to two cores; the other 87 take 46% of the running time and average
+  5 to 6 cores. 75 actions averaged more than the 4.5 cores a worker requests (`host-cmake`, `host-gcc-initial`, `host-gcc-final`, `glibc`).
+- **Memory is small.** The largest process anywhere was 1.33 GiB (`host-gcc-initial`, `host-gcc-final`). The busiest worker container over three hours
+  peaked at 4.3 GiB (all its processes, `make -j4`) and at 13 cores.
+- **Longest action: 350 s.** The compiler chain is long end to end, not in one action.
+- **No memory kills on this cluster:** no `OOMKilled` container, no `container_oom_events_total`, no stored action that ended on a signal. Failed
+  actions are not cached, so the last check cannot see them. The OOM kills that set `concurrency: 1` were on the single 7.7 GB machine
+  ([ADR-0015](../decisions/0015-buildbarn-on-kubernetes.md)).
+- **Consequence:** a worker requests 4.5 vCPU and 9 GiB for one action at a time, so three fill a node while the cluster reads 30% CPU and 6% memory
+  in use. See [Action sizes and execution platforms](../design/action-sizes.md).
+
+## Status when testing paused (2026-09-21)
+
+The testing phase is **not finished**. Per project, what exists and what does not (a cell counts only when its manifest is IDENTICAL to the golden):
+
+| Project | Golden | Cells done | Open |
+|---|---|---|---|
+| helloworld | yes | all 8 cells, IDENTICAL | none |
+| superduperbird (Car Thing) | yes | see its section above | none recorded in this pause |
+| bottlerocket-sdk | yes | wrapped remote, remote-cache (cold and warm): IDENTICAL | native cells not re-run after the `STAGING_SUBDIR` fix (a native remote dev build passed, 59 of 59 actions); local and local-cache cells not run |
+| qemu-x86_64 | yes | none | remote cells failed on `host-gettext-tiny` (fixed: `extra_view`); `host-libglib2` then fails in the remote action after about 100 s, not an OOM (`oom_kill 0`, peak 0.8 GB of 9 GiB); the cause is not found (the action's log shows only its last 100 lines) |
+| funkey-os | rebuilt after the libvorbis patch; differs from the first golden in `libSDL_sound` (expected), `/boot/zImage` and `/etc/shadow` (not explained; no Buck2 cell has compared yet) | none | the local wrapped cell failed in `sdl_sound` (fixed by `patches/buildroot/0002`); the following local-cache dev build failed on `host-lzo`, `lzo`, `host-icu` (`stamp_dir` fix) and `host-gettext-tiny` (`extra_view` fix); neither fix has been re-run; remote cells need the `legacy` pool |
+| home-assistant-os | no | none | the golden failed twice at `rtl8821cu` (`--no-print-directory`, [ADR-0018](../decisions/0018-make-runs-with-no-print-directory.md)); the rerun was stopped when the cluster was torn down |
+
+Found on the way, all fixed and committed: native recipes assumed the sysroot directory name (`STAGING_SUBDIR`, [ADR-0012](../decisions/0012-toolchain-tuple-from-buildroot.md)),
+`stamp_dir` included a package's SUBDIR on an older Buildroot, the FunKey `libvorbis*.la` files named libvorbis's build directory, `make` printed directories into a
+captured `KVER` (ADR-0018). Every action key changed once with ADR-0018, so the caches of earlier runs are gone.
+
+The cluster this ran on was destroyed at the end of the session (`terraform/` recreates it). Two of the measured limits worth knowing: scale-from-zero needs the predeclared
+queue, and scale-in needs the drain ([Kubernetes guide](../guides/kubernetes.md#how-autoscaling-works)).

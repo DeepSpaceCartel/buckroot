@@ -24,6 +24,7 @@ nav:
       - Remote cache and execution with Buildbarn: guides/buildbarn.md
       - Debugging a failing package: guides/debugging.md
       - Buildbarn and Coder on Kubernetes: guides/kubernetes.md
+      - Finding what an action used: guides/action-resource-usage.md
   - Concepts:
       - Architecture: concepts/architecture.md
       - Buildroot vs. Buck2: concepts/buildroot-vs-buck2.md
@@ -45,6 +46,7 @@ nav:
   - Design:
       - Overview: design/index.md
       - Worker environment in the key: design/worker-environment-in-the-key.md
+      - Action sizes and execution platforms: design/action-sizes.md
   - Decisions:
       - Decision log: decisions/index.md
       - 0001. One Buck2 target per Buildroot package: decisions/0001-one-target-per-package.md
