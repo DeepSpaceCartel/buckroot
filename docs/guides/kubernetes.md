@@ -122,7 +122,7 @@ containers:
 
 Rules of thumb: request the CPU and memory the build needs, not a whole node (one worker slot is 4.5 CPU and 9 GiB; the golden default is 7 CPU and 14 GiB), because the cluster is five servers in all and a Job whose request fits nowhere waits; check what holds a claim with
 `kubectl -n buildbarn get pods -o json | jq -r '.items[] | select(.spec.volumes[]?.persistentVolumeClaim.claimName=="golden-dl") | .metadata.name'`.
-To add a claim, add its name to the `for_each` in `golden.tf` and apply `terraform/platform` (a PVC-only change; it does not roll the Buildbarn pods). To preload a claim from a machine that already downloaded (a first golden of a project otherwise downloads from the cluster's IP, which GitHub rate-limits), see the seeding commands below.
+To add a claim, add its name to the `for_each` in `golden.tf` and apply `terraform/platform` (a PVC-only change; it does not roll the Buildbarn pods). To preload a claim from a machine that already downloaded (a first golden of a project otherwise downloads from the cluster's IP, which GitHub rate-limits), see the seeding commands just above.
 
 ## What the first apply found
 
