@@ -296,12 +296,20 @@ ROOT_SKIP = {"buildroot-src": {".git", "output", "dl", ".config", ".config.old",
 INFRA_SKIP = {"buildroot-src": set(), "buildroot-external": {"Config.in", "configs", "output", "dl", ".git"}}
 
 
+def unsafe_link(full):
+    """A symlink Buck2 must not follow: dangling, or with an absolute target (a rootfs overlay's
+    `etc/dropbear -> /tmp` means /tmp on the *device*; on the build host it points at the host's /tmp,
+    and a source that follows it would upload the host's /tmp). Both are declared as data with their
+    literal target and recreated in the view, so the rootfs gets the symlink itself."""
+    return os.path.islink(full) and (not os.path.exists(full) or os.readlink(full).startswith("/"))
+
+
 def dangling_links(path):
-    """Symlinks below `path` whose target does not resolve on their own."""
+    """Symlinks below `path` that Buck2 cannot track as sources: dangling or absolute (see unsafe_link)."""
     for root, dirs, files in os.walk(path):
         for name in dirs + files:
             full = os.path.join(root, name)
-            if os.path.islink(full) and not os.path.exists(full):
+            if unsafe_link(full):
                 yield full
 
 
@@ -313,7 +321,7 @@ def file_list(path):
     for root, _, files in os.walk(path):
         for name in files:
             full = os.path.join(root, name)
-            if not (os.path.islink(full) and not os.path.exists(full)):
+            if not unsafe_link(full):
                 out.append(os.path.relpath(full, path))
     return sorted(out)
 

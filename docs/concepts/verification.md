@@ -60,6 +60,11 @@ Each of these builds passed and *booted*; only the manifest showed them:
 - **Missing dangling symlinks.** Buck2 cannot see a dangling symlink as an input, so it
   never reached a remote worker: the image silently lacked `/var/log`, `/dev/fd`,
   `/etc/mtab` and twelve more (15 of 369 entries). They are now declared as data.
+  The same treatment covers symlinks with an **absolute target**: FunKey-OS's rootfs overlay has
+  `etc/dropbear -> /tmp`, which means `/tmp` on the device; on the build host it resolves to the
+  host's `/tmp`, so a source that followed it would have uploaded the host's temporary files, and
+  a source that ignored it would have dropped the link from the image. Found by reading Buck2's
+  file-watcher output before the first FunKey build, not by a manifest.
 - **Unstripped binaries.** The rootfs action's host tree lacked the cross `strip`, so
   every binary and shared library kept its symbols. `host-binutils` is not in Buildroot's
   `PACKAGES` and buckroot's per-package host trees are deltas rather than complete trees,
