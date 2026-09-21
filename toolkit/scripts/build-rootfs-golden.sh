@@ -26,7 +26,7 @@ export FRAGMENT="${GOLDEN_FRAGMENT:+$FRAGMENT}"     # only for the instrumented 
 
 exec "$HERE/scripts/br2-ns.sh" "$OUT" "$HERE/buildroot-src/dl" -- bash -c '
   set -euo pipefail
-  MK="make -C /mnt/src O=/mnt/out BR2_DL_DIR=/mnt/dl ${EXTERNAL:+BR2_EXTERNAL=/mnt/external}"
+  MK="make --no-print-directory -C /mnt/src O=/mnt/out BR2_DL_DIR=/mnt/dl ${EXTERNAL:+BR2_EXTERNAL=/mnt/external}"
   $MK "$DEFCONFIG"
   if [ -n "$FRAGMENT" ]; then printf "%s\n" "$FRAGMENT" >> /mnt/out/.config; $MK olddefconfig; fi
   $MK -j"$JOBS" $MAKE_ARGS

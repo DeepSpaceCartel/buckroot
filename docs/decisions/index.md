@@ -30,3 +30,6 @@ building it.
 | [0013](0013-worker-image-is-the-tool-baseline.md) | The worker image is the tool baseline | accepted |
 | [0014](0014-view-entries-are-declared-inputs.md) | Every view entry is a declared input, and remote execution proves it | accepted |
 | [0015](0015-buildbarn-on-kubernetes.md) | Buildbarn on a dedicated Kubernetes cluster with autoscaled worker pools | accepted |
+| [0016](0016-one-node-pool.md) | One node pool, one server type, no taints | accepted |
+| [0017](0017-tool-baseline-per-project-era.md) | A project names the tool baseline of its era | accepted |
+| [0018](0018-make-runs-with-no-print-directory.md) | Every `make` of a build runs with `--no-print-directory` | accepted |

@@ -72,7 +72,10 @@ def parallel_jobs():
     return max(1, min(cpus + 1, memory_bytes() // (2 * 2**30)))
 
 
-MAKE = ["make", "-C", "/mnt/src", "O=/mnt/out",
+# --no-print-directory: without it every sub-make gets `w` in MAKEFLAGS, and GNU make 4.3 then prints "make: Entering directory" to
+# STDOUT even under -s. Buildroot's kernel-module infrastructure captures `$(MAKE) ... kernelrelease` in backticks as KVER=..., so
+# rtl8821cu (Home Assistant OS) received "make[1]: Entering directory ..." words and failed with "multiple target patterns".
+MAKE = ["make", "--no-print-directory", "-C", "/mnt/src", "O=/mnt/out",
         "BR2_EXTERNAL=/mnt/external", "BR2_DL_DIR=/mnt/dl", f"PARALLEL_JOBS={parallel_jobs()}"]
 ENV = {"PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
        "LC_ALL": "C", "TERM": "dumb", "BR2_NS_NET": "off"}
