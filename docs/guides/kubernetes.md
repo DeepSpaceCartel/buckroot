@@ -33,14 +33,14 @@ flowchart LR
 | control | static x1, `cpx51` | the Talos control plane, and pods like any other node |
 | nodes | 0 to 4, `cpx51` (16 vCPU, 32 GB) | everything: storage, frontend, scheduler, portal, Postgres, Coder and its workspaces, KEDA, Prometheus, Buildbarn workers |
 
-Worker **pools** are schedulers plus workers, not node pools: `shared` (the default image) and `legacy` (the ubuntu:20.04 image, for projects that name
-that baseline, [ADR-0017](../decisions/0017-tool-baseline-per-project-era.md)); `dedicated` exists in the chart, switched off.
+Worker **pools** are schedulers plus workers, not node pools: `shared` (the default image) and `legacy` (a project's own baseline image, today FunKey-OS's: ubuntu:20.04 plus its SDK,
+[ADR-0017](../decisions/0017-tool-baseline-per-project-era.md)); `dedicated` exists in the chart, switched off. Three workers share a node (9 GiB each, `make -j4`).
 
 One pool, one server type, no taints: the project's server limit is 5, so a server that only one kind of pod may use is a wasted slot
 ([ADR-0016](../decisions/0016-one-node-pool.md)). The chart still supports a second, dedicated-CPU pool for clean timings (`pools.dedicated`), off until the limit is raised.
 
 A **worker** is one pod with three containers: `bb-worker` (fetches inputs), the privileged `runner` (executes the command in the tool baseline image, starting
-a mount namespace per action) and an idle reporter. Two workers share a node, each with a memory limit of 14 GiB: the build actions size `make -jN` from the container's memory (about 2 GiB per job), so a worker runs `make -j7` and cannot take the other's memory. The Buildbarn configuration is the toolkit's,
+a mount namespace per action) and an idle reporter. Three workers share a node, each with a memory limit of 9 GiB: the build actions size `make -jN` from the container's memory (about 2 GiB per job), so a worker runs `make -j4` and cannot take another's memory. One action is one whole package build, so the worker count is the number of packages in flight; most packages are small, so more, narrower slots beat fewer wide ones. The Buildbarn configuration is the toolkit's,
 unchanged: one `env.libsonnet` file holds every tunable, and the chart renders it from `values.yaml`.
 
 ## Choosing a pool
