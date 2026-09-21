@@ -1,0 +1,62 @@
+[
+ {
+  "variant": "wrapped",
+  "mode": "remote",
+  "salt": "wrapped-remote-21031358",
+  "instance": "bottlerocket-sdk-remote-wrapped-031358",
+  "cold": {
+   "ok": false,
+   "seconds": 244.4,
+   "commands": 54,
+   "cached": 0,
+   "remote": 54,
+   "local": 0,
+   "error_tail": "[2026-09-21T03:18:03.320+00:00] Network: up 1.7MiB  down 37MiB  session GRPC-SESSION-ID\n[2026-09-21T03:18:03.339+00:00]\n[2026-09-21T03:18:03.339+00:00] BUILD ERRORS (2)\n[2026-09-21T03:18:03.339+00:00] The following actions failed during the execution of this command:\n[2026-09-21T03:18:03.339+00:00] Action failed: root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d) (download_file gawk-5.3.1.tar.xz)\n[2026-09-21T03:18:03.339+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/gawk/gawk-5.3.1.tar.xz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:18:03.339+00:00] <html><head>\n[2026-09-21T03:18:03.339+00:00] <title>404 Not Found</title>\n[2026-09-21T03:18:03.339+00:00] </head><body>\n[2026-09-21T03:18:03.339+00:00] <h1>Not Found</h1>\n[2026-09-21T03:18:03.339+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:18:03.339+00:00] </body></html>\n\n[2026-09-21T03:18:03.339+00:00] Action failed: root//buildroot-src/package/mpc:mpc-1.3.1.tar.gz (root//platforms:default#5fe249fa9992182d) (download_file mpc-1.3.1.tar.gz)\n[2026-09-21T03:18:03.339+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/mpc/mpc-1.3.1.tar.gz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:18:03.339+00:00] <html><head>\n[2026-09-21T03:18:03.339+00:00] <title>404 Not Found</title>\n[2026-09-21T03:18:03.339+00:00] </head><body>\n[2026-09-21T03:18:03.339+00:00] <h1>Not Found</h1>\n[2026-09-21T03:18:03.339+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:18:03.339+00:00] </body></html>\n\n[2026-09-21T03:18:03.339+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "remote-cache",
+  "salt": "wrapped-remote-cache-21031358",
+  "instance": "bottlerocket-sdk-remote-cache-wrapped",
+  "cold": {
+   "ok": false,
+   "seconds": 259.6,
+   "commands": 54,
+   "cached": 0,
+   "remote": 54,
+   "local": 0,
+   "error_tail": "[2026-09-21T03:18:18.499+00:00] Network: up 1.7MiB  down 37MiB  session GRPC-SESSION-ID\n[2026-09-21T03:18:18.511+00:00]\n[2026-09-21T03:18:18.511+00:00] BUILD ERRORS (2)\n[2026-09-21T03:18:18.511+00:00] The following actions failed during the execution of this command:\n[2026-09-21T03:18:18.511+00:00] Action failed: root//buildroot-src/package/mpc:mpc-1.3.1.tar.gz (root//platforms:default#5fe249fa9992182d) (download_file mpc-1.3.1.tar.gz)\n[2026-09-21T03:18:18.511+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/mpc/mpc-1.3.1.tar.gz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:18:18.511+00:00] <html><head>\n[2026-09-21T03:18:18.511+00:00] <title>404 Not Found</title>\n[2026-09-21T03:18:18.511+00:00] </head><body>\n[2026-09-21T03:18:18.511+00:00] <h1>Not Found</h1>\n[2026-09-21T03:18:18.511+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:18:18.511+00:00] </body></html>\n\n[2026-09-21T03:18:18.511+00:00] Action failed: root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d) (download_file gawk-5.3.1.tar.xz)\n[2026-09-21T03:18:18.511+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/gawk/gawk-5.3.1.tar.xz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:18:18.511+00:00] <html><head>\n[2026-09-21T03:18:18.511+00:00] <title>404 Not Found</title>\n[2026-09-21T03:18:18.511+00:00] </head><body>\n[2026-09-21T03:18:18.511+00:00] <h1>Not Found</h1>\n[2026-09-21T03:18:18.511+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:18:18.511+00:00] </body></html>\n\n[2026-09-21T03:18:18.511+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote",
+  "salt": "native-remote-21031358",
+  "instance": "bottlerocket-sdk-remote-native-031358",
+  "cold": {
+   "ok": false,
+   "seconds": 224.7,
+   "commands": 50,
+   "cached": 0,
+   "remote": 50,
+   "local": 0,
+   "error_tail": "[2026-09-21T03:17:43.600+00:00] Network: up 3.6MiB  down 39MiB  session GRPC-SESSION-ID\n[2026-09-21T03:17:43.607+00:00]\n[2026-09-21T03:17:43.607+00:00] BUILD ERRORS (2)\n[2026-09-21T03:17:43.607+00:00] The following actions failed during the execution of this command:\n[2026-09-21T03:17:43.607+00:00] Action failed: root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d) (download_file gawk-5.3.1.tar.xz)\n[2026-09-21T03:17:43.607+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/gawk/gawk-5.3.1.tar.xz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:17:43.607+00:00] <html><head>\n[2026-09-21T03:17:43.607+00:00] <title>404 Not Found</title>\n[2026-09-21T03:17:43.607+00:00] </head><body>\n[2026-09-21T03:17:43.607+00:00] <h1>Not Found</h1>\n[2026-09-21T03:17:43.607+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:17:43.607+00:00] </body></html>\n\n[2026-09-21T03:17:43.607+00:00] Action failed: root//buildroot-src/package/mpc:mpc-1.3.1.tar.gz (root//platforms:default#5fe249fa9992182d) (download_file mpc-1.3.1.tar.gz)\n[2026-09-21T03:17:43.607+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/mpc/mpc-1.3.1.tar.gz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:17:43.607+00:00] <html><head>\n[2026-09-21T03:17:43.607+00:00] <title>404 Not Found</title>\n[2026-09-21T03:17:43.607+00:00] </head><body>\n[2026-09-21T03:17:43.607+00:00] <h1>Not Found</h1>\n[2026-09-21T03:17:43.607+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:17:43.607+00:00] </body></html>\n\n[2026-09-21T03:17:43.607+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote-cache",
+  "salt": "native-remote-cache-21031358",
+  "instance": "bottlerocket-sdk-remote-cache-native",
+  "cold": {
+   "ok": false,
+   "seconds": 217.5,
+   "commands": 50,
+   "cached": 0,
+   "remote": 50,
+   "local": 0,
+   "error_tail": "[2026-09-21T03:17:36.338+00:00] Network: up 159MiB  down 169MiB  session GRPC-SESSION-ID\n[2026-09-21T03:17:36.347+00:00]\n[2026-09-21T03:17:36.347+00:00] BUILD ERRORS (2)\n[2026-09-21T03:17:36.347+00:00] The following actions failed during the execution of this command:\n[2026-09-21T03:17:36.347+00:00] Action failed: root//buildroot-src/package/mpc:mpc-1.3.1.tar.gz (root//platforms:default#5fe249fa9992182d) (download_file mpc-1.3.1.tar.gz)\n[2026-09-21T03:17:36.347+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/mpc/mpc-1.3.1.tar.gz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:17:36.347+00:00] <html><head>\n[2026-09-21T03:17:36.347+00:00] <title>404 Not Found</title>\n[2026-09-21T03:17:36.347+00:00] </head><body>\n[2026-09-21T03:17:36.347+00:00] <h1>Not Found</h1>\n[2026-09-21T03:17:36.347+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:17:36.347+00:00] </body></html>\n\n[2026-09-21T03:17:36.348+00:00] Action failed: root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d) (download_file gawk-5.3.1.tar.xz)\n[2026-09-21T03:17:36.348+00:00] Error performing http_head request: HTTP Client Error (404 Not Found) when querying URI: https://ftpmirror.gnu.org/gawk/gawk-5.3.1.tar.xz. Response text: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n[2026-09-21T03:17:36.348+00:00] <html><head>\n[2026-09-21T03:17:36.348+00:00] <title>404 Not Found</title>\n[2026-09-21T03:17:36.348+00:00] </head><body>\n[2026-09-21T03:17:36.348+00:00] <h1>Not Found</h1>\n[2026-09-21T03:17:36.348+00:00] <p>The requested URL was not found on this server.</p>\n[2026-09-21T03:17:36.348+00:00] </body></html>\n\n[2026-09-21T03:17:36.348+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gawk:gawk-5.3.1.tar.xz (root//platforms:default#5fe249fa9992182d)'"
+  }
+ }
+]

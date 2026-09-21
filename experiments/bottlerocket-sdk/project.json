@@ -10,7 +10,9 @@
   "sources": "http",
   "config_fragment": [
     "# BR2_PRIMARY_SITE_ONLY is not set",
-    "BR2_PRIMARY_SITE=\"\""
+    "BR2_PRIMARY_SITE=\"\"",
+    "BR2_INIT_NONE=y",
+    "# BR2_PACKAGE_BUSYBOX is not set"
   ],
   "heavy": [
     "host-gcc-initial",
@@ -20,10 +22,7 @@
     "host-skeleton",
     "host-fakedate",
     "skeleton",
-    "initscripts",
-    "urandom-scripts",
-    "skeleton-init-sysv",
     "skeleton-init-common"
   ],
-  "notes": "The SDK's defconfigs (copied unchanged into buildroot-external/configs/) pin BR2_PRIMARY_SITE=file:///home/builder with BR2_PRIMARY_SITE_ONLY: its Dockerfile pre-fetches every source there. The fragment turns that off so Buildroot downloads normally; nothing else in the configuration changes. Its Buildroot is the 2025.05.1 release with patches/buildroot/0001-0005 (sysroot and tools-directory controls for binutils and gcc), applied at setup."
+  "notes": "The SDK's defconfigs pin BR2_PRIMARY_SITE=file:///home/builder with BR2_PRIMARY_SITE_ONLY: its Dockerfile pre-fetches every source there. The fragment turns that off so Buildroot downloads normally. The SDK only ever runs `make toolchain`, never a full `make`: a full build also builds Buildroot's default init system and BusyBox, which fail against the SDK's own sysroot (`MB_LEN_MAX wrong` in the patched glibc headers), so the fragment selects no init system and no BusyBox and the build is what the SDK builds: the cross toolchain and sysroot (the root filesystem is the skeleton plus the target libc files). Buildroot is 2025.05.1 with patches/buildroot/0001-0005 applied at setup."
 }

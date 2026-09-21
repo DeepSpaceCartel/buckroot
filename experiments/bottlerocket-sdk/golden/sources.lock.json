@@ -1,4 +1,5 @@
 {
  "binutils/binutils-2.44.tar.xz": "ce2017e059d63e67ddb9240e9d4ec49c2893605035cd60e92ad53177f4377237",
+ "dash/dash-0.5.12.tar.gz": "6a474ac46e8b0b32916c4c60df694c82058d3297d8b385b74508030ca4a8f28a",
  "gcc/gcc-13.4.0.tar.xz": "9c4ce6dbb040568fdc545588ac03c5cbc95a8dbf0c7aa490170843afb59ca8f5"
 }

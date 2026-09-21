@@ -2,29 +2,30 @@
  "buildroot": "2025.05.1",
  "defconfig": "sdk_x86_64_gnu_defconfig",
  "packages": {
-  "busybox": {
+  "dash": {
    "deps": [
+    "host-autoconf",
+    "host-automake",
     "host-fakedate",
+    "host-libtool",
     "host-skeleton",
     "skeleton",
     "toolchain"
    ],
-   "dir": "buildroot-src/package/busybox",
-   "dl_dir": "busybox",
+   "dir": "buildroot-src/package/dash",
+   "dl_dir": "dash",
    "kind": "target",
    "sources": [
     {
-     "file": "busybox-1.37.0.tar.bz2",
-     "sha256": "3311dff32e746499f4df0d5df04d7eb396382d7e108bb9250e7b519b837043a4",
-     "urls": [
-      "https://www.busybox.net/downloads/busybox-1.37.0.tar.bz2",
-      "https://sources.buildroot.net/busybox/busybox-1.37.0.tar.bz2",
-      "https://sources.buildroot.net/busybox-1.37.0.tar.bz2"
-     ]
+     "file": "dash-0.5.12.tar.gz",
+     "hash": {
+      "sha512": "13bd262be0089260cbd13530a9cf34690c0abeb2f1920eb5e61be7951b716f9f335b86279d425dbfae56cbd49231a8fdffdff70601a5177da3d543be6fc5eb17"
+     },
+     "vendored": true
     }
    ],
-   "stamp_dir": "build/busybox-1.37.0",
-   "version": "1.37.0",
+   "stamp_dir": "build/dash-0.5.12",
+   "version": "0.5.12",
    "virtual": false
   },
   "gcc-final": {
@@ -542,21 +543,6 @@
    "version": "",
    "virtual": false
   },
-  "initscripts": {
-   "deps": [
-    "host-fakedate",
-    "host-skeleton",
-    "skeleton",
-    "toolchain"
-   ],
-   "dir": "buildroot-src/package/initscripts",
-   "dl_dir": "initscripts",
-   "kind": "target",
-   "sources": [],
-   "stamp_dir": "build/initscripts",
-   "version": "",
-   "virtual": false
-  },
   "linux-headers": {
    "deps": [
     "host-fakedate",
@@ -585,7 +571,7 @@
    "deps": [
     "host-fakedate",
     "host-skeleton",
-    "skeleton-init-sysv"
+    "skeleton-init-none"
    ],
    "dir": "buildroot-src/package/skeleton",
    "dl_dir": null,
@@ -608,17 +594,17 @@
    "version": "",
    "virtual": false
   },
-  "skeleton-init-sysv": {
+  "skeleton-init-none": {
    "deps": [
     "host-fakedate",
     "host-skeleton",
     "skeleton-init-common"
    ],
-   "dir": "buildroot-src/package/skeleton-init-sysv",
-   "dl_dir": "skeleton-init-sysv",
+   "dir": "buildroot-src/package/skeleton-init-none",
+   "dl_dir": "skeleton-init-none",
    "kind": "target",
    "sources": [],
-   "stamp_dir": "build/skeleton-init-sysv",
+   "stamp_dir": "build/skeleton-init-none",
    "version": "",
    "virtual": false
   },
@@ -651,21 +637,6 @@
    "stamp_dir": "build/toolchain-buildroot",
    "version": null,
    "virtual": true
-  },
-  "urandom-scripts": {
-   "deps": [
-    "host-fakedate",
-    "host-skeleton",
-    "skeleton",
-    "toolchain"
-   ],
-   "dir": "buildroot-src/package/urandom-scripts",
-   "dl_dir": "urandom-scripts",
-   "kind": "target",
-   "sources": [],
-   "stamp_dir": "build/urandom-scripts",
-   "version": "",
-   "virtual": false
   }
  },
  "target_tuple": "x86_64-bottlerocket-linux-gnu"
