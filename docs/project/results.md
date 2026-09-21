@@ -186,7 +186,7 @@ The testing phase is **not finished**. Per project, what exists and what does no
 | Project | Golden | Cells done | Open |
 |---|---|---|---|
 | helloworld | yes | all 8 cells, IDENTICAL | none |
-| superduperbird (Car Thing) | yes | see its section above | none recorded in this pause |
+| superduperbird (Car Thing) | yes | all 8 cells, both variants in local, local-cache, remote and remote-cache (cold and warm for the cache modes), every manifest IDENTICAL: see its section above | none |
 | bottlerocket-sdk | yes | wrapped remote, remote-cache (cold and warm): IDENTICAL | native cells not re-run after the `STAGING_SUBDIR` fix (a native remote dev build passed, 59 of 59 actions); local and local-cache cells not run |
 | qemu-x86_64 | yes | none | remote cells failed on `host-gettext-tiny` (fixed: `extra_view`); `host-libglib2` then fails in the remote action after about 100 s, not an OOM (`oom_kill 0`, peak 0.8 GB of 9 GiB); the cause is not found (the action's log shows only its last 100 lines) |
 | funkey-os | rebuilt after the libvorbis patch; differs from the first golden in `libSDL_sound` (expected), `/boot/zImage` and `/etc/shadow` (not explained; no Buck2 cell has compared yet) | none | the local wrapped cell failed in `sdl_sound` (fixed by `patches/buildroot/0002`); the following local-cache dev build failed on `host-lzo`, `lzo`, `host-icu` (`stamp_dir` fix) and `host-gettext-tiny` (`extra_view` fix); neither fix has been re-run; remote cells need the `legacy` pool |
