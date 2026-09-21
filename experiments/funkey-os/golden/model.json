@@ -1133,7 +1133,7 @@
      "vendored": true
     }
    ],
-   "stamp_dir": "build/host-icu-67-1/source",
+   "stamp_dir": "build/host-icu-67-1",
    "version": "67-1",
    "virtual": false
   },
@@ -1252,7 +1252,7 @@
      "vendored": true
     }
    ],
-   "stamp_dir": "build/host-libtool-2.4.6/.",
+   "stamp_dir": "build/host-libtool-2.4.6",
    "version": "2.4.6",
    "virtual": false
   },
@@ -1381,7 +1381,7 @@
      "vendored": true
     }
    ],
-   "stamp_dir": "build/host-lzo-2.10//buildroot-build",
+   "stamp_dir": "build/host-lzo-2.10",
    "version": "2.10",
    "virtual": false
   },
@@ -2039,7 +2039,7 @@
      "vendored": true
     }
    ],
-   "stamp_dir": "build/icu-67-1/source",
+   "stamp_dir": "build/icu-67-1",
    "version": "67-1",
    "virtual": false
   },
@@ -2668,7 +2668,7 @@
      "vendored": true
     }
    ],
-   "stamp_dir": "build/lzo-2.10//buildroot-build",
+   "stamp_dir": "build/lzo-2.10",
    "version": "2.10",
    "virtual": false
   },
@@ -3185,7 +3185,7 @@
      "vendored": true
     }
    ],
-   "stamp_dir": "build/retrofe-RetroFE-FunKey-1.1.4/RetroFE/Source/buildroot-build",
+   "stamp_dir": "build/retrofe-RetroFE-FunKey-1.1.4",
    "version": "RetroFE-FunKey-1.1.4",
    "virtual": false
   },
@@ -3738,5 +3738,6 @@
    "virtual": true
   }
  },
+ "staging_subdir": "arm-buildroot-linux-musleabihf/sysroot",
  "target_tuple": "arm-buildroot-linux-musleabihf"
 }

@@ -28,5 +28,10 @@
     "patches/external/0001: PCSX-ReARMed's install runs mksquashfs without depending on host-squashfs; per-package directories need the dependency declared. Nothing in the image changes.",
     "native: the seven skeleton-family packages with a rule in toolkit/br2/native/ (the same set as Car Thing); the toolchain is an external custom SDK, which has no native recipe.",
     "native: six skeleton-family packages; not urandom-scripts, whose native recipe installs S01seedrng (a file of newer Buildroot; this 2021 tree has S20urandom)."
-  ]
+  ],
+  "extra_view": {
+    "package/gettext-tiny": [
+      "package/gettext-gnu"
+    ]
+  }
 }

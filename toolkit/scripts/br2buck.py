@@ -43,6 +43,12 @@ def buildroot_json(out_dir, *goal):
     return json.loads(r.stdout)
 
 
+def stamp_dir(path):
+    """build/<pkg>-<version>. An older Buildroot's show-info reports the package's SUBDIR too
+    (build/host-lzo-2.10//buildroot-build, build/host-icu-67-1/source), where no .stamp_* files are."""
+    return "/".join([x for x in path.split("/") if x][:2])
+
+
 def buildroot_vars(out_dir, patterns):
     """Expanded make variables matching `patterns` (a `%` is a wildcard): {name: {"expanded": value}}.
     `show-vars` exists since Buildroot 2023; older trees have `printvars` (NAME=value lines)."""
@@ -181,7 +187,7 @@ def extract(out_dir):
         model["packages"][name] = {
             "kind": e["type"], "virtual": bool(e.get("virtual")),
             "version": e.get("version"), "dl_dir": e.get("dl_dir"),
-            "stamp_dir": (e.get("stamp_dir") or e["build_dir"]).rstrip("/"),     # older show-info calls it build_dir
+            "stamp_dir": stamp_dir(e.get("stamp_dir") or e["build_dir"]),     # older show-info calls it build_dir
             "dir": normalize_pkg_dir(e["package_dir"] if "package_dir" in e else
                                      hash_vars[var_prefix(name, e) + "_PKGDIR"][0]),
             "deps": sorted(e["dependencies"]), "sources": sources,
