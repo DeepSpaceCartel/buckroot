@@ -6,3 +6,6 @@
 **/kubeconfig
 **/talosconfig
 crash.log
+
+# backups of the credentials files the cluster module writes
+**/*.bak
