@@ -14,6 +14,11 @@ permissions:
 jobs:
   image:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - { base: "ubuntu:24.04", tag: latest }
+          - { base: "ubuntu:20.04", tag: ubuntu20.04 }   # the legacy baseline (projects on Buildroot <= 2021)
     steps:
       - uses: actions/checkout@v4
       - uses: docker/login-action@v3
@@ -29,8 +34,9 @@ jobs:
           context: toolkit/infra/buildbarn/runner
           push: true
           labels: org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+          build-args: BASE=${{ matrix.base }}
           tags: |
-            ${{ steps.repo.outputs.image }}:latest
-            ${{ steps.repo.outputs.image }}:${{ github.sha }}
+            ${{ steps.repo.outputs.image }}:${{ matrix.tag }}
+            ${{ steps.repo.outputs.image }}:${{ matrix.tag }}-${{ github.sha }}
       - run: |
           echo "Pin this digest in the platform's runner_image variable: ${{ steps.repo.outputs.image }}@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
