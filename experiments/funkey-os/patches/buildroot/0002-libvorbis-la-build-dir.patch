@@ -1,0 +1,16 @@
+--- a/package/libvorbis/libvorbis.mk	2026-09-21 05:56:37.900683119 +0000
++++ b/package/libvorbis/libvorbis.mk	2026-09-21 05:56:37.938683838 +0000
+@@ -13,4 +13,13 @@
+ LIBVORBIS_LICENSE = BSD-3-Clause
+ LIBVORBIS_LICENSE_FILES = COPYING
+ 
++# libtool records libvorbis.la at its build directory in libvorbisfile.la and libvorbisenc.la (their
++# dependency_libs), because the install into staging cannot find the installed copy. A package that
++# links them later then needs this package's build tree, which exists only when everything is built in
++# one tree; -lvorbis says the same and needs only the installed library.
++define LIBVORBIS_FIX_LA_DEPENDENCY
++	$(SED) 's,$(@D)/lib/libvorbis.la,-lvorbis,g' $(STAGING_DIR)/usr/lib/libvorbisfile.la $(STAGING_DIR)/usr/lib/libvorbisenc.la
++endef
++LIBVORBIS_POST_INSTALL_STAGING_HOOKS += LIBVORBIS_FIX_LA_DEPENDENCY
++
+ $(eval $(autotools-package))
