@@ -449,7 +449,7 @@ def render_pkg_dir(pkg_dir, pkgs, carved):
             if "urls" in s and s["file"] not in seen_sources:
                 seen_sources.add(s["file"])
                 lines.append(f'http_file(\n    name = {q(target_name(s["file"]))},\n    out = {q(s["file"])},\n'
-                             f'    urls = {bzl_list(s["urls"][:1])},  # prelude http_file takes one URL; sha256 is enforced\n'
+                             f'    urls = {bzl_list([canonical_url(u) for u in s["urls"][:1]])},  # prelude http_file takes one URL; sha256 is enforced\n'
                              f'    sha256 = "{s["sha256"]}",\n'
                              f'    visibility = ["PUBLIC"],\n)\n')
         remote = [s for s in p["sources"] if "urls" in s or s.get("vendored")]
@@ -580,6 +580,18 @@ def vendored_sources(model):
             if s.get("vendored"):
                 seen[(p["dl_dir"], s["file"])] = s.get("hash")
     return sorted((d, f, h) for (d, f), h in seen.items())
+
+
+# Hosts that redirect to a mirror chosen at random per request: some mirrors lack a file and answer 404 (to Buck2's HEAD, and to
+# anything else), so the same URL succeeded or failed by luck. Rendered as the canonical host, which is deterministic.
+CANONICAL_HOSTS = {"https://ftpmirror.gnu.org": "https://ftp.gnu.org/gnu"}
+
+
+def canonical_url(url):
+    for host, canonical in CANONICAL_HOSTS.items():
+        if url == host or url.startswith(host + "/"):
+            return canonical + url[len(host):]
+    return url
 
 
 def target_name(s):
