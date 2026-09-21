@@ -21,6 +21,11 @@
     "BR2_TARGET_ROOTFS_EROFS=n",
     "BR2_TARGET_ROOTFS_TAR=y"
   ],
-  "native": [],
-  "notes": "Deviations from the board's own defconfig, applied to golden and Buck2 alike: no ccache (its cache directory is outside the build), no post-image script (it assembles disk images outside the rootfs), and a tar rootfs instead of EROFS so the manifest scanner can read it."
+  "native": [
+    "host-skeleton",
+    "host-fakedate",
+    "skeleton",
+    "skeleton-init-common"
+  ],
+  "notes": "Deviations from the board's own defconfig, applied to golden and Buck2 alike: no ccache (its cache directory is outside the build), no post-image script (it assembles disk images outside the rootfs), and a tar rootfs instead of EROFS so the manifest scanner can read it. native: the init-independent skeleton packages; the init system is systemd and the toolkit has no native recipe for skeleton-init-systemd, so that package stays wrapped."
 }
