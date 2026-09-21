@@ -228,8 +228,8 @@ def cmd_setup(a):
         sh([ROOT / "scripts" / "fetch-buildroot.sh"], check=True)
 
 
-def cmd_fetch(_):
-    sh([ROOT / "scripts" / "br2buck.py", "fetch"], check=True)
+def cmd_fetch(a):
+    sh([ROOT / "scripts" / "br2buck.py", "fetch", *(["--vendor-only"] if a.vendor_only else [])], check=True)
 
 
 def cmd_preflight(a):
@@ -257,6 +257,8 @@ def golden_job(a):
     fetch = "for i in 1 2 3 4; do scripts/br2 fetch && break; [ $i = 4 ] && exit 1; sleep 60; done\n" if CFG["sources"] == "vendored" else ""
     vanilla = " --vanilla" if a.vanilla else ""
     results = f"golden/rootfs.{'vanilla.' if a.vanilla else ''}manifest.json results/golden{'-vanilla' if a.vanilla else ''}.json"
+    if CFG["sources"] == "vendored":
+        results += " golden/sources.lock.json"        # what the Job's fetch pinned: commit it with the manifest
     dl = ("mkdir -p /dl && rm -rf buildroot-src/dl && ln -s /dl buildroot-src/dl\n" if a.dl_claim else "")   # the persistent BR2_DL_DIR
     script = f"""set -eu
 git clone --quiet '{repo}' /work/repo
@@ -395,7 +397,9 @@ def main():
     su.add_argument("--no-buck2", action="store_true", help="only fetch the source trees (a golden build is plain make and needs no buck2)")
     su.set_defaults(fn=cmd_setup)
     sub.add_parser("extract").set_defaults(fn=cmd_extract)
-    sub.add_parser("fetch").set_defaults(fn=cmd_fetch)
+    fe = sub.add_parser("fetch")
+    fe.add_argument("--vendor-only", action="store_true", help="skip make source: vendor from an already filled buildroot-src/dl (e.g. copied from the cluster's golden-dl volume)")
+    fe.set_defaults(fn=cmd_fetch)
     d = sub.add_parser("dev", help="iterate: no clean, keep-going, toolkit edits do not invalidate")
     d.add_argument("--pkg", help="build just this package (its target and dependencies)")
     d.add_argument("--target", help="an explicit Buck2 label")

@@ -193,14 +193,8 @@ def extract(out_dir):
 
 # ------------------------------------------------------------------ fetch ----
 
-def fetch():
-    """Download what Buck2 cannot: run Buildroot's own downloader (`make source`, network on,
-    hashes checked by Buildroot), then vendor the files listed as `vendored` in the model under
-    sources/ and pin their sha256 in golden/sources.lock.json (a later fetch must reproduce it:
-    Buildroot's git tarballs are reproducible)."""
-    import hashlib
-    model = json.loads(MODEL.read_text())
-    dl = HERE / "buildroot-src" / "dl"
+def download(dl):
+    """Buildroot's own downloader for every package of the configuration (`make source`)."""
     with tempfile.TemporaryDirectory(prefix="br2-fetch-") as tmp:
         buildroot_defconfig(tmp)
         r = subprocess.run([str(NS), tmp, str(dl), "--", "make", "-C", "/mnt/src", "O=/mnt/out",
@@ -208,6 +202,20 @@ def fetch():
                             "source"])
         if r.returncode != 0:
             sys.exit("make source failed")
+
+
+def fetch(vendor_only=False):
+    """Download what Buck2 cannot: run Buildroot's own downloader (`make source`, network on,
+    hashes checked by Buildroot), then vendor the files listed as `vendored` in the model under
+    sources/ and pin their sha256 in golden/sources.lock.json (a later fetch must reproduce it:
+    Buildroot's git tarballs are reproducible). vendor_only skips the download step: the files
+    are already in buildroot-src/dl (fetched elsewhere, e.g. by the golden Job on the cluster:
+    `make source` can need the whole cross toolchain when packages vendor Cargo crates)."""
+    import hashlib
+    model = json.loads(MODEL.read_text())
+    dl = HERE / "buildroot-src" / "dl"
+    if not vendor_only:
+        download(dl)
     lock_path = HERE / "golden" / "sources.lock.json"
     lock = json.loads(lock_path.read_text()) if lock_path.exists() else {}
     for d, f, h in vendored_sources(model):
@@ -625,12 +633,13 @@ def main():
     ex = sub.add_parser("extract")
     ex.add_argument("--out-dir", default=None,
                     help="an existing Buildroot output dir to query (default: a temporary one)")
-    sub.add_parser("fetch")
+    fe = sub.add_parser("fetch")
+    fe.add_argument("--vendor-only", action="store_true", help="skip make source: vendor from an already filled buildroot-src/dl")
     rd = sub.add_parser("render")
     rd.add_argument("--check", action="store_true")
     args = ap.parse_args()
     if args.cmd == "fetch":
-        fetch()
+        fetch(args.vendor_only)
     elif args.cmd == "extract":
         extract(args.out_dir)
     else:
