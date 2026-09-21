@@ -13,6 +13,7 @@ parallelism, downloads and caching (see br2/rules.bzl). Stdlib only.
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -432,7 +433,7 @@ def render_pkg_dir(pkg_dir, pkgs, carved):
         for s in p["sources"]:
             if "urls" in s and s["file"] not in seen_sources:
                 seen_sources.add(s["file"])
-                lines.append(f'http_file(\n    name = "{s["file"]}",\n    out = "{s["file"]}",\n'
+                lines.append(f'http_file(\n    name = "{target_name(s["file"])}",\n    out = "{s["file"]}",\n'
                              f'    urls = {bzl_list(s["urls"][:1])},  # prelude http_file takes one URL; sha256 is enforced\n'
                              f'    sha256 = "{s["sha256"]}",\n'
                              f'    visibility = ["PUBLIC"],\n)\n')
@@ -446,7 +447,7 @@ def render_pkg_dir(pkg_dir, pkgs, carved):
             args.append("    deps = " + bzl_list([dep_label(DIRS[d], d) for d in p["deps"]]) + ",")
         if remote:
             args.append("    source_files = " + bzl_list([s["file"] for s in remote]) + ",")
-            args.append("    sources = " + bzl_list([f'//sources:{p["dl_dir"]}--{s["file"]}' if s.get("vendored") else f':{s["file"]}'
+            args.append("    sources = " + bzl_list([f'//sources:{target_name(p["dl_dir"] + "--" + s["file"])}' if s.get("vendored") else f':{target_name(s["file"])}'
                                         for s in remote]) + ",")
         if local:
             args.append("    local_srcs = " + bzl_list([f"//{s['local']}:src" for s in local]) + ",")
@@ -566,9 +567,15 @@ def vendored_sources(model):
     return sorted((d, f, h) for (d, f), h in seen.items())
 
 
+def target_name(s):
+    """A Buck2 target name for a file name: `?` and `=` are label syntax (e.g. Buildroot keeps a URL's query string in the
+    downloaded file's name, musl-compat-headers' `queue.h?rev=1.70`); the artifact keeps the real file name."""
+    return re.sub(r"[^A-Za-z0-9_.+/-]", "_", s)
+
+
 def render_sources(model):
     """Vendored downloads, exposed as Buck2 sources (the files are put there by `br2 fetch`)."""
-    body = "".join(f'export_file(name = "{d}--{f}", src = "{d}/{f}", visibility = ["PUBLIC"])\n'
+    body = "".join(f'export_file(name = "{target_name(d + "--" + f)}", src = "{d}/{f}", visibility = ["PUBLIC"])\n'
                    for d, f, _ in vendored_sources(model))
     return HEADER + "\n# Downloads Buck2's http_file cannot express (git, sha512-only hashes...): put here by `br2 fetch`.\n" + body
 
