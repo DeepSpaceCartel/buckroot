@@ -49,4 +49,12 @@ local env = import 'env.libsonnet';
     },
   },
   platformQueueWithNoWorkersTimeout: env.noWorkersTimeout,
+  // The queue exists from the start. Created by the first worker instead, it is removed again after noWorkersTimeout
+  // without workers, and from then on an action fails at once ("No workers exist for instance name prefix ...")
+  // instead of waiting for a worker to be started: workers scaled to zero could never scale up again.
+  predeclaredPlatformQueues: [{
+    instanceNamePrefix: '',
+    platform: { properties: env.platformProperties },
+    sizeClasses: [0],
+  }],
 }

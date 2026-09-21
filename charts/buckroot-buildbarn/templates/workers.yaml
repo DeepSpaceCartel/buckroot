@@ -26,6 +26,16 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: buckroot-worker
+---
+# The preStop script of every worker container (see the script for what it does).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bb-worker-drain
+  labels: {{- include "bb.labels" . | nindent 4 }}
+data:
+  drain.sh: |
+{{ .Files.Get "files/drain.sh" | indent 4 }}
 {{- range $name, $p := .Values.pools }}{{ if $p.enabled }}
 ---
 # One worker = one pod = three containers that share /worker (build directories and the runner socket), /bb (the runner
@@ -53,10 +63,10 @@ spec:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ $.Values.diagnosticsPort | quote }}
-        checksum/config: {{ printf "%s%s" (include "bb.env" (dict "root" $ "workerPool" $name)) ($.Files.Glob "files/config/*" | toJson) | sha256sum }}
+        checksum/config: {{ printf "%s%s%s" (include "bb.env" (dict "root" $ "workerPool" $name)) ($.Files.Glob "files/config/*" | toJson) ($.Files.Get "files/drain.sh") | sha256sum }}
     spec:
       serviceAccountName: buckroot-worker
-      terminationGracePeriodSeconds: {{ add $.Values.workerTerminationDelaySeconds 30 }}
+      terminationGracePeriodSeconds: {{ add $.Values.workerDrainTimeoutSeconds 60 }}     # the drain (files/drain.sh) waits for the running action, at most workerDrainTimeoutSeconds
       {{- with $p.worker.nodeSelector }}
       nodeSelector: {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -77,7 +87,7 @@ spec:
           volumeMounts:
             - { name: bb, mountPath: /bb }
         - name: prepare
-          image: {{ $.Values.images.busybox }}
+          image: {{ $.Values.images.staticBusybox }}
           env:
             - name: POD_NAME
               valueFrom: { fieldRef: { fieldPath: metadata.name } }
@@ -88,22 +98,27 @@ spec:
               mkdir -p /worker/build /worker/cache/persistent_state
               chmod -R 0777 /worker
               echo "{ slot: '$POD_NAME' }" > /gen/id.libsonnet
+              cp /bin/busybox /tools/busybox          # a static shell for the preStop hooks (bb-worker's image has none)
           volumeMounts:
             - { name: worker, mountPath: /worker }
             - { name: gen, mountPath: /gen }
+            - { name: tools, mountPath: /tools }
       containers:
         - name: worker
           image: {{ $.Values.images.worker }}
           args: [/config/worker.jsonnet]
           ports:
             - { name: metrics, containerPort: {{ $.Values.diagnosticsPort }} }
+          env: {{- include "bb.drainEnv" (dict "root" $ "pool" $name) | nindent 12 }}
           resources: { requests: { cpu: 250m, memory: 512Mi } }
           lifecycle:
-            preStop: { sleep: { seconds: {{ $.Values.workerTerminationDelaySeconds }} } }
+            {{- include "bb.drainHook" . | nindent 12 }}
           volumeMounts:
             - { name: config, mountPath: /config }
             - { name: gen, mountPath: /config/gen }
             - { name: worker, mountPath: /worker }
+            - { name: tools, mountPath: /tools }
+            - { name: drain, mountPath: /drain }
         - name: runner
           image: {{ $p.worker.image | default $.Values.images.runner }}
           command:
@@ -112,22 +127,24 @@ spec:
             - while ! test -f /bb/installed; do sleep 1; done; exec /bb/bb_runner /config/runner.jsonnet
           securityContext:
             privileged: true        # actions start a mount namespace (toolkit scripts/br2-ns.sh)
+          env: {{- include "bb.drainEnv" (dict "root" $ "pool" $name) | nindent 12 }}
           resources: {{- toYaml $p.worker.resources | nindent 12 }}
           lifecycle:
-            preStop: { sleep: { seconds: {{ $.Values.workerTerminationDelaySeconds }} } }
+            {{- include "bb.drainHook" . | nindent 12 }}
           volumeMounts:
             - { name: config, mountPath: /config }
             - { name: bb, mountPath: /bb }
             - { name: worker, mountPath: /worker }
             - { name: scratch, mountPath: /var/tmp }
+            - { name: tools, mountPath: /tools }
+            - { name: drain, mountPath: /drain }
         {{- if $.Values.idleReporter.enabled }}
         - name: idle-reporter
           image: {{ $.Values.images.utility }}
           env:
-            - name: POD_NAME
-              valueFrom: { fieldRef: { fieldPath: metadata.name } }
             - name: POD_NAMESPACE
               valueFrom: { fieldRef: { fieldPath: metadata.namespace } }
+            {{- include "bb.drainEnv" (dict "root" $ "pool" $name) | nindent 12 }}
           command:
             - sh
             - -c
@@ -135,6 +152,7 @@ spec:
               api=https://kubernetes.default.svc
               sa=/var/run/secrets/kubernetes.io/serviceaccount
               last=""
+              trap 'exit 0' TERM        # this shell is PID 1: without a handler SIGTERM is ignored and the pod lingers until SIGKILL
               while true; do
                 if [ -n "$(ls -A /worker/build 2>/dev/null)" ]; then cost=1000; else cost=0; fi
                 if [ "$cost" != "$last" ]; then
@@ -143,17 +161,25 @@ spec:
                     -d "{\"metadata\":{\"annotations\":{\"controller.kubernetes.io/pod-deletion-cost\":\"$cost\"}}}" \
                     "$api/api/v1/namespaces/$POD_NAMESPACE/pods/$POD_NAME" >/dev/null && last=$cost
                 fi
-                sleep {{ $.Values.idleReporter.intervalSeconds }}
+                sleep {{ $.Values.idleReporter.intervalSeconds }} & wait $!     # a trap runs between commands: not during a foreground sleep
               done
           resources: { requests: { cpu: 10m, memory: 16Mi } }
+          lifecycle:
+            {{- include "bb.drainHook" . | nindent 12 }}
           volumeMounts:
             - { name: worker, mountPath: /worker, readOnly: true }
+            - { name: tools, mountPath: /tools }
+            - { name: drain, mountPath: /drain }
         {{- end }}
       volumes:
         - name: config
           configMap: { name: bb-config-worker-{{ $name }} }
         - name: gen
           emptyDir: {}
+        - name: tools
+          emptyDir: {}
+        - name: drain
+          configMap: { name: bb-worker-drain }
         - name: bb
           emptyDir: {}
         - name: worker

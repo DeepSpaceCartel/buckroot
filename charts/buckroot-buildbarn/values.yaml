@@ -13,6 +13,7 @@ images:
   runner: ghcr.io/deepspacecartel/buckroot-worker:latest
   utility: docker.io/curlimages/curl:8.11.1   # the busy/idle reporter
   busybox: docker.io/library/busybox:1.37
+  staticBusybox: docker.io/library/busybox:1.37-musl   # static: its binary is copied into the worker pods for the preStop hooks (bb-worker's image has no shell)
 
 # Platform properties every worker advertises and every scheduler routes on (one static platform per scheduler).
 platformProperties:
@@ -91,8 +92,11 @@ pools:
       replicas: 0
     scaling: { min: 0, max: 4, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
 
-# Delay before a worker pod stops, so an action that is still running can finish. Scale-in normally picks an idle
-# pod (see idleReporter), so this is insurance, not the mechanism.
+# Deleting a worker pod (scale-in, node drain, rollout) first DRAINS it: files/drain.sh tells the scheduler to stop assigning
+# actions to it, then waits until the action it runs, if any, has finished (at most this long; the pod's grace period is this
+# plus a minute). A gcc build is the longest action, about 40 minutes.
+workerDrainTimeoutSeconds: 3600
+# Only when the scheduler cannot be reached: wait this long (the old behaviour) and stop.
 workerTerminationDelaySeconds: 60
 
 # Reports busy/idle by annotating the pod `controller.kubernetes.io/pod-deletion-cost`, so a scale-in removes idle
