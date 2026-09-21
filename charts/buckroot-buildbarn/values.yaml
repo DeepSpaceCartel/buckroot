@@ -43,13 +43,15 @@ pools:
       concurrency: 1
       cacheGiB: 20                # the worker's local input cache (emptyDir)
       workDirGiB: 100             # build directories + /var/tmp scratch (emptyDir on node-local disk)
-      # Two workers share a node (cpx51: 16 vCPU, 32 GB), each with half of it. The memory LIMIT matters: the build actions
-      # size `make -jN` from the container's memory (about 2 GiB per job, toolkit br2/pkg_action.py), so 14Gi means -j7, and
-      # the limit keeps one worker's compile from taking the other's memory.
+      # Three workers share a node (cpx51: 16 vCPU, 32 GB). One action is one whole package build (`make -jN` inside), and a
+      # worker runs one at a time, so the worker count is the number of packages in flight; most packages are small serial
+      # steps, so more, narrower slots beat fewer wide ones (ADR-0016). The memory LIMIT matters: the actions size `make -jN`
+      # from the container's memory (about 2 GiB per job, toolkit br2/pkg_action.py), so 9Gi means -j4, and the limit keeps
+      # one worker's compile from taking another's memory.
       onePerNode: false
       resources:
-        requests: { cpu: "7", memory: 14Gi }
-        limits: { memory: 14Gi }
+        requests: { cpu: "4500m", memory: 9Gi }
+        limits: { memory: 9Gi }
       nodeSelector: {}            # the cluster has one node pool; set a selector when a pool is dedicated to workers
       tolerations: []
       replicas: 0                 # KEDA (below) manages the count when keda.enabled
@@ -71,19 +73,19 @@ pools:
       replicas: 0
     scaling: { min: 0, max: 4, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
 
-  legacy:                         # workers on the legacy baseline image (ubuntu:20.04 era host tools), for projects pinned to an old Buildroot
+  legacy:                         # workers on a project's own baseline image (here FunKey-OS: ubuntu:20.04 era host tools plus its SDK), ADR-0017
     enabled: true
     instancePrefix: legacy
     noWorkersTimeout: 900s
     worker:
-      image: ghcr.io/deepspacecartel/buckroot-worker:ubuntu20.04
+      image: ghcr.io/deepspacecartel/buckroot-worker:funkey
       concurrency: 1
       cacheGiB: 20
       workDirGiB: 100
       onePerNode: false
       resources:
-        requests: { cpu: "7", memory: 14Gi }
-        limits: { memory: 14Gi }
+        requests: { cpu: "4500m", memory: 9Gi }
+        limits: { memory: 9Gi }
       nodeSelector: {}
       tolerations: []
       replicas: 0

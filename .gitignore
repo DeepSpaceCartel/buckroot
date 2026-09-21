@@ -12,3 +12,5 @@ site/
 # Editor / OS
 .vscode/
 .DS_Store
+# fs-manifest.py scan cache next to results
+.scan.json

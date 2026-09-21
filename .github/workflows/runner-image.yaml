@@ -20,6 +20,10 @@ jobs:
         include:
           - { base: "ubuntu:24.04", tag: latest }
           - { base: "ubuntu:20.04", tag: ubuntu20.04 }   # the legacy baseline (projects on Buildroot <= 2021)
+          - base: "ubuntu:20.04"                          # FunKey-OS: its era plus its released SDK at the documented path
+            tag: funkey
+            sdk_url: https://github.com/FunKey-Project/FunKey-OS/releases/download/FunKey-OS-2.1.0/FunKey-sdk-2.1.0.tar.gz
+            sdk_sha256: 5ed790c9aaad018c9a6e2e00bca92c5f477ce7bc4135be2a20f8f2ce4f49e397
     steps:
       - uses: actions/checkout@v4
       - uses: docker/login-action@v3
@@ -35,7 +39,10 @@ jobs:
           context: toolkit/infra/buildbarn/runner
           push: true
           labels: org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-          build-args: BASE=${{ matrix.base }}
+          build-args: |
+            BASE=${{ matrix.base }}
+            SDK_URL=${{ matrix.sdk_url || '' }}
+            SDK_SHA256=${{ matrix.sdk_sha256 || '' }}
           tags: |
             ${{ steps.repo.outputs.image }}:${{ matrix.tag }}
             ${{ steps.repo.outputs.image }}:${{ matrix.tag }}-${{ github.sha }}

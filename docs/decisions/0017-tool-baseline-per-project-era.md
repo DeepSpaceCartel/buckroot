@@ -15,9 +15,10 @@ toolkit does not support, and a deviation from the project as published), or bui
 
 ## Decision
 
-- The worker image is built in **two variants** from one Dockerfile (`BASE` argument): `latest` (ubuntu:24.04) and `ubuntu20.04` (glibc 2.31,
-  gcc 9), published by CI as `buckroot-worker:<tag>`.
-- A project may name its baseline in `project.json` (`"baseline": "ubuntu20.04"`). `br2` then sends its remote actions to the **`legacy` worker
+- The worker image is built in **variants** from one Dockerfile (`BASE`, and optionally a vendor SDK at its documented path): `latest` (ubuntu:24.04),
+  `ubuntu20.04` (glibc 2.31, gcc 9) and `funkey` (ubuntu:20.04 plus the released FunKey SDK at `/opt/FunKey-sdk-2.1.0`, whose `.la` files name that
+  path), published by CI as `buckroot-worker:<tag>`.
+- A project may name its baseline in `project.json` (`"baseline": "funkey"`). `br2` then sends its remote actions to the **`legacy` worker
   pool** (instance-name prefix `legacy/`, workers running that image) and runs its golden Job in the same image, so golden and Buck2 builds
   still share one baseline (ADR-0013). Everything else is unchanged; no patches are applied to the project.
 - The chart's pools take a per-pool `worker.image`; the `legacy` pool is enabled with zero replicas until a build needs it.

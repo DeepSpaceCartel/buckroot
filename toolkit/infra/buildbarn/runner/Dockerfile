@@ -13,5 +13,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       findutils diffutils sed gawk pkg-config git xauth debianutils \
     && rm -rf /var/lib/apt/lists/*
 
+# A vendor SDK at its documented install path, when a project's baseline needs one: FunKey-OS's released SDK was built at
+# /opt/FunKey-sdk-2.1.0 and its .la files carry that path, so Buildroot's downloaded copy only links when the SDK also exists there.
+ARG SDK_URL=""
+ARG SDK_SHA256=""
+RUN if [ -n "$SDK_URL" ]; then \
+      curl -fsSL -o /tmp/sdk.tgz "$SDK_URL" \
+      && echo "$SDK_SHA256  /tmp/sdk.tgz" | sha256sum -c - \
+      && tar -xzf /tmp/sdk.tgz -C /opt && rm /tmp/sdk.tgz; \
+    fi
+
 # Same fixed PATH the actions use (see br2/pkg_action.py ENV).
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
