@@ -1,0 +1,672 @@
+{
+ "buildroot": "2025.05.1",
+ "defconfig": "sdk_x86_64_gnu_defconfig",
+ "packages": {
+  "busybox": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/busybox",
+   "dl_dir": "busybox",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "busybox-1.37.0.tar.bz2",
+     "sha256": "3311dff32e746499f4df0d5df04d7eb396382d7e108bb9250e7b519b837043a4",
+     "urls": [
+      "https://www.busybox.net/downloads/busybox-1.37.0.tar.bz2",
+      "https://sources.buildroot.net/busybox/busybox-1.37.0.tar.bz2",
+      "https://sources.buildroot.net/busybox-1.37.0.tar.bz2"
+     ]
+    }
+   ],
+   "stamp_dir": "build/busybox-1.37.0",
+   "version": "1.37.0",
+   "virtual": false
+  },
+  "gcc-final": {
+   "deps": [
+    "host-fakedate",
+    "host-gcc-final",
+    "host-skeleton",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/package/gcc/gcc-final",
+   "dl_dir": "gcc",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "gcc-13.4.0.tar.xz",
+     "hash": {
+      "sha512": "9b4b83ecf51ef355b868608b8d257b2fa435c06d2719cb86657a7c2c2a0828ff4ce04e9bac1055bbcad8ed5b4da524cafaef654785e23a50233d95d89201e35f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/gcc-final-13.4.0",
+   "version": "13.4.0",
+   "virtual": false
+  },
+  "glibc": {
+   "deps": [
+    "host-bison",
+    "host-fakedate",
+    "host-gawk",
+    "host-gcc-initial",
+    "host-skeleton",
+    "linux-headers",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/package/glibc",
+   "dl_dir": "glibc",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "glibc-2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163.tar.gz",
+     "sha256": "ed2cd1f058f22f682e700c5be408975db62025a14863a5a6700ee93d5927504e",
+     "urls": [
+      "https://github.com/bminor/glibc/archive/2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163/glibc-2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163.tar.gz",
+      "https://sources.buildroot.net/glibc/glibc-2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163.tar.gz",
+      "https://sources.buildroot.net/glibc-2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163.tar.gz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/glibc-2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163",
+   "version": "2.41-5-gcb7f20653724029be89224ed3a35d627cc5b4163",
+   "virtual": false
+  },
+  "host-acl": {
+   "deps": [
+    "host-attr",
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/acl",
+   "dl_dir": "acl",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "acl-2.3.2.tar.xz",
+     "sha256": "97203a72cae99ab89a067fe2210c1cbf052bc492b479eca7d226d9830883b0bd",
+     "urls": [
+      "https://download.savannah.nongnu.org/releases/acl/acl-2.3.2.tar.xz",
+      "https://sources.buildroot.net/acl/acl-2.3.2.tar.xz",
+      "https://sources.buildroot.net/acl-2.3.2.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-acl-2.3.2",
+   "version": "2.3.2",
+   "virtual": false
+  },
+  "host-attr": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/attr",
+   "dl_dir": "attr",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "attr-2.5.2.tar.xz",
+     "sha256": "f2e97b0ab7ce293681ab701915766190d607a1dba7fae8a718138150b700a70b",
+     "urls": [
+      "http://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.xz",
+      "https://sources.buildroot.net/attr/attr-2.5.2.tar.xz",
+      "https://sources.buildroot.net/attr-2.5.2.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-attr-2.5.2",
+   "version": "2.5.2",
+   "virtual": false
+  },
+  "host-autoconf": {
+   "deps": [
+    "host-fakedate",
+    "host-libtool",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/autoconf",
+   "dl_dir": "autoconf",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "autoconf-2.72.tar.xz",
+     "sha256": "ba885c1319578d6c94d46e9b0dceb4014caafe2490e437a0dbca3f270a223f5a",
+     "urls": [
+      "https://ftpmirror.gnu.org/autoconf/autoconf-2.72.tar.xz",
+      "https://sources.buildroot.net/autoconf/autoconf-2.72.tar.xz",
+      "https://sources.buildroot.net/autoconf-2.72.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-autoconf-2.72",
+   "version": "2.72",
+   "virtual": false
+  },
+  "host-automake": {
+   "deps": [
+    "host-autoconf",
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/automake",
+   "dl_dir": "automake",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "automake-1.16.5.tar.xz",
+     "sha256": "f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469",
+     "urls": [
+      "https://ftpmirror.gnu.org/automake/automake-1.16.5.tar.xz",
+      "https://sources.buildroot.net/automake/automake-1.16.5.tar.xz",
+      "https://sources.buildroot.net/automake-1.16.5.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-automake-1.16.5",
+   "version": "1.16.5",
+   "virtual": false
+  },
+  "host-binutils": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/binutils",
+   "dl_dir": "binutils",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "binutils-2.44.tar.xz",
+     "hash": {
+      "sha512": "b85d3bbc0e334cf67a96219d3c7c65fbf3e832b2c98a7417bf131f3645a0307057ec81cd2b29ff2563cec53e3d42f73e2c60cc5708e80d4a730efdcc6ae14ad7"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-binutils-2.44",
+   "version": "2.44",
+   "virtual": false
+  },
+  "host-bison": {
+   "deps": [
+    "host-fakedate",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/bison",
+   "dl_dir": "bison",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "bison-3.8.2.tar.xz",
+     "sha256": "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2",
+     "urls": [
+      "https://ftpmirror.gnu.org/bison/bison-3.8.2.tar.xz",
+      "https://sources.buildroot.net/bison/bison-3.8.2.tar.xz",
+      "https://sources.buildroot.net/bison-3.8.2.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-bison-3.8.2",
+   "version": "3.8.2",
+   "virtual": false
+  },
+  "host-fakedate": {
+   "deps": [
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/fakedate",
+   "dl_dir": "fakedate",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-fakedate",
+   "version": "",
+   "virtual": false
+  },
+  "host-fakeroot": {
+   "deps": [
+    "host-acl",
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/fakeroot",
+   "dl_dir": "fakeroot",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "fakeroot_1.37.1.1.orig.tar.gz",
+     "sha256": "86b0b75bf319ca42e525c098675b6ed10a06b76e69ec9ccf20ef5e03883b3a14",
+     "urls": [
+      "https://snapshot.debian.org/archive/debian/20250329T150348Z/pool/main/f/fakeroot/fakeroot_1.37.1.1.orig.tar.gz",
+      "https://sources.buildroot.net/fakeroot/fakeroot_1.37.1.1.orig.tar.gz",
+      "https://sources.buildroot.net/fakeroot_1.37.1.1.orig.tar.gz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-fakeroot-1.37.1.1",
+   "version": "1.37.1.1",
+   "virtual": false
+  },
+  "host-gawk": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gawk",
+   "dl_dir": "gawk",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gawk-5.3.1.tar.xz",
+     "sha256": "694db764812a6236423d4ff40ceb7b6c4c441301b72ad502bb5c27e00cd56f78",
+     "urls": [
+      "https://ftpmirror.gnu.org/gawk/gawk-5.3.1.tar.xz",
+      "https://sources.buildroot.net/gawk/gawk-5.3.1.tar.xz",
+      "https://sources.buildroot.net/gawk-5.3.1.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-gawk-5.3.1",
+   "version": "5.3.1",
+   "virtual": false
+  },
+  "host-gcc-final": {
+   "deps": [
+    "glibc",
+    "host-binutils",
+    "host-fakedate",
+    "host-gmp",
+    "host-isl",
+    "host-mpc",
+    "host-mpfr",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gcc/gcc-final",
+   "dl_dir": "gcc",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gcc-13.4.0.tar.xz",
+     "hash": {
+      "sha512": "9b4b83ecf51ef355b868608b8d257b2fa435c06d2719cb86657a7c2c2a0828ff4ce04e9bac1055bbcad8ed5b4da524cafaef654785e23a50233d95d89201e35f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gcc-final-13.4.0",
+   "version": "13.4.0",
+   "virtual": false
+  },
+  "host-gcc-initial": {
+   "deps": [
+    "host-binutils",
+    "host-fakedate",
+    "host-gmp",
+    "host-isl",
+    "host-mpc",
+    "host-mpfr",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gcc/gcc-initial",
+   "dl_dir": "gcc",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gcc-13.4.0.tar.xz",
+     "hash": {
+      "sha512": "9b4b83ecf51ef355b868608b8d257b2fa435c06d2719cb86657a7c2c2a0828ff4ce04e9bac1055bbcad8ed5b4da524cafaef654785e23a50233d95d89201e35f"
+     },
+     "vendored": true
+    }
+   ],
+   "stamp_dir": "build/host-gcc-initial-13.4.0",
+   "version": "13.4.0",
+   "virtual": false
+  },
+  "host-gmp": {
+   "deps": [
+    "host-autoconf",
+    "host-automake",
+    "host-fakedate",
+    "host-libtool",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/gmp",
+   "dl_dir": "gmp",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "gmp-6.3.0.tar.xz",
+     "sha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+     "urls": [
+      "https://ftpmirror.gnu.org/gmp/gmp-6.3.0.tar.xz",
+      "https://sources.buildroot.net/gmp/gmp-6.3.0.tar.xz",
+      "https://sources.buildroot.net/gmp-6.3.0.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-gmp-6.3.0",
+   "version": "6.3.0",
+   "virtual": false
+  },
+  "host-isl": {
+   "deps": [
+    "host-fakedate",
+    "host-gmp",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/isl",
+   "dl_dir": "isl",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "isl-0.26.tar.xz",
+     "sha256": "a0b5cb06d24f9fa9e77b55fabbe9a3c94a336190345c2555f9915bb38e976504",
+     "urls": [
+      "https://libisl.sourceforge.io/isl-0.26.tar.xz",
+      "https://sources.buildroot.net/isl/isl-0.26.tar.xz",
+      "https://sources.buildroot.net/isl-0.26.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-isl-0.26",
+   "version": "0.26",
+   "virtual": false
+  },
+  "host-libtool": {
+   "deps": [
+    "host-fakedate",
+    "host-m4",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/libtool",
+   "dl_dir": "libtool",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "libtool-2.4.6.tar.xz",
+     "sha256": "7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f",
+     "urls": [
+      "https://ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.xz",
+      "https://sources.buildroot.net/libtool/libtool-2.4.6.tar.xz",
+      "https://sources.buildroot.net/libtool-2.4.6.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-libtool-2.4.6",
+   "version": "2.4.6",
+   "virtual": false
+  },
+  "host-m4": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/m4",
+   "dl_dir": "m4",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "m4-1.4.20.tar.xz",
+     "sha256": "e236ea3a1ccf5f6c270b1c4bb60726f371fa49459a8eaaebc90b216b328daf2b",
+     "urls": [
+      "https://ftpmirror.gnu.org/m4/m4-1.4.20.tar.xz",
+      "https://sources.buildroot.net/m4/m4-1.4.20.tar.xz",
+      "https://sources.buildroot.net/m4-1.4.20.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-m4-1.4.20",
+   "version": "1.4.20",
+   "virtual": false
+  },
+  "host-makedevs": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/makedevs",
+   "dl_dir": "makedevs",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-makedevs",
+   "version": "",
+   "virtual": false
+  },
+  "host-mpc": {
+   "deps": [
+    "host-fakedate",
+    "host-gmp",
+    "host-mpfr",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/mpc",
+   "dl_dir": "mpc",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "mpc-1.3.1.tar.gz",
+     "sha256": "ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8",
+     "urls": [
+      "https://ftpmirror.gnu.org/mpc/mpc-1.3.1.tar.gz",
+      "https://sources.buildroot.net/mpc/mpc-1.3.1.tar.gz",
+      "https://sources.buildroot.net/mpc-1.3.1.tar.gz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-mpc-1.3.1",
+   "version": "1.3.1",
+   "virtual": false
+  },
+  "host-mpfr": {
+   "deps": [
+    "host-fakedate",
+    "host-gmp",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/mpfr",
+   "dl_dir": "mpfr",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "mpfr-4.1.1.tar.xz",
+     "sha256": "ffd195bd567dbaffc3b98b23fd00aad0537680c9896171e44fe3ff79e28ac33d",
+     "urls": [
+      "http://www.mpfr.org/mpfr-4.1.1/mpfr-4.1.1.tar.xz",
+      "https://sources.buildroot.net/mpfr/mpfr-4.1.1.tar.xz",
+      "https://sources.buildroot.net/mpfr-4.1.1.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-mpfr-4.1.1",
+   "version": "4.1.1",
+   "virtual": false
+  },
+  "host-patchelf": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/patchelf",
+   "dl_dir": "patchelf",
+   "kind": "host",
+   "sources": [
+    {
+     "file": "patchelf-0.13.tar.bz2",
+     "sha256": "4c7ed4bcfc1a114d6286e4a0d3c1a90db147a4c3adda1814ee0eee0f9ee917ed",
+     "urls": [
+      "https://github.com/NixOS/patchelf/releases/download/0.13/patchelf-0.13.tar.bz2",
+      "https://sources.buildroot.net/patchelf/patchelf-0.13.tar.bz2",
+      "https://sources.buildroot.net/patchelf-0.13.tar.bz2"
+     ]
+    }
+   ],
+   "stamp_dir": "build/host-patchelf-0.13",
+   "version": "0.13",
+   "virtual": false
+  },
+  "host-skeleton": {
+   "deps": [],
+   "dir": "buildroot-src/package/skeleton",
+   "dl_dir": "skeleton",
+   "kind": "host",
+   "sources": [],
+   "stamp_dir": "build/host-skeleton",
+   "version": "",
+   "virtual": false
+  },
+  "ifupdown-scripts": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/ifupdown-scripts",
+   "dl_dir": "ifupdown-scripts",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/ifupdown-scripts",
+   "version": "",
+   "virtual": false
+  },
+  "initscripts": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/initscripts",
+   "dl_dir": "initscripts",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/initscripts",
+   "version": "",
+   "virtual": false
+  },
+  "linux-headers": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/package/linux-headers",
+   "dl_dir": "linux",
+   "kind": "target",
+   "sources": [
+    {
+     "file": "linux-6.1.147.tar.xz",
+     "sha256": "218f25663a41e3d811e84fa1c4acec50684898b2f6d0c8c0deb531d937e466f7",
+     "urls": [
+      "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.147.tar.xz",
+      "https://sources.buildroot.net/linux/linux-6.1.147.tar.xz",
+      "https://sources.buildroot.net/linux-6.1.147.tar.xz"
+     ]
+    }
+   ],
+   "stamp_dir": "build/linux-headers-6.1.147",
+   "version": "6.1.147",
+   "virtual": false
+  },
+  "skeleton": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton-init-sysv"
+   ],
+   "dir": "buildroot-src/package/skeleton",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/skeleton",
+   "version": null,
+   "virtual": true
+  },
+  "skeleton-init-common": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton"
+   ],
+   "dir": "buildroot-src/package/skeleton-init-common",
+   "dl_dir": "skeleton-init-common",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/skeleton-init-common",
+   "version": "",
+   "virtual": false
+  },
+  "skeleton-init-sysv": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton-init-common"
+   ],
+   "dir": "buildroot-src/package/skeleton-init-sysv",
+   "dl_dir": "skeleton-init-sysv",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/skeleton-init-sysv",
+   "version": "",
+   "virtual": false
+  },
+  "toolchain": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain-buildroot"
+   ],
+   "dir": "buildroot-src/toolchain/toolchain",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/toolchain",
+   "version": null,
+   "virtual": true
+  },
+  "toolchain-buildroot": {
+   "deps": [
+    "gcc-final",
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton"
+   ],
+   "dir": "buildroot-src/toolchain/toolchain-buildroot",
+   "dl_dir": null,
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/toolchain-buildroot",
+   "version": null,
+   "virtual": true
+  },
+  "urandom-scripts": {
+   "deps": [
+    "host-fakedate",
+    "host-skeleton",
+    "skeleton",
+    "toolchain"
+   ],
+   "dir": "buildroot-src/package/urandom-scripts",
+   "dl_dir": "urandom-scripts",
+   "kind": "target",
+   "sources": [],
+   "stamp_dir": "build/urandom-scripts",
+   "version": "",
+   "virtual": false
+  }
+ },
+ "target_tuple": "x86_64-bottlerocket-linux-gnu"
+}

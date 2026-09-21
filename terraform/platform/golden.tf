@@ -2,10 +2,10 @@
 # BR2_DL_DIR is a complete, reusable download cache, so a second golden of any project downloads nothing and a retry after a
 # rate-limited download picks up where it stopped. Shared by all projects (files are versioned). A Hetzner volume is single-attach,
 # so one golden Job runs at a time; a second waits in Pending until the first finishes.
-# Two claims, so two goldens can run at once (`br2 golden --k8s --dl-claim golden-dl-b`); seed the second from the first or from a
+# Several claims, so several goldens can run at once (`br2 golden --k8s --dl-claim golden-dl-b`); seed the second from the first or from a
 # machine that fetched (docs/guides/kubernetes.md).
 resource "kubernetes_persistent_volume_claim_v1" "golden_dl" {
-  for_each = toset(["golden-dl", "golden-dl-b"])
+  for_each = toset(["golden-dl", "golden-dl-b", "golden-dl-c"])
   metadata {
     name      = each.key
     namespace = kubernetes_namespace_v1.buildbarn.metadata[0].name

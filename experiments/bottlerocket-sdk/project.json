@@ -1,0 +1,29 @@
+{
+  "name": "bottlerocket-sdk",
+  "description": "Bottlerocket SDK (bottlerocket-os/bottlerocket-sdk): the toolchain and host tools AWS builds Bottlerocket with. Buildroot 2025.05.1 plus the SDK's five-patch series, x86_64 glibc. Not a firmware image: the build is a cross toolchain and sysroot.",
+  "defconfig": "sdk_x86_64_gnu_defconfig",
+  "external": true,
+  "buildroot": {
+    "repo": "https://github.com/buildroot/buildroot.git",
+    "ref": "2025.05.1"
+  },
+  "sources": "http",
+  "config_fragment": [
+    "# BR2_PRIMARY_SITE_ONLY is not set",
+    "BR2_PRIMARY_SITE=\"\""
+  ],
+  "heavy": [
+    "host-gcc-initial",
+    "host-gcc-final"
+  ],
+  "native": [
+    "host-skeleton",
+    "host-fakedate",
+    "skeleton",
+    "initscripts",
+    "urandom-scripts",
+    "skeleton-init-sysv",
+    "skeleton-init-common"
+  ],
+  "notes": "The SDK's defconfigs (copied unchanged into buildroot-external/configs/) pin BR2_PRIMARY_SITE=file:///home/builder with BR2_PRIMARY_SITE_ONLY: its Dockerfile pre-fetches every source there. The fragment turns that off so Buildroot downloads normally; nothing else in the configuration changes. Its Buildroot is the 2025.05.1 release with patches/buildroot/0001-0005 (sysroot and tools-directory controls for binutils and gcc), applied at setup."
+}

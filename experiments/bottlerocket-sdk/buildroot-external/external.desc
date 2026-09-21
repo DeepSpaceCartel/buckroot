@@ -1,0 +1,2 @@
+name: BOTTLEROCKET_SDK
+desc: Bottlerocket SDK: the four toolchain defconfigs of bottlerocket-os/bottlerocket-sdk (configs/buildroot/), unchanged
