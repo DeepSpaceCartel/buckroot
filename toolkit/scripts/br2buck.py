@@ -621,6 +621,21 @@ def render_generated(model):
 DIRS = {}   # package name -> package dir (filled by render())
 
 
+def stale_generated(current):
+    """BUCK files an earlier render wrote (they carry the @generated header) that the current model no longer produces. A left-over
+    one turns its directory into a Buck2 sub-package, so the parent's directory source fails ("does not exist as a member of package")."""
+    first = HEADER.splitlines()[0]
+    found = []
+    for root in ("buildroot-src", "buildroot-external"):
+        for dp, dns, fns in os.walk(HERE / root):
+            dns[:] = [d for d in dns if d not in (".git", "output", "dl")]
+            if "BUCK" in fns:
+                rel = os.path.relpath(os.path.join(dp, "BUCK"), HERE)
+                if rel not in current and (Path(dp) / "BUCK").read_text(errors="replace").startswith(first):
+                    found.append(rel)
+    return sorted(found)
+
+
 def render(check):
     model = json.loads(MODEL.read_text())
     DIRS.clear()
@@ -629,6 +644,11 @@ def render(check):
     for n, p in model["packages"].items():
         by_dir.setdefault(p["dir"], {})[n] = p
     carved = set(by_dir)
+    # Stale generated BUCK files go first: rendering reads the tree, and a left-over one changes what its parent lists.
+    stale = stale_generated({f"{d}/BUCK" for d in by_dir} | {"buildroot-src/BUCK", "buildroot-external/BUCK"})
+    if not check:
+        for rel in stale:
+            (HERE / rel).unlink()
     files = {d: render_pkg_dir(d, pkgs, carved) for d, pkgs in by_dir.items()}
     out = {f"{d}/BUCK": text for d, text in files.items()}
     for root in ("buildroot-src", "buildroot-external"):
@@ -649,6 +669,7 @@ def render(check):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(text)
     if check:
+        changed += [rel + "  (no longer generated)" for rel in stale]
         if changed:
             sys.exit("stale rendered files (run `scripts/br2buck.py render`):\n  " + "\n  ".join(changed))
         print(f"{len(out)} rendered files up to date")
@@ -658,7 +679,7 @@ def render(check):
     if excl.parent.is_dir() and "\nBUCK\n" not in "\n" + excl.read_text() + "\n":
         with open(excl, "a") as fh:
             fh.write("BUCK\n")
-    print(f"{len(out)} files rendered ({len(changed)} changed)")
+    print(f"{len(out)} files rendered ({len(changed)} changed" + (f", {len(stale)} stale removed)" if stale else ")"))
 
 
 def main():
