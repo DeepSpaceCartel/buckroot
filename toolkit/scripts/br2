@@ -211,16 +211,21 @@ def build_once(mode, variant, cold_state=True, iso=""):
     if cold_state:
         clean(iso)
     result["instance"] = inst
-    result["cold"] = buck_build(mode, variant, inst, show=True, iso=iso, salt=salt)
-    if result["cold"]["ok"] and result["cold"].get("output") and golden.exists():
-        diff = manifest_diff(result["cold"]["output"], golden, iso)
-        result["cold"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
-    if mode in ("local-cache", "remote-cache") and result["cold"]["ok"]:
-        clean(iso)
-        result["warm"] = buck_build(mode, variant, inst, show=True, iso=iso, salt=salt)
-        if result["warm"]["ok"] and result["warm"].get("output") and golden.exists():
-            diff = manifest_diff(result["warm"]["output"], golden, iso)
-            result["warm"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
+    try:
+        result["cold"] = buck_build(mode, variant, inst, show=True, iso=iso, salt=salt)
+        if result["cold"]["ok"] and result["cold"].get("output") and golden.exists():
+            diff = manifest_diff(result["cold"]["output"], golden, iso)
+            result["cold"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
+        if mode in ("local-cache", "remote-cache") and result["cold"]["ok"]:
+            clean(iso)
+            result["warm"] = buck_build(mode, variant, inst, show=True, iso=iso, salt=salt)
+            if result["warm"]["ok"] and result["warm"].get("output") and golden.exists():
+                diff = manifest_diff(result["warm"]["output"], golden, iso)
+                result["warm"]["manifest"] = "IDENTICAL" if diff == ["IDENTICAL"] else diff[:20]
+    finally:
+        # a cell's daemon (one per isolation dir) would otherwise outlive the cell: a matrix of parallel cells left a dozen
+        # idle daemons and gigabytes of memory behind. The build outputs stay in buck-out.
+        sh([*buck2_cmd(iso), "kill"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result
 
 
