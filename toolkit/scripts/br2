@@ -236,7 +236,7 @@ def cmd_extract(_):
 
 
 def golden_job(a):
-    """`br2 golden --k8s`: the golden build as a Kubernetes Job on a Buildbarn worker pool's nodes, in the worker's own tool-baseline
+    """`br2 golden --k8s`: the golden build as a Kubernetes Job on the cluster, in the worker's own tool-baseline
     image (so the golden and the remote builds share one environment). The repository is cloned at the current commit, so push
     first. Small results come back through the pod log (a gzip'd tar between markers); the image and build tree are discarded."""
     import base64
@@ -247,7 +247,6 @@ def golden_job(a):
     ref = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     prefix = subprocess.check_output(["git", "rev-parse", "--show-prefix"], cwd=ROOT, text=True).strip().rstrip("/")
     name = re.sub(r"[^a-z0-9-]", "-", f"golden-{CFG['name']}-{ref[:8]}".lower())[:60]
-    pool = a.pool or "dedicated"
     fetch = "scripts/br2 fetch\n" if CFG["sources"] == "vendored" else ""
     vanilla = " --vanilla" if a.vanilla else ""
     results = f"golden/rootfs.{'vanilla.' if a.vanilla else ''}manifest.json results/golden{'-vanilla' if a.vanilla else ''}.json"
@@ -272,8 +271,6 @@ echo BR2_RESULTS_END
                 "metadata": {"labels": {"app": "buckroot-golden"}},
                 "spec": {
                     "restartPolicy": "Never",
-                    "nodeSelector": {"buckroot.dev/pool": f"bb-workers-{pool}"},
-                    "tolerations": [{"key": "buckroot-worker", "operator": "Equal", "value": "true", "effect": "NoSchedule"}],
                     "containers": [{
                         "name": "golden", "image": a.image, "command": ["bash", "-c", script],
                         "env": [{"name": "HOME", "value": "/work"}, {"name": "BR2_CACHE", "value": "/work/cache"}],
@@ -404,8 +401,7 @@ def main():
     pf.set_defaults(fn=cmd_preflight)
     g = sub.add_parser("golden")
     g.add_argument("--vanilla", action="store_true")
-    g.add_argument("--k8s", action="store_true", help="run as a Kubernetes Job on the Buildbarn worker pool's nodes (push first; results come back through the pod log)")
-    g.add_argument("--pool", default="", help="--k8s: worker pool whose nodes to use (default dedicated)")
+    g.add_argument("--k8s", action="store_true", help="run as a Kubernetes Job on the cluster, in the worker image (push first; results come back through the pod log)")
     g.add_argument("--namespace", default="buildbarn", help="--k8s: namespace (needs the privileged Pod Security level)")
     g.add_argument("--image", default=os.environ.get("BR2_RUNNER_IMAGE", "ghcr.io/deepspacecartel/buckroot-worker:latest"), help="--k8s: the tool-baseline image")
     g.add_argument("--cpu", default="7", help="--k8s: CPU request")

@@ -63,12 +63,14 @@ spec:
       {{- with $p.worker.tolerations }}
       tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if $p.worker.onePerNode }}
       affinity:
-        podAntiAffinity:            # one worker per node, so make -jN sees the node's CPUs
+        podAntiAffinity:            # one worker per node: the pool's workers are sized to a whole node
           requiredDuringSchedulingIgnoredDuringExecution:
             - topologyKey: kubernetes.io/hostname
               labelSelector:
                 matchLabels: { app: worker }
+      {{- end }}
       initContainers:
         - name: runner-installer
           image: {{ $.Values.images.runnerInstaller }}

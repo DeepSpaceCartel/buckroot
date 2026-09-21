@@ -6,9 +6,10 @@ Design and reasoning: [Kubernetes deployment guide](../docs/guides/kubernetes.md
 
 ```
 terraform/
-  cluster/            the cluster: control plane, an always-on platform node, three autoscaled pools (0..N)
+  cluster/            the cluster: a schedulable control node and one autoscaled pool (0..4), one server type
   platform/           what runs on it: Buildbarn (charts/buckroot-buildbarn), KEDA, Prometheus, Coder
   coder-templates/    the workspace template, as code
+  tailscale/          the tailnet policy (tags for the Kubernetes operator)
 ../charts/buckroot-buildbarn/    the Buildbarn Helm chart
 ```
 
@@ -16,14 +17,13 @@ terraform/
 
 | Pool | Size | Purpose |
 |---|---|---|
-| control | static x1 | Talos control plane |
-| platform | static x1 | Buildbarn storage, frontend, schedulers, portal, Postgres, Coder, KEDA, Prometheus |
-| bb-workers-shared | 0..8 | Buildbarn workers, cheap shared vCPU (noisy timings) |
-| bb-workers-dedicated | 0..4 | Buildbarn workers, dedicated vCPU (measured runs) |
-| coder-workspaces | 0..2 | Coder workspace pods |
+| control | static x1, `cpx51` | Talos control plane, schedulable: platform pods and workers run here too |
+| nodes | 0..4, `cpx51` | one autoscaled pool, no taints: platform pods, Coder workspaces, Buildbarn workers (two per node) |
 
-The autoscaled pools are empty until a pod needs them and are billed hourly only while a server exists. Server types are variables;
-check availability in your location with `hcloud server-type list` (all x86: the tool baseline is x86-64).
+One server type and no taints, because the Hetzner project's server limit is 5 (a new account cannot request more) and a
+server reserved for one kind of pod is a wasted slot; see [ADR-0016](../docs/decisions/0016-one-node-pool.md). A node exists only
+while a pod needs it and is billed hourly. Server types are variables; check availability in your location with
+`hcloud server-type list` (all x86: the tool baseline is x86-64).
 
 ## Apply
 

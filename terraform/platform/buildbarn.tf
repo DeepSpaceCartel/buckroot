@@ -38,7 +38,10 @@ resource "helm_release" "buildbarn" {
       prometheusAddress = "http://prometheus-server.${kubernetes_namespace_v1.monitoring.metadata[0].name}.svc.cluster.local:80"
     }
     pools = {
-      for pool, query in var.worker_scaling_queries : pool => { scaling = { query = query } }
+      for pool in ["shared", "dedicated"] : pool => merge(
+        contains(keys(var.worker_scaling_queries), pool) ? { scaling = { query = var.worker_scaling_queries[pool] } } : {},
+        contains(keys(var.worker_replicas), pool) ? { worker = { replicas = var.worker_replicas[pool] } } : {},
+      )
     }
   })]
 

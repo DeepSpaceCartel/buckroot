@@ -43,21 +43,26 @@ pools:
       concurrency: 1
       cacheGiB: 20                # the worker's local input cache (emptyDir)
       workDirGiB: 100             # build directories + /var/tmp scratch (emptyDir on node-local disk)
-      resources:                  # size a worker to a whole node so `make -jN` sees its CPUs
-        requests: { cpu: "7", memory: 12Gi }
-      nodeSelector: { buckroot.dev/pool: bb-workers-shared }
-      tolerations:
-        - { key: buckroot-worker, operator: Equal, value: "true", effect: NoSchedule }
+      # Two workers share a node (cpx51: 16 vCPU, 32 GB), each with half of it. The memory LIMIT matters: the build actions
+      # size `make -jN` from the container's memory (about 2 GiB per job, toolkit br2/pkg_action.py), so 14Gi means -j7, and
+      # the limit keeps one worker's compile from taking the other's memory.
+      onePerNode: false
+      resources:
+        requests: { cpu: "7", memory: 14Gi }
+        limits: { memory: 14Gi }
+      nodeSelector: {}            # the cluster has one node pool; set a selector when a pool is dedicated to workers
+      tolerations: []
       replicas: 0                 # KEDA (below) manages the count when keda.enabled
     scaling: { min: 0, max: 8, tasksPerWorker: 1, cooldownSeconds: 300, scaleDownStabilizationSeconds: 300, query: "" }
-  dedicated:
-    enabled: true
+  dedicated:                      # a second pool for clean timings on dedicated-CPU nodes; off while the project's server limit is 5
+    enabled: false
     instancePrefix: dedicated
     noWorkersTimeout: 900s
     worker:
       concurrency: 1
       cacheGiB: 20
       workDirGiB: 100
+      onePerNode: true            # sized to a whole node (ccx33: 8 dedicated vCPU, 32 GB), for clean timings
       resources:
         requests: { cpu: "7", memory: 28Gi }
       nodeSelector: { buckroot.dev/pool: bb-workers-dedicated }

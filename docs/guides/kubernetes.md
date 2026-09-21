@@ -6,9 +6,8 @@ A cluster dedicated to buckroot development, on Hetzner Cloud: Buildbarn (remote
 pools, and Coder for workspaces. The code is in [`terraform/`](https://github.com/DeepSpaceCartel/buckroot/tree/main/terraform) and
 [`charts/buckroot-buildbarn/`](https://github.com/DeepSpaceCartel/buckroot/tree/main/charts/buckroot-buildbarn). Reasoning: [ADR-0015](../decisions/0015-buildbarn-on-kubernetes.md).
 
-!!! warning "Written and validated, not yet applied"
-    Everything here passes `terraform validate`, `helm lint` and `helm template`, and the rendered Buildbarn configuration was accepted by the
-    Buildbarn binaries. It has **not** been applied to a real Hetzner project. The first apply will find things; the risks are listed at the end.
+!!! note "Applied"
+    The cluster runs in Hillsboro since 2026-09-20. What the first apply found is in [What the first apply found](#what-the-first-apply-found).
 
 ## Why
 
@@ -23,32 +22,28 @@ flowchart LR
     ws[Coder workspace<br/>Buck2 client] -->|"grpc frontend:8980"| fe[frontend]
     fe --> st[(storage<br/>CAS + action cache)]
     fe -->|instance name| s1[scheduler-shared]
-    fe -->|"instance name dedicated/..."| s2[scheduler-dedicated]
-    s1 --> w1["worker pods<br/>bb-workers-shared 0..8"]
-    s2 --> w2["worker pods<br/>bb-workers-dedicated 0..4"]
+    s1 --> w1["worker pods<br/>two per node"]
     w1 --> st
-    w2 --> st
     k[KEDA] -.scales.-> w1
-    k -.scales.-> w2
     p[Prometheus] -.queue depth.-> k
 ```
 
 | Node pool | Size | Runs |
 |---|---|---|
-| control | static x1 | Talos control plane |
-| platform | static x1 | storage, frontend, schedulers, portal, Postgres, Coder, KEDA, Prometheus |
-| bb-workers-shared | 0 to 8 | worker pods on cheap shared-vCPU servers |
-| bb-workers-dedicated | 0 to 4 | worker pods on dedicated-vCPU servers, for measured runs |
-| coder-workspaces | 0 to 2 | Coder workspace pods |
+| control | static x1, `cpx51` | the Talos control plane, and pods like any other node |
+| nodes | 0 to 4, `cpx51` (16 vCPU, 32 GB) | everything: storage, frontend, scheduler, portal, Postgres, Coder and its workspaces, KEDA, Prometheus, Buildbarn workers |
+
+One pool, one server type, no taints: the project's server limit is 5, so a server that only one kind of pod may use is a wasted slot
+([ADR-0016](../decisions/0016-one-node-pool.md)). The chart still supports a second, dedicated-CPU pool for clean timings (`pools.dedicated`), off until the limit is raised.
 
 A **worker** is one pod with three containers: `bb-worker` (fetches inputs), the privileged `runner` (executes the command in the tool baseline image, starting
-a mount namespace per action) and an idle reporter. One worker runs on one node, so `make -jN` sees the node's CPUs. The Buildbarn configuration is the toolkit's,
+a mount namespace per action) and an idle reporter. Two workers share a node, each with a memory limit of 14 GiB: the build actions size `make -jN` from the container's memory (about 2 GiB per job), so a worker runs `make -j7` and cannot take the other's memory. The Buildbarn configuration is the toolkit's,
 unchanged: one `env.libsonnet` file holds every tunable, and the chart renders it from `values.yaml`.
 
 ## Choosing a pool
 
-Each pool has its own scheduler. The client chooses by the **instance name** it uses: an instance name starting with `dedicated/` goes to the dedicated pool, anything
-else to the shared pool. The cache is shared by both (Buildbarn's storage ignores instance names). For measured runs use the dedicated pool for consistent timings.
+The client chooses by the **instance name** it uses (`br2 build --pool P` prefixes it with `P/`): an instance name starting with `dedicated/` goes to the
+dedicated pool's scheduler when that pool is enabled, anything else to the shared pool. The cache is shared by all pools (Buildbarn's storage ignores instance names).
 
 ## How autoscaling works
 
@@ -67,7 +62,7 @@ A 60-second delay before a worker stops is insurance for the rare case. All of t
 
 ## Workspaces
 
-Coder runs in the cluster, from its own Helm chart. The workspace template is Coder's stock Kubernetes example with the smallest changes: this cluster's node pool and namespace, bigger defaults (4 cores, 8 GB, a
+Coder runs in the cluster, from its own Helm chart. The workspace template is Coder's stock Kubernetes example with the smallest changes: this cluster's namespace, bigger defaults (4 cores, 8 GB, a
 100 GB home), the tools the example image lacks installed on start, and `BR2_RE_ENDPOINT=grpc://frontend.buildbarn.svc.cluster.local:8980`. Workspaces use the **remote modes only**; they need no privileged pod.
 
 ## Applying it
@@ -75,20 +70,29 @@ Coder runs in the cluster, from its own Helm chart. The workspace template is Co
 See [`terraform/README.md`](https://github.com/DeepSpaceCartel/buckroot/blob/main/terraform/README.md): apply `cluster`, check `kubectl get nodes`, apply `platform`, and clear the autoscaled nodes with
 `platform/teardown.sh` before destroying. The worker image (`runner-image` workflow) has to be published and its digest set in `runner_image` first.
 
-## Risks to check on the first apply
+## Reaching it
 
-| Risk | How to check |
+Nothing is exposed to the internet. The [Tailscale Kubernetes operator](https://tailscale.com/kb/1236/kubernetes-operator) puts Coder on the tailnet
+(`https://coder.<tailnet>.ts.net`, an Ingress of class `tailscale`, TLS from Tailscale); the tailnet policy that allows this is Terraform too
+(`terraform/tailscale/`). `kubectl` on the machine that applied `cluster` works through `~/.kube/config`; from anywhere else, the plan is the
+operator's API server proxy. The Buildbarn UIs are still `kubectl port-forward` (`svc/scheduler-shared 7982`, `svc/portal 8081`).
+
+## What the first apply found
+
+| Found | Fix |
 |---|---|
-| The server types exist in Hillsboro and the project's server quota is high enough | `hcloud server-type list`; ask Hetzner for a higher limit before scaling |
-| Privileged runner pods are admitted under Talos and the namespace exemption | a worker pod reaches `Running` |
-| The idle reporter's file test matches how `bb-worker` lays out its build directory | watch the pod annotation change while an action runs |
-| The scheduler metric for the KEDA query | read a scheduler's `/metrics` on port 9980 |
-| Cold start: server creation, Talos boot, pulling the ~1 GB runner image | time from queued action to first running action; consider a warm minimum during work hours |
-| A scale-in during a running build fails no action | remove capacity mid-build on purpose |
-| Storage performance on network volumes | compare cache hit and upload rates with the single-machine stack |
-| Mounting an `emptyDir` at `/config/gen` inside the ConfigMap mount | the worker pod starts and registers with the scheduler |
+| The runner and the worker share the pod's network namespace, so both bound the diagnostics port and the runner exited | the runner config has no diagnostics server |
+| Prometheus's node-exporter needs host namespaces, which the namespace's baseline Pod Security level refuses; Helm waited for the whole timeout | node-exporter is off (nothing uses node metrics) |
+| The image name had an uppercase organisation and the package was private | lowercase name; the package is public (the image holds only build tools) |
+| A worker pod sized to a whole node, plus a pool per purpose, against a project limit of 5 servers | one untainted pool, two workers per node (ADR-0016) |
+| `br2 setup` needs `zstd` for the buck2 download, which the worker image lacks | `br2 setup --no-buck2` in the golden Job (a golden build is plain make) |
+| `br2buck.py render` was not deterministic (a symlink target inside nested carved packages had two owners, picked by set order) | the most specific owner wins; verified under eight hash seeds |
+
+Verified: privileged worker pods run under Talos; a worker registers and executes actions (helloworld remote-cache, 61 of 61 actions remote, warm run 61 of 61 cached, manifest
+IDENTICAL against a golden built by `br2 golden --k8s` in the same image); Car Thing's 98 packages pass `viewcheck --mode remote`. Not yet measured: cold-start time from zero
+nodes, the KEDA query (worker counts are set by hand through `worker_replicas` for now), and a mid-build scale-in.
 
 ## Not done
 
-A public gateway, TLS and DNS for Coder and the Buildbarn UIs (they are reached by `kubectl port-forward`), internal cluster security (network policies, RBAC hardening: single-tenant for now),
-external access to Buildbarn with client authentication, and the golden build as a Kubernetes Job on the dedicated pool.
+Internal cluster security (network policies, RBAC hardening: single-tenant for now), the Buildbarn UIs and gRPC endpoint on the tailnet, `kubectl` from other
+machines (the operator's API server proxy), and worker autoscaling from the scheduler's queue.

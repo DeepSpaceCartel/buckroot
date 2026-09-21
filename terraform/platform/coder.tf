@@ -35,7 +35,6 @@ resource "helm_release" "postgresql" {
     { name = "auth.username", value = "coder" },
     { name = "auth.database", value = "coder" },
     { name = "primary.persistence.size", value = "10Gi" },
-    { name = "primary.nodeSelector.buckroot\\.dev/pool", value = "platform" },
   ]
 
   set_sensitive = [
@@ -70,7 +69,6 @@ resource "helm_release" "coder" {
   values = [yamlencode({
     coder = {
       service      = { type = "ClusterIP" }
-      nodeSelector = { "buckroot.dev/pool" = "platform" }
       serviceAccount = {
         # Workspaces are provisioned into their own namespace.
         workspaceNamespaces = [{ name = kubernetes_namespace_v1.workspaces.metadata[0].name }]

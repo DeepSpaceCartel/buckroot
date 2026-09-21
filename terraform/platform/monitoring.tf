@@ -27,8 +27,6 @@ resource "helm_release" "prometheus" {
     server = {
       retention        = "48h"
       persistentVolume = { size = "10Gi" }
-      # It runs on the always-on platform node; a worker node can be gone at any time.
-      nodeSelector = { "buckroot.dev/pool" = "platform" }
     }
   })]
 }

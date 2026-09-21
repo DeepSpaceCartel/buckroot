@@ -27,7 +27,7 @@ fi
 
 echo "Waiting for autoscaled nodes to go (the autoscaler removes empty nodes after its scale-down delay):"
 while true; do
-  n=$(kubectl get nodes -l 'buckroot.dev/pool in (bb-workers-shared,bb-workers-dedicated,coder-workspaces)' --no-headers 2>/dev/null | wc -l)
+  n=$(kubectl get nodes -l 'buckroot.dev/pool=nodes' --no-headers 2>/dev/null | wc -l)
   echo "  autoscaled nodes left: $n"
   [ "$n" -eq 0 ] && break
   sleep 30

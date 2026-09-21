@@ -61,6 +61,7 @@ nav:
       - 0013. The worker image is the tool baseline: decisions/0013-worker-image-is-the-tool-baseline.md
       - 0014. Every view entry is a declared input: decisions/0014-view-entries-are-declared-inputs.md
       - 0015. Buildbarn on Kubernetes: decisions/0015-buildbarn-on-kubernetes.md
+      - 0016. One node pool: decisions/0016-one-node-pool.md
 
 theme:
   name: material

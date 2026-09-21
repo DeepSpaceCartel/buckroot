@@ -1,6 +1,6 @@
 # buckroot workspace: Coder's stock Kubernetes template (examples/templates/kubernetes in coder/coder) with the
 # smallest changes that make it a buckroot workspace:
-#   * the workspaces namespace and node pool of this cluster (toleration for coder-workspaces),
+#   * the workspaces namespace of this cluster,
 #   * BR2_RE_ENDPOINT pointing at Buildbarn inside the cluster,
 #   * a startup step that installs the few tools the image lacks,
 #   * bigger defaults (4 cores, 8 GB, a 100 GB home for the Buildroot trees and vendored sources).
@@ -297,13 +297,6 @@ resource "kubernetes_deployment_v1" "main" {
       }
       spec {
         # The dedicated workspaces pool (see terraform/cluster): tainted so only workspaces run there.
-        node_selector = { "coder-workspace" = "true" }
-        toleration {
-          key      = "coder-workspace"
-          operator = "Equal"
-          value    = "true"
-          effect   = "NoSchedule"
-        }
         security_context {
           run_as_user     = 1000
           fs_group        = 1000

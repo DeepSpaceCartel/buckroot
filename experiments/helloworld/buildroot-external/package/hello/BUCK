@@ -15,8 +15,8 @@ br2_inputs(
 )
 
 # The package's own files, for hand-written native rules (br2/native/) to consume.
-export_file(name = "file.Config.in", src = "Config.in", visibility = ["PUBLIC"])
-export_file(name = "file.hello.mk", src = "hello.mk", visibility = ["PUBLIC"])
+export_file(name = "file.Config.in", src = "Config.in", mode = "reference", visibility = ["PUBLIC"])
+export_file(name = "file.hello.mk", src = "hello.mk", mode = "reference", visibility = ["PUBLIC"])
 
 br2_package(
     name = "hello",

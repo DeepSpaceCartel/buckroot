@@ -109,3 +109,12 @@ variable "coder_github_orgs" {
   type        = list(string)
   default     = ["DeepSpaceCartel"]
 }
+
+variable "worker_replicas" {
+  description = <<-EOT
+    Fixed number of worker pods per pool (keys: shared, dedicated) while worker autoscaling is off. A shared node runs two workers, so
+    shared = 4 needs two nodes. Costs money while non-zero (a cpx51 is about 0.45 EUR/h): set it for a run, then back to {}.
+  EOT
+  type        = map(number)
+  default     = {}
+}
