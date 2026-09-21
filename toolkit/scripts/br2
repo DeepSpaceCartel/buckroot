@@ -425,7 +425,7 @@ def main():
     g.add_argument("--image", default=os.environ.get("BR2_RUNNER_IMAGE", f"ghcr.io/deepspacecartel/buckroot-worker:{BASELINE or 'latest'}"),
                    help="--k8s: the tool-baseline image (default: the project's baseline, else latest)")
     g.add_argument("--cpu", default="7", help="--k8s: CPU request")
-    g.add_argument("--memory", default="28Gi", help="--k8s: memory request")
+    g.add_argument("--memory", default="14Gi", help="--k8s: memory request (a golden is one make -j: the same as one worker slot)")
     g.add_argument("--deadline", type=int, default=14400, help="--k8s: seconds before the Job is stopped")
     g.add_argument("--dl-claim", default="golden-dl", help="--k8s: PersistentVolumeClaim that keeps Buildroot's downloads between Jobs (empty: none)")
     g.add_argument("--dry-run", action="store_true", help="--k8s: print the Job and run nothing")
