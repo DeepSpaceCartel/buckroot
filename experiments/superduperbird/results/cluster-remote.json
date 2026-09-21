@@ -1,0 +1,86 @@
+[
+ {
+  "variant": "wrapped",
+  "mode": "remote",
+  "salt": "wrapped-remote-21005638",
+  "instance": "superduperbird-remote-wrapped-005638",
+  "cold": {
+   "ok": true,
+   "seconds": 2101.2,
+   "commands": 199,
+   "cached": 0,
+   "remote": 199,
+   "local": 0,
+   "output": "/home/buckroot/experiments/superduperbird/buck-out/wrapped-remote/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "remote-cache",
+  "salt": "wrapped-remote-cache-21014852",
+  "instance": "superduperbird-remote-cache-wrapped",
+  "cold": {
+   "ok": true,
+   "seconds": 1392.5,
+   "commands": 199,
+   "cached": 0,
+   "remote": 199,
+   "local": 0,
+   "output": "/home/buckroot/experiments/superduperbird/buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 25.0,
+   "commands": 199,
+   "cached": 199,
+   "remote": 0,
+   "local": 0,
+   "output": "/home/buckroot/experiments/superduperbird/buck-out/v2/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote",
+  "salt": "native-remote-21005638",
+  "instance": "superduperbird-remote-native-005638",
+  "cold": {
+   "ok": true,
+   "seconds": 1851.3,
+   "commands": 193,
+   "cached": 0,
+   "remote": 193,
+   "local": 0,
+   "output": "/home/buckroot/experiments/superduperbird/buck-out/native-remote/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote-cache",
+  "salt": "native-remote-cache-21005638",
+  "instance": "superduperbird-remote-cache-native",
+  "cold": {
+   "ok": true,
+   "seconds": 2065.6,
+   "commands": 193,
+   "cached": 0,
+   "remote": 193,
+   "local": 0,
+   "output": "/home/buckroot/experiments/superduperbird/buck-out/native-remote-cache/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  },
+  "warm": {
+   "ok": true,
+   "seconds": 22.2,
+   "commands": 193,
+   "cached": 193,
+   "remote": 0,
+   "local": 0,
+   "output": "/home/buckroot/experiments/superduperbird/buck-out/native-remote-cache/art/root/5fe249fa9992182d/br2/generated/__rootfs__/rootfs.tar",
+   "manifest": "IDENTICAL"
+  }
+ }
+]

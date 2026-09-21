@@ -97,7 +97,7 @@ sha-256 hash has a random salt on every build.
 | Buck2 `wrapped`, remote and remote-cache, fourth attempt (no `xauth` in the worker image) | complete: 199 of 199 actions on the worker; cold 7,982 s and 7,338 s, warm 17 s (199 of 199 cached). Manifest: three OpenSSH binaries differ (see below) |
 | Buck2 `native`, remote, with `xauth` added to the worker image | done: 193 actions on the worker in 7,473 s, manifest **IDENTICAL**; confirms the OpenSSH explanation |
 | Buck2 `wrapped`, remote, second attempt | failed after 102 min, 184 of 199 actions: `util-linux-libs` (and others with cross-directory links) had no `util-linux.mk` on the worker; fixed by [ADR-0014](../decisions/0014-view-entries-are-declared-inputs.md) |
-| the remaining remote cells: `native` remote-cache, `wrapped` remote and remote-cache with the `xauth` image | not finished: the single 4-core machine was stopped after a rerun had run 3 h (the native remote-cache cell was OOM-killed at 153 of 193 actions before the memory-capped `make` parallelism); to be run on the Kubernetes worker pools ([guide](../guides/kubernetes.md)) |
+| the four remote cells on the Kubernetes cluster ([guide](../guides/kubernetes.md)) | done, all **IDENTICAL**: see the table below |
 
 The first comparison of the Buck2 rootfs with the golden showed 40+ differences, all binaries
 and libraries larger than the golden's: the cross `strip` was missing from the rootfs
@@ -108,6 +108,29 @@ libraries into a real `usr/lib64`. The tuple now comes from Buildroot
 ([Wrapped and native](../concepts/wrapped-and-native.md#the-artifact-format-is-an-interface)); after the fix the
 native local cell passes. The table will be filled in when the remaining cells complete. The first
 cell's time (110 min) includes about ten minutes of overlap with source downloads for another project.
+
+### The remote cells on the cluster
+
+The four remote cells, run on 2026-09-21 on the [Kubernetes cluster](../guides/kubernetes.md): the Buck2 client on the 4-core machine,
+actions on shared-vCPU `cpx51` workers (16 vCPU, 32 GB; at the time two workers per node, each `make -j7`), the four cells in parallel
+on 4 to 7 workers, one worker slot per action. Golden and workers use the same tool baseline image ([ADR-0013](../decisions/0013-worker-image-is-the-tool-baseline.md)),
+so the OpenSSH `xauth` difference of the single-machine runs is gone. Results in `results/cluster-remote.json`.
+
+| variant | mode | run | ok | seconds | commands | cached | remote | local | manifest |
+|---|---|---|---|---|---|---|---|---|---|
+| wrapped | remote | cold | yes | 2101.2 | 199 | 0 | 199 | 0 | IDENTICAL |
+| wrapped | remote-cache | cold | yes | 1392.5 | 199 | 0 | 199 | 0 | IDENTICAL |
+| wrapped | remote-cache | warm | yes | 25.0 | 199 | 199 | 0 | 0 | IDENTICAL |
+| native | remote | cold | yes | 1851.3 | 193 | 0 | 193 | 0 | IDENTICAL |
+| native | remote-cache | cold | yes | 2065.6 | 193 | 0 | 193 | 0 | IDENTICAL |
+| native | remote-cache | warm | yes | 22.2 | 193 | 193 | 0 | 0 | IDENTICAL |
+
+Compared with the single machine (wrapped remote cold 7,982 s, native remote cold 7,473 s): 3.5 to 4 times faster per cell, and the
+cells ran side by side, so the matrix took about 35 minutes instead of 8 hours. The cold times are not comparable with each other in
+detail: they shared 4 to 7 worker slots while running, and the wrapped remote-cache cell (1,392 s) ran alone after a rerun, which is
+the fairest number for "one cell on the cluster". Its first attempt failed at the last action: a `terraform apply` rolled the frontend
+pods mid-build (an operational mistake, now a rule in the guide), not a build defect. The warm runs (25 s and 22 s) are the whole
+199- or 193-action graph served from the action cache over the network.
 
 ### The three OpenSSH differences
 

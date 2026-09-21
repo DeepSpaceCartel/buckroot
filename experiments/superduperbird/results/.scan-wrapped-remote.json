@@ -1,0 +1,6334 @@
+{
+ "entries": {
+  "/bin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/bin/arch": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/ash": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/base32": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/base64": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/busybox": {
+   "gid": 0,
+   "mode": "4755",
+   "sha256": "0d195e713ad42378e927733e3a9d131e0c12191d629e10e06b8eba984cb017b4",
+   "size": 813512,
+   "type": "file",
+   "uid": 0
+  },
+  "/bin/cat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/chattr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/chgrp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/chmod": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/chown": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/cp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/cpio": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/date": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/dd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/df": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/dmesg": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/dnsdomainname": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/dumpkmap": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/echo": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/egrep": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/false": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/fdflush": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/fgrep": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/getopt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/grep": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/gunzip": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/gzip": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/hostname": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/kill": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/link": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/linux32": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/linux64": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/ln": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/login": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/ls": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/lsattr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/mkdir": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/mknod": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/mktemp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/more": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/mount": {
+   "gid": 0,
+   "mode": "4755",
+   "sha256": "d32467b37f6fdff8c468431f711e6a4786fe8fcf321a2ffab570f111a90390bc",
+   "size": 63344,
+   "type": "file",
+   "uid": 0
+  },
+  "/bin/mountpoint": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/mt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/mv": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/netstat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/nice": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/nuke": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/pidof": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/ping": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/pipe_progress": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/printenv": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/ps": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/pwd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/resume": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/rm": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/rmdir": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/run-parts": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/sed": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/setarch": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/setpriv": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/setserial": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/sh": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/sleep": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/stty": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/su": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/sync": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/tar": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/touch": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/true": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/umount": {
+   "gid": 0,
+   "mode": "4755",
+   "sha256": "0b29eadc455f93f0f671b4dce19a2062c52234657cd9390b3aeeb63d7f9ba014",
+   "size": 34672,
+   "type": "file",
+   "uid": 0
+  },
+  "/bin/uname": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/usleep": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/vi": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/watch": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/bin/zcat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/dev/fd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/log": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../tmp/log",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/pts": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/dev/shm": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/dev/stderr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd/2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/stdin": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd/0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/dev/stdout": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/fd/1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/avahi": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/avahi/avahi-autoipd.action": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "bdda720d50cfebbacd966b11beff8a9df2d453aa29bdba4156873863e5243c77",
+   "size": 2561,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/avahi/avahi-daemon.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f5ed1c838661a12a292c4a764af0ff0feb8420486570264da833653d40328ff8",
+   "size": 1807,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/avahi/avahi-dnsconfd.action": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "1c35a47448cb10975593d5af12a61033f8648af5c60b823bbb1bc2550403e08a",
+   "size": 2743,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/avahi/hosts": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d16fca08d5054e14ffa9b0cb919263f4f21db379da4058ea745d3ec467f32afd",
+   "size": 1121,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/avahi/services": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/avahi/services/sftp-ssh.service": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "60a516f94e4da95dc65d7f39494d1920a1f64ed59b88579ec5e181b9ed203353",
+   "size": 1075,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/avahi/services/ssh.service": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "83c63e090cf20cd1bca469dc9f2b549a6972ac99c3ea8a2a5df7c10b4b537579",
+   "size": 1071,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/dbus-1": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/dbus-1/session.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "2218b9313dc6d2e07d85751f318124cc5138787358ae1039703321cf6b35602a",
+   "size": 838,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/dbus-1/system.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a6f50dc70ef082a110dcdb164579cd2af221b90226c5e0aca237edcad98a1c26",
+   "size": 833,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/fonts": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/10-hinting-slight.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/10-hinting-slight.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/10-scale-bitmap-fonts.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/10-sub-pixel-none.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/10-yes-antialias.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/10-yes-antialias.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/11-lcdfilter-default.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/20-unhint-small-vera.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/30-metric-aliases.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/30-metric-aliases.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/40-nonlatin.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/40-nonlatin.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/45-generic.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/45-generic.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/45-latin.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/45-latin.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/48-spacing.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/48-spacing.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/49-sansserif.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/49-sansserif.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/50-user.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/50-user.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/51-local.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/51-local.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/60-generic.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/60-generic.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/60-latin.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/60-latin.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/65-fonts-persian.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/65-fonts-persian.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/65-nonlatin.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/65-nonlatin.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/69-unifont.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/69-unifont.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/80-delicious.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/80-delicious.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/90-synthetic.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/share/fontconfig/conf.avail/90-synthetic.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/fonts/conf.d/README": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "fdc29a3ebd8816eb07ed04c2cbe151076e95a7b0b2a0ec8fe94e5c8a67931d3c",
+   "size": 979,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/fonts/fonts.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0fea9da6f155d7b5d0529be4aef7a1bef2b75601747d28787c2c378e22de2a30",
+   "size": 2664,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/fstab": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c6a4550bde116e73f1326d7e15e5cab777beb3e2994fe17a116005308d5893b1",
+   "size": 334,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/group": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "65c3354a2c50a69efd6571078a85c598871450ec6675480672fd39d0f0dd0a02",
+   "size": 382,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/hostname": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "fdf03ac419b7c7155d43d6be4275c1a4fc107cb2ee3261189c0f3b333f1c78c4",
+   "size": 15,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/hosts": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "6421fe3bf02c956687e7bb629c516b4d2f3008ebe621a35d51812cc11ad29254",
+   "size": 45,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/init.d/S01seedrng": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "8cf53d7f3533b38b420f998dae1087ca3ac51579fe10baaf53f5614941a10c8b",
+   "size": 1243,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S01syslogd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ad6ad88add71db7483665acf11e3942f3acb62e96e74545a532cd906a9427dd0",
+   "size": 1012,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S02klogd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "e2f967bf785912d605e5dd8055e1c2c668e8523a88df1c39109df00eb9564285",
+   "size": 1004,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S02sysctl": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "cd6398f21c96f6a2578ee1aa54039abdc20aea7c446e2f9b4b40c18977d70d44",
+   "size": 2804,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S05avahi-setup.sh": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "457b15e218cc641e4ea9a0a4994f27f5dc06324f98f2cf44b125ba8c734bfc30",
+   "size": 274,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S10udev": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "bb734ab26fb7e10afe5c12cfebbed1197ea962217518a0e39bb08d9e82c5f329",
+   "size": 1594,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S30dbus": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "450c433cdd01fdb83b8930e72cbf72052af0ee4ee054c54fe3a12e02c12879e6",
+   "size": 1619,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S40network": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "27eac7a647b151a9688d972b6668f082e1a01b699e0f6435b5fe10693135abf5",
+   "size": 438,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S49usbgadget": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "c3a951a0a6b03803e0052bbc2ae3195015d53b163117be20702166f23faefaac",
+   "size": 6908,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S50avahi-daemon": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "d50a9a52c395b524a48b566e45fa9f8afffad363ad924584c2c8f00069c89cdd",
+   "size": 285,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/S50sshd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "de2802429bddb70a2c13f1c90f61fadbd53c900eb4c4e83b82eb87b58b64dbdb",
+   "size": 532,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/rc.modules": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "bf87fdd486404247f5d6e087cf913e75a11a181fcc5691055645b83b713eaf98",
+   "size": 511,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/rcK": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "1831a7330d3ce1a7ecc17dc6a272e22cee2012c82c8cf62883d222f3b75cc851",
+   "size": 468,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/init.d/rcS": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b6f88a5abe580dc7e96300136b4b1d802f940d6f270b02bb75176791c6071cb1",
+   "size": 1341,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/inittab": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "14ef8fb780305998e33e6ccaf051ce264220aca74e6db4de043056887c456731",
+   "size": 1279,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/issue": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c17f0695b0c25654a4830c6c2534fb8b8883c4f4f32ba1299ceb9f1a48bd05bc",
+   "size": 26,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/libinput": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/modules": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "08bb005d1c662b944183e6ddc8b1e08af5f105f199dd4072d5e4132dcec9f48a",
+   "size": 68,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/mtab": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../proc/self/mounts",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/network": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-down.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-post-down.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-pre-up.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/if-pre-up.d/wait_iface": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b70434ea0e10ab723658230c0b52b687e939009886329ee57e4b23008b64c465",
+   "size": 576,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/network/if-up.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/network/interfaces": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "bf24145cc4a9986989955f512359a6ded0dffb789a93dc94ad5b41e7a378b1b2",
+   "size": 77,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/network/nfs_check": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "c5df7c81ab887a46f60b7061f0e2374903a1aea916bdeb67d56dddc3582a704e",
+   "size": 846,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/nsswitch.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d18b9b4b6e92883f160b547494980ffd0f9322778b1e73df42ae702859bfbd43",
+   "size": 230,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/os-release": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../usr/lib/os-release",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/passwd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "2fe901fcf4d72aabfd923e7185b25f4c1349051f639ef850141cfa3c4085a520",
+   "size": 483,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/profile": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "82aaa6819e07689a9ff2f1bf7fdb306e91bc9fac89dd650d214996b937cf49c6",
+   "size": 299,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/profile.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/profile.d/umask.sh": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9b7dae25ad0e172974b7d845a5d3d76e2f62a06b6556fd9c523031419c78d16a",
+   "size": 10,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/protocols": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "29a1a99d7cca2f6a909c42971d6e42e28c0959b5c65714e8190a5a058d747248",
+   "size": 2744,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/resolv.conf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../tmp/resolv.conf",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/etc/services": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9305257b1d026853ea63166ad48ccdbbab6edb6db92c0f26cd751d90b5e1a5a4",
+   "size": 10873,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/shadow": {
+   "gid": 0,
+   "mode": "0600",
+   "sha256": "d2ebbc81d3fd59e58d9d5ab63ec539bc1ca1805f246b4b3bd4e0f500bd21cc16",
+   "size": 235,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/shells": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5335b105b66e599c7297a95183264da1baeb7975615c4fc4feb81bc218264381",
+   "size": 17,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssh": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/ssh/moduli": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "767c47e94052c3b0c95ef94ebb12679acb09ea1e4f09620d1847929e33889370",
+   "size": 620105,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssh/ssh_config": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d12f4f223cd089cc47121cdfcd10463965db41e63c425c68e9a2bbf7b3e26a3f",
+   "size": 1526,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssh/sshd_config": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "6ad3b8d4098d897d1c4d5594dfe8846ead0e999711e61f51095387660b1bc004",
+   "size": 3101,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssl": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/ssl/certs": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/ssl/ct_log_list.cnf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f1c1803d13d1d0b755b13b23c28bd4e20e07baf9f2b744c9337ba5866aa0ec3b",
+   "size": 412,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssl/ct_log_list.cnf.dist": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f1c1803d13d1d0b755b13b23c28bd4e20e07baf9f2b744c9337ba5866aa0ec3b",
+   "size": 412,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssl/misc": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/ssl/openssl.cnf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3a0c65ff954aff207420846926d31d1b6056be525a0f3d38dff21f5b89f90688",
+   "size": 12328,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssl/openssl.cnf.dist": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3a0c65ff954aff207420846926d31d1b6056be525a0f3d38dff21f5b89f90688",
+   "size": 12328,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/ssl/private": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/udev": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/udev/hwdb.bin": {
+   "gid": 0,
+   "mode": "0444",
+   "sha256": "ec40b7dcfe06c1441c0d950f2f86eb2f0e38e02dae773ad7f0885dddeab99294",
+   "size": 9732328,
+   "type": "file",
+   "uid": 0
+  },
+  "/etc/udev/rules.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/etc/udev/udev.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "96d43c3414fcdd70cf114c9f1290f2f9240b42b03a077de7e89b4fa2b7d4aa14",
+   "size": 215,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/firmware": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/firmware/brcm": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/firmware/brcm/BCM20703A2.hcd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7867d65f61d212be52d2dd0ccd5e152c48417d3bb2f0f11a93fbcf423b7fa206",
+   "size": 44163,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/ld-linux-aarch64.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "7028243f8ee16a2c42a311c136265d5c5dab9f96bb0da53ba0f31312d0c6c1e8",
+   "size": 194656,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libanl.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "38b702dff7443002325fefe24e870c21eab69a5931f803e1eaf8adb0ab28c357",
+   "size": 5848,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libatomic.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libatomic.so.1.2.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/lib/libatomic.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libatomic.so.1.2.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/lib/libatomic.so.1.2.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "e24d31ad75e93d06633d3bf54d90bcf1606481e6d5a80833395fafeb3cc57b47",
+   "size": 38816,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libblkid.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libblkid.so.1.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/lib/libblkid.so.1.1.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "0263a91d40d3d2bdd9c3d557ae8bc066bb25c1e6b25f9e44912f8e7954ea4b8d",
+   "size": 387896,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libc.so.6": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fb94b00853151de9fea02ffd9e1911d70a36f2545f579b157b1b7adf737b51b0",
+   "size": 1622096,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libdl.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "51973e4d3a957c85f802b1e874f6c1defdc02b711a83472167870dc4b20650f7",
+   "size": 5848,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libgcc_s.so": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "69a56a9993b7729b29b274e65016031c81f2397f176ed5ad44d59bd50425e0bd",
+   "size": 132,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libgcc_s.so.1": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9781ac2e5b7b43cb3ffbbfccbc39f8fb4d09eaf80ab0d5f885d81defa51d2afc",
+   "size": 100560,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libm.so.6": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "94808d4d8f701918f9cfa096d8a804d8cd46652ea6580146508c9ec36d30acc7",
+   "size": 538408,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libmount.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libmount.so.1.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/lib/libmount.so.1.1.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "07c7dc427324553865f55789c6cbc8c6445922e2d9622cd61c9f37ee26443409",
+   "size": 444856,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libmvec.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "8eab34e2b98841948f1f648bd309c16b011fb216209238e925d22bc8e3a36576",
+   "size": 63264,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libnss_dns.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b8a58601a023cecb68d5f12f91c932508dd6124f4f34ff0642491ad502af208a",
+   "size": 5848,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libnss_files.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "45b25c3b9e117e249db9faf23653be5159eeeccd58e1c9cbe5853dfabbacb107",
+   "size": 5848,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libpthread.so.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "3007f5cc16600f47958ad5a2697bf146af58774a8190ff179ad5f2979fdbbe14",
+   "size": 8312,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libresolv.so.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "1cade2214235c084c5d8dbb0bb48c59960e8894d91432657e2d2ec824de5e4e7",
+   "size": 59384,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/librt.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "9c4ceb1e9d264e339669147a9ee721e98bf3df723ca8f41a571aee07b7394697",
+   "size": 5920,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libudev.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libudev.so.1.6.3",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/lib/libudev.so.1.6.3": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "05a95820a7e30715c8190f9d8f3a8ef61451fcbd4a793cbf0c89649a447fe558",
+   "size": 165896,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libutil.so.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "561dc0260622acd3b3b7d15c13cc9cfd997a6b38f9da7d59ff355da2f81852e3",
+   "size": 5848,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/libuuid.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libuuid.so.1.3.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/lib/libuuid.so.1.3.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "350d636312cd94a4f5b17ceea03d50e820ce3ede52a8eae1f087a097a336f241",
+   "size": 30560,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/hardware": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/hardware/aml-4.9": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/hardware/aml-4.9/arm": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/hardware/aml-4.9/arm/gpu": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/hardware/aml-4.9/arm/gpu/mali.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5426313b275c9a2dab518cc59edbd5e8f8c7dbf547e031949684e5ed80366e63",
+   "size": 821720,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/amlogic": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/amlogic/ddr_tool": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/amlogic/ddr_tool/ddr_window.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "15a584f6d572554991c182e590c7a61e5b6de75c1af386060ad8abf7d8b750a2",
+   "size": 16336,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/bluetooth": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/bluetooth/bcm203x.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c3564b6391180202947a0e1c056d626317a588095ea5fd39c2fab1220d08852f",
+   "size": 10568,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/function": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/function/usb_f_obex.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "ba55da5f1760bd55a3c5e8fa916a4d13a2aa36b3554720fc008a26e60a798651",
+   "size": 12336,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/function/usb_f_serial.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5283262a30c5ab7497e0061e3d3025996ae49de1dc79564f323d850066730b4d",
+   "size": 11248,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/legacy": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/legacy/g_ether.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f7860dbb5b935fea769deaf1d5fb9fc85e49e2c483dbc1c9197c51d90cc75e09",
+   "size": 16280,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/legacy/g_midi.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3a60c591e547e4b96614349fa4726bbed2ea0f64b39780ae113841cfb239272f",
+   "size": 13536,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/legacy/g_ncm.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5f0caf8e70a1486e8d8b068dfc97429b4f33292e5a8992ddb83095c1b0d5674c",
+   "size": 13184,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/usb/gadget/legacy/g_serial.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a4cfd7276a8f09ee6f10346ee0c81e9599442483846ef997672ee8eb972c1b05",
+   "size": 13656,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/video": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/video/backlight": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/drivers/video/backlight/lcd.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "14895837029a89a743fb9aa11e52cd37eaab00b56d5c2ba06489450f8aa9f8a6",
+   "size": 14256,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/fs": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/fs/efivarfs": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/fs/efivarfs/efivarfs.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "13ddaafb040a9963ecffde49048801dc50e44ea9626889538601488f3bdce719",
+   "size": 19936,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/net": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/net/bridge": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/kernel/net/bridge/br_netfilter.ko": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f6468ed4f136ec3ab54e0eb777403f1fe0bf81df0d3559c6062acfafedf9ab4c",
+   "size": 30920,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.alias": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f954be732f85811e18a1e5c091c5b3fdcd6edbe6949cbcf35c93a0f6129c6e71",
+   "size": 328,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.alias.bin": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "4900854208ab6f05b41dfa752748abf2a67a2c360dd603cf81aac2cfe538b659",
+   "size": 620,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.builtin": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9e51f7c1fa8159dbd6d89b4001cd08baa12ecb2913a9326055a324a196b83b5b",
+   "size": 12386,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.builtin.alias.bin": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.builtin.bin": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "ea2fa82ff0e4b9fdd7875f58e6159ba136f9b67d69d2a44d19867aba8af13585",
+   "size": 14363,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.dep": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "80800e0dc4380e47e5c389d3241a7985489304072bc47d254a4b09935e7df33d",
+   "size": 504,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.dep.bin": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3fef8714ff1f950dde7008d81c799d060de3627726295ff722ec53a3b49c82da",
+   "size": 922,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.devname": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.order": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "05a483096b79c21c2aa8dd903c13eb9cb6dc498ebdcfa3dba3c6ac680e39ee81",
+   "size": 459,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.softdep": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "ac2de753255c506934be29e69261f1485f51ee9cf9c2bf467bcc0c4cf95f8713",
+   "size": 55,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.symbols": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3afd16f718eee54a152ea20763530731a3080205ee7b12532749f958965c767f",
+   "size": 932,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/modules/4.9.113/modules.symbols.bin": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "20d9e7edf6314da623b5d4696d6852c307b708e6a7b67497580612d8bdb97ec5",
+   "size": 986,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/udev/ata_id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "7c9dd9b37420de4aa2a29eb44c55dbd7aa9044fff3fcef20c49d878b678c6f88",
+   "size": 108560,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/cdrom_id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ed9f51a450b8032d39e4086a91dd22d5f5f946557b7fdcb20ec38aa860db2c41",
+   "size": 124944,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/collect": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "2003d4125385a51dad6a40492bbb695c601d673c1289355e9976764e354c868b",
+   "size": 108568,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/dmi_memory_id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "d27f1fdc14f0803e8b26fab4e906d69d5f54e98f216fa898ed933edd90b933b5",
+   "size": 116752,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/fido_id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "60dd7026dd10ab7495989d533a916f5be28f2cf222c4a35241b6f91239b21bf6",
+   "size": 108560,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/mtd_probe": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "259a2b0583925c122c54a5cc2143eeb15e6a258f673655222cfa0f906ae415f9",
+   "size": 75792,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rule_generator.functions": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c7043abb835a3bdfd8b978b20264735c88361a3e0d3629988db63e647d00c4ad",
+   "size": 3006,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/50-udev-default.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d24e847307991e0d48febb57ac95ab2878dd65af9a546d07c4793742b81ba21b",
+   "size": 4980,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-autosuspend.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7ffae083695390282bc7e953cff18d6bba874c3ca4bd7c77391d5b3c2e3add25",
+   "size": 532,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-block.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "bd9988b957ba416bfdd72f6cc94a7d0e3c0b4d793fe85141ce4920bd1a747c1d",
+   "size": 703,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-cdrom_id.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "16f44dc355a6b5ada3a0706b2f84c95b25ed6c2a09e4e201da94885c93d1a4d2",
+   "size": 1071,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-drm.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9045c45062fdb03abd55cdec32fb13fe6f196290b52b5c4c9fc350406bf094ce",
+   "size": 413,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-evdev.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e3052a757a28dd43ede1528064b3ca855fa7d9eb3405e0d6f3b032b664cf7381",
+   "size": 982,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-fido-id.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "cca02ad85534572cdbd125bdba411417de1158b0709825114882cb8b8b7735e6",
+   "size": 491,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-input-id.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "2983389654fbf42eca6b703543f76867dbf53eeec9288c2c88d0fcb338a2c265",
+   "size": 282,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-persistent-alsa.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "36767245b64ae515fc073c21bc78769f41188140e1d7b9576ec8dee34d585172",
+   "size": 616,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-persistent-input.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "1726417b25f78af68845dc3627c3336e7959a3db2a81b7d77c35018d38f840d4",
+   "size": 2719,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-persistent-storage-tape.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "1ea5fa3e9f63b6a41d68c36ded365927ce95d8026242533566fd5a9015ebcdb2",
+   "size": 2204,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-persistent-storage.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "38ec44b7d342afb863201de148e06e1d693e9e92b5bf0359f1dd72a20324b4cd",
+   "size": 8346,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-persistent-v4l.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "219eb6b4c0df4d8701cc5a316b2ddf63797d4c1b689bc0b289d5cb8063a7034e",
+   "size": 769,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-sensor.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0e8bbe52adaa173d3deba22f9c3a1c7447884ab5c625d3c3b4fdce60e52bd6d3",
+   "size": 1618,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/60-serial.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "54367e1335266de43edb6451534c9e69c317075212b216cedf1d3b6896f14ee0",
+   "size": 1190,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/64-btrfs.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a4bc67740cd0988415907b0fdb5e9cd955be2626b5095b55c7eed4aa4e99bb53",
+   "size": 616,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/70-camera.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "48e36a875615bcf113566a8f4b3fcf2c9bcc229d772a074007e854bab67471aa",
+   "size": 281,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/70-joystick.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "199e72c162185b62c0888791c9b3cde2c8b180fae4e4ae3a29564f933d0adffd",
+   "size": 432,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/70-memory.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "46b8696d6ad29b2e80b9dcad60ddb2e4a3deee5a5b1df09f116f1ca9d4dfb150",
+   "size": 184,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/70-mouse.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d495d2b8523e7f8175a9b06704f168e14ab97a8a333d4a52ec9501bc0c509ecb",
+   "size": 734,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/70-touchpad.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "8d81de6a6d5b5703098518f977c3b984bdf179238402a8ca0205f85cde798a27",
+   "size": 473,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/75-net-description.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5b8da22a593f2aaffd4697e4cbfb14cb7eb1d52b96f03d9a60c82eeec920e925",
+   "size": 452,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/75-persistent-net-generator.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "43253275c7695b19f4a8a51fd4d271c356ca7ae6887e4845209d5ad3110ffd1f",
+   "size": 4082,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/75-probe_mtd.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "54256aa2ca91172cbce3ea805ccf2cd52de8acbbc2db88d209de84655fa997c5",
+   "size": 174,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/78-sound-card.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "ec291608292fe2de555e8a1e5ce574acf315fe65268c469872614073d5e36cae",
+   "size": 4816,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/80-drivers.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "87198a78651a2f71ced048f26a093a97bc05678cd2f0023ced7948fc49c6c5d8",
+   "size": 617,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/rules.d/81-net-dhcp.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3438299d7e6254472600168b557a467a497d537353511ec07657b494d1b13fec",
+   "size": 528,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/scsi_id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "8bcf9d69107af865fa71e59bb0e0f6ff67d4c38da49803c756b47e2bfb33bfb7",
+   "size": 121368,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/v4l_id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "05b5ab3ae6f1752455940f1d3e2a478ab78835724ef4e135c744292cb4ff6014",
+   "size": 75792,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib/udev/write_net_rules": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "83e111e64a2c108527ac4647600af3f37ae1a96f4364ef99507cefd55befb6e3",
+   "size": 3830,
+   "type": "file",
+   "uid": 0
+  },
+  "/lib64": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "lib",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/linuxrc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/media": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/mnt": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/opt": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/proc": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/root": {
+   "gid": 0,
+   "mode": "0700",
+   "type": "dir",
+   "uid": 0
+  },
+  "/run": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/sbin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/sbin/arp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/blkid": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/devmem": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/fdisk": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/freeramdisk": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/fsck": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/fstrim": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/getty": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/halt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/hdparm": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/hwclock": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/ifconfig": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/ifdown": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/ifup": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/init": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/insmod": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/ip": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/ipaddr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/iplink": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/ipneigh": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/iproute": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/iprule": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/iptunnel": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/klogd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/loadkmap": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/losetup": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/lsmod": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/makedevs": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/mdev": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/mkdosfs": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/mke2fs": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/mkswap": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/modprobe": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/nameif": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/pivot_root": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/poweroff": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/reboot": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/rmmod": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/route": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/run-init": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/runlevel": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/setconsole": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/start-stop-daemon": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/sulogin": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/swapoff": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/swapon": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/switch_root": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/sysctl": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/syslogd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/udevadm": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/usr/bin/udevadm",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/udevd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "abe4686cd3a18f04ebbd04ed6ba9601969cfd55963615937ca5e53d05b406edd",
+   "size": 350352,
+   "type": "file",
+   "uid": 0
+  },
+  "/sbin/udhcpc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/uevent": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/vconfig": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sbin/watchdog": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/sys": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/tmp": {
+   "gid": 0,
+   "mode": "1777",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/bin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/bin/[": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/[[": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/ar": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/ascii": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/avahi-browse": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b4b1519f6375881714472ceeefc5778180bb52771cb2312285dfe13b9091a1aa",
+   "size": 26496,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/avahi-browse-domains": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "avahi-browse",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/avahi-publish": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "06d58ec3affafa2939687e169c3b34646fee8e4b9a1e3790b7f29774f6eff40d",
+   "size": 18296,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/avahi-publish-address": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "avahi-publish",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/avahi-publish-service": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "avahi-publish",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/avahi-resolve": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "c13c319eeae5b05f737ed2879e8de25bc62668e0a4661b1526cc0c5d84649f72",
+   "size": 18296,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/avahi-resolve-address": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "avahi-resolve",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/avahi-resolve-host-name": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "avahi-resolve",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/avahi-set-host-name": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "4cd871224fb86a9f359aea232f34d2452bd2047ae45bed4a3f4564c5c7f41b6a",
+   "size": 14200,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/awk": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/basename": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/bc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/bunzip2": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/bzcat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/chrt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/chvt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/cksum": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/clear": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/cmp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/crc32": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/crontab": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/cut": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/dbus-cleanup-sockets": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "eb99d15c905393c54456ad8b44dcade7fa757e6cd155dad0d4b7a2568fb44dee",
+   "size": 14112,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-daemon": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "f151b5515f91cb5aece419372c194d3d27fd177ba446d94e644189752839b2ee",
+   "size": 227576,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-launch": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "6d5d6fe7c010f61432759097610235dbe29fce441e2f64ccb045ca0d3b82f9c8",
+   "size": 18216,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-monitor": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "e2fcf5fb2b0f0480420fa9a9167dcf1c0a23d89d3555589b803f9e0fadb13b1e",
+   "size": 22312,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-run-session": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "aeb1e316d06ff14607cdd999fa7f2a792336257beaceb684f45a8c63daf66657",
+   "size": 14112,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-send": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fcc2525b6f9e071fdf0f10bb68522f5c1f6c486506d98a432e1700d829127fe8",
+   "size": 26400,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-test-tool": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "eaf75927d911d564e055e3857e2d50084ce038dfd337be9f7473f41008a91514",
+   "size": 22384,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-update-activation-environment": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "258f6ab0c98266369acf67c421e828eba295fe381d7d19c1ae3694c01189acbe",
+   "size": 14112,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dbus-uuidgen": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "98d28e0460a1aefe186d4e5d5c03aaca96f360bfd6c030e74c00b749bfe8cb59",
+   "size": 10016,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/dc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/deallocvt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/di-edid-decode": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b244ccc87fe981522cc0f4143585f7f7d49700f7a1591ff65fa6a010028b84d9",
+   "size": 55152,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/diff": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/dirname": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/dos2unix": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/du": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/eject": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/env": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/expr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/factor": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/fallocate": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/fc-cache": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ab4da1b02f303b429ab27c50c50039079c507bb15eee2b295a8e55a0e99bfca1",
+   "size": 18288,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-cat": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "a86f1e5298098b5811dda99d8fd40a17aad92d022316d29a50582d2d44ae5d23",
+   "size": 14192,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-conflist": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "285d7f11a0d83e9ca18d2bbd092dcfd1b7bc9975d4e13ef8ead570dce2142ae6",
+   "size": 10096,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-list": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "bd9e4e77e1324eeaa766450807825e3bd17bf214412a6059d8dbc7d28cc621a7",
+   "size": 10096,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-match": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "2882b6b9284fb574d755105466789808b2f56ffa0c527034e422fccfa84157d2",
+   "size": 14192,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-pattern": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "9e862ababbb4904c14f1218520689dd386bf1cf3639f75ce58cee8e5bef7ddd8",
+   "size": 10096,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-query": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "8e1bceca2aca811dc974903e706c3442b0fc1978a34b1b0b2e272f58e6a037ff",
+   "size": 10096,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-scan": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "023c9f7b263c85cadf3cc14f817d0c3731419cc62e217e67a21976167df35a85",
+   "size": 10096,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/fc-validate": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "8d42c43a25350c9940b6c1da9a2d6ba010a1a01b9532fc6f4ad2a204d3a60c73",
+   "size": 10096,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/find": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/flock": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/fold": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/free": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/fuser": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/head": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/hexdump": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/hexedit": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/hostid": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/id": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/install": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/ipcrm": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/ipcs": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/killall": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/last": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/less": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/libevdev-tweak-device": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ba20378d5aacd27192325c346ff9d7e0e6c9d65408a3b5b1e7eecde19835467e",
+   "size": 14608,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/libinput": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "760fd44af8a2ecfb1fc44bb0ad607ae1503c7428b41d62bc796ed458897ed326",
+   "size": 55488,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/logger": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/logname": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lsof": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lspci": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lsscsi": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lsusb": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lzcat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lzma": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/lzopcat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/md5sum": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/mesg": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/microcom": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/mkfifo": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/mkpasswd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/mouse-dpi-tool": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "864df4459d48ba0410c854fc7ddd985e0255c43f023fec4cf54f7a8e462b695d",
+   "size": 14112,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/mtdev-test": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "0ce4aa4ce964598933a970a98aab91a7655797b346792fcca01153c4089dd8f4",
+   "size": 10016,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/nl": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/nohup": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/nproc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/nslookup": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/od": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/openvt": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/passwd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/paste": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/patch": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/printf": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/readlink": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/realpath": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/renice": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/reset": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/resize": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/scp": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "66a18be8a6fa89cc7369f3501affb4453c30c393a8baf5b835f92af169e423e1",
+   "size": 223416,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/seq": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/setfattr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/setkeycodes": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/setsid": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/sftp": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "50fdaa0ef423fddd5e55de25e15a59d27698d933e9f001b8de6d9d22621fb52c",
+   "size": 227488,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/sha1sum": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/sha256sum": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/sha3sum": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/sha512sum": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/shred": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/sort": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/ssh": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "d01630af228374f28a4517de6e3481ae4804e6e063ce88098bacf0bf3c6d2cf5",
+   "size": 915968,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/ssh-add": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "5bdeeec037482d6ac6a8a285fa6c4baa559f69537efabab41fe989d2537a82ea",
+   "size": 436168,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/ssh-agent": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "7f0b65279432f56ca9a62aa1433e457dba4eeb89172f464f8cd08da255f19db7",
+   "size": 411568,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/ssh-copy-id": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b625120eeff8b0e64e4e8c71e5ed3a7878fd69d318a88ce0a22e115725f6b815",
+   "size": 13078,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/ssh-keygen": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "64bbc5c67d161b779fd8eaa3b08bbbce2ab3f40cdf62aa35cc81f026f77a0a1f",
+   "size": 550968,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/ssh-keyscan": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "830206f6be5ffc1b27cc4ec3d5ab4d5dee05860e19dff447f073cd31937293f9",
+   "size": 518328,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/strings": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/svc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/svok": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/tail": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/tee": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/telnet": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/test": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/tftp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/time": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/top": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/touchpad-edge-detector": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "f849a76429bb40d4851a54d396e956f90e3ba3308c0efb3e0ea2924bf0704d7e",
+   "size": 14112,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/tr": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/traceroute": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/tree": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/truncate": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/ts": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/tsort": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/tty": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/udevadm": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "1b81f074cdd56cfec41e9becfce943d09f1d9edce66c315f7c3716a268c7bdd8",
+   "size": 366680,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/uniq": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/unix2dos": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/unlink": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/unlzma": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/unlzop": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/unxz": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/unzip": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/uptime": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/uudecode": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/uuencode": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/vlock": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/w": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/wc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/wget": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/which": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/who": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/whoami": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/xargs": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/xkbcli": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "a746ae2e7888614d806f15cc0b73b741d0ee365f4014f007bb917604542757cd",
+   "size": 14208,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/bin/xxd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/xz": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/xzcat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/bin/yes": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/avahi": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/dri": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/dri/armada-drm_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/exynos_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/gm12u320_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/hdlcd_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/hx8357d_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/ili9163_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/ili9225_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/ili9341_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/ili9486_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/imx-dcss_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/imx-drm_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/imx-lcdif_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/ingenic-drm_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/kirin_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/kms_swrast_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/komeda_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/mali-dp_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/mcde_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/mediatek_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/meson_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/mi0283qt_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/mxsfb-drm_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/panel-mipi-dbi_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/panfrost_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/pl111_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/rcar-du_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/repaper_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/rockchip_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/st7586_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/st7735r_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/sti_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/stm_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/sun4i-drm_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/swrast_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/dri/udl_dri.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "fc352f85921bd3652b374c68d5a7fb55df09e2d33d5a6202a4615db933f56115",
+   "size": 13675712,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libEGL.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libEGL.so.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libEGL.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libEGL.so.1.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libEGL.so.1.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "e1ffdfd46f7d0b76352632617b65fe3217198efc090b0ded87f9184cb800104b",
+   "size": 186600,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libGLESv1_CM.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libGLESv1_CM.so.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libGLESv1_CM.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libGLESv1_CM.so.1.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libGLESv1_CM.so.1.1.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "4f9c667db30d0f234b75d091aac012a2684355d5d38b99334d40430dbd0af451",
+   "size": 21920,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libGLESv2.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libGLESv2.so.2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libGLESv2.so.2": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libGLESv2.so.2.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libGLESv2.so.2.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "04387fb4c2a3b1b8ec19388bf719a30146bfd22b75891c8028b82eff13f4422b",
+   "size": 50592,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libOSMesa.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libOSMesa.so.8",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libOSMesa.so.8": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libOSMesa.so.8.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libOSMesa.so.8.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "863cf83853a40d1bbb904840fbb49c0473f6423bf499e1075d704870065340b6",
+   "size": 11264784,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libSDL2-2.0.so.0": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libSDL2-2.0.so.0.3000.3",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libSDL2-2.0.so.0.3000.3": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "4cc8b3989881901cd80d968e77f3606e045f2064b56449068860ed6a74dbbf16",
+   "size": 1289056,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libSDL2.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libSDL2-2.0.so.0.3000.3",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-client.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libavahi-client.so.3.2.9",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-client.so.3": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libavahi-client.so.3.2.9",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-client.so.3.2.9": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "9a763cd8e408cd192ce88cb77c860a4384151ef2b776f913e19d19508385a025",
+   "size": 71616,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-common.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libavahi-common.so.3.5.4",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-common.so.3": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libavahi-common.so.3.5.4",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-common.so.3.5.4": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "c5a8b408426972bec64f91807dec81c8f34a753ddab472f122ebdeb9e3f6f8c4",
+   "size": 55344,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-core.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libavahi-core.so.7.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-core.so.7": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libavahi-core.so.7.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libavahi-core.so.7.1.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ee7595bd6f5c7449d547f871a6c8d7208f2acac9c59477354d06e0cfab1bd70b",
+   "size": 231120,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libblkid.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../lib/libblkid.so.1.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libcrypt.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libcrypt.so.2.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libcrypt.so.2": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libcrypt.so.2.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libcrypt.so.2.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "6f33768dcc37349d0923b2497fc21aef27d6a6b9a01024e91754191a49468924",
+   "size": 194336,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libcrypto.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libcrypto.so.3",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libcrypto.so.3": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "57fba86260e22b95d4c43c25d048ae0b347ba97d239230eb56694c8cd88d9a29",
+   "size": 5032144,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libdaemon.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdaemon.so.0.5.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdaemon.so.0": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdaemon.so.0.5.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdaemon.so.0.5.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "f45248cb5152c8001c16869492a167a8714c3cc12ed921105641ce2291b00ca6",
+   "size": 30368,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libdbus-1.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdbus-1.so.3.32.4",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdbus-1.so.3": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdbus-1.so.3.32.4",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdbus-1.so.3.32.4": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "1116a7ea4fce86b3568a53d352cf5b17d1d4d28c6071bfff4192029b612de04a",
+   "size": 358320,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libdisplay-info.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdisplay-info.so.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdisplay-info.so.0.1.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "6a2ab3b1a67bef6d4127c8e8a999d24712c472a6939c5107bc0cb2ebaab493c3",
+   "size": 194176,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libdisplay-info.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdisplay-info.so.0.1.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdns_sd.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdns_sd.so.1.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdns_sd.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdns_sd.so.1.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdns_sd.so.1.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "41dfbfca642153d0d0eaaf053b55635d1f437c65708dd4c0a0905385eb42eedc",
+   "size": 38528,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libdrm.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdrm.so.2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdrm.so.2": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libdrm.so.2.4.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libdrm.so.2.4.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "7fbc6ea1cf6e77ce54df4b0e862c1f46ef5f72b8bf871e3ec0399d6d0e75504b",
+   "size": 91952,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libevdev.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libevdev.so.2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libevdev.so.2": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libevdev.so.2.3.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libevdev.so.2.3.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "132fe6167827b35725ef0029d72c75f781e90344db17062084415f299e9ba7f6",
+   "size": 116544,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libexpat.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libexpat.so.1.9.2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libexpat.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libexpat.so.1.9.2",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libexpat.so.1.9.2": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b5416dd15d85c8859c6f616ef786dca9327c99079dc1621a687f540509438f36",
+   "size": 157392,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libfontconfig.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libfontconfig.so.1.12.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libfontconfig.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libfontconfig.so.1.12.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libfontconfig.so.1.12.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "69eb03064bd2c927202e6d9ba6d3403d015e1244321a38afd2db969b76e43f63",
+   "size": 313048,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libfreetype.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libfreetype.so.6.20.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libfreetype.so.6": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libfreetype.so.6.20.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libfreetype.so.6.20.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ce566581d9cd80549cf001f1a3b1fbc0da4f73808abce979e47515969a290c30",
+   "size": 702160,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libgbm.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libgbm.so.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libgbm.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libgbm.so.1.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libgbm.so.1.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "46defda8a80ef6a5a54dec175f5ad0d9b0acc556910c20ca2be9d35b835842c4",
+   "size": 63600,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libglapi.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libglapi.so.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libglapi.so.0": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libglapi.so.0.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libglapi.so.0.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "73736a7fd561373a50299fcf71a18fb31c2392f800586e6526b4b78599980cd5",
+   "size": 304992,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libinput.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libinput.so.10",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libinput.so.10": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libinput.so.10.13.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libinput.so.10.13.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "7ff41aec4b78d518b4d2998c7349a607a47a422500c9bd28ff238c6e4ad701e5",
+   "size": 322608,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libkmod.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libkmod.so.2.4.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libkmod.so.2": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libkmod.so.2.4.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libkmod.so.2.4.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "1d36612f38ae26a4606662dc0ff48e73059e9ed1325002854c32794f83af90a9",
+   "size": 100128,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libmount.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../lib/libmount.so.1.1.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libmtdev.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libmtdev.so.1.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libmtdev.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libmtdev.so.1.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libmtdev.so.1.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "eb924917a0b197baf4016dd3d47fa9c98479e950233802673f975a179b135bc8",
+   "size": 22144,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libssl.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libssl.so.3",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libssl.so.3": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "f0490001c277ab22a05183be64dacbac6074b6604a556f093d43ac7a44629adc",
+   "size": 998808,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libstdc++.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libstdc++.so.6.0.32",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libstdc++.so.6": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libstdc++.so.6.0.32",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libstdc++.so.6.0.32": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b13381d53e4738b6a8b73621b9365494d652b84ce72ebe2ef8737004814b8a33",
+   "size": 2362360,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libstdc++.so.6.0.32-gdb.py": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "60c46e26a3cb7afbc1cce9532ab4691fda36da6421a143740ce04923383f170c",
+   "size": 2476,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libudev.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../lib/libudev.so.1.6.3",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libuuid.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../lib/libuuid.so.1.3.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libxkbcommon.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libxkbcommon.so.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libxkbcommon.so.0": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libxkbcommon.so.0.0.0",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libxkbcommon.so.0.0.0": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "292ce161bfa87cbfca785d5a6a8c43a6e52bae5854ed1dd8b61bf9736994d45d",
+   "size": 276256,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/libz.so": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libz.so.1.3.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libz.so.1": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "libz.so.1.3.1",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/lib/libz.so.1.3.1": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "72113935e4adfe71b1680bce735f60ef3f5a05f9cb810e5363a891f549847369",
+   "size": 83744,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/os-release": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "ca45faa11e8f29cef5874adb9878d50e9f16df922330e96c0c48455435803252",
+   "size": 101,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/ossl-modules": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/ossl-modules/legacy.so": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "84da28d6787e4a9af58da742a7f775706081790cff4f45b811a0ad8d4e13d1cd",
+   "size": 124624,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/udev": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/udev/libinput-device-group": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "373adfb84ec20f1c90277d3e11ce04b8eca5c77ba04f26a6aaa25b3fd2b32c44",
+   "size": 10016,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/udev/libinput-fuzz-extract": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "b7ddf17595197a0d4bc97583d333a2c84110182b965e0c1ebccefcb745fc7f24",
+   "size": 18288,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/udev/libinput-fuzz-to-zero": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "c0c418943042b88689cfe3ab5bb79d041d7817182c175804b658c2cada026e55",
+   "size": 10016,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/udev/rules.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/lib/udev/rules.d/80-libinput-device-groups.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "35f6ece1a8e5f20fe65640f40e87e3e2144ca07f7c5274eb50bfa08aab5fb318",
+   "size": 207,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib/udev/rules.d/90-libinput-fuzz-override.rules": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5ccc9410710a42f42fb662e3fe68e9443a22abccb4249ac3df9c1127a7872fbc",
+   "size": 1098,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/lib64": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "lib",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/libexec": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/libexec/dbus-daemon-launch-helper": {
+   "gid": 102,
+   "mode": "4750",
+   "sha256": "ade18c76ee8595e1531f3f61897a0a0e32538a0c87b84d7cfd4ea68685538432",
+   "size": 59264,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-analyze": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "4dd68f68025e34c05cfed3a999ead83509ed2e8a6ae1d2bd3ee59a7c60f7738f",
+   "size": 55456,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-debug-events": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "6f768c5ba6255b6c9a642800c30cff319f888222050390a038204b5c622f3658",
+   "size": 85280,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-debug-tablet": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "23fce893ed5788393dac9f0f63df37fab5584f444769fb112c422c4933f75931",
+   "size": 68784,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-list-devices": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "94b0c55284dac8094fcbf428a25da18d9f5dceb09898a8c69bf17cd1897c0e52",
+   "size": 63584,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-list-kernel-devices": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "00394ebe2dd44fc53c95535aeb1fe2c28be6dc4c365fbe7c147539566e4c3645",
+   "size": 4182,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-measure": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "4555cdd2f6e7f9ebdf8f5a71a3e53dcf538994e39bb16d19578cff3d29d61848",
+   "size": 55456,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-quirks": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ef5cbe337877e74d3fdd38350564719602fc67f3f044e5bab823f77ace536e16",
+   "size": 55520,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-record": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "ef375bdf2871ce89670d2e1b1246f16d361692a0cb664fb28f63db287a0b5d59",
+   "size": 100880,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/libinput/libinput-test": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "5e3c2ef13db0818a5e7f9d66ae8c54dec7faa21b8ab19eab32a35e9930a692e6",
+   "size": 55456,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/sftp-server": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "0611c065e282f668f74d96c206a0339062ff4cf2afe7337f664879a883452e28",
+   "size": 161704,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/ssh-keysign": {
+   "gid": 0,
+   "mode": "4711",
+   "sha256": "6cc9abc9594ad37f068abeedce8cfd8a403e9273a8c62e73e00154ad6f1d3b7a",
+   "size": 542936,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/ssh-pkcs11-helper": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "bd578f9eb958ee764596b85e04685e30cf75b4b59b264b160de530ad09545113",
+   "size": 391072,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/xkbcommon": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/libexec/xkbcommon/xkbcli-compile-keymap": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "e5b5cca8f9524ff531406bf5470b39ad8287afe77124bf53753fb9f9937e1508",
+   "size": 14544,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/xkbcommon/xkbcli-how-to-type": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "162100eaa788543f054d45c262bcdaf699abf308bd1cae4d130104a8907802ae",
+   "size": 14368,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/libexec/xkbcommon/xkbcli-interactive-evdev": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "cfd2a43ef99c2c08a531019e9f3fbb3a429d1e9d1f8ece332d39483de5bdbb80",
+   "size": 22696,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/sbin": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/sbin/addgroup": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/adduser": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/arping": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/avahi-autoipd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "9f46e8e0a14dbe7b9e8d033e22c8804bb974e0e07eab10d3c8cae58e7117dd97",
+   "size": 38776,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/sbin/avahi-daemon": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "99b4834dd1d340859ac2b8c519e6accb6227d342bc951cc8b1b4253928ea784b",
+   "size": 141416,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/sbin/avahi-dnsconfd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "f0b08f06529107015fbdb7ae5f33bd044a83bd5044d12dcdc730af5f2f3ca4b7",
+   "size": 22384,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/sbin/chroot": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/crond": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/delgroup": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/deluser": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/dnsd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/ether-wake": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/fbset": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/fdformat": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/fsfreeze": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/i2cdetect": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/i2cdump": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/i2cget": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/i2cset": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/i2ctransfer": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/inetd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/killall5": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/loadfont": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/mim": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/nologin": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/partprobe": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/rdate": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/readprofile": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/seedrng": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/setlogcons": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/sbin/sshd": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "9bf97652be69d8a4e62ec8bfc64310be238089faa40204c55da52fd779309952",
+   "size": 957264,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/sbin/ubirename": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../bin/busybox",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/usr/share": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/avahi": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/avahi/avahi-service.dtd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "cbdcda74df125b04c254e4b1a495d18ccb139b4d6ffea48cfe455b08fd3bad6a",
+   "size": 612,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.AddressResolver.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "aa30465c8573b5cfac75f7581ecf6439eb5923e783dc39ba3569932d66c1dc12",
+   "size": 1635,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.DomainBrowser.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3fd2a26c05bc5f6a9ea121162814f25fa41a750594dfae6bee6a35c63b9390cb",
+   "size": 1728,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.EntryGroup.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7ea489e95681a97acbef068413dd063802af1ae7ba5ef3adfb3d42566d31a488",
+   "size": 3596,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.HostNameResolver.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0f418e7793eca2129220534413dd48b5f42e746d2a3896d194d5faf9d17e1d99",
+   "size": 1636,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.RecordBrowser.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "37d012a9cdbe953e0c32d0042c2a4e692becc276ff0bc14d8c0178cc96e7cd00",
+   "size": 1934,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.Server.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "cdb6b1f9cda0509e362815fde88074d1151976f9f8bdd3ff30cb80a86c90d631",
+   "size": 14334,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.ServiceBrowser.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c4978128db3864abd0470315768c6570509fce3a2a5332fc68832971d5006d2a",
+   "size": 1865,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.ServiceResolver.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a7bc05116c4fb6f8194956bc27cebaced4d6362401a1cc9ad5686744d6342680",
+   "size": 1888,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/interfaces/org.freedesktop.Avahi.ServiceTypeBrowser.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "6ca4d11d21db16bb34964aff545c7d642421c163eeba5560008cd6f097b2f6e8",
+   "size": 1801,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/services": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/session.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "206f009ddcf909422f3651c687b4623a5780fb7486c6d650e5332f57c00d6be1",
+   "size": 3561,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/session.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/system-services": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/system.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "b87c92f170382de4f5e451190a7938c3a1f54220b33b518f941e8c88607fafb6",
+   "size": 5802,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/system.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/dbus-1/system.d/avahi-dbus.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "69a775240508cb86c6a9b4baac8c10411a2c816710f0431adfd9b6ab598e385d",
+   "size": 1144,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/drirc.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/drirc.d/00-mesa-defaults.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "163cb19d742e53e1edd0251f7fd6ff221bacd84d65d1d19a6ba6d394969828bc",
+   "size": 65280,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7dae5045441ce7ab4ce9ee0ccbee84e2ae90daee9cfd2ac64cd887ee85c528df",
+   "size": 213,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f04d1737c2a85925a6294f4b966597d03a30c9e4c551c7a8c270eaad514b2689",
+   "size": 717,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-autohint.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9ae4308a18941969ea42f5881c202be052fe12da3fb1fb4fc4b940642ec74db0",
+   "size": 630,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-hinting-full.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "aa01699d6a43a1be2996233e67daf1570b9000bd1a59763463d3a12b852cdc3a",
+   "size": 616,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-hinting-medium.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f0eaec3db6879f3460bd0e1ef3e09dd965168ca460a79d098eb0648c6740095d",
+   "size": 620,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-hinting-none.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5970fa53c69874ee51349300ef3412592e46e7f133c06074befcf6ab2a3ef6e2",
+   "size": 616,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-hinting-slight.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d138eca2bac3f78d45ff7cfb649ad792caa4a6e61f73cea7cf0ea54b091f1ef4",
+   "size": 620,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-no-antialias.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "75412c70f3a78ad090c79a9dc63cce6aae41b2cfc2f67f4a1a1b533526216d2e",
+   "size": 260,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "df8e99abb6f82384c61978906a45a95794940545da95790d87f01d9391e0894b",
+   "size": 2068,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "719006f7887a958da8efe5ad010a2cde689313074607ae20f0be4cd9e8bfffad",
+   "size": 672,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0f00b5cf0ce07062ec65b9b340aa888f6c5fbc215aafebd26781be2d5a13ff6a",
+   "size": 647,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e4cfc04f5fc5093d2ba20c40f8709c9dfc099997313d0f96bc8256597a15d057",
+   "size": 672,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "15178eb45f3206433bace02053214d5750b9d74a4ece727f48c7fbc8f8c9adb3",
+   "size": 682,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "049680ed134d34c560be493a47301bf6542050e7e89c27d3df25145b41f8133e",
+   "size": 682,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-unhinted.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "dca27a149268da3aeaa3416dc236fd1d76e2f997b1ba91e1292297e78c9281d4",
+   "size": 625,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/10-yes-antialias.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e6d82a642d1b37f7d24dc37f938b999f00ff7aa4303b2602d04164d53f221005",
+   "size": 258,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "76aec9d8dac48faabe1bbde9e887cfb09fa45f30be5f8826e945a394a0097e48",
+   "size": 695,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0768fd57ae0a50d54f2f2e5efae98437ae8623573b652f246ac22e574d5f38b0",
+   "size": 692,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0708443f97406b100a5ccfa67ea8a1c1473ff60ff03848e536bc62e2b2ddcea3",
+   "size": 689,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "278732c68c16177f2aa3c7e4ea318b9f720aee13a433c32eb15ba626806c609d",
+   "size": 1377,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "8b8c05318fb3f4893a9522e7989dd9280d14233adbc21be867bd173add4a0d5c",
+   "size": 3329,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/30-metric-aliases.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "4c17a813364e7f38ca5758350cf47fead36a9f5497e4a310ebf473f2e6103661",
+   "size": 13234,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/35-lang-normalize.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9744531dad3dda3f7a11afc4e211873c53386436fde19efa7efe964f187171f5",
+   "size": 42037,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/40-nonlatin.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5c3f7d62a44258d5d9e81a93b1685bee5ab78acb8688b25a43c4c1e749312a84",
+   "size": 7775,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/45-generic.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "24de9f68189d544bb4cc084d9bd8f3a59d8b988a9dc44b11e9877d5add5fc948",
+   "size": 3490,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/45-latin.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "30ee92d2633ea4ec2328975fa44e3ff4f8c6465b468b79c3b1df7002f0693d23",
+   "size": 7055,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/48-spacing.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "99d839cd8aa28854e8f54f26e7200b6e57951f39f56791a0ed473662488bcef6",
+   "size": 441,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/49-sansserif.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7849a11ce5243e8bb3d06bcad558737a8682e5122e73c8e427f4c011a2054818",
+   "size": 639,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/50-user.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "449137ccce57d60bca178d57519ba54e1942d757ad171f3a88cd78df2161c970",
+   "size": 751,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/51-local.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "dca9d917e1f66f73bfa495943b4d1eaab2d93810a51bc8e600cf4d4e9df03e67",
+   "size": 263,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/60-generic.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "195bc8605dd23289d42c10d79cc13a5ce4a4b3cf965df5b30ecc0b7149bb951f",
+   "size": 1911,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/60-latin.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "df313037dc3a13daa6eb82483aedfc236157cd3895c557250aa5e72b71ad5508",
+   "size": 2136,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/65-fonts-persian.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c675fab143a3638346874798be45f51f6878ebec591b4362d83cfffb828ec4ca",
+   "size": 10132,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/65-khmer.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0bc1c077ef01cb409f51f95218b97b144278c0568b5de03683047b2a1963c590",
+   "size": 304,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/65-nonlatin.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "62368f194f78e9d9b52c13dd605cb8bdd8d4386fc8177b72eff5fb01dcb61d48",
+   "size": 9291,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/69-unifont.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "fa97c0cf5f79d70e2dc3dc48155d4c9220cd7c6a8bc95b89c4ebcc517f97479e",
+   "size": 687,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/70-no-bitmaps.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "47411e21901abd71e3d076107c375e9a8ffd1957410b16d7a291cdbe0e466a0a",
+   "size": 327,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d097ed60eb7e2f822c8f91ce82244b2767d4eca000f30204bc6884609b56b49a",
+   "size": 327,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/80-delicious.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "34f27b7fe9cd83b2b6d46f16ef9c477412f2d7ef63634f86b9b38b79bc4f81ad",
+   "size": 437,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fontconfig/conf.avail/90-synthetic.conf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "cdd0aac7840c664a7127b64db66bdfe8dc22be3774d10bc22f4a41c98de5d85e",
+   "size": 1757,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-Bold.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "679b5c1e09cab3156bb8ef529735f9382bf31ca7ac737382ab959297f8d82ad4",
+   "size": 331612,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-BoldItalic.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "875d776e7f33c50b1d1b594791da0eba9865648f232f08bcba00bba9dfa01d96",
+   "size": 354956,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-Italic.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "4ab857e72f781a8967a6e4a9ac8858fbd6b3a9f9782db349d4b62b78ed02860b",
+   "size": 384408,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-Light.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a5d3ef89f219e90e1f22616adf2bd4a86c8ddd37aff58cd223482c44e3a92eef",
+   "size": 413600,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-LightItalic.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "8fc50d6238be2076f602578d846c81a680f3c1ad58c372cc272b4dee6e68ff90",
+   "size": 407728,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-Medium.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3cd952b8b52581e48a8fa95b31c8829c2baa41b635042a69587d57f98092961e",
+   "size": 339360,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-MediumItalic.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "54f65387b462fef9b4fb45f4e84344d5a9cfa660e281189e8d5e0ddcfccf5e8c",
+   "size": 365080,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/fonts/ubuntu/Ubuntu-Regular.ttf": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3128df86a31805618436d0ae5651ba4285d0c9de0a39057d025f64ee33bceb64",
+   "size": 351884,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/gettext": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/gettext/its": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/gettext/its/fontconfig.its": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "6911bec6d1c515804b4fc856e9168842c3f045d0337557a71e6f8f8d5f7515d0",
+   "size": 1293,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/gettext/its/fontconfig.loc": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e0404cb7e3496810701f3970fe7e11c2114328823de9ba8d043544590d60dcf7",
+   "size": 1293,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/hwdata": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/hwdata/pci.ids": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e79cc3ae3fadff9a231f7dd7aa6a87e6c886d3e7817573cb6bc58a5d33dc36d4",
+   "size": 1431735,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/hwdata/pnp.ids": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "762e4ca4fef4c3bbf814be77e0a3a62741169c0bb6e80f4c7d18b330fff458dc",
+   "size": 62964,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/hwdata/usb.ids": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "579be5d72169c8e2b3ec97dee7200de778091817dde696e6466106109af04677",
+   "size": 726965,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/libinput/10-generic-keyboard.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "dbc21e3a6f421be6ce8cdd13ec162f8edfb9c8f965d985c9f3f2e6e9ccd729ee",
+   "size": 245,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/10-generic-mouse.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "05e1d4ade23f481b880fa8d87749ada4ab0a58a35f3cce04620591d0dcd9cdfe",
+   "size": 197,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/10-generic-trackball.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5ca0c549f5dd153825fd175438806341383f0b9c37404c23a34184d11f5fad88",
+   "size": 110,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-a4tech.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "60ca8d7ec4ed35c80f7f4b527bf9b019ec5afba29c149bc279c1df9ef62e2e30",
+   "size": 100,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-aiptek.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a882c9d0e1ec960d2f30a18b477df766719e84f4aadb528112f05aac82409ef5",
+   "size": 307,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-alps.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7c15f71f6ed2b063b2ef0d106c9dbd6b25952db0b22f8a8a4b71709771f23376",
+   "size": 894,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-contour.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "994b4b54c3fec9bb6d3f23a3f8749e231b39f05ad61e2b95f5a9fca50e011055",
+   "size": 575,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-cypress.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "f282ad45a5bd8540515df80f6720b5a2dd2a2f831eeadc552b128af10768ce33",
+   "size": 272,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-elantech.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "eebb19ee9d8ae70b87c882b929d7ebefc647c608b8b8ff62ae6560dd2410ae02",
+   "size": 250,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-glorious.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5c079d4db3c9ae435bd0c5bbb0ca397b0512960b8d341b499d613f5bf721f5ed",
+   "size": 111,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-ibm.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "1eead31c14af85f293b610dc263873ae219df7534b8dea8a65f6198ae9e20cc3",
+   "size": 1099,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-kensington.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "53bdac7f09aff9d3417f17abfeeaf5829bad5eb198855bac78a5f43f50202dca",
+   "size": 187,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-logitech.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "069d04d84ffdf8ae6b0f8675f434c58389505bedc418ffcb8209bd87f3476b03",
+   "size": 2382,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-madcatz.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "4c9f382225bec2f1d4d12668568a5d1d00748bcaa7b6b117a93ed47f7fe4a70f",
+   "size": 1952,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-microsoft.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "1b0dec1ef19e8a63fabf8828c7d4148e3371e7e6212e6594a79d7f26bd0cb7e4",
+   "size": 1207,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-oracle.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "2068a5e856d869e1c3d3b4ddaeecb93fcefffe0ab489f2decf25440886ae04d9",
+   "size": 92,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-qemu.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "e283e4c8f863baabe3350f553f10a9c72f665c86dd86b77630b6268ccfc7dae6",
+   "size": 82,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-razer.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "eab59346cba8869c6e563456386b861d7db39fc7aeb18cd22785b25b2d755255",
+   "size": 5685,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-synaptics.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "8eddd0d9050e62f6917906e716678fc41d2b6da8e4bf47038e4cebfab89ada57",
+   "size": 510,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-trust.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "de570be4b1c9b56d95e0ebe33297f2412a617222c6425dc19ac771cbf115ed91",
+   "size": 120,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-vmware.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a14c2d8bc30de7206474e1882fb7f72c2644a1f98ec7d6825e4bdc2e5b47c124",
+   "size": 246,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/30-vendor-wacom.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "8578a1a0d51f0b0b68539cd409ad92add1064d90f20dfe90ebc119265c3e1c80",
+   "size": 676,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-acer.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d0fb509131ed4de967691cd604b903f91603e18fd0ba4b8ea35d9b5221a94d19",
+   "size": 265,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-apple.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "afa66b1a50fa7a39ac0aa04c66bf715922e9f18d7591deb19ed8e9655ba15666",
+   "size": 3165,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-asus.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "c8882aed51586625277b39c2c9e28fc212d546c5aa715368b37998ad8ce0cb00",
+   "size": 1535,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-chicony.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "2d387c8b7447e64aa4d4c035a3bf951e7bc9e63886283b56f0dba4bcd800ff25",
+   "size": 425,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-chuwi.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7f1d1d234eb386346ba1b0347d34798f2da5b41f4643355ba58fd016d5e604d3",
+   "size": 218,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-cyborg.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "6b9774a5aed1723b30c8e62cbef14d97675e4e56293ed7882beccc34277d7121",
+   "size": 1522,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-dell.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "3a16891b8759a2b3e5c408b9a705b79d808dc7adfbef272c2e44fb7def69982d",
+   "size": 3515,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-framework.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "4670340c023459f5ddbdb09614cf79b46c8eed6c655799d71ca29db12cf34f60",
+   "size": 162,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-gigabyte.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "7dc5fa5b2117299c443401b5a79688a64be5f0e7d75f5fab186280203e3d325c",
+   "size": 159,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-google.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "0ceb460dfb457e0c0528d49abeefcdebfcc35e58e947ad74724ebfc5d4cef8a1",
+   "size": 3090,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-gpd.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9fb41cf957b71fee4cb3eabc11c1f1bf0990caa0beab8663f4d6e6da53809fca",
+   "size": 158,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-graviton.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "2cabd2a195cfbb42cb6e10abb418a0220a7ed2fff7d08f615d364e4c51d1a822",
+   "size": 229,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-hp.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9048ec186ed424ea3a55dfd51b554a6897ed0a3e3fd280646ac3cdb8e8b4253a",
+   "size": 3380,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-huawei.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a90f94ea0bcc10ffc3bb09f86950701be67b886aa6760aff0d3b3e0a541e5f8c",
+   "size": 426,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-lenovo.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "45eb59029f83824c51521fa8f17a9d52b3c2e27cb1d0636f7e3d1b8c32460cb6",
+   "size": 10135,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-pine64.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "d69336f5d8bf379c8efd7e4727d24759d3ed21dfed0a16b767e24a1b45755125",
+   "size": 132,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-sony.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "5f877a47b920e88db083fb92894b895108ce0cf8a13985bf6d9887752dfea5f2",
+   "size": 247,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-starlabs.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "64d27e33ebef0cc95bc083a9b4a141fb61fc7fd48b4dd99815524c714d02e912",
+   "size": 161,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-system76.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "eb5a06031836fa4987b32c6b1839cd931920b495f2006ae25c82e48089050e25",
+   "size": 575,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-toshiba.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "758ff408ebb485ac6624ddb8250320b68e40dbcfe37b0d4967bb8ceb424c6c1f",
+   "size": 149,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/libinput/50-system-vaio.quirks": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "a71d39eb48c95e8aafdb1d6357a693de12826b63855e568fdcb78d13ba310466",
+   "size": 173,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/udhcpc": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/udhcpc/default.script": {
+   "gid": 0,
+   "mode": "0755",
+   "sha256": "76839067af78d35e0c1bdb8e3e45982e882a47bc3f605d91340fb5be6ed74aee",
+   "size": 3133,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/udhcpc/default.script.d": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/xml": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/xml/dbus-1": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/xml/dbus-1/busconfig.dtd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "9403dd9564b4568d62ca9004d40e2d0c1141ad2a1274d50e97bac66f98cc739d",
+   "size": 1907,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/xml/dbus-1/catalog.xml": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "33743188186f8a6563558fc4f0421d24953f09a2f8fd5f4042892194eb6e4216",
+   "size": 612,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/xml/dbus-1/introspect.dtd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "be73d84e8f764478f78be388385eaa7a3e4c86d314f9d68934f2c7be8b0d25bf",
+   "size": 1226,
+   "type": "file",
+   "uid": 0
+  },
+  "/usr/share/xml/fontconfig": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/usr/share/xml/fontconfig/fonts.dtd": {
+   "gid": 0,
+   "mode": "0644",
+   "sha256": "76afafd572f6194858eef6d28389505d591d8d2a026da46568046554a87c207f",
+   "size": 8254,
+   "type": "file",
+   "uid": 0
+  },
+  "/var": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/var/cache": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../tmp",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/empty": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/var/lib": {
+   "gid": 0,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 0
+  },
+  "/var/lib/avahi-autoipd": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/tmp/avahi-autoipd",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/lib/dbus": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "/tmp/dbus",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/lib/misc": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../../tmp",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/lock": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../run/lock",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/log": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../tmp",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/run": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../run",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/spool": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../tmp",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/tmp": {
+   "gid": 0,
+   "mode": "0777",
+   "target": "../tmp",
+   "type": "symlink",
+   "uid": 0
+  },
+  "/var/www": {
+   "gid": 33,
+   "mode": "0755",
+   "type": "dir",
+   "uid": 33
+  }
+ }
+}
