@@ -87,6 +87,16 @@ runs plain `make`; the manifest and timing come back through the pod log. Downlo
 `BR2_DL_DIR`, shared by all projects), so a second golden of any project downloads nothing and a retried Job continues where a rate-limited
 download stopped. The volume is single-attach: one golden Job at a time.
 
+A first golden of a project still downloads everything from the cluster's IP, and GitHub's codeload rate-limits that (429). A machine that has
+already run `br2 fetch` holds the same files in `buildroot-src/dl`; seed the volume from it once, through a helper pod that mounts the claim:
+
+```bash
+kubectl -n buildbarn run golden-dl-seed --image=alpine:3.20 --restart=Never --overrides='{"spec":{"containers":[{"name":"seed","image":"alpine:3.20",
+  "command":["sleep","7200"],"volumeMounts":[{"name":"dl","mountPath":"/dl"}]}],"volumes":[{"name":"dl","persistentVolumeClaim":{"claimName":"golden-dl"}}]}}'
+tar -C experiments/<name>/buildroot-src/dl -cf - . | kubectl -n buildbarn exec -i golden-dl-seed -- tar -C /dl -xf -
+kubectl -n buildbarn delete pod golden-dl-seed        # the Job cannot mount the claim while the helper holds it
+```
+
 ## What the first apply found
 
 | Found | Fix |
