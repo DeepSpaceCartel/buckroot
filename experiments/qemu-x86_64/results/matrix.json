@@ -1,0 +1,62 @@
+[
+ {
+  "variant": "wrapped",
+  "mode": "remote",
+  "salt": "wrapped-remote-21042919",
+  "instance": "qemu-x86_64-remote-wrapped-042919",
+  "cold": {
+   "ok": false,
+   "seconds": 1526.8,
+   "commands": 127,
+   "cached": 0,
+   "remote": 127,
+   "local": 0,
+   "error_tail": "[2026-09-21T04:54:46.206+00:00] Stderr:\n[pkg_action] make host-gettext-tiny\nmake host-gettext-tiny failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\n>>> host-gettext-tiny 0.3.2 Downloading\ngettext-tiny-0.3.2.tar.gz: OK (sha256: 29cc165e27e83d2bb3760118c2368eadab550830d962d758e51bd36eb860f383)\n>>> host-gettext-tiny 0.3.2 Extracting\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\ngzip -d -c /mnt/dl/gettext-tiny/gettext-tiny-0.3.2.tar.gz | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2   -xf -\nmkdir -p /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu\n/mnt/dl/gettext-tiny/ | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu  -xf -\n/bin/bash: line 1: /mnt/dl/gettext-tiny/: Is a directory\ntar: This does not look like a tar archive\ntar: Exiting with failure status due to previous errors\nmake: *** [package/pkg-generic.mk:215: /mnt/out/build/host-gettext-tiny-0.3.2/.stamp_extracted] Error 2\nmake: Leaving directory '/mnt/src'\n[2026-09-21T04:54:46.206+00:00] Info:\nAction details (uncached result): qemu-x86_64/blobs/sha256/historical_execute_response/a6b2819606acf7dffe6af5cf26d71a461bc3c646d7e2896e1e41f7880b808e11-649/\n\n[2026-09-21T04:54:46.206+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gettext-tiny:host-gettext-tiny (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "wrapped",
+  "mode": "remote-cache",
+  "salt": "wrapped-remote-cache-21042919",
+  "instance": "qemu-x86_64-remote-cache-wrapped",
+  "cold": {
+   "ok": false,
+   "seconds": 1535.3,
+   "commands": 127,
+   "cached": 0,
+   "remote": 127,
+   "local": 0,
+   "error_tail": "[2026-09-21T04:54:54.853+00:00] Stderr:\n[pkg_action] make host-gettext-tiny\nmake host-gettext-tiny failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\n>>> host-gettext-tiny 0.3.2 Downloading\ngettext-tiny-0.3.2.tar.gz: OK (sha256: 29cc165e27e83d2bb3760118c2368eadab550830d962d758e51bd36eb860f383)\n>>> host-gettext-tiny 0.3.2 Extracting\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\ngzip -d -c /mnt/dl/gettext-tiny/gettext-tiny-0.3.2.tar.gz | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2   -xf -\nmkdir -p /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu\n/mnt/dl/gettext-tiny/ | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu  -xf -\n/bin/bash: line 1: /mnt/dl/gettext-tiny/: Is a directory\ntar: This does not look like a tar archive\ntar: Exiting with failure status due to previous errors\nmake: *** [package/pkg-generic.mk:215: /mnt/out/build/host-gettext-tiny-0.3.2/.stamp_extracted] Error 2\nmake: Leaving directory '/mnt/src'\n[2026-09-21T04:54:54.853+00:00] Info:\nAction details (uncached result): qemu-x86_64/blobs/sha256/historical_execute_response/a88c435760b5cf4d71da3bdad823aa35ed505debdc871feb82df30ebaec7c33f-646/\n\n[2026-09-21T04:54:54.853+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gettext-tiny:host-gettext-tiny (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote",
+  "salt": "native-remote-21042919",
+  "instance": "qemu-x86_64-remote-native-042919",
+  "cold": {
+   "ok": false,
+   "seconds": 1563.8,
+   "commands": 121,
+   "cached": 0,
+   "remote": 121,
+   "local": 0,
+   "error_tail": "[2026-09-21T04:55:23.274+00:00] Stderr:\n[pkg_action] make host-gettext-tiny\nmake host-gettext-tiny failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\n>>> host-gettext-tiny 0.3.2 Downloading\ngettext-tiny-0.3.2.tar.gz: OK (sha256: 29cc165e27e83d2bb3760118c2368eadab550830d962d758e51bd36eb860f383)\n>>> host-gettext-tiny 0.3.2 Extracting\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\ngzip -d -c /mnt/dl/gettext-tiny/gettext-tiny-0.3.2.tar.gz | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2   -xf -\nmkdir -p /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu\n/mnt/dl/gettext-tiny/ | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu  -xf -\n/bin/bash: line 1: /mnt/dl/gettext-tiny/: Is a directory\ntar: This does not look like a tar archive\ntar: Exiting with failure status due to previous errors\nmake: *** [package/pkg-generic.mk:215: /mnt/out/build/host-gettext-tiny-0.3.2/.stamp_extracted] Error 2\nmake: Leaving directory '/mnt/src'\n[2026-09-21T04:55:23.274+00:00] Info:\nAction details (uncached result): qemu-x86_64/blobs/sha256/historical_execute_response/bfebf9f9b3da3a7e8c2ce74dfea07b70401ec659085af5407b6796f253ddac27-649/\n\n[2026-09-21T04:55:23.274+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gettext-tiny:host-gettext-tiny (root//platforms:default#5fe249fa9992182d)'"
+  }
+ },
+ {
+  "variant": "native",
+  "mode": "remote-cache",
+  "salt": "native-remote-cache-21042919",
+  "instance": "qemu-x86_64-remote-cache-native",
+  "cold": {
+   "ok": false,
+   "seconds": 1579.2,
+   "commands": 121,
+   "cached": 0,
+   "remote": 121,
+   "local": 0,
+   "error_tail": "[2026-09-21T04:55:38.690+00:00] Stderr:\n[pkg_action] make host-gettext-tiny\nmake host-gettext-tiny failed (exit 2); last output:\nmake: Entering directory '/mnt/src'\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\n>>> host-gettext-tiny 0.3.2 Downloading\ngettext-tiny-0.3.2.tar.gz: OK (sha256: 29cc165e27e83d2bb3760118c2368eadab550830d962d758e51bd36eb860f383)\n>>> host-gettext-tiny 0.3.2 Extracting\nmkdir -p /mnt/out/per-package/host-gettext-tiny/host\nmkdir -p /mnt/out/per-package/host-gettext-tiny/target\ngzip -d -c /mnt/dl/gettext-tiny/gettext-tiny-0.3.2.tar.gz | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2   -xf -\nmkdir -p /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu\n/mnt/dl/gettext-tiny/ | tar --strip-components=1 -C /mnt/out/build/host-gettext-tiny-0.3.2/gettext-gnu  -xf -\n/bin/bash: line 1: /mnt/dl/gettext-tiny/: Is a directory\ntar: This does not look like a tar archive\ntar: Exiting with failure status due to previous errors\nmake: *** [package/pkg-generic.mk:215: /mnt/out/build/host-gettext-tiny-0.3.2/.stamp_extracted] Error 2\nmake: Leaving directory '/mnt/src'\n[2026-09-21T04:55:38.690+00:00] Info:\nAction details (uncached result): qemu-x86_64/blobs/sha256/historical_execute_response/9133064c9d770e8e8896d8757e595d0ac35f5574a1f3b71429e997840bff8dce-644/\n\n[2026-09-21T04:55:38.690+00:00]\nBUILD FAILED\nFailed to build 'root//buildroot-src/package/gettext-tiny:host-gettext-tiny (root//platforms:default#5fe249fa9992182d)'"
+  }
+ }
+]

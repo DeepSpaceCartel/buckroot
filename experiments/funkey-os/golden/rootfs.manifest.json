@@ -662,7 +662,7 @@
   "/boot/zImage": {
    "gid": 0,
    "mode": "0644",
-   "sha256": "55966bce82ab4efe23e39e7232b7d64a0c91fb24fd552c2eaf517ecb453617a0",
+   "sha256": "7f6c7149811b3f4f0c79047835a76408478f2e3dbd4ad4f68ef7eaa6f10ce651",
    "size": 3534176,
    "type": "file",
    "uid": 0
@@ -1160,8 +1160,8 @@
   "/etc/shadow": {
    "gid": 0,
    "mode": "0644",
-   "sha256": "afe5616cc2648325c6d520cd534c71de41ff2f7d278dcdefbca075170ddda7ae",
-   "size": 192,
+   "sha256": "7ab6ed7b3d92918dd07744a326baca699a8ed9db57f61d6713611c99d6fa7caa",
+   "size": 195,
    "type": "file",
    "uid": 0
   },
@@ -11640,7 +11640,7 @@
   "/usr/lib/libSDL_sound-1.0.so.1.0.2": {
    "gid": 0,
    "mode": "0755",
-   "sha256": "13c50e4acdfbeda2f4306c1c09ec0c3a54a2c42617f4332d8a930a7a7f365a48",
+   "sha256": "f3596b6c2448b42659cdaf955993b798a5a59614dc4b130119538d8fa6fe5b66",
    "size": 157060,
    "type": "file",
    "uid": 0
