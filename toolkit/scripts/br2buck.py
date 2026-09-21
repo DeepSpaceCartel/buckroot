@@ -439,8 +439,18 @@ def render_pkg_dir(pkg_dir, pkgs, carved):
              + (f'    deps = ["//{root}:{link_target_name(pkg_dir)}"],\n' if links else "")
              + (f'    symlinks = {bzl_dict(dangling_map(pkg_dir))},\n' if dangling_map(pkg_dir) else "")
              + '    visibility = ["PUBLIC"],\n)\n']
-    exports = [n for n in sorted(os.listdir(HERE / pkg_dir))
-               if n != "BUCK" and (HERE / pkg_dir / n).is_file() and not (HERE / pkg_dir / n).is_symlink()]
+    def exportable(n):
+        """A plain file, or a plain directory that is neither a sub-package nor holds one nor a link Buck2 cannot track: a symlink
+        elsewhere in the tree may point at it (package/go/go-src -> ../go-bin), and the dependency on it is `:file.<name>`."""
+        path = HERE / pkg_dir / n
+        if n == "BUCK" or path.is_symlink():
+            return False
+        if path.is_file():
+            return True
+        rel = f"{pkg_dir}/{n}"
+        return (path.is_dir() and rel not in carved and not any(c.startswith(rel + "/") for c in carved)
+                and next(dangling_links(path), None) is None)
+    exports = [n for n in sorted(os.listdir(HERE / pkg_dir)) if exportable(n)]
     lines.append("# The package's own files, for hand-written native rules (br2/native/) to consume.\n"
                  + "".join(f'export_file(name = {q("file." + n)}, src = {q(n)}, mode = "reference", visibility = ["PUBLIC"])\n' for n in exports))
     seen_sources = set()

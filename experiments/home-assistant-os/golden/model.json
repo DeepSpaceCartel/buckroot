@@ -763,21 +763,6 @@
    "version": "4.21.0",
    "virtual": false
   },
-  "hassio": {
-   "deps": [
-    "host-fakedate",
-    "host-skeleton",
-    "skeleton",
-    "toolchain"
-   ],
-   "dir": "buildroot-external/package/hassio",
-   "dl_dir": "hassio",
-   "kind": "target",
-   "sources": [],
-   "stamp_dir": "build/hassio-1.0.0",
-   "version": "1.0.0",
-   "virtual": false
-  },
   "host-acl": {
    "deps": [
     "host-attr",

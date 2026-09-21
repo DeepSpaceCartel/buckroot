@@ -25,8 +25,7 @@
   "native": [
     "host-skeleton",
     "host-fakedate",
-    "skeleton",
     "skeleton-init-common"
   ],
-  "notes": "Deviations from the board's own defconfig, applied to golden and Buck2 alike: no ccache (its cache directory is outside the build), no post-image script (it assembles disk images outside the rootfs), and a tar rootfs instead of EROFS so the manifest scanner can read it. native: the init-independent skeleton packages; the init system is systemd and the toolkit has no native recipe for skeleton-init-systemd, so that package stays wrapped. hassio is excluded too: it downloads seven Docker container images at build time from a moving version file (version.home-assistant.io) and builds a data partition with Docker-in-Docker, all for the disk images (`HASSIO_INSTALL_IMAGES`); it installs nothing into the root filesystem, and its inputs change over time, so it can be neither hermetic nor compared byte for byte."
+  "notes": "Deviations from the board's own defconfig, applied to golden and Buck2 alike: no ccache (its cache directory is outside the build), no post-image script (it assembles disk images outside the rootfs), and a tar rootfs instead of EROFS so the manifest scanner can read it. hassio is excluded too: it downloads seven Docker container images at build time from a moving version file (version.home-assistant.io) and builds a data partition with Docker-in-Docker, all for the disk images (`HASSIO_INSTALL_IMAGES`); it installs nothing into the root filesystem, and its inputs change over time, so it can be neither hermetic nor compared byte for byte. native: three packages (the native skeleton recipe requires skeleton-init-sysv; this is systemd)."
 }

@@ -23,9 +23,8 @@
   "native": [
     "host-skeleton",
     "host-fakedate",
-    "skeleton",
     "skeleton-init-common"
   ],
-  "notes": "The SDK's defconfigs pin BR2_PRIMARY_SITE=file:///home/builder with BR2_PRIMARY_SITE_ONLY: its Dockerfile pre-fetches every source there. The fragment turns that off so Buildroot downloads normally. The SDK only ever runs `make toolchain`, never a full `make`: a full build also builds Buildroot's default init system and BusyBox, which fail against the SDK's own sysroot (`MB_LEN_MAX wrong` in the patched glibc headers), so the fragment selects no init system and no BusyBox and the build is what the SDK builds: the cross toolchain and sysroot (the root filesystem is the skeleton plus the target libc files). Buildroot is 2025.05.1 with patches/buildroot/0001-0005 applied at setup. Without BusyBox Buildroot would build dash as /bin/sh (also a target package that does not build against the SDK's sysroot), so the shell is none as well; a tar rootfs gives the manifest scanner something to read.",
+  "notes": "The SDK's defconfigs pin BR2_PRIMARY_SITE=file:///home/builder with BR2_PRIMARY_SITE_ONLY: its Dockerfile pre-fetches every source there. The fragment turns that off so Buildroot downloads normally. The SDK only ever runs `make toolchain`, never a full `make`: a full build also builds Buildroot's default init system and BusyBox, which fail against the SDK's own sysroot (`MB_LEN_MAX wrong` in the patched glibc headers), so the fragment selects no init system and no BusyBox and the build is what the SDK builds: the cross toolchain and sysroot (the root filesystem is the skeleton plus the target libc files). Buildroot is 2025.05.1 with patches/buildroot/0001-0005 applied at setup. Without BusyBox Buildroot would build dash as /bin/sh (also a target package that does not build against the SDK's sysroot), so the shell is none as well; a tar rootfs gives the manifest scanner something to read. native: three packages; the native skeleton recipe requires skeleton-init-sysv, and this configuration has no init system.",
   "rootfs_image": "rootfs.tar"
 }
