@@ -100,6 +100,30 @@ tar -C experiments/<name>/buildroot-src/dl -cf - . | kubectl -n buildbarn exec -
 kubectl -n buildbarn delete pod golden-dl-seed        # the Job cannot mount the claim while the helper holds it
 ```
 
+### The download volumes (`golden-dl`, `golden-dl-b`, `golden-dl-c`)
+
+A shared, persistent cache of Buildroot's downloads for anything that builds with plain `make` on the cluster (the golden Jobs, or any other Job).
+
+| | |
+|---|---|
+| Objects | PersistentVolumeClaims in namespace `buildbarn`, defined in [`terraform/platform/golden.tf`](https://github.com/DeepSpaceCartel/buckroot/blob/main/terraform/platform/golden.tf) (`for_each` over the claim names; size `golden_dl_gib`, 60 Gi each) |
+| Storage | Hetzner block volumes through the CSI driver, class `hcloud-volumes-encrypted` (the cluster default, encrypted, expandable online, reclaim policy `Delete`) |
+| Access mode | `ReadWriteOnce`: **one node, therefore one pod, at a time per claim**. A second pod that mounts a claim in use stays `Pending` until the first ends. Several claims exist so several Jobs can run at once |
+| Binding | `WaitForFirstConsumer`: the volume is created in the location of the first pod that uses it; a claim is `Pending` until then |
+| Contents | Buildroot's `BR2_DL_DIR` layout: `/dl/<package>/<file>`, one directory per package, plus the toolchain tarballs. Files are versioned by name, so projects on different Buildroot versions coexist and Buildroot checks each hash itself |
+| Use | mount at `/dl` and use it as the download directory: `make BR2_DL_DIR=/dl ...` or `ln -s /dl <buildroot>/dl` (what `br2 golden --k8s` does; `--dl-claim NAME` picks the claim) |
+
+```yaml
+volumes:
+  - { name: dl, persistentVolumeClaim: { claimName: golden-dl-b } }
+containers:
+  - volumeMounts: [{ name: dl, mountPath: /dl }]
+```
+
+Rules of thumb: request the CPU and memory the build needs, not a whole node (one worker slot is 4.5 CPU and 9 GiB; the golden default is 7 CPU and 14 GiB), because the cluster is five servers in all and a Job whose request fits nowhere waits; check what holds a claim with
+`kubectl -n buildbarn get pods -o json | jq -r '.items[] | select(.spec.volumes[]?.persistentVolumeClaim.claimName=="golden-dl") | .metadata.name'`.
+To add a claim, add its name to the `for_each` in `golden.tf` and apply `terraform/platform` (a PVC-only change; it does not roll the Buildbarn pods). To preload a claim from a machine that already downloaded (a first golden of a project otherwise downloads from the cluster's IP, which GitHub rate-limits), see the seeding commands below.
+
 ## What the first apply found
 
 | Found | Fix |
