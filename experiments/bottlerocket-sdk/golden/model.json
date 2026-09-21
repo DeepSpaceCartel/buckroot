@@ -613,5 +613,6 @@
    "virtual": true
   }
  },
+ "staging_subdir": "x86_64-bottlerocket-linux-gnu/sys-root",
  "target_tuple": "x86_64-bottlerocket-linux-gnu"
 }

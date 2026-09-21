@@ -137,10 +137,14 @@ def extract(out_dir):
         hash_vars = {k: v["expanded"].split() for k, v in hv.items()}
     # The toolchain tuple names the sysroot (host/<tuple>/sysroot): aarch64-buildroot-linux-gnu for an
     # internal glibc toolchain, ...-musl for a musl or Bootlin one. Native rules must not hard-code it.
-    tuple_var = buildroot_vars(out_dir, "GNU_TARGET_NAME")["GNU_TARGET_NAME"]["expanded"].strip()
+    vars_ = buildroot_vars(out_dir, "GNU_TARGET_NAME STAGING_SUBDIR")
+    tuple_var = vars_["GNU_TARGET_NAME"]["expanded"].strip()
+    # ...and STAGING_SUBDIR the sysroot's name under host/ (<tuple>/sysroot; a vendor fork can change it: Bottlerocket's SDK uses sys-root)
+    staging_subdir = vars_["STAGING_SUBDIR"]["expanded"].strip()
     model = {"defconfig": DEFCONFIG,
              "buildroot": (HERE / "BUILDROOT_PINNED_VERSION.txt").read_text().strip(),
              "target_tuple": tuple_var,
+             "staging_subdir": staging_subdir,
              "packages": {}}
     for name, e in sorted(info.items()):
         if e.get("type") not in ("target", "host"):
@@ -666,8 +670,10 @@ def render(check):
     out["br2/generated/BUCK"] = render_generated(model)
     if not model.get("target_tuple"):
         sys.exit("golden/model.json has no target_tuple: run `scripts/br2 extract` again")
-    out["br2/generated/target.bzl"] = (f"{HEADER}\n# The toolchain tuple: the sysroot is host/<tuple>/sysroot.\n"
-                                       f'TARGET_TUPLE = "{model["target_tuple"]}"\n')
+    staging_subdir = model.get("staging_subdir") or model["target_tuple"] + "/sysroot"     # a model made before the field existed
+    out["br2/generated/target.bzl"] = (f"{HEADER}\n# The toolchain tuple, and the sysroot: host/<STAGING_SUBDIR> (usually <tuple>/sysroot).\n"
+                                       f'TARGET_TUPLE = "{model["target_tuple"]}"\n'
+                                       f'STAGING_SUBDIR = "{staging_subdir}"\n')
     out["sources/BUCK"] = render_sources(model)
 
     changed = []

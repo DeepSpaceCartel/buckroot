@@ -7,7 +7,7 @@
 # package, the rootfs, and a few cheap config-derived actions whose outputs come out
 # byte-identical for everybody else (Buck2 stops there: early cutoff).
 
-load("//br2/generated:target.bzl", "TARGET_TUPLE")
+load("//br2/generated:target.bzl", "STAGING_SUBDIR", "TARGET_TUPLE")
 
 Br2Pkg = provider(fields = {
     "dir": provider_field(str),                 # repo-relative package directory
@@ -418,7 +418,7 @@ BR2_STAMPS_TARGET = [".stamp_downloaded", ".stamp_extracted", ".stamp_patched", 
 BR2_STAMPS_HOST = [".stamp_downloaded", ".stamp_extracted", ".stamp_patched", ".stamp_configured", ".stamp_built", ".stamp_host_installed", ".stamp_installed"]
 BR2_STAMPS_STAGING = [".stamp_downloaded", ".stamp_extracted", ".stamp_patched", ".stamp_configured", ".stamp_built", ".stamp_staging_installed", ".stamp_installed"]
 
-_STAGING_DIR = "host/" + TARGET_TUPLE + "/sysroot"
+_STAGING_DIR = "host/" + STAGING_SUBDIR
 
 def _entries(ctx):
     out = []

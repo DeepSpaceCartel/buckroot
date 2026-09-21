@@ -364,9 +364,11 @@ def cmd_matrix(a):
         for v, m in cells:
             print(f"cell {v}/{m}: instance {instance(m, v)}, isolation dir '{iso(v, m)}', pool '{POOL or 'default'}', endpoint {RE_ENDPOINT or 'localhost:8980'}")
         return
-    results = []
     res_dir = ROOT / "results"
     res_dir.mkdir(exist_ok=True)
+    # a partial matrix (--variants/--modes) replaces the cells it runs and keeps the other cells of an earlier run
+    earlier = json.loads((res_dir / "matrix.json").read_text()) if (res_dir / "matrix.json").exists() else []
+    results = [r for r in earlier if (r["variant"], r["mode"]) not in cells]
     lock = threading.Lock()
 
     def run(cell):
@@ -374,7 +376,7 @@ def cmd_matrix(a):
         r = build_once(m, v, iso=iso(v, m))
         with lock:
             results.append(r)
-            results.sort(key=lambda x: (cells.index((x["variant"], x["mode"]))))
+            results.sort(key=lambda x: (VARIANTS.index(x["variant"]), MODES.index(x["mode"])))
             (res_dir / "matrix.json").write_text(json.dumps(results, indent=1) + "\n")
             (res_dir / "matrix.md").write_text(render_md(results))
             print(render_md([r]), flush=True)

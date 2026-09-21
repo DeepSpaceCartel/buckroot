@@ -30,3 +30,14 @@ load it. `render` refuses a model that has no tuple.
 - **Not solved**: other configuration assumptions in native recipes (glibc versus musl, merged `/usr`).
   Recipes raise on configurations they do not implement, and `compare-pkg.py` against the wrapped artifact is
   the check; it must compare the *native* target (`//br2/native/<pkg>`), not the wrapped label.
+
+## Addendum, 2026-09-21: the sysroot's directory name is data too
+
+The tuple was not the only assumption: the rules also wrote `sysroot` after it. Bottlerocket's SDK patches Buildroot
+(`STAGING_SUBDIR = $(GNU_TARGET_NAME)/sys-root`), so the native `host-skeleton` and every `staging:` install went to
+`host/<tuple>/sysroot`, and `host-gcc-final` failed again with `ld: cannot find crti.o`, this time in a project that
+had the right tuple. `br2 extract` now also records `STAGING_SUBDIR` (`staging_subdir` in `golden/model.json`) and
+`br2 render` writes it to `target.bzl` as `STAGING_SUBDIR`; `rules.bzl` and `host-skeleton` use it. A model without the field
+falls back to `<tuple>/sysroot`, so no other project's rendered files or action keys change. The native
+recipes of the Bootlin toolchain (`toolchain-external-bootlin`) still name the sysroot themselves; they describe one
+fixed external toolchain, not a configurable one.

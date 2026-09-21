@@ -77,7 +77,8 @@ on the *unwrapped* compiler gives a byte-identical `hello`.
   it was developed on. On a glibc project the native skeleton then created its
   `lib64 -> lib` symlinks in a sysroot nobody used, glibc installed a real `usr/lib64`
   directory, and `host-gcc-final` failed with `ld: cannot find crti.o` about fifty minutes
-  into the build. The symptom was far from the cause, and a first equivalence check
+  into the build. (The sysroot's directory name is data as well: Bottlerocket's SDK calls it `sys-root`, recorded as
+  `STAGING_SUBDIR`, [ADR-0012](../decisions/0012-toolchain-tuple-from-buildroot.md#addendum-2026-09-21-the-sysroots-directory-name-is-data-too).) The symptom was far from the cause, and a first equivalence check
   missed it because both sides were the wrapped artifact (see
   [below](#equivalence-is-checked-not-assumed)).
 

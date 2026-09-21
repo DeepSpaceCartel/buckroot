@@ -17,7 +17,7 @@ It is vendored there by `toolkit/bin/br2-sync`.
 | `br2 dev [--pkg P] [--target L] [--variant V] [--mode M] [--strict]` | iteration loop; see [Iterating fast](../guides/fast-iteration.md) |
 | `br2 viewcheck [--mode M]` | build every package's `[viewcheck]`: enter each view with that action's declared inputs and run nothing. `--mode remote` runs it on the worker and finds entries that only work locally |
 | `br2 build --variant V --mode M` | one clean, timed, manifest-checked Buck2 build of `//:rootfs`; prints JSON |
-| `br2 matrix [--variants ...] [--modes ...] [--parallel N] [--pool P] [--dry-run]` | every variant and mode; writes `results/matrix.{json,md}`. `--parallel N` runs N cells at once, each in its own Buck2 isolation directory (only meaningful with remote capacity to match; timings of parallel cells are not comparable with a serial run); `--pool P` sends the remote actions to a worker pool (see below); `--dry-run` prints the Buck2 commands and runs nothing |
+| `br2 matrix [--variants ...] [--modes ...] [--parallel N] [--pool P] [--dry-run]` | every variant and mode; writes `results/matrix.{json,md}`; a partial matrix (`--variants`/`--modes`) replaces the cells it runs and keeps the other cells already in the file. `--parallel N` runs N cells at once, each in its own Buck2 isolation directory (only meaningful with remote capacity to match; timings of parallel cells are not comparable with a serial run); `--pool P` sends the remote actions to a worker pool (see below); `--dry-run` prints the Buck2 commands and runs nothing |
 
 Variants: `wrapped`, `native`. Modes: `local`, `local-cache`, `remote`, `remote-cache`. The
 two cache modes run twice, cold and warm.
