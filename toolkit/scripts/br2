@@ -176,10 +176,13 @@ def cmd_viewcheck(a):
     if not labels:
         sys.exit("viewcheck: no br2_package targets found (the uquery failed?); see the output above")
     print(f"{'OK' if r.returncode == 0 else 'FAILED'} {len(labels)} packages" + (f"  commands={m[1]} remote={m[3]} local={m[4]}" if m else ""))
-    for label, tail in failures(out):
+    failed = failures(out)
+    for label, tail in failed:
         print(f"\n  FAILED {label}")
         for l in tail:
             print("    " + l[:200])
+    if r.returncode != 0 and not failed:             # buck2 failed before any action ran (analysis, daemon, remote routing): say what it said
+        print("\n".join("    " + l[:200] for l in out.strip().splitlines()[-25:]))
     sys.exit(r.returncode)
 
 
